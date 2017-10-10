@@ -17,6 +17,8 @@ The Recipe App is a new fun way to discover, share and make recipies. It doesn't
 #### View and Associate Recipies
 
 - [ ] As a user that just logged in I should land on the Home Page that includes a curated list of recipies organized by different subjects (what your friends like, your food preferences, most liked recipies)
+	- [ ] As a user I would like to quickly find something that I am looking for to cook
+	- [ ] If available, as a user it would be cool to see an ARkit model representing the final dish
 - [ ] As a user I want to be able to associate recipies to myself
 - [ ] As a user I want to be able to see the recipe details (photos, time to cook, level of difficulty, ingredients, steps to cook it, how many people have added it to their profiles)
 - [ ] As a user I want to be able to see other people profile with their most popular recipies (from themselves or that they have added) and the rest of their recipies
@@ -50,12 +52,13 @@ The Recipe App is a new fun way to discover, share and make recipies. It doesn't
 - [ ] As a user I want to be able to log in using Twitter Auth service
 - [ ] As a user I want to scan a barcode of a product to add it as an ingredient
 - [ ] As a user I want to keep an inventory of ingredients that I want to use for my recipies
-- [ ] If available, as a user it would be cool to see an ARkit model representing the final dish
 - [ ] As a user I would like to get recommendations of similar recipies
 - [ ] As a user I want to receive notification when a friend posts a new recipe
 - [ ] As a user I would like to have an option to shop ingredientes (either online or show a store near by) 
 - [ ] As a user I would like to receive a notification when there is a popular dish in my area 
 - [ ] When entering steps to cook as a user I would like to upload a video of the process
+- [ ] Use SiriKit to search for recipies
+- [ ] Use iOS Spotlight to seach for recipies
 
 ## Team
 

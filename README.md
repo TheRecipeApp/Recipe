@@ -55,6 +55,7 @@ The Recipe App is a new fun way to discover, share and make recipies. It doesn't
 - [ ] As a user I want to receive notification when a friend posts a new recipe
 - [ ] As a user I would like to have an option to shop ingredientes (either online or show a store near by) 
 - [ ] As a user I would like to receive a notification when there is a popular dish in my area 
+- [ ] When entering steps to cook as a user I would like to upload a video of the process
 
 ## Team
 

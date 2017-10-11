@@ -69,6 +69,9 @@
 		5FD28DD31F8B2B1D005BAD06 /* RecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				AFA347841F8DAC7900C283D6 /* Views */,
+				AFA347831F8DAC5B00C283D6 /* Controllers */,
+				AFA347821F8DAC4900C283D6 /* Models */,
 				5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */,
 				5FD28DD61F8B2B1D005BAD06 /* ViewController.swift */,
 				5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */,
@@ -77,6 +80,27 @@
 				5FD28DE01F8B2B1D005BAD06 /* Info.plist */,
 			);
 			path = RecipeApp;
+			sourceTree = "<group>";
+		};
+		AFA347821F8DAC4900C283D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AFA347831F8DAC5B00C283D6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AFA347841F8DAC7900C283D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CB6038BE29919B77360F3240 /* Pods */ = {
@@ -386,6 +410,7 @@
 				5FD28DE51F8B2B1D005BAD06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

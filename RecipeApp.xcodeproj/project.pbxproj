@@ -12,6 +12,7 @@
 		5FD28DDA1F8B2B1D005BAD06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */; };
 		5FD28DDC1F8B2B1D005BAD06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD28DDB1F8B2B1D005BAD06 /* Assets.xcassets */; };
 		5FD28DDF1F8B2B1D005BAD06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD28DDD1F8B2B1D005BAD06 /* LaunchScreen.storyboard */; };
+		5FD9E9311F8F403900976497 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD9E9301F8F403900976497 /* Login.storyboard */; };
 		63D8CAFD3952C8959CD6C184 /* Pods_RecipeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B6A8422A02C8B20F2F48F6 /* Pods_RecipeApp.framework */; };
 		AF1374A51F8FB5B1004B98A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1374A41F8FB5B1004B98A8 /* User.swift */; };
 		AF1374A71F8FB8E0004B98A8 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1374A61F8FB8E0004B98A8 /* UserSettings.swift */; };
@@ -35,6 +36,7 @@
 		AFD1FCE01F90505900190961 /* CookingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingStep.swift; sourceTree = "<group>"; };
 		AFD1FCE21F90507300190961 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		AFD1FCE41F90507F00190961 /* Cookbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookbook.swift; sourceTree = "<group>"; };
+		5FD9E9301F8F403900976497 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D0D52C27226C49A1233A307F /* Pods-RecipeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp.release.xcconfig"; sourceTree = "<group>"; };
 		DF996A821FC7F80EAEFDFE1E /* Pods-RecipeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E9B6A8422A02C8B20F2F48F6 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,17 +83,26 @@
 		5FD28DD31F8B2B1D005BAD06 /* RecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				5FD9E92F1F8F401E00976497 /* Storyboards */,
 				AFA347841F8DAC7900C283D6 /* Views */,
 				AFA347831F8DAC5B00C283D6 /* Controllers */,
 				AFA347821F8DAC4900C283D6 /* Models */,
 				5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */,
 				5FD28DD61F8B2B1D005BAD06 /* ViewController.swift */,
-				5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */,
 				5FD28DDB1F8B2B1D005BAD06 /* Assets.xcassets */,
 				5FD28DDD1F8B2B1D005BAD06 /* LaunchScreen.storyboard */,
 				5FD28DE01F8B2B1D005BAD06 /* Info.plist */,
 			);
 			path = RecipeApp;
+			sourceTree = "<group>";
+		};
+		5FD9E92F1F8F401E00976497 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */,
+				5FD9E9301F8F403900976497 /* Login.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		AFA347821F8DAC4900C283D6 /* Models */ = {
@@ -192,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FD9E9311F8F403900976497 /* Login.storyboard in Resources */,
 				5FD28DDF1F8B2B1D005BAD06 /* LaunchScreen.storyboard in Resources */,
 				5FD28DDC1F8B2B1D005BAD06 /* Assets.xcassets in Resources */,
 				5FD28DDA1F8B2B1D005BAD06 /* Main.storyboard in Resources */,

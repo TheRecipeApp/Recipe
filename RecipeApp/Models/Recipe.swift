@@ -16,7 +16,7 @@ enum RecipeDifficulty {
 }
 
 class Recipe: NSObject {
-	static var cookingTechniqueDictionary = NSDictionary()
+	static var cookingTechniques = ["Baking","Basting","Boiling","Boning","Brining","Broiling","Canning","Caramelizing","Chiffonade","Chopping","Cold Storage","Creaming","Cubing","Deep Frying","Deglazing","Degorging","Drying","Fermenting","Grilling","Julienning","Marinating","Melting","Microwaving","Mincing","Pickling","Poaching","Pressure Cooking","Puree","Roasting","Sauteing","Simmering","Slicing","Smoking","Soak","Spice rubs","Steaming","Stir Frying"]
 	
 	private var name: String {
 		get { return self.name }
@@ -66,9 +66,5 @@ class Recipe: NSObject {
 		self.desc = description
 		self.cookingTime = cookingTime
 		self.owner = owner
-	}
-	
-	static func populateCookingTechniqueDictionary() {
-		
 	}
 }

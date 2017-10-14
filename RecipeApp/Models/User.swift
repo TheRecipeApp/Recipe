@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class User: NSObject {
+class User: PFObject {
 	private var email: String {
 		get { return self.email }
 		set { self.email = newValue }
@@ -17,6 +17,11 @@ class User: NSObject {
 	private var screenName: String {
 		get { return self.screenName }
 		set { self.screenName = newValue }
+	}
+	private var password: String {
+		get {return self.password}
+		// TODO: hash the password value
+		set {self.password = newValue }
 	}
 	private var firstName: String {
 		get { return self.firstName }

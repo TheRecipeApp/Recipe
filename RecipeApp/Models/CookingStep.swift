@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CookingStep: NSObject {
+class CookingStep: PFObject {
 	private var desc: String {
 		get { return self.desc }
 		set { self.desc = newValue }

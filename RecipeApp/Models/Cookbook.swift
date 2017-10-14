@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Parse
 
-class Cookbook: NSObject {
+class Cookbook: PFObject {
 	private var name: String {
 		get { return self.name }
 		set { self.name = newValue }

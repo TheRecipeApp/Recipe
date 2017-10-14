@@ -7,15 +7,27 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+	private let parseApplicationId = "recipe-id"
+	private let parseServer = "cp-recipe.herokuapp.com/parse"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+		let storyboard = UIStoryboard(name: "Login", bundle: nil)
+		// view controller currently being set in Storyboard as default will be overridden
+		window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		
+		Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
+			configuration.applicationId = self.parseApplicationId
+			configuration.server = "http://\(self.parseServer)"
+		}))
+
         return true
     }
 

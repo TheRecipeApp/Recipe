@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  RecipeApp
 //
 //  Created by Vijayanand on 10/14/17.
@@ -7,20 +7,18 @@
 //
 
 import UIKit
-import Parse
 import CryptoSwift
 
-class LoginViewController: UIViewController {
-
+class RegisterViewController: UIViewController {
 	@IBOutlet weak var username: UITextField!
 	@IBOutlet weak var password: UITextField!
+	@IBOutlet weak var confirmPassword: UITextField!
 	let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
-	
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
 		// create an OK action
 		let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
 			// handle response here.
@@ -30,7 +28,7 @@ class LoginViewController: UIViewController {
 		
 		
 		let width = CGFloat(2.0)
-
+		
 		username.textColor = UIColor.white
 		let userNameBorder = CALayer()
 		userNameBorder.borderColor = UIColor.white.cgColor
@@ -46,43 +44,65 @@ class LoginViewController: UIViewController {
 		passwordBorder.borderWidth = width
 		password.layer.addSublayer(passwordBorder)
 		password.layer.masksToBounds = true
-    }
+
+		confirmPassword.textColor = UIColor.white
+		let confirmPasswordBorder = CALayer()
+		confirmPasswordBorder.borderColor = UIColor.white.cgColor
+		confirmPasswordBorder.frame = CGRect(x: 0, y: confirmPassword.frame.size.height - width, width:  confirmPassword.frame.size.width, height: confirmPassword.frame.size.height)
+		confirmPasswordBorder.borderWidth = width
+		confirmPassword.layer.addSublayer(confirmPasswordBorder)
+		confirmPassword.layer.masksToBounds = true
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-	
-	@IBAction func onSignUp(_ sender: UIButton) {
-		performSegue(withIdentifier: "RegisterUserSegue", sender: sender)
-	}
-	
-	@IBAction func onLogin(_ sender: UIButton) {
-		loginUser()
-	}
-	
-	private func loginUser() {
-		
-		let user = username.text ?? ""
-		let passwd = password.text ?? ""
-		let passwdHash = passwd.sha512()
+    
 
+	@IBAction func onRegister(_ sender: UIButton) {
+		registerUser()
+	}
+	
+	private func registerUser() {
+		// initialize a user object
+		let newUser = User()
 		
-		User.logInWithUsername(inBackground: user, password: passwdHash) { (user: PFUser?, error: Error?) in
+		// set user properties
+		newUser.username = username.text
+		newUser.email = username.text
+		let pwd = password.text
+		let confirmPwd = confirmPassword.text
+		if pwd != nil {
+			if (pwd != confirmPwd) {
+				password.text = ""
+				confirmPassword.text = ""
+				alertController.title = "Password Confirmation Failed"
+				self.password.becomeFirstResponder()
+				present(alertController, animated: true, completion: nil)
+				return
+			}
+		}
+		newUser.password = password.text?.sha512()
+		
+		// call sign up function on the object
+		newUser.signUpInBackground { (success: Bool, error: Error?) in
 			if let error = error {
-				print("User log in failed: \(error.localizedDescription)")
-				self.alertController.title = "Invalid Login"
+				print(error.localizedDescription)
 				self.password.text = ""
+				self.confirmPassword.text = ""
+				self.alertController.title = "Unable to Register User"
 				self.present(self.alertController, animated: true, completion: {
 				})
 			} else {
-				print("User logged in successfully")
-				// display view controller that needs to shown after successful login
+				print("User Registered successfully")
+				// manually segue to logged in view
+				self.dismiss(animated: true, completion: nil)
 			}
 		}
 	}
-
-    /*
+	
+	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -93,4 +113,3 @@ class LoginViewController: UIViewController {
     */
 
 }
-

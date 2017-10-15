@@ -9,25 +9,35 @@
 import UIKit
 import Parse
 import CryptoSwift
+import FacebookCore
+import FacebookLogin
+import ParseFacebookUtilsV4
+
 
 class LoginViewController: UIViewController {
 
 	@IBOutlet weak var username: UITextField!
 	@IBOutlet weak var password: UITextField!
+    
 	let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+        // Override point for customization after application launch.
+      
+//        // Facebook Swift SDK example below
+//        let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
+//        loginButton.center = view.center
+//        view.addSubview(loginButton)
 
         // Do any additional setup after loading the view.
-
+        
 		// create an OK action
 		let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
 			// handle response here.
 		}
 		// add the OK action to the alert controller
 		alertController.addAction(OKAction)
-		
 		
 		let width = CGFloat(2.0)
 
@@ -61,15 +71,34 @@ class LoginViewController: UIViewController {
 		loginUser()
 	}
 	
-	private func loginUser() {
+    @IBAction func onFacebookLogin(_ sender: UIButton) {
+        print("User tapped on login with facebook")
+        // Parse-Facebook Swift SDK below
+        let permissions: [String] = ["public_profile", "email", "user_friends"]
+        PFFacebookUtils.logInInBackground(withReadPermissions: permissions) { (user: PFUser?, error: Error?) in
+            if let error = error {
+                print("There was an error with fb login: \(error.localizedDescription)")
+            }
+            if let user = user {
+                if user.isNew {
+                    print("User signed up and logged in through Facebook!")
+                } else {
+                    print("User logged in through Facebook!")
+                }
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
+            }
+        }
+    }
+
+    private func loginUser() {
 		
 		let user = username.text ?? ""
 		let passwd = password.text ?? ""
 		let passwdHash = passwd.sha512()
 
-		
 		User.logInWithUsername(inBackground: user, password: passwdHash) { (user: PFUser?, error: Error?) in
-			if let error = error {
+            if let error = error {
 				print("User log in failed: \(error.localizedDescription)")
 				self.alertController.title = "Invalid Login"
 				self.password.text = ""
@@ -93,4 +122,16 @@ class LoginViewController: UIViewController {
     */
 
 }
+
+//extension LoginViewController: LoginButtonDelegate {
+//    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+//        print("User logged in")
+//    }
+//
+//    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+//        print("User just completed the login")
+//        print("user id \(AccessToken.current?.userId)")
+//        print(UserProfile.current?.fullName)
+//    }
+//}
 

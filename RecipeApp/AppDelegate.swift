@@ -8,6 +8,9 @@
 
 import UIKit
 import Parse
+import FBSDKCoreKit
+import ParseFacebookUtilsV4
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 	private let parseApplicationId = "recipe-id"
-	private let parseServer = "cp-recipe.herokuapp.com/parse"
+    private let parseServer = "cp-recipe.herokuapp.com/parse"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
 		// view controller currently being set in Storyboard as default will be overridden
@@ -26,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
 			configuration.applicationId = self.parseApplicationId
 			configuration.server = "http://\(self.parseServer)"
+            PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
 		}))
 
+        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
         return true
     }
 
@@ -46,13 +52,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        FBSDKAppEvents.activateApp()
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    // still debugging this
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("Facebook invoked the recipe url scheme")
+        return true
+    }
+    // still debugging this
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        print("Facebook invoked the recipe url scheme 2")
+        return true
+    }
+    
 }
 

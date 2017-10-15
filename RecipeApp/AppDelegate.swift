@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
 		}))
         
+        // TODO: Alex, can you take a look at this?
 //        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
         return true
     }

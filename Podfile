@@ -9,7 +9,11 @@ target 'RecipeApp' do
   pod 'AFNetworking'
   pod 'MBProgressHUD'
   pod 'Parse'
+  pod 'ParseUI'
   pod 'CryptoSwift'
+  pod 'ParseFacebookUtilsV4'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

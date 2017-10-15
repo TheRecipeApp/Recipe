@@ -85,6 +85,18 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKS-YZ-e6G">
+                                <rect key="frame" x="38" y="496.5" width="300" height="30"/>
+                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="iTo-K9-zJl"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="LOG IN WITH FACEBOOK"/>
+                                <connections>
+                                    <action selector="onFacebookLogin:" destination="oFa-a6-JZr" eventType="touchUpInside" id="pae-nh-nbu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -93,6 +105,7 @@
                             <constraint firstItem="Nlc-Hu-8Mo" firstAttribute="centerX" secondItem="gDt-pe-oHB" secondAttribute="centerX" id="6Gy-mL-u3f"/>
                             <constraint firstItem="xKT-Um-rqB" firstAttribute="leading" secondItem="p1Q-rJ-Egf" secondAttribute="leading" id="AS9-vq-zK0"/>
                             <constraint firstItem="olR-B7-uJD" firstAttribute="centerX" secondItem="gDt-pe-oHB" secondAttribute="centerX" id="Cgv-Qw-PMH"/>
+                            <constraint firstItem="oKS-YZ-e6G" firstAttribute="centerX" secondItem="tCa-qQ-9cO" secondAttribute="centerX" id="Jkf-xt-efd"/>
                             <constraint firstItem="xKT-Um-rqB" firstAttribute="bottom" secondItem="p1Q-rJ-Egf" secondAttribute="bottom" id="NJW-fB-b7s"/>
                             <constraint firstItem="vsp-mU-VWE" firstAttribute="top" secondItem="olR-B7-uJD" secondAttribute="bottom" constant="10" id="QbM-Cf-KK4"/>
                             <constraint firstItem="x7r-zi-hvH" firstAttribute="centerX" secondItem="gDt-pe-oHB" secondAttribute="centerX" id="TG9-OJ-sAp"/>
@@ -100,6 +113,7 @@
                             <constraint firstItem="vsp-mU-VWE" firstAttribute="centerX" secondItem="gDt-pe-oHB" secondAttribute="centerX" id="bpl-QS-eni"/>
                             <constraint firstItem="tCa-qQ-9cO" firstAttribute="centerX" secondItem="gDt-pe-oHB" secondAttribute="centerX" id="chj-mc-jAQ"/>
                             <constraint firstItem="tCa-qQ-9cO" firstAttribute="top" secondItem="Nlc-Hu-8Mo" secondAttribute="bottom" constant="10" id="him-dM-gj0"/>
+                            <constraint firstItem="oKS-YZ-e6G" firstAttribute="top" secondItem="x7r-zi-hvH" secondAttribute="bottom" constant="4" id="ktg-ZQ-Zd1"/>
                             <constraint firstItem="x7r-zi-hvH" firstAttribute="top" secondItem="tCa-qQ-9cO" secondAttribute="bottom" constant="4" id="oXr-nB-Jys"/>
                             <constraint firstItem="olR-B7-uJD" firstAttribute="centerY" secondItem="gDt-pe-oHB" secondAttribute="centerY" id="tHW-9i-1bK"/>
                         </constraints>

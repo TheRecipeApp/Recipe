@@ -9,19 +9,10 @@
 import UIKit
 import Parse
 
-class User: PFObject {
-	private var email: String {
-		get { return self.email }
-		set { self.email = newValue }
-	}
+class User: PFUser {
 	private var screenName: String {
 		get { return self.screenName }
 		set { self.screenName = newValue }
-	}
-	private var password: String {
-		get {return self.password}
-		// TODO: hash the password value
-		set {self.password = newValue }
 	}
 	private var firstName: String {
 		get { return self.firstName }
@@ -64,10 +55,7 @@ class User: PFObject {
 		set { self.profileImage = newValue }
 	}
 	
-	
-	
-	init(email: String, screenName: String, firstName: String, lastName: String?, phone: String, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
-		super.init()
+	func custom_init(screenName: String, firstName: String, lastName: String?, phone: String, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
 		self.email = email
 		self.screenName = screenName
 		self.firstName = firstName

@@ -13,5 +13,5 @@ class FacebookAuthDelegate: NSObject, PFUserAuthenticationDelegate {
     func restoreAuthentication(withAuthData authData: [String : String]?) -> Bool {
         return true
     }
-
+    
 }

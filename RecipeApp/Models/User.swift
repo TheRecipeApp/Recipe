@@ -9,11 +9,7 @@
 import UIKit
 import Parse
 
-class User: NSObject {
-	private var email: String {
-		get { return self.email }
-		set { self.email = newValue }
-	}
+class User: PFUser {
 	private var screenName: String {
 		get { return self.screenName }
 		set { self.screenName = newValue }
@@ -59,10 +55,7 @@ class User: NSObject {
 		set { self.profileImage = newValue }
 	}
 	
-	
-	
-	init(email: String, screenName: String, firstName: String, lastName: String?, phone: String, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
-		super.init()
+	func custom_init(screenName: String, firstName: String, lastName: String?, phone: String, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
 		self.email = email
 		self.screenName = screenName
 		self.firstName = firstName

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Parse
 
-class UserSettings: NSObject {
+class UserSettings: PFObject {
 	private var shareMyCooking: Bool {
 		get { return self.shareMyCooking }
 		set { self.shareMyCooking = newValue }

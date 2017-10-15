@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */; };
 		5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */; };
 		5FD28DD71F8B2B1D005BAD06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD61F8B2B1D005BAD06 /* ViewController.swift */; };
 		5FD28DDA1F8B2B1D005BAD06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthDelegate.swift; sourceTree = "<group>"; };
 		5FD28DD11F8B2B1D005BAD06 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FD28DD61F8B2B1D005BAD06 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5F08B0001F9412610050E639 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		5FD28DC81F8B2B1D005BAD06 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 			children = (
 				5F08AFFD1F93F5D00050E639 /* Supporting Files */,
 				5FD9E92F1F8F401E00976497 /* Storyboards */,
+				5F08B0001F9412610050E639 /* Auth */,
 				AFA347841F8DAC7900C283D6 /* Views */,
 				AFA347831F8DAC5B00C283D6 /* ViewControllers */,
 				AFA347821F8DAC4900C283D6 /* Models */,
@@ -306,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7EC2701F929C9D00A42121 /* LoginViewController.swift in Sources */,
+				5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */,
 				AFF8ED791F92C7A8007A34CE /* RegisterViewController.swift in Sources */,
 				AFD1FCE51F90507F00190961 /* Cookbook.swift in Sources */,
 				5FD28DD71F8B2B1D005BAD06 /* ViewController.swift in Sources */,

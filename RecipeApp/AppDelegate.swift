@@ -11,7 +11,6 @@ import Parse
 import FBSDKCoreKit
 import ParseFacebookUtilsV4
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -33,8 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
 		}))
         
-        // TODO: Alex, can you take a look at this?
-//        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
+        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
         return true
     }
 

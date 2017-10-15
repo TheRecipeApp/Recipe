@@ -32,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			configuration.server = "http://\(self.parseServer)"
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
 		}))
-
-        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
+        
+//        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
         return true
     }
 

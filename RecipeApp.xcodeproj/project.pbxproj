@@ -66,6 +66,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5F08AFFD1F93F5D00050E639 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5FD28DDB1F8B2B1D005BAD06 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		5FD28DC81F8B2B1D005BAD06 = {
 			isa = PBXGroup;
 			children = (
@@ -87,13 +95,13 @@
 		5FD28DD31F8B2B1D005BAD06 /* RecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				5F08AFFD1F93F5D00050E639 /* Supporting Files */,
 				5FD9E92F1F8F401E00976497 /* Storyboards */,
 				AFA347841F8DAC7900C283D6 /* Views */,
 				AFA347831F8DAC5B00C283D6 /* ViewControllers */,
 				AFA347821F8DAC4900C283D6 /* Models */,
 				5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */,
 				5FD28DD61F8B2B1D005BAD06 /* ViewController.swift */,
-				5FD28DDB1F8B2B1D005BAD06 /* Assets.xcassets */,
 				5FD28DE01F8B2B1D005BAD06 /* Info.plist */,
 			);
 			path = RecipeApp;
@@ -262,16 +270,28 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/ParseFacebookUtilsV4/ParseFacebookUtilsV4.framework",
+				"${BUILT_PRODUCTS_DIR}/ParseUI/ParseUI.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParseFacebookUtilsV4.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParseUI.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

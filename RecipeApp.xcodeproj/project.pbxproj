@@ -94,7 +94,6 @@
 				5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */,
 				5FD28DD61F8B2B1D005BAD06 /* ViewController.swift */,
 				5FD28DDB1F8B2B1D005BAD06 /* Assets.xcassets */,
-				5FD28DDD1F8B2B1D005BAD06 /* LaunchScreen.storyboard */,
 				5FD28DE01F8B2B1D005BAD06 /* Info.plist */,
 			);
 			path = RecipeApp;
@@ -103,9 +102,9 @@
 		5FD9E92F1F8F401E00976497 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				5FD28DDD1F8B2B1D005BAD06 /* LaunchScreen.storyboard */,
 				5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */,
 				5FD9E9301F8F403900976497 /* Login.storyboard */,
-				AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -126,6 +125,7 @@
 		AFA347831F8DAC5B00C283D6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */,
 				AF7EC26F1F929C9D00A42121 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;

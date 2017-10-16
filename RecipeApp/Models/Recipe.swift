@@ -55,9 +55,13 @@ class Recipe: PFObject {
 		get { return self.calories }
 		set { self.calories = newValue}
 	}
-	private var servings: Int?{
+	private var servings: Int? {
 		get { return self.servings }
 		set { self.servings = newValue}
+	}
+	private var image: PFFile {
+		get { return self.image }
+		set { self.image = newValue }
 	}
 	
 	init(name: String, description: String?, owner: UInt64, cookingTime: Int?) {

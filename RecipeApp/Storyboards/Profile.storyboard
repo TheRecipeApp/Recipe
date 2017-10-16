@@ -23,7 +23,7 @@
                     <navigationItem key="navigationItem" id="WfW-6b-dwp">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="FM8-0O-GZs">
                             <connections>
-                                <segue destination="cjM-rc-cs7" kind="push" id="c6E-uw-DVR"/>
+                                <segue destination="cjM-rc-cs7" kind="show" id="HUh-Vx-3px"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

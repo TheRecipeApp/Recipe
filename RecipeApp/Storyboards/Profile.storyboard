@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8ak-mu-oBu">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="t47-hO-RYz">
+            <objects>
+                <viewController id="tVQ-Zt-gRl" customClass="ProfileViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KyV-3k-xT4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="i69-mD-gWq"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="WfW-6b-dwp">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="FM8-0O-GZs">
+                            <connections>
+                                <segue destination="cjM-rc-cs7" kind="show" id="HUh-Vx-3px"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ezx-L4-b9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674" y="99"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="ncO-k7-6IP">
+            <objects>
+                <viewController id="cjM-rc-cs7" customClass="EditProfileViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iCt-FQ-oZ0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ahE-v4-DE3"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZhF-ea-TMM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L99-dI-GNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1471" y="99"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3LI-uh-lKH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8ak-mu-oBu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mAq-JV-B8B">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tVQ-Zt-gRl" kind="relationship" relationship="rootViewController" id="lJW-Wg-x43"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aQU-Pq-uFV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-160" y="98.950524737631198"/>
+        </scene>
+    </scenes>
+</document>

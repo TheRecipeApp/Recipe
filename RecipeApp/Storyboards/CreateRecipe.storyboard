@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i80-mO-F3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975.20000000000005" y="116.49175412293854"/>
+            <point key="canvasLocation" x="1050" y="119"/>
         </scene>
         <!--Complete Recipe View Controller-->
         <scene sceneID="8JY-33-Fxp">
@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIn-7l-6fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="119.1904047976012"/>
+            <point key="canvasLocation" x="1890" y="119"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dEL-LN-f5v">

@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  FindViewController.swift
 //  RecipeApp
 //
 //  Created by Cesar Cavazos on 10/8/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class FindViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

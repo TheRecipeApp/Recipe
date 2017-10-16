@@ -37,10 +37,6 @@ class User: PFUser {
 		get { return self.followers }
 		set { self.followers = newValue }
 	}
-	private var cookbooks: [UInt64]? { // list of cookbook ids that the current user is interested in
-		get { return self.cookbooks }
-		set { self.cookbooks = newValue }
-	}
 	private var settings: UserSettings {
 		get { return self.settings }
 		set { self.settings = newValue }
@@ -64,7 +60,6 @@ class User: PFUser {
 		self.stars = 0
 		self.followers = [UInt64]()
 		self.following = [UInt64]()
-		self.cookbooks = [UInt64]()
 		self.settings = UserSettings(shareMyCooking: shareMyCooking, learnToCook: learnToCook, enablePushNotifications: enablePushNotifications, favoriteCuisines: favoriteCuisines)
 	}
 }

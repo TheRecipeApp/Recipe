@@ -32,11 +32,23 @@ class CookingStep: PFObject {
 		set { self.stepImage = newValue }
 	}
 	
+	private var recipeId: UInt64 {
+		get { return self.recipeId }
+		set { self.recipeId = newValue }
+	}
+	
+	priave var stepNumber: Int {
+		get { return self.stepNumber }
+		set { self.stepNumber = newValue }
+	}
+	
 	// TODO: add a property to store video guide
 
-	init(desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
+	init(recipeId: UInt64, stepNumber: Int, desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
 		super.init()
 		self.desc = desc
+		self.stepNumber = stepNumber
+		self.recipeId = recipeId
 		self.ingredients = ingredients ?? [Ingredient]()
 		self.ingredientAmounts = ingredientAmounts ?? [Float]()
 		self.ingredientUnits = ingredientUnits ?? [String]()

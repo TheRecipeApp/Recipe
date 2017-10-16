@@ -37,7 +37,7 @@ class CookingStep: PFObject {
 		set { self.recipeId = newValue }
 	}
 	
-	priave var stepNumber: Int {
+	private var stepNumber: Int {
 		get { return self.stepNumber }
 		set { self.stepNumber = newValue }
 	}

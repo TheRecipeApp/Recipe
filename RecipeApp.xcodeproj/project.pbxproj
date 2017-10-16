@@ -14,6 +14,9 @@
 		5F576D711F944CDA0037228B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F576D701F944CDA0037228B /* Profile.storyboard */; };
 		5F576D731F944D190037228B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D721F944D190037228B /* ProfileViewController.swift */; };
 		5F576D751F944D260037228B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D741F944D260037228B /* EditProfileViewController.swift */; };
+		5F576D771F94512E0037228B /* Cooking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F576D761F94512E0037228B /* Cooking.storyboard */; };
+		5F576D791F94518C0037228B /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D781F94518C0037228B /* StepsViewController.swift */; };
+		5F576D7B1F94519A0037228B /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D7A1F94519A0037228B /* FinishViewController.swift */; };
 		5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */; };
 		5FD28DD71F8B2B1D005BAD06 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD61F8B2B1D005BAD06 /* HomeViewController.swift */; };
 		5FD28DDA1F8B2B1D005BAD06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */; };
@@ -39,6 +42,9 @@
 		5F576D701F944CDA0037228B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		5F576D721F944D190037228B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5F576D741F944D260037228B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		5F576D761F94512E0037228B /* Cooking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cooking.storyboard; sourceTree = "<group>"; };
+		5F576D781F94518C0037228B /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		5F576D7A1F94519A0037228B /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 		5FD28DD11F8B2B1D005BAD06 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FD28DD61F8B2B1D005BAD06 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -125,11 +131,13 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		5F576D681F944BDB0037228B /* Cook */ = {
+		5F576D681F944BDB0037228B /* Cooking */ = {
 			isa = PBXGroup;
 			children = (
+				5F576D781F94518C0037228B /* StepsViewController.swift */,
+				5F576D7A1F94519A0037228B /* FinishViewController.swift */,
 			);
-			path = Cook;
+			path = Cooking;
 			sourceTree = "<group>";
 		};
 		5F576D691F944BE70037228B /* CreateRecipe */ = {
@@ -179,6 +187,7 @@
 				5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */,
 				5FD9E9301F8F403900976497 /* Login.storyboard */,
 				5F576D701F944CDA0037228B /* Profile.storyboard */,
+				5F576D761F94512E0037228B /* Cooking.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -200,7 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				5F576D691F944BE70037228B /* CreateRecipe */,
-				5F576D681F944BDB0037228B /* Cook */,
+				5F576D681F944BDB0037228B /* Cooking */,
 				5F576D671F944BD60037228B /* Profile */,
 				5F576D661F944BD00037228B /* Main */,
 				5F576D651F944BC80037228B /* Login */,
@@ -287,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FD9E9311F8F403900976497 /* Login.storyboard in Resources */,
+				5F576D771F94512E0037228B /* Cooking.storyboard in Resources */,
 				5FD28DDF1F8B2B1D005BAD06 /* LaunchScreen.storyboard in Resources */,
 				5F576D711F944CDA0037228B /* Profile.storyboard in Resources */,
 				5FD28DDC1F8B2B1D005BAD06 /* Assets.xcassets in Resources */,
@@ -384,7 +394,9 @@
 				5FD28DD71F8B2B1D005BAD06 /* HomeViewController.swift in Sources */,
 				5F576D6D1F944C310037228B /* AddFriendsViewController.swift in Sources */,
 				5F576D6B1F944C1B0037228B /* SelectPreferenceViewController.swift in Sources */,
+				5F576D791F94518C0037228B /* StepsViewController.swift in Sources */,
 				AF1374A71F8FB8E0004B98A8 /* UserSettings.swift in Sources */,
+				5F576D7B1F94519A0037228B /* FinishViewController.swift in Sources */,
 				AFD1FCE31F90507300190961 /* Ingredient.swift in Sources */,
 				5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */,
 				AF1374A51F8FB5B1004B98A8 /* User.swift in Sources */,

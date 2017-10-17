@@ -38,26 +38,9 @@ class LoginViewController: UIViewController {
 		}
 		// add the OK action to the alert controller
 		alertController.addAction(OKAction)
-		username.attributedPlaceholder = NSAttributedString(string: "Username or Email", attributes: [NSForegroundColorAttributeName: UIColor.white])
-		password.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.white])
 		
-		let width = CGFloat(2.0)
-
-		username.textColor = UIColor.white
-		let userNameBorder = CALayer()
-		userNameBorder.borderColor = UIColor.white.cgColor
-		userNameBorder.frame = CGRect(x: 0, y: username.frame.size.height - width, width:  username.frame.size.width, height: username.frame.size.height)
-		userNameBorder.borderWidth = width
-		username.layer.addSublayer(userNameBorder)
-		username.layer.masksToBounds = true
-		
-		password.textColor = UIColor.white
-		let passwordBorder = CALayer()
-		passwordBorder.borderColor = UIColor.white.cgColor
-		passwordBorder.frame = CGRect(x: 0, y: password.frame.size.height - width, width:  password.frame.size.width, height: password.frame.size.height)
-		passwordBorder.borderWidth = width
-		password.layer.addSublayer(passwordBorder)
-		password.layer.masksToBounds = true
+		setupTextFieldAtributes(field: username, string: "Username or Email")
+		setupTextFieldAtributes(field: password, string: "Enter Password")
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +75,18 @@ class LoginViewController: UIViewController {
             }
         }
     }
+	
+	private func setupTextFieldAtributes(field: UITextField, string: String) {
+		let width = CGFloat(2.0)
+		field.textColor = UIColor.white
+		let fieldBorder = CALayer()
+		fieldBorder.borderColor = UIColor.white.cgColor
+		fieldBorder.frame = CGRect(x: 0, y: field.frame.size.height - width, width:  field.frame.size.width, height: field.frame.size.height)
+		fieldBorder.borderWidth = width
+		field.layer.addSublayer(fieldBorder)
+		field.layer.masksToBounds = true
+		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
+	}
 
     private func loginUser() {
 		

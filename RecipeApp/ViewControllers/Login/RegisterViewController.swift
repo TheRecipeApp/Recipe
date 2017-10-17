@@ -28,45 +28,10 @@ class RegisterViewController: UIViewController {
 		// add the OK action to the alert controller
 		alertController.addAction(OKAction)
 		
-		
-		let width = CGFloat(2.0)
-		
-		email.textColor = UIColor.white
-		let emailBorder = CALayer()
-		emailBorder.borderColor = UIColor.white.cgColor
-		emailBorder.frame = CGRect(x: 0, y: email.frame.size.height - width, width:  email.frame.size.width, height: email.frame.size.height)
-		emailBorder.borderWidth = width
-		email.layer.addSublayer(emailBorder)
-		email.layer.masksToBounds = true
-		email.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSForegroundColorAttributeName: UIColor.white])
-		
-		username.textColor = UIColor.white
-		let userNameBorder = CALayer()
-		userNameBorder.borderColor = UIColor.white.cgColor
-		userNameBorder.frame = CGRect(x: 0, y: username.frame.size.height - width, width:  username.frame.size.width, height: username.frame.size.height)
-		userNameBorder.borderWidth = width
-		username.layer.addSublayer(userNameBorder)
-		username.layer.masksToBounds = true
-		username.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSForegroundColorAttributeName: UIColor.white])
-
-		password.textColor = UIColor.white
-		let passwordBorder = CALayer()
-		passwordBorder.borderColor = UIColor.white.cgColor
-		passwordBorder.frame = CGRect(x: 0, y: password.frame.size.height - width, width:  password.frame.size.width, height: password.frame.size.height)
-		passwordBorder.borderWidth = width
-		password.layer.addSublayer(passwordBorder)
-		password.layer.masksToBounds = true
-		password.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName: UIColor.white])
-
-		confirmPassword.textColor = UIColor.white
-		let confirmPasswordBorder = CALayer()
-		confirmPasswordBorder.borderColor = UIColor.white.cgColor
-		confirmPasswordBorder.frame = CGRect(x: 0, y: confirmPassword.frame.size.height - width, width:  confirmPassword.frame.size.width, height: confirmPassword.frame.size.height)
-		confirmPasswordBorder.borderWidth = width
-		confirmPassword.layer.addSublayer(confirmPasswordBorder)
-		confirmPassword.layer.masksToBounds = true
-		confirmPassword.attributedPlaceholder = NSAttributedString(string: "Confirm Password", attributes: [NSForegroundColorAttributeName: UIColor.white])
-
+		setupTextFieldAtributes(field: email, string: "Email")
+		setupTextFieldAtributes(field: username, string: "Username")
+		setupTextFieldAtributes(field: password, string: "Password")
+		setupTextFieldAtributes(field: confirmPassword, string: "Confirm Password")
 	}
 
     override func didReceiveMemoryWarning() {
@@ -115,6 +80,18 @@ class RegisterViewController: UIViewController {
 				self.dismiss(animated: true, completion: nil)
 			}
 		}
+	}
+	
+	private func setupTextFieldAtributes(field: UITextField, string: String) {
+		let width = CGFloat(2.0)
+		field.textColor = UIColor.white
+		let fieldBorder = CALayer()
+		fieldBorder.borderColor = UIColor.white.cgColor
+		fieldBorder.frame = CGRect(x: 0, y: field.frame.size.height - width, width:  field.frame.size.width, height: field.frame.size.height)
+		fieldBorder.borderWidth = width
+		field.layer.addSublayer(fieldBorder)
+		field.layer.masksToBounds = true
+		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
 	}
 	
 	/*

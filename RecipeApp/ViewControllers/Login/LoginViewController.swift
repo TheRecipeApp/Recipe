@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
 		// add the OK action to the alert controller
 		alertController.addAction(OKAction)
 		
-		setupTextFieldAtributes(field: username, string: "Username or Email")
+		setupTextFieldAtributes(field: username, string: "Username")
 		setupTextFieldAtributes(field: password, string: "Enter Password")
     }
 
@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
     }
 	
 	@IBAction func onSignUp(_ sender: UIButton) {
-		performSegue(withIdentifier: "RegisterUserSegue", sender: sender)
+		performSegue(withIdentifier: "RegisterNavigationSegue", sender: sender)
 	}
 	
 	@IBAction func onLogin(_ sender: UIButton) {
@@ -88,8 +88,7 @@ class LoginViewController: UIViewController {
 		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
 	}
 
-    private func loginUser() {
-		
+    private func loginUser() {		
 		let user = username.text ?? ""
 		let passwd = password.text ?? ""
 		let passwdHash = passwd.sha512()
@@ -105,8 +104,8 @@ class LoginViewController: UIViewController {
 				print("User logged in successfully")
 				// display view controller that needs to shown after successful login
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let vc = storyboard.instantiateInitialViewController()
-				self.show(vc!, sender: self)
+				let vc = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! UITabBarController
+				self.show(vc, sender: self)
 			}
 		}
 	}

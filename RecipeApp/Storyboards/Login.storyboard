@@ -134,12 +134,12 @@
                     <connections>
                         <outlet property="password" destination="vsp-mU-VWE" id="nIk-ng-8xI"/>
                         <outlet property="username" destination="olR-B7-uJD" id="8Ya-I0-6Cr"/>
-                        <segue destination="W8R-7X-NmK" kind="presentation" identifier="RegisterUserSegue" id="kID-ZN-5W7"/>
+                        <segue destination="mFq-vo-Vof" kind="presentation" identifier="RegisterNavigationSegue" id="kID-ZN-5W7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUN-hw-kif" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88.799999999999997" y="163.26836581709148"/>
+            <point key="canvasLocation" x="-305" y="161"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="FZV-uG-3gX">
@@ -153,14 +153,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoWhiteBig" translatesAutoresizingMaskIntoConstraints="NO" id="wSy-ag-v1x">
-                                <rect key="frame" x="103" y="75" width="170" height="97"/>
+                                <rect key="frame" x="103" y="119" width="170" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="170" id="NMi-le-gkt"/>
                                     <constraint firstAttribute="height" constant="97" id="q8A-Ms-VY1"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCQ-FX-r8T">
-                                <rect key="frame" x="50" y="214" width="275" height="30"/>
+                                <rect key="frame" x="50" y="258" width="275" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -171,7 +171,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VZb-dv-8w8">
-                                <rect key="frame" x="50" y="264" width="275" height="30"/>
+                                <rect key="frame" x="50" y="308" width="275" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -182,7 +182,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fgj-fI-oDE">
-                                <rect key="frame" x="50" y="314" width="275" height="30"/>
+                                <rect key="frame" x="50" y="358" width="275" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -193,7 +193,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C0b-fr-8vN">
-                                <rect key="frame" x="50" y="364" width="275" height="30"/>
+                                <rect key="frame" x="50" y="408" width="275" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -204,7 +204,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWl-6u-Sj1">
-                                <rect key="frame" x="30" y="439" width="315" height="45"/>
+                                <rect key="frame" x="30" y="483" width="315" height="45"/>
                                 <color key="backgroundColor" name="PrimaryColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="nWX-ji-fvq"/>
@@ -217,9 +217,20 @@
                                     <action selector="onRegister:" destination="W8R-7X-NmK" eventType="touchUpInside" id="eRk-Yo-Q6I"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYS-h0-0kM">
+                                <rect key="frame" x="160" y="543" width="55" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" name="PrimaryColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancel:" destination="W8R-7X-NmK" eventType="touchUpInside" id="Jr3-nu-GhK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="QYS-h0-0kM" firstAttribute="centerX" secondItem="JCG-L6-eqM" secondAttribute="centerX" id="17T-8f-POB"/>
                             <constraint firstItem="UA7-wr-WJd" firstAttribute="trailing" secondItem="C0b-fr-8vN" secondAttribute="trailing" constant="50" id="2GW-yH-ebY"/>
                             <constraint firstItem="qNx-zc-Tfl" firstAttribute="leading" secondItem="UA7-wr-WJd" secondAttribute="leading" id="5MD-ef-ppv"/>
                             <constraint firstItem="C0b-fr-8vN" firstAttribute="top" secondItem="Fgj-fI-oDE" secondAttribute="bottom" constant="20" id="5wp-aD-Pma"/>
@@ -239,23 +250,26 @@
                             <constraint firstItem="dCQ-FX-r8T" firstAttribute="top" secondItem="wSy-ag-v1x" secondAttribute="bottom" constant="42" id="tcw-4O-vjt"/>
                             <constraint firstItem="Fgj-fI-oDE" firstAttribute="top" secondItem="VZb-dv-8w8" secondAttribute="bottom" constant="20" id="uHy-2d-bbM"/>
                             <constraint firstItem="oWl-6u-Sj1" firstAttribute="top" secondItem="C0b-fr-8vN" secondAttribute="bottom" constant="45" id="uq1-by-vdt"/>
+                            <constraint firstItem="QYS-h0-0kM" firstAttribute="top" secondItem="oWl-6u-Sj1" secondAttribute="bottom" constant="15" id="wBn-WT-leh"/>
                             <constraint firstItem="UA7-wr-WJd" firstAttribute="trailing" secondItem="dCQ-FX-r8T" secondAttribute="trailing" constant="50" id="xC8-3d-dGr"/>
                             <constraint firstItem="qNx-zc-Tfl" firstAttribute="trailing" secondItem="UA7-wr-WJd" secondAttribute="trailing" id="zwu-rK-L6l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UA7-wr-WJd"/>
                     </view>
+                    <navigationItem key="navigationItem" id="hf4-f1-Vg6"/>
                     <connections>
                         <outlet property="confirmPassword" destination="C0b-fr-8vN" id="hSn-XP-9hX"/>
                         <outlet property="email" destination="dCQ-FX-r8T" id="uf2-8R-AaD"/>
                         <outlet property="password" destination="Fgj-fI-oDE" id="K92-pi-PtT"/>
                         <outlet property="username" destination="VZb-dv-8w8" id="qnt-W5-u4L"/>
+                        <segue destination="A6D-mN-AbA" kind="presentation" identifier="SelectPreferenceNavigationSegue" id="6is-5i-wJS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nLG-xj-iCJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="831.20000000000005" y="161.46926536731635"/>
+            <point key="canvasLocation" x="1170.4000000000001" y="161.46926536731635"/>
         </scene>
-        <!--Select Preference View Controller-->
+        <!--Select Preference-->
         <scene sceneID="5YU-9D-eA0">
             <objects>
                 <viewController id="Om5-Yi-SV3" customClass="SelectPreferenceViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -274,10 +288,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1xq-rz-jDz"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Select Preference" id="I6o-sS-cl9">
+                        <barButtonItem key="leftBarButtonItem" title="Skip" style="plain" id="2Wk-Gk-cAb">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onSkip:" destination="Om5-Yi-SV3" id="rrE-Xv-UlR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iK-bW-hzw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1598" y="174"/>
+            <point key="canvasLocation" x="2735" y="152"/>
         </scene>
         <!--Add Friends View Controller-->
         <scene sceneID="U7q-27-7O6">
@@ -298,10 +320,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="UhU-Ip-xe8"/>
                     </view>
+                    <navigationItem key="navigationItem" id="dDv-ci-8UQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L8V-e6-p4r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="173"/>
+            <point key="canvasLocation" x="4188" y="152"/>
         </scene>
         <!--Select Friends View Controller-->
         <scene sceneID="GNM-hw-cmn">
@@ -322,10 +345,88 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8yS-xU-wFZ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="CeF-IP-u99"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1q-GG-cpM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3169" y="173"/>
+            <point key="canvasLocation" x="5762" y="152"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Xn-p7-xk0">
+            <objects>
+                <navigationController storyboardIdentifier="RegisterNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mFq-vo-Vof" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CcX-40-4kk">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="W8R-7X-NmK" kind="relationship" relationship="rootViewController" id="leS-6E-5zj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WPl-gu-nTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="471" y="161"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lBG-ta-3N5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A6D-mN-AbA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PSH-gG-4qN">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="PrimaryColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Om5-Yi-SV3" kind="relationship" relationship="rootViewController" id="cVZ-9M-QCT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="htN-YB-QLi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1992" y="152.92353823088456"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q1C-DD-r2g">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QNs-Dg-Bp9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AES-tc-e7D">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="n5c-nW-ID7" kind="relationship" relationship="rootViewController" id="vlI-j5-QJq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="leg-vn-zkR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3439" y="152"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XyV-XR-uOP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Ez-Ri-63s" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SB6-2q-dkW">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="36A-wR-6ZC" kind="relationship" relationship="rootViewController" id="TKF-a9-aET"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="exH-VK-8ty" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4991" y="152"/>
         </scene>
     </scenes>
     <resources>
@@ -333,6 +434,9 @@
         <image name="BackgroundDark" width="320" height="568"/>
         <image name="ContinueWithFacebook" width="210" height="34"/>
         <image name="LogoWhiteBig" width="170" height="97"/>
+        <namedColor name="PrimaryColor">
+            <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

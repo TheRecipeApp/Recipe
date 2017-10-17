@@ -28,6 +28,9 @@ class RegisterViewController: UIViewController {
 		// add the OK action to the alert controller
 		alertController.addAction(OKAction)
 		
+		let navigationController = self.navigationController
+		navigationController?.isNavigationBarHidden = true
+		
 		setupTextFieldAtributes(field: email, string: "Email")
 		setupTextFieldAtributes(field: username, string: "Username")
 		setupTextFieldAtributes(field: password, string: "Password")
@@ -50,9 +53,10 @@ class RegisterViewController: UIViewController {
 		
 		// set user properties
 		newUser.username = username.text
-		newUser.email = username.text
+		newUser.email = email.text
 		let pwd = password.text
 		let confirmPwd = confirmPassword.text
+		
 		if pwd != nil {
 			if (pwd != confirmPwd) {
 				password.text = ""
@@ -77,9 +81,13 @@ class RegisterViewController: UIViewController {
 			} else {
 				print("User Registered successfully")
 				// manually segue to logged in view
-				self.dismiss(animated: true, completion: nil)
+				self.performSegue(withIdentifier: "SelectPreferenceNavigationSegue", sender: nil)
 			}
 		}
+	}
+	
+	@IBAction func onCancel(_ sender: UIButton) {
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	private func setupTextFieldAtributes(field: UITextField, string: String) {
@@ -94,7 +102,6 @@ class RegisterViewController: UIViewController {
 		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
 	}
 	
-	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -102,6 +109,5 @@ class RegisterViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }

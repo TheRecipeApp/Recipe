@@ -38,6 +38,8 @@ class LoginViewController: UIViewController {
 		}
 		// add the OK action to the alert controller
 		alertController.addAction(OKAction)
+		username.attributedPlaceholder = NSAttributedString(string: "Username or Email", attributes: [NSForegroundColorAttributeName: UIColor.white])
+		password.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSForegroundColorAttributeName: UIColor.white])
 		
 		let width = CGFloat(2.0)
 
@@ -107,6 +109,9 @@ class LoginViewController: UIViewController {
 			} else {
 				print("User logged in successfully")
 				// display view controller that needs to shown after successful login
+				let storyboard = UIStoryboard(name: "Main", bundle: nil)
+				let vc = storyboard.instantiateInitialViewController()
+				self.show(vc!, sender: self)
 			}
 		}
 	}

@@ -13,6 +13,8 @@ class RegisterViewController: UIViewController {
 	@IBOutlet weak var username: UITextField!
 	@IBOutlet weak var password: UITextField!
 	@IBOutlet weak var confirmPassword: UITextField!
+	@IBOutlet weak var email: UITextField!
+	
 	let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
 
 	override func viewDidLoad() {
@@ -29,6 +31,15 @@ class RegisterViewController: UIViewController {
 		
 		let width = CGFloat(2.0)
 		
+		email.textColor = UIColor.white
+		let emailBorder = CALayer()
+		emailBorder.borderColor = UIColor.white.cgColor
+		emailBorder.frame = CGRect(x: 0, y: email.frame.size.height - width, width:  email.frame.size.width, height: email.frame.size.height)
+		emailBorder.borderWidth = width
+		email.layer.addSublayer(emailBorder)
+		email.layer.masksToBounds = true
+		email.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSForegroundColorAttributeName: UIColor.white])
+		
 		username.textColor = UIColor.white
 		let userNameBorder = CALayer()
 		userNameBorder.borderColor = UIColor.white.cgColor
@@ -36,7 +47,8 @@ class RegisterViewController: UIViewController {
 		userNameBorder.borderWidth = width
 		username.layer.addSublayer(userNameBorder)
 		username.layer.masksToBounds = true
-		
+		username.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSForegroundColorAttributeName: UIColor.white])
+
 		password.textColor = UIColor.white
 		let passwordBorder = CALayer()
 		passwordBorder.borderColor = UIColor.white.cgColor
@@ -44,6 +56,7 @@ class RegisterViewController: UIViewController {
 		passwordBorder.borderWidth = width
 		password.layer.addSublayer(passwordBorder)
 		password.layer.masksToBounds = true
+		password.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName: UIColor.white])
 
 		confirmPassword.textColor = UIColor.white
 		let confirmPasswordBorder = CALayer()
@@ -52,6 +65,8 @@ class RegisterViewController: UIViewController {
 		confirmPasswordBorder.borderWidth = width
 		confirmPassword.layer.addSublayer(confirmPasswordBorder)
 		confirmPassword.layer.masksToBounds = true
+		confirmPassword.attributedPlaceholder = NSAttributedString(string: "Confirm Password", attributes: [NSForegroundColorAttributeName: UIColor.white])
+
 	}
 
     override func didReceiveMemoryWarning() {

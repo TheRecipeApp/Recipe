@@ -74,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQP-uF-nmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1208.8" y="767.76611694152928"/>
+            <point key="canvasLocation" x="1548" y="767.76611694152928"/>
         </scene>
         <!--Recipe View Controller-->
         <scene sceneID="QY0-Sc-AKg">
@@ -92,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MT5-y4-4Ai" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="768"/>
+            <point key="canvasLocation" x="2735.1999999999998" y="767.76611694152928"/>
         </scene>
         <!--Find-->
         <scene sceneID="C4S-18-ga9">
@@ -118,6 +118,25 @@
             </objects>
             <point key="canvasLocation" x="420" y="32.833583208395808"/>
         </scene>
+        <!--Create-->
+        <scene sceneID="LtD-Qx-KGZ">
+            <objects>
+                <viewController storyboardIdentifier="TempViewController" id="EbJ-Dg-EQE" customClass="CreateViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nhd-qb-ppX"/>
+                        <viewControllerLayoutGuide type="bottom" id="LNj-HA-e0y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hvD-CE-U6a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create" id="zZA-Qq-V2V"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mnu-MF-t1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28" y="1131"/>
+        </scene>
         <!--Explore-->
         <scene sceneID="rmM-cw-9Hx">
             <objects>
@@ -135,7 +154,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2nw-3a-fNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="767.76611694152928"/>
+            <point key="canvasLocation" x="759.20000000000005" y="767.76611694152928"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="18e-ob-5MV">
@@ -150,11 +169,35 @@
                     <connections>
                         <segue destination="2Tw-XZ-JID" kind="relationship" relationship="viewControllers" id="d9U-bO-qxK"/>
                         <segue destination="BoN-VG-w1B" kind="relationship" relationship="viewControllers" id="UsU-h4-OL3"/>
+                        <segue destination="hqJ-hk-7Tz" kind="relationship" relationship="viewControllers" id="pJJ-uV-voL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jE2-pc-dhl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-577" y="402"/>
+        </scene>
+        <!--Create-->
+        <scene sceneID="zlv-iN-lQI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hqJ-hk-7Tz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Create" id="l5D-at-dVT" userLabel="Recipes Carousel"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Ium-0c-ioX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="PrimaryColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EbJ-Dg-EQE" kind="relationship" relationship="rootViewController" id="XP5-1Y-NQK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbO-UZ-l7M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-798" y="1132"/>
         </scene>
     </scenes>
     <resources>

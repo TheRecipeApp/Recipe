@@ -9,43 +9,25 @@
 import UIKit
 import Parse
 
-class CookingStep: PFObject {
-	private var desc: String {
-		get { return self.desc }
-		set { self.desc = newValue }
-	}
-	private var ingredients: [Ingredient]? {
-		get { return self.ingredients }
-		set { self.ingredients = newValue }
-	}
-	private var ingredientAmounts: [Float] {
-		get { return self.ingredientAmounts }
-		set { self.ingredientAmounts = newValue }
-	}
-	private var ingredientUnits: [String] {
-		get { return self.ingredientUnits }
-		set { self.ingredientUnits = newValue }
+class CookingStep: PFObject, PFSubclassing {
+	static func parseClassName() -> String {
+		return "CookingStep"
 	}
 	
-	private var stepImage: PFFile? {
-		get { return self.stepImage }
-		set { self.stepImage = newValue }
-	}
-	
-	private var recipeId: UInt64 {
-		get { return self.recipeId }
-		set { self.recipeId = newValue }
-	}
-	
-	private var stepNumber: Int {
-		get { return self.stepNumber }
-		set { self.stepNumber = newValue }
-	}
+	@NSManaged var desc: String
+	@NSManaged var ingredients: [Ingredient]?
+	@NSManaged var ingredientAmounts: [Float]
+	@NSManaged var ingredientUnits: [String]
+	@NSManaged var stepImage: PFFile?
+	@NSManaged var recipeId: UInt64
+	@NSManaged var stepNumber: NSNumber
 	
 	// TODO: add a property to store video guide
-
-	init(recipeId: UInt64, stepNumber: Int, desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
+	override init() {
 		super.init()
+	}
+
+	func custom_init(recipeId: UInt64, stepNumber: NSNumber, desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
 		self.desc = desc
 		self.stepNumber = stepNumber
 		self.recipeId = recipeId

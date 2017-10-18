@@ -9,64 +9,31 @@
 import UIKit
 import Parse
 
-enum RecipeDifficulty {
-	case low
-	case medium
-	case high
-	case expert
-}
-
-class Recipe: PFObject {
+class Recipe: PFObject, PFSubclassing {
+	static func parseClassName() -> String {
+		return "Recipe"
+	}
+	
 	static var cookingTechniques = ["Baking","Basting","Boiling","Boning","Brining","Broiling","Canning","Caramelizing","Chiffonade","Chopping","Cold Storage","Creaming","Cubing","Deep Frying","Deglazing","Degorging","Drying","Fermenting","Grilling","Julienning","Marinating","Melting","Microwaving","Mincing","Pickling","Poaching","Pressure Cooking","Puree","Roasting","Sauteing","Simmering","Slicing","Smoking","Soak","Spice rubs","Steaming","Stir Frying"]
 	
-	private var name: String {
-		get { return self.name }
-		set { self.name = newValue}
-	}
-	private var desc: String? {
-		get { return self.desc }
-		set { self.desc = newValue}
-	}
-	private var cookingTime: Int? {
-		get { return self.cookingTime }
-		set { self.cookingTime = newValue}
-	}
-	private var difficultyLevel: RecipeDifficulty? {
-		get { return self.difficultyLevel }
-		set { self.difficultyLevel = newValue}
-	}
-	private var cuisine: String? {
-		get { return self.cuisine }
-		set { self.cuisine = newValue}
-	}
-	private var likes: Int? {
-		get { return self.likes }
-		set { self.likes = newValue}
-	}
-	private var owner: UInt64 {
-		get { return self.owner }
-		set { self.owner = newValue}
-	}
-	private var shares: Int? {
-		get { return self.shares }
-		set { self.shares = newValue}
-	}
-	private var calories: Int? {
-		get { return self.calories }
-		set { self.calories = newValue}
-	}
-	private var servings: Int? {
-		get { return self.servings }
-		set { self.servings = newValue}
-	}
-	private var image: PFFile {
-		get { return self.image }
-		set { self.image = newValue }
+	@NSManaged var name: String
+	@NSManaged var desc: String?
+	@NSManaged var cookingTime: NSNumber?
+	@NSManaged var difficultyLevel: String?
+	@NSManaged var cuisine: String?
+	@NSManaged var likes: NSNumber?
+	@NSManaged var owner: UInt64
+	@NSManaged var shares: NSNumber?
+	@NSManaged var calories: NSNumber?
+	@NSManaged var servings: NSNumber?
+	@NSManaged var image: PFFile?
+	
+	override init() {
+		super.init()
 	}
 	
-	init(name: String, description: String?, owner: UInt64, cookingTime: Int?) {
+	func custom_init(name: String, description: String?, owner: UInt64, cookingTime: NSNumber?) {
 		// TODO: finish implementation fo the init function with appropriate params and body of the function
-		super.init()
 		self.name = name
 		self.desc = description
 		self.cookingTime = cookingTime

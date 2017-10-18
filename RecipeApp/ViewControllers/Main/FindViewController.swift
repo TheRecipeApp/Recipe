@@ -10,8 +10,12 @@ import UIKit
 
 class FindViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -20,5 +24,17 @@ class FindViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onSearch(_ sender: UIButton) {
+        print("Search button pressed")
+    }
+    
+    @IBAction func onProfile(_ sender: UIBarButtonItem) {
+        print("Profile button pressed")
+    }
+    
+    @IBAction func onAddRecipe(_ sender: UIBarButtonItem) {
+        print("Add recipe button pressed")
+    }
+    
 }
 

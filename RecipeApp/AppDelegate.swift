@@ -22,17 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
-		let storyboard = UIStoryboard(name: "Login", bundle: nil)
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		// view controller currently being set in Storyboard as default will be overridden
-		window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
 		
-		Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
-			configuration.applicationId = self.parseApplicationId
-			configuration.server = "http://\(self.parseServer)"
-            PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
-		}))
-        
-        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
+//        Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
+//            configuration.applicationId = self.parseApplicationId
+//            configuration.server = "http://\(self.parseServer)"
+//            PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+//        }))
+//
+//        PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
         return true
     }
 

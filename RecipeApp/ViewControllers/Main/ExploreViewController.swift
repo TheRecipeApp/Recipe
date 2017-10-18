@@ -21,7 +21,14 @@ class ExploreViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func onProfile(_ sender: UIBarButtonItem) {
+        print("Profile button pressed")
+    }
+    
+    @IBAction func onAddRecipe(_ sender: Any) {
+        print("Add recipe button pressed")
+    }
+    
     /*
     // MARK: - Navigation
 

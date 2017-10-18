@@ -10,11 +10,11 @@ import UIKit
 import Parse
 
 class User: PFUser {
-	private var screenName: String {
+	private var screenName: String? {
 		get { return self.screenName }
 		set { self.screenName = newValue }
 	}
-	private var firstName: String {
+	private var firstName: String? {
 		get { return self.firstName }
 		set { self.firstName = newValue }
 	}
@@ -23,7 +23,7 @@ class User: PFUser {
 		set { self.lastName = newValue }
 	}
 	private var name: String {
-		get { return self.firstName + " " + self.lastName! }
+		get { return self.firstName! + " " + self.lastName! }
 	}
 	private var stars: Int? {
 		get { return self.stars }
@@ -37,11 +37,11 @@ class User: PFUser {
 		get { return self.followers }
 		set { self.followers = newValue }
 	}
-	private var settings: UserSettings {
+	private var settings: UserSettings? {
 		get { return self.settings }
 		set { self.settings = newValue }
 	}
-	private var phone: String {
+	private var phone: String? {
 		get { return self.phone }
 		set { self.phone = newValue }
 	}
@@ -51,7 +51,7 @@ class User: PFUser {
 		set { self.profileImage = newValue }
 	}
 	
-	func custom_init(screenName: String, firstName: String, lastName: String?, phone: String, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
+	func custom_init(screenName: String?, firstName: String?, lastName: String?, phone: String?, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
 		self.email = email
 		self.screenName = screenName
 		self.firstName = firstName
@@ -61,5 +61,15 @@ class User: PFUser {
 		self.followers = [UInt64]()
 		self.following = [UInt64]()
 		self.settings = UserSettings(shareMyCooking: shareMyCooking, learnToCook: learnToCook, enablePushNotifications: enablePushNotifications, favoriteCuisines: favoriteCuisines)
+		self.saveInBackground(block: { (success, error) in
+			if (success) {
+				// The object has been saved.
+				print("User: " + self.username! + " saved with additional attributes")
+			} else {
+				// There was a problem, check error.description
+				print("Unable to save User attributes for User: " + self.username!)
+				print("error: " + (error?.localizedDescription)!)
+			}
+		})
 	}
 }

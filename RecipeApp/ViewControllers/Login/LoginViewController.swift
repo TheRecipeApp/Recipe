@@ -70,6 +70,17 @@ class LoginViewController: UIViewController {
                 } else {
                     print("User logged in through Facebook!")
                 }
+				let currentUser = user
+				currentUser.saveInBackground(block: { (success, error) in
+					if (success) {
+						// The object has been saved.
+						print("User: " + currentUser.username! + " saved with additional attributes")
+					} else {
+						// There was a problem, check error.description
+						print("Unable to save User attributes for User: " + currentUser.username!)
+						print("error: " + (error?.localizedDescription)!)
+					}
+				})
             } else {
                 print("Uh oh. The user cancelled the Facebook login.")
             }
@@ -98,10 +109,20 @@ class LoginViewController: UIViewController {
 				print("User log in failed: \(error.localizedDescription)")
 				self.alertController.title = "Invalid Login"
 				self.password.text = ""
-				self.present(self.alertController, animated: true, completion: {
-				})
+				self.present(self.alertController, animated: true, completion: nil)
 			} else {
 				print("User logged in successfully")
+				let currentUser = user
+				currentUser?.saveInBackground(block: { (success, error) in
+					if (success) {
+						// The object has been saved.
+						print("User: " + (currentUser?.username)! + " saved")
+					} else {
+						// There was a problem, check error.description
+						print("Unable to save User: " + (currentUser?.username)!)
+						print("error: " + (error?.localizedDescription)!)
+					}
+				})
 				// display view controller that needs to shown after successful login
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
 				let vc = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! UITabBarController

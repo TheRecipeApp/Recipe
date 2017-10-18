@@ -9,23 +9,15 @@
 import UIKit
 import Parse
 
-class UserSettings: PFObject {
-	private var shareMyCooking: Bool {
-		get { return self.shareMyCooking }
-		set { self.shareMyCooking = newValue }
+class UserSettings: PFObject, PFSubclassing {
+	static func parseClassName() -> String {
+		return "UserSettings"
 	}
-	private var learnToCook: Bool {
-		get { return self.learnToCook }
-		set { self.learnToCook = newValue }
-	}
-	private var enablePushNotifications: Bool {
-		get { return self.enablePushNotifications }
-		set { self.enablePushNotifications = newValue }
-	}
-	private var favoriteCuisines: [String] {
-		get { return self.favoriteCuisines }
-		set { self.favoriteCuisines = newValue }
-	}
+	
+	@NSManaged var shareMyCooking: Bool
+	@NSManaged var learnToCook: Bool
+	@NSManaged var enablePushNotifications: Bool
+	@NSManaged var favoriteCuisines: [String]
 
 	init(shareMyCooking : Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
 		super.init()

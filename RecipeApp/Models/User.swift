@@ -10,48 +10,21 @@ import UIKit
 import Parse
 
 class User: PFUser {
-	private var screenName: String? {
-		get { return self.screenName }
-		set { self.screenName = newValue }
-	}
-	private var firstName: String? {
-		get { return self.firstName }
-		set { self.firstName = newValue }
-	}
-	private var lastName: String? {
-		get { return self.lastName }
-		set { self.lastName = newValue }
-	}
+	@NSManaged var screenName: String?
+	@NSManaged var firstName: String?
+	@NSManaged var lastName: String?
 	private var name: String {
 		get { return self.firstName! + " " + self.lastName! }
 	}
-	private var stars: Int? {
-		get { return self.stars }
-		set { self.stars = newValue }
-	}
-	private var following: [UInt64]? { // array of user object ids that the current user is following
-		get { return self.following }
-		set { self.following = newValue }
-	}
-	private var followers: [UInt64]? { // array of ids of users who are following the current user
-		get { return self.followers }
-		set { self.followers = newValue }
-	}
-	private var settings: UserSettings? {
-		get { return self.settings }
-		set { self.settings = newValue }
-	}
-	private var phone: String? {
-		get { return self.phone }
-		set { self.phone = newValue }
-	}
+	@NSManaged var stars: NSNumber?
+	@NSManaged var following: [UInt64]?
+	@NSManaged var followers: [UInt64]?
+	@NSManaged var settings: UserSettings?
+	@NSManaged var phone: String?
 	// TODO: need to setup the profile image field
-	private var profileImage: PFFile? {
-		get { return self.profileImage }
-		set { self.profileImage = newValue }
-	}
+	@NSManaged var profileImage: PFFile?
 	
-	func custom_init(screenName: String?, firstName: String?, lastName: String?, phone: String?, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
+	func custom_init(screenName: String?, firstName: String?, lastName: String?, phone: String?, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?, stars: NSNumber?) {
 		self.email = email
 		self.screenName = screenName
 		self.firstName = firstName
@@ -61,6 +34,7 @@ class User: PFUser {
 		self.followers = [UInt64]()
 		self.following = [UInt64]()
 		self.settings = UserSettings(shareMyCooking: shareMyCooking, learnToCook: learnToCook, enablePushNotifications: enablePushNotifications, favoriteCuisines: favoriteCuisines)
+		self.stars = stars
 		self.saveInBackground(block: { (success, error) in
 			if (success) {
 				// The object has been saved.

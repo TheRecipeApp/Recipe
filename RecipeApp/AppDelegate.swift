@@ -29,15 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
 
-		var user = PFUser.current()
-		if let user = user {
+		let user = PFUser.current()
+        if user != nil {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
 		} else {
 			// Override point for customization after application launch.
 			let storyboard = UIStoryboard(name: "Login", bundle: nil)
 			// view controller currently being set in Storyboard as default will be overridden
-			window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+			window?.rootViewController = storyboard.instantiateInitialViewController()
 		}
         return true
     }

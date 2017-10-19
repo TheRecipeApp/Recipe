@@ -48,6 +48,10 @@ class RegisterViewController: UIViewController {
 	}
 	
 	private func registerUser() {
+        
+        self.performSegue(withIdentifier: "SelectPreferenceNavigationSegue", sender: nil)
+        return
+        
 		// initialize a user object
 		let newUser = User()
 		

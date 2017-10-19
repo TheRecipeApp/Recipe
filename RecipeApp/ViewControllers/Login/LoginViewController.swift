@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.isNavigationBarHidden = true
         // Override point for customization after application launch.
       
 //        // Facebook Swift SDK example below

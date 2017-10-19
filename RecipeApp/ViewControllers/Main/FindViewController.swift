@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class FindViewController: UIViewController {
 
@@ -36,5 +37,11 @@ class FindViewController: UIViewController {
         print("Add recipe button pressed")
     }
     
+	@IBAction func onLogout(_ sender: Any) {
+		PFUser.logOut()
+		let storyboard = UIStoryboard(name: "Login", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		self.present(vc, animated: true, completion: nil)
+	}
 }
 

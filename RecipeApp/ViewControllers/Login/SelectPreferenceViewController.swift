@@ -22,7 +22,13 @@ class SelectPreferenceViewController: UIViewController {
     }
     
 
-    /*
+	@IBAction func onSkip(_ sender: Any) {
+		let storyboard = UIStoryboard(name: "Login", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		self.present(vc, animated: true, completion: nil)
+	}
+	
+	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

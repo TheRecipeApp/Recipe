@@ -1,24 +1,23 @@
 //
-//  NewRecipeViewController.swift
+//  CreateViewController.swift
 //  RecipeApp
 //
-//  Created by Cesar Cavazos on 10/15/17.
+//  Created by Vijayanand on 10/18/17.
 //  Copyright © 2017 The Recipe App. All rights reserved.
 //
 
 import UIKit
 
-class NewRecipeViewController: UIViewController {
+class CreateViewController: UIViewController {
 
-	@IBOutlet weak var ingredientTextField: UITextField!
-	@IBOutlet weak var amountTextField: UITextField!
-	@IBOutlet weak var unitsTextField: UITextField!
-	
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
+		let storyboard = UIStoryboard(name: "RecipesCarousel", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "RecipesCarouselView")
+		self.present(vc, animated: true, completion: nil)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

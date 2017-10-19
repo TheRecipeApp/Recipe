@@ -9,31 +9,17 @@
 import UIKit
 import Parse
 
-class Cookbook: PFObject {
-	private var name: String {
-		get { return self.name }
-		set { self.name = newValue }
+class Cookbook: PFObject, PFSubclassing {
+	static func parseClassName() -> String {
+		return "Cookbook"
 	}
-	private var category: String? {
-		get { return self.category }
-		set { self.category = newValue }
-	}
-	private var cuisine: String? {
-		get { return self.cuisine }
-		set { self.cuisine = newValue }
-	}
-	private var tags: [String]? {
-		get { return self.tags }
-		set { self.tags = newValue }
-	}
-	private var owner: UInt64 {
-		get { return self.owner }
-		set { self.owner = newValue }
-	}
-	private var recipes: [Recipe]? {
-		get { return self.recipes }
-		set { self.recipes = newValue }
-	}
+	
+	@NSManaged var name: String
+	@NSManaged var category: String?
+	@NSManaged var cuisine: String?
+	@NSManaged var tags: [String]?
+	@NSManaged var owner: UInt64
+	@NSManaged var recipes: [Recipe]?
 
 	init(name: String, owner: UInt64, category: String?, cuisine: String?, tags: [String]?, recipes: [Recipe]?) {
 		super.init()

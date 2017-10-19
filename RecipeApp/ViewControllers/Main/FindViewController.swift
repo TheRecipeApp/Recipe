@@ -24,7 +24,7 @@ class FindViewController: UIViewController {
 	@IBAction func onLogout(_ sender: Any) {
 		PFUser.logOut()
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
-		let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		let vc = storyboard.instantiateInitialViewController() as! UINavigationController
 		self.present(vc, animated: true, completion: nil)
 	}
 }

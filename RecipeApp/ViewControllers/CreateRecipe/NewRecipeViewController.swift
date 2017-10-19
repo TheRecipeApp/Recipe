@@ -18,13 +18,27 @@ class NewRecipeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		setupTextFieldAtributes(field: ingredientTextField, string: "Ingredient")
+		setupTextFieldAtributes(field: amountTextField, string: "Amount")
+		setupTextFieldAtributes(field: unitsTextField, string: "Units")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+	private func setupTextFieldAtributes(field: UITextField, string: String) {
+		let width = CGFloat(2.0)
+		field.textColor = UIColor.white
+		let fieldBorder = CALayer()
+		fieldBorder.borderColor = UIColor.white.cgColor
+		fieldBorder.frame = CGRect(x: 0, y: field.frame.size.height - width, width:  field.frame.size.width, height: field.frame.size.height)
+		fieldBorder.borderWidth = width
+		field.layer.addSublayer(fieldBorder)
+		field.layer.masksToBounds = true
+		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
+	}
 
     /*
     // MARK: - Navigation

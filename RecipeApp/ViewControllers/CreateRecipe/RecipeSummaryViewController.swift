@@ -1,14 +1,14 @@
 //
-//  AddStepViewController.swift
+//  RecipeSummaryViewController.swift
 //  RecipeApp
 //
-//  Created by Cesar Cavazos on 10/15/17.
+//  Created by Vijayanand on 10/19/17.
 //  Copyright © 2017 The Recipe App. All rights reserved.
 //
 
 import UIKit
 
-class AddStepViewController: UIViewController {
+class RecipeSummaryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

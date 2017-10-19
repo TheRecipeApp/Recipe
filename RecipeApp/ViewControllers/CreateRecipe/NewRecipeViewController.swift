@@ -10,7 +10,11 @@ import UIKit
 
 class NewRecipeViewController: UIViewController {
 
-    override func viewDidLoad() {
+	@IBOutlet weak var ingredientTextField: UITextField!
+	@IBOutlet weak var amountTextField: UITextField!
+	@IBOutlet weak var unitsTextField: UITextField!
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

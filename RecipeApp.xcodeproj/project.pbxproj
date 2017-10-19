@@ -44,6 +44,7 @@
 		AFD1FCE31F90507300190961 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCE21F90507300190961 /* Ingredient.swift */; };
 		AFD1FCE51F90507F00190961 /* Cookbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCE41F90507F00190961 /* Cookbook.swift */; };
 		AFF8ED791F92C7A8007A34CE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */; };
+		BE46D7531F9743A00060A49A /* DiscoverRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46D7521F9743A00060A49A /* DiscoverRecipeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		AFD1FCE21F90507300190961 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		AFD1FCE41F90507F00190961 /* Cookbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookbook.swift; sourceTree = "<group>"; };
 		AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		BE46D7521F9743A00060A49A /* DiscoverRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRecipeCell.swift; sourceTree = "<group>"; };
 		D0D52C27226C49A1233A307F /* Pods-RecipeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp.release.xcconfig"; sourceTree = "<group>"; };
 		DF996A821FC7F80EAEFDFE1E /* Pods-RecipeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E9B6A8422A02C8B20F2F48F6 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				5F576D851F9453640037228B /* ExploreViewController.swift */,
 				5F576D871F9453C60037228B /* CookbookViewController.swift */,
 				5F576D891F9453D20037228B /* RecipeViewController.swift */,
+				BE46D7521F9743A00060A49A /* DiscoverRecipeCell.swift */,
 				AF92FF251F97A548007CBFCB /* CreateViewController.swift */,
 			);
 			path = Main;
@@ -461,6 +464,7 @@
 				AFD1FCE11F90505900190961 /* CookingStep.swift in Sources */,
 				5F576D861F9453640037228B /* ExploreViewController.swift in Sources */,
 				AFD1FCDF1F8FC2A100190961 /* Recipe.swift in Sources */,
+				BE46D7531F9743A00060A49A /* DiscoverRecipeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +531,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -572,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		var user = PFUser.current()
 		if let user = user {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-			window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+			window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
 		} else {
 			// Override point for customization after application launch.
 			let storyboard = UIStoryboard(name: "Login", bundle: nil)

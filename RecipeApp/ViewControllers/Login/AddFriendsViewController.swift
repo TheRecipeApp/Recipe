@@ -12,8 +12,10 @@ class AddFriendsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationController?.isNavigationBarHidden = false
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

@@ -49,6 +49,7 @@ class RegisterViewController: UIViewController {
 	
 	private func registerUser() {
         
+        // TODO: Delete this
         self.performSegue(withIdentifier: "SelectPreferenceNavigationSegue", sender: nil)
         return
         

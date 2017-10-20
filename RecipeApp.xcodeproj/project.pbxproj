@@ -10,7 +10,6 @@
 		5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */; };
 		5F576D6B1F944C1B0037228B /* SelectPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D6A1F944C1B0037228B /* SelectPreferenceViewController.swift */; };
 		5F576D6D1F944C310037228B /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D6C1F944C310037228B /* AddFriendsViewController.swift */; };
-		5F576D6F1F944C400037228B /* SelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D6E1F944C400037228B /* SelectFriendsViewController.swift */; };
 		5F576D711F944CDA0037228B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F576D701F944CDA0037228B /* Profile.storyboard */; };
 		5F576D731F944D190037228B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D721F944D190037228B /* ProfileViewController.swift */; };
 		5F576D751F944D260037228B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D741F944D260037228B /* EditProfileViewController.swift */; };
@@ -24,6 +23,7 @@
 		5F576D861F9453640037228B /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D851F9453640037228B /* ExploreViewController.swift */; };
 		5F576D881F9453C60037228B /* CookbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D871F9453C60037228B /* CookbookViewController.swift */; };
 		5F576D8A1F9453D20037228B /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D891F9453D20037228B /* RecipeViewController.swift */; };
+		5F95FA771F99CB3000F4D87B /* UILabelCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95FA761F99CB3000F4D87B /* UILabelCategory.swift */; };
 		5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */; };
 		5FD28DD71F8B2B1D005BAD06 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD61F8B2B1D005BAD06 /* FindViewController.swift */; };
 		5FD28DDA1F8B2B1D005BAD06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD28DD81F8B2B1D005BAD06 /* Main.storyboard */; };
@@ -51,7 +51,6 @@
 		5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthDelegate.swift; sourceTree = "<group>"; };
 		5F576D6A1F944C1B0037228B /* SelectPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPreferenceViewController.swift; sourceTree = "<group>"; };
 		5F576D6C1F944C310037228B /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
-		5F576D6E1F944C400037228B /* SelectFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendsViewController.swift; sourceTree = "<group>"; };
 		5F576D701F944CDA0037228B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		5F576D721F944D190037228B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5F576D741F944D260037228B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		5F576D851F9453640037228B /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		5F576D871F9453C60037228B /* CookbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookViewController.swift; sourceTree = "<group>"; };
 		5F576D891F9453D20037228B /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		5F95FA761F99CB3000F4D87B /* UILabelCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelCategory.swift; sourceTree = "<group>"; };
 		5FD28DD11F8B2B1D005BAD06 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FD28DD61F8B2B1D005BAD06 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +135,6 @@
 				AF7EC26F1F929C9D00A42121 /* LoginViewController.swift */,
 				5F576D6A1F944C1B0037228B /* SelectPreferenceViewController.swift */,
 				5F576D6C1F944C310037228B /* AddFriendsViewController.swift */,
-				5F576D6E1F944C400037228B /* SelectFriendsViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -259,6 +258,7 @@
 			children = (
 				AFAF0A021F9727D1008DF5D2 /* RecipeBlockView.xib */,
 				AFAF0A061F972817008DF5D2 /* RecipeBlockView.swift */,
+				5F95FA761F99CB3000F4D87B /* UILabelCategory.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -439,7 +439,6 @@
 			files = (
 				5F576D841F94524E0037228B /* CompleteRecipeViewController.swift in Sources */,
 				5F576D751F944D260037228B /* EditProfileViewController.swift in Sources */,
-				5F576D6F1F944C400037228B /* SelectFriendsViewController.swift in Sources */,
 				AFAF0A071F972817008DF5D2 /* RecipeBlockView.swift in Sources */,
 				5F576D881F9453C60037228B /* CookbookViewController.swift in Sources */,
 				AF7EC2701F929C9D00A42121 /* LoginViewController.swift in Sources */,
@@ -458,6 +457,7 @@
 				AFD1FCE31F90507300190961 /* Ingredient.swift in Sources */,
 				5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */,
 				AF1374A51F8FB5B1004B98A8 /* User.swift in Sources */,
+				5F95FA771F99CB3000F4D87B /* UILabelCategory.swift in Sources */,
 				5F576D731F944D190037228B /* ProfileViewController.swift in Sources */,
 				5F576D8A1F9453D20037228B /* RecipeViewController.swift in Sources */,
 				AFAF0A0B1F97314D008DF5D2 /* RecipesCarouselViewController.swift in Sources */,

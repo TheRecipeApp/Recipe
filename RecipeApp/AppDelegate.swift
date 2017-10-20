@@ -10,6 +10,9 @@ import UIKit
 import Parse
 import FBSDKCoreKit
 import ParseFacebookUtilsV4
+import MobileCenter
+import MobileCenterAnalytics
+import MobileCenterCrashes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,6 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			// view controller currently being set in Storyboard as default will be overridden
 			window?.rootViewController = storyboard.instantiateInitialViewController()
 		}
+        
+        MSMobileCenter.start("99833ae2-1f46-44b9-870f-991c73e3e3a8", withServices:[
+            MSAnalytics.self,
+            MSCrashes.self
+            ])
+        
         return true
     }
 

@@ -9,11 +9,22 @@
 import UIKit
 
 class StepDetailsViewController: UIViewController {
-
+	@IBOutlet weak var ingredientsTable: UITableView!
+	@IBOutlet weak var stepDescription: UITextView!
+	
+	var step: CookingStep?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
+		ingredientsTable.delegate = self
+		ingredientsTable.dataSource = self
+		ingredientsTable.estimatedRowHeight = 50
+		ingredientsTable.rowHeight = UITableViewAutomaticDimension
+		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
+		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 
         // Do any additional setup after loading the view.
+		stepDescription.text = step?.desc
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,5 +42,22 @@ class StepDetailsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension StepDetailsViewController : UITableViewDataSource, UITableViewDelegate {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return (step?.ingredients?.count)!
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientsTableViewCell", for: indexPath) as! IngredientsTableViewCell
+		cell.ingredientNameLabel.text = step?.ingredients?[indexPath.row].name
+		if let amount = step?.ingredientAmounts[indexPath.row] {
+			cell.ingredientAmountLabel.text = String("\(amount)")
+		}
+		cell.ingredientUnitsLabel.text = step?.ingredientUnits[indexPath.row]
+		return cell
+	}
+	
+	
 }

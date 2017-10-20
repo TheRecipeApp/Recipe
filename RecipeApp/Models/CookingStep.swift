@@ -19,7 +19,7 @@ class CookingStep: PFObject, PFSubclassing {
 	@NSManaged var ingredientAmounts: [Float]
 	@NSManaged var ingredientUnits: [String]
 	@NSManaged var stepImage: PFFile?
-	@NSManaged var recipeId: UInt64
+	@NSManaged var recipeId: String?
 	@NSManaged var stepNumber: NSNumber
 	
 	// TODO: add a property to store video guide
@@ -27,7 +27,7 @@ class CookingStep: PFObject, PFSubclassing {
 		super.init()
 	}
 
-	func custom_init(recipeId: UInt64, stepNumber: NSNumber, desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
+	func custom_init(recipeId: String, stepNumber: NSNumber, desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
 		self.desc = desc
 		self.stepNumber = stepNumber
 		self.recipeId = recipeId

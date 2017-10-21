@@ -19,7 +19,7 @@ class Recipe: PFObject, PFSubclassing {
 	@NSManaged var name: String
 	@NSManaged var owner: String?
 	@NSManaged var desc: String?
-	@NSManaged var cookingTime: NSNumber?
+	@NSManaged var cookingTime: String?
 	@NSManaged var difficultyLevel: String?
 	@NSManaged var cuisine: String?
 	@NSManaged var likes: NSNumber?

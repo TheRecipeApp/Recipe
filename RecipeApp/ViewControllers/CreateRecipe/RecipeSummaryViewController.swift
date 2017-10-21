@@ -17,6 +17,8 @@ class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var difficultyTextField: UITextField!
 	@IBOutlet weak var timeToCookTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
+	@IBOutlet weak var stepImage: UIImageView!
+	@IBOutlet weak var stepVideo: UIView!
 	var cookingSteps: [CookingStep]? = nil
 	
     override func viewDidLoad() {
@@ -25,7 +27,7 @@ class RecipeSummaryViewController: UIViewController {
         // Do any additional setup after loading the view.
 		recipeStepsTable.delegate = self
 		recipeStepsTable.dataSource = self
-		recipeStepsTable.estimatedRowHeight = 50
+		recipeStepsTable.estimatedRowHeight = 100
 		recipeStepsTable.rowHeight = UITableViewAutomaticDimension
 
 		if let cookingSteps = cookingSteps {
@@ -33,6 +35,8 @@ class RecipeSummaryViewController: UIViewController {
 				// initialize the steps in the steps table
 			}
 		}
+		stepImage.layer.borderWidth = 1
+		stepVideo.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +60,7 @@ class RecipeSummaryViewController: UIViewController {
 			// add the OK action to the alert controller
 			alertController.addAction(OKAction)
 			alertController.title = "NO Current User. Please Login"
+			present(alertController, animated: true, completion: nil)
 		} else {
 			recipe.owner = owner?.objectId
 			if let name = nameTextField.text {
@@ -70,7 +75,7 @@ class RecipeSummaryViewController: UIViewController {
 					recipe.difficultyLevel = difficulty
 				}
 				if let timeToCook = timeToCookTextField.text {
-					recipe.cookingTime = Int(timeToCook) as NSNumber?
+					recipe.cookingTime = timeToCook
 				}
 				if let desc = descriptionTextField.text {
 					recipe.desc = desc

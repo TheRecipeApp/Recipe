@@ -27,6 +27,7 @@ class NewRecipeViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		// Do any additional setup after loading the view.
 		ingredientsTable.delegate = self
 		ingredientsTable.dataSource = self
 		ingredientsTable.estimatedRowHeight = 50
@@ -35,11 +36,6 @@ class NewRecipeViewController: UIViewController {
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 
 		stepNumberLabel.text = String("\(stepNumber)")
-
-        // Do any additional setup after loading the view.
-		setupTextFieldAtributes(field: ingredientTextField, string: "Ingredient")
-		setupTextFieldAtributes(field: amountTextField, string: "Amount")
-		setupTextFieldAtributes(field: unitsTextField, string: "Units")
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,14 +121,35 @@ class NewRecipeViewController: UIViewController {
 			stepDescriptionTextField.text = ""
 			ingredientTextField.becomeFirstResponder()
 			clearAll()
+			ingredientsTable.reloadData()
 		} else {
 			print("step description is not present")
 			stepDescriptionTextField.becomeFirstResponder()
 		}
 	}
 	
+	@IBAction func onIngredientChanged(_ sender: UITextField) {
+		if !(ingredientTextField.text?.isEmpty)! {
+			stepNotSaved = true
+		}
+	}
+	
+	@IBAction func onAmountChanged(_ sender: Any) {
+		if !((amountTextField.text?.isEmpty)!) {
+			stepNotSaved = true
+		}
+	}
+	
+	@IBAction func onUnitsChanged(_ sender: Any) {
+		if !(unitsTextField.text?.isEmpty)! {
+			stepNotSaved = true
+		}
+	}
+	
 	@IBAction func stepDescriptionChanged(_ sender: Any) {
-		stepNotSaved = true
+		if !(stepDescriptionTextField.text?.isEmpty)! {
+			stepNotSaved = true
+		}
 	}
 	
 	@IBAction func onDone(_ sender: UIButton) {
@@ -155,6 +172,7 @@ class NewRecipeViewController: UIViewController {
 			// add the OK action to the alert controller
 			alertController.addAction(OKAction)
 			alertController.title = "Step Not Saved, Clear Current Step?"
+			present(alertController, animated: true, completion: nil)
 		} else {
 			performSegue(withIdentifier: "RecipeSummarySegue", sender: nil)
 		}
@@ -186,4 +204,5 @@ extension NewRecipeViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.customInit(name: stepIngredients[indexPath.row].name, amount: stepIngredientAmounts[indexPath.row], units: stepIngredientUnits[indexPath.row])
 		return cell
 	}
+	
 }

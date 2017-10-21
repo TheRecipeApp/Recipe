@@ -29,4 +29,11 @@ class IngredientsTableViewCell: UITableViewCell {
 		ingredientAmountLabel.text = String("\(amount)")
 		ingredientUnitsLabel.text = "(" + units + ")"
 	}
+	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		ingredientNameLabel.text = ""
+		ingredientAmountLabel.text = ""
+		ingredientUnitsLabel.text = ""
+	}
 }

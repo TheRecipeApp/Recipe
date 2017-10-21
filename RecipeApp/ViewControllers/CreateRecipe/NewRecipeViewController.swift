@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Speech
 
 class NewRecipeViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var stepNumberLabel: UILabel!
 	@IBOutlet weak var ingredientsTable: UITableView!
 	@IBOutlet weak var stepDescriptionTextView: UITextView!
+	@IBOutlet weak var micButton: UIButton!
 	
 	private var stepNumber: Int = 1
 	var steps = [CookingStep]()
@@ -23,6 +25,13 @@ class NewRecipeViewController: UIViewController {
 	var stepIngredientAmounts = [Float]()
 	var stepIngredientUnits = [String]()
 	var stepNotSaved = false
+	
+	// variables needed for speech recognition and transcribing
+	var audioEngine = AVAudioEngine()
+	var speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+	var speechRecognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+	var speechRecognitionTask = SFSpeechRecognitionTask()
+	var speechRecognitionStarted = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,7 +188,24 @@ class NewRecipeViewController: UIViewController {
 		}
 	}
 	
-    // MARK: - Navigation
+	@IBAction func speechButtonTapped(_ sender: UIButton) {
+		if speechRecognitionStarted {
+			self.micButton.setImage(#imageLiteral(resourceName: "mic"), for: .normal)
+			audioEngine.stop()
+			
+			if let node = audioEngine.inputNode {
+				node.removeTap(onBus: 0)
+			}
+			speechRecognitionRequest.endAudio() // Added line to mark end of recording
+//			speechRecognitionTask.cancel()
+			speechRecognitionStarted = false
+		} else {
+			self.micButton.setImage(#imageLiteral(resourceName: "mic green"), for: .normal)
+			self.recordAndRecognizeSpeech()
+		}
+	}
+	
+	// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -205,5 +231,54 @@ extension NewRecipeViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.customInit(name: stepIngredients[indexPath.row].name, amount: stepIngredientAmounts[indexPath.row], units: stepIngredientUnits[indexPath.row])
 		return cell
 	}
-	
+}
+
+extension NewRecipeViewController: SFSpeechRecognizerDelegate {
+	func recordAndRecognizeSpeech() {
+		guard let node = audioEngine.inputNode else { return }
+		let recordingFormat = node.outputFormat(forBus: 0)
+		// configure the node
+		node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, _ AVAudioTime) in
+			self.speechRecognitionRequest.append(buffer)
+		}
+		// prepare and start the recording
+		audioEngine.prepare()
+		do {
+			try audioEngine.start()
+		} catch {
+			return print(error)
+		}
+		// checks to make sure the recognizer is available for the device and for the locale
+		guard let myRecognizer = SFSpeechRecognizer() else {
+			// A recognizer is not supported for the current locale
+			let alertController = UIAlertController()
+			// create an OK action
+			let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			// add the OK action to the alert controller
+			alertController.addAction(OKAction)
+			alertController.title = "A recognizer is not supported for the current locale"
+			present(alertController, animated: true, completion: nil)
+			return
+		}
+		if !myRecognizer.isAvailable {
+			// A Recognizer is not available right now
+			let alertController = UIAlertController()
+			// create an OK action
+			let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			// add the OK action to the alert controller
+			alertController.addAction(OKAction)
+			alertController.title = "A Recognizer is not available right now"
+			present(alertController, animated: true, completion: nil)
+			return
+		}
+		speechRecognitionStarted = true
+		speechRecognitionTask = (speechRecognizer?.recognitionTask(with: speechRecognitionRequest, resultHandler: { (result: SFSpeechRecognitionResult?, error: Error?) in
+			if let result = result {
+				let instructionString = result.bestTranscription.formattedString
+				self.stepDescriptionTextView.text = instructionString
+			} else if let error = error {
+				print(error)
+			}
+		}))!
+	}
 }

@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ln-mL-u5I">
-                                <rect key="frame" x="10" y="10" width="41" height="21"/>
+                                <rect key="frame" x="10" y="10" width="41" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fa0-rW-o2y">
-                                <rect key="frame" x="0.0" y="39" width="375" height="25"/>
+                                <rect key="frame" x="0.0" y="38" width="375" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSd-Si-r0u">
                                         <rect key="frame" x="10" y="2" width="86" height="21"/>
@@ -43,17 +43,17 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pN7-Nt-bUF">
-                                <rect key="frame" x="0.0" y="72" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="71" width="375" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="ufp-A7-Wz2"/>
                                 </constraints>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grj-1h-ppD">
-                                <rect key="frame" x="0.0" y="230" width="375" height="25"/>
+                                <rect key="frame" x="0.0" y="229" width="375" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Ingredient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAU-d3-ZOz">
-                                        <rect key="frame" x="10" y="2" width="112.5" height="21"/>
+                                        <rect key="frame" x="10" y="2" width="113" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -68,7 +68,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdX-VA-XKT">
-                                <rect key="frame" x="286" y="276" width="30" height="30"/>
+                                <rect key="frame" x="286" y="275" width="30" height="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addIngredient:" destination="8NP-LO-Ewe" eventType="touchUpInside" id="PWQ-Qj-6St"/>
@@ -88,7 +88,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zwt-rK-crV">
-                                <rect key="frame" x="129" y="282.5" width="55" height="17"/>
+                                <rect key="frame" x="129" y="282" width="55" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="3wA-DZ-6Nd"/>
                                     <constraint firstAttribute="height" constant="17" id="vPI-9f-knc"/>
@@ -98,7 +98,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="units" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OEp-m9-A1p">
-                                <rect key="frame" x="198" y="278.5" width="40" height="25"/>
+                                <rect key="frame" x="198" y="278" width="40" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="2ix-C5-qq1"/>
                                     <constraint firstAttribute="height" constant="25" id="97H-qt-zMP"/>
@@ -111,7 +111,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zyn-Q9-gRO">
-                                <rect key="frame" x="329" y="276" width="36" height="30"/>
+                                <rect key="frame" x="329" y="275" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearIngredient:" destination="8NP-LO-Ewe" eventType="touchUpInside" id="QiI-rr-iPz"/>
@@ -121,7 +121,7 @@
                                 <rect key="frame" x="0.0" y="328" width="375" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wie-Pe-h7K">
-                                        <rect key="frame" x="10" y="2" width="127.5" height="21"/>
+                                        <rect key="frame" x="10" y="2" width="128" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -182,7 +182,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZa-jb-uSG">
-                                <rect key="frame" x="59" y="10" width="18" height="21"/>
+                                <rect key="frame" x="59" y="9.5" width="18" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -197,6 +197,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgG-E2-Pbg">
+                                <rect key="frame" x="211" y="373" width="20" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="UQ9-s0-GBW"/>
+                                    <constraint firstAttribute="width" constant="20" id="rJO-jM-O9X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="mic"/>
+                                <connections>
+                                    <action selector="speechButtonTapped:" destination="8NP-LO-Ewe" eventType="touchUpInside" id="YRK-sQ-hnp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -207,6 +220,7 @@
                             <constraint firstItem="OEp-m9-A1p" firstAttribute="leading" secondItem="zwt-rK-crV" secondAttribute="trailing" constant="14" id="8aY-2r-fbw"/>
                             <constraint firstItem="H1A-Rf-f0m" firstAttribute="centerY" secondItem="kDz-UI-fh5" secondAttribute="centerY" id="90l-OY-eeP"/>
                             <constraint firstItem="MZa-jb-uSG" firstAttribute="centerY" secondItem="3Ln-mL-u5I" secondAttribute="centerY" id="AMV-ZA-JEb"/>
+                            <constraint firstItem="zgG-E2-Pbg" firstAttribute="leading" secondItem="xoy-YJ-Do5" secondAttribute="trailing" constant="1" id="CVF-vt-Rgm"/>
                             <constraint firstItem="kDz-UI-fh5" firstAttribute="top" secondItem="hkx-7k-jUc" secondAttribute="bottom" constant="20" id="DqU-R3-RbP"/>
                             <constraint firstItem="zwt-rK-crV" firstAttribute="leading" secondItem="T6a-gT-OXv" secondAttribute="trailing" constant="19" id="E3X-Yh-lf6"/>
                             <constraint firstItem="Fa0-rW-o2y" firstAttribute="leading" secondItem="d5V-eN-i4T" secondAttribute="leading" id="Get-z3-gkI"/>
@@ -226,6 +240,7 @@
                             <constraint firstItem="d5V-eN-i4T" firstAttribute="trailing" secondItem="RE8-4L-pTY" secondAttribute="trailing" constant="10" id="fka-Ew-Ldj"/>
                             <constraint firstItem="d5V-eN-i4T" firstAttribute="trailing" secondItem="Ujd-fR-df6" secondAttribute="trailing" id="jBF-XI-etl"/>
                             <constraint firstItem="Wie-Pe-h7K" firstAttribute="top" secondItem="T6a-gT-OXv" secondAttribute="bottom" constant="26.5" id="lBq-OT-Uip"/>
+                            <constraint firstItem="zgG-E2-Pbg" firstAttribute="top" secondItem="xoy-YJ-Do5" secondAttribute="top" id="mFn-Fm-W0f"/>
                             <constraint firstItem="Fa0-rW-o2y" firstAttribute="top" secondItem="3Ln-mL-u5I" secondAttribute="bottom" constant="8" id="mca-pt-1Bs"/>
                             <constraint firstItem="Zyn-Q9-gRO" firstAttribute="leading" secondItem="kdX-VA-XKT" secondAttribute="trailing" constant="13" id="n2f-nR-YBC"/>
                             <constraint firstItem="H1A-Rf-f0m" firstAttribute="centerX" secondItem="MO1-uh-H5y" secondAttribute="centerX" id="npE-04-dDo"/>
@@ -254,6 +269,7 @@
                         <outlet property="amountTextField" destination="zwt-rK-crV" id="fmb-qb-IoB"/>
                         <outlet property="ingredientTextField" destination="T6a-gT-OXv" id="BNK-Wm-MMh"/>
                         <outlet property="ingredientsTable" destination="pN7-Nt-bUF" id="rzr-18-rAx"/>
+                        <outlet property="micButton" destination="zgG-E2-Pbg" id="keH-N7-l4H"/>
                         <outlet property="stepDescriptionTextView" destination="xoy-YJ-Do5" id="qUX-9V-0Ar"/>
                         <outlet property="stepNumberLabel" destination="MZa-jb-uSG" id="bzK-cx-JWR"/>
                         <outlet property="unitsTextField" destination="OEp-m9-A1p" id="XD2-Jg-Uln"/>
@@ -625,10 +641,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="mic" width="205" height="300"/>
         <image name="upload_image" width="263" height="264"/>
-        <namedColor name="PrimaryColor">
-            <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

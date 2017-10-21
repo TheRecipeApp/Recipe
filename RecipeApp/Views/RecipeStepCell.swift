@@ -10,6 +10,8 @@ import UIKit
 
 class RecipeStepCell: UITableViewCell {
 
+	@IBOutlet weak var stepDescriptionView: UIView!
+	@IBOutlet weak var stepNumberView: UIView!
 	@IBOutlet weak var stepNumberLabel: UILabel!
 	@IBOutlet weak var stepDescriptionLabel: UILabel!
 	
@@ -22,6 +24,8 @@ class RecipeStepCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+		stepNumberLabel.layer.borderWidth = 1
+		stepDescriptionLabel.layer.borderWidth = 1
     }
 
 	override func prepareForReuse() {

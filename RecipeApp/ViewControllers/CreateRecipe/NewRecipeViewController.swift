@@ -15,9 +15,9 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var unitsTextField: UITextField!
 	@IBOutlet weak var stepNumberLabel: UILabel!
 	@IBOutlet weak var ingredientsTable: UITableView!
-	@IBOutlet weak var stepDescriptionTextField: UITextField!
+	@IBOutlet weak var stepDescriptionTextView: UITextView!
 	
-	private var stepNumber: Int = 0
+	private var stepNumber: Int = 1
 	var steps = [CookingStep]()
 	var stepIngredients = [Ingredient]()
 	var stepIngredientAmounts = [Float]()
@@ -36,6 +36,7 @@ class NewRecipeViewController: UIViewController {
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 
 		stepNumberLabel.text = String("\(stepNumber)")
+		stepDescriptionTextView.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +69,7 @@ class NewRecipeViewController: UIViewController {
 		stepIngredientUnits.removeAll()
 		stepIngredientAmounts.removeAll()
 		stepIngredients.removeAll()
-		self.stepDescriptionTextField.text = ""
+		self.stepDescriptionTextView.text = ""
 		stepNotSaved = false
 	}
 	
@@ -109,7 +110,7 @@ class NewRecipeViewController: UIViewController {
 	}
 	
 	@IBAction func onSave(_ sender: UIButton) {
-		if let stepDesc = stepDescriptionTextField.text {
+		if let stepDesc = stepDescriptionTextView.text {
 			let cookingStep = CookingStep()
 			cookingStep.desc = stepDesc
 			cookingStep.ingredients = stepIngredients
@@ -118,13 +119,13 @@ class NewRecipeViewController: UIViewController {
 			steps.append(cookingStep)
 			stepNumber = stepNumber + 1
 			stepNumberLabel.text = String("\(stepNumber)")
-			stepDescriptionTextField.text = ""
+			stepDescriptionTextView.text = ""
 			ingredientTextField.becomeFirstResponder()
 			clearAll()
 			ingredientsTable.reloadData()
 		} else {
 			print("step description is not present")
-			stepDescriptionTextField.becomeFirstResponder()
+			stepDescriptionTextView.becomeFirstResponder()
 		}
 	}
 	
@@ -147,7 +148,7 @@ class NewRecipeViewController: UIViewController {
 	}
 	
 	@IBAction func stepDescriptionChanged(_ sender: Any) {
-		if !(stepDescriptionTextField.text?.isEmpty)! {
+		if !(stepDescriptionTextView.text?.isEmpty)! {
 			stepNotSaved = true
 		}
 	}

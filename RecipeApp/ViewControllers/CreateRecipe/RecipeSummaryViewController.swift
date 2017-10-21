@@ -93,7 +93,7 @@ class RecipeSummaryViewController: UIViewController {
 							})
 						}
 						let storyboard = UIStoryboard(name: "Main", bundle: nil)
-						let vc = storyboard.instantiateInitialViewController() as! UINavigationController
+						let vc = storyboard.instantiateInitialViewController() as! UITabBarController
 						self.present(vc, animated: true, completion: nil)
 					} else {
 						print("Unable to Save Recipe")

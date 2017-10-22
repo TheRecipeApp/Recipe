@@ -202,6 +202,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onAddRecipe:" destination="BYZ-38-t0r" id="5Q6-1f-Yt2"/>
+                                <segue destination="yEK-f7-M2F" kind="presentation" id="A5l-Cy-vCu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -214,6 +215,14 @@
                 <panGestureRecognizer minimumNumberOfTouches="1" id="hhj-Bw-hcT"/>
             </objects>
             <point key="canvasLocation" x="1208.8" y="32.833583208395808"/>
+        </scene>
+        <!--CreateRecipeFlow-->
+        <scene sceneID="2fT-28-yLz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CreateRecipe" referencedIdentifier="CreateRecipeFlow" id="yEK-f7-M2F" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wN0-n6-JGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1786" y="-166"/>
         </scene>
         <!--ProfileViewNavigationController-->
         <scene sceneID="Nxf-9O-qjV">

@@ -106,9 +106,11 @@ class NewRecipeViewController: UIViewController {
 		stepIngredientUnits.removeAll()
 		stepIngredientAmounts.removeAll()
 		stepIngredients.removeAll()
-		self.stepDescriptionTextView.text = ""
+		stepDescriptionTextView.text = ""
 		stepNotSaved = false
-		stepImageView.image = nil
+		stepImageView.image = UIImage(named: "upload_image.png")
+		stepImageUploaded = false
+
 	}
 	
 	private func clearIngregientLabels() {
@@ -119,7 +121,8 @@ class NewRecipeViewController: UIViewController {
 	
 	@IBAction func addIngredient(_ sender: Any) {
 		if let name = ingredientTextField.text {
-			let ingredient = Ingredient(name: name, image: nil, calories: 0)
+			let ingredient = Ingredient()
+			ingredient.name = name
 			stepIngredients.append(ingredient)
 			if let amountStr = amountTextField.text, let amount = Float(amountStr) {
 				stepIngredientAmounts.append(amount)

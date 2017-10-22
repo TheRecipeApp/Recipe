@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class StepDetailsViewController: UIViewController {
 	@IBOutlet weak var ingredientsTable: UITableView!
@@ -15,6 +16,7 @@ class StepDetailsViewController: UIViewController {
 	@IBOutlet weak var stepAudio: UIButton!
 	
 	var step: CookingStep?
+	var audioPlayer: AVAudioPlayer?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,24 @@ class StepDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
 		stepDescription.text = step?.desc
 		setupStepImage()
+		setupStepAudio()
 		stepAudio.layer.borderWidth = 1
     }
+	
+	func setupStepAudio() {
+		let audioFile = step?.stepAudio
+		audioFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
+			if error == nil {
+				if let audioData = data {
+					do {
+						try self.audioPlayer = AVAudioPlayer(data: audioData)
+					} catch {
+						print("Unable to create audio player:", error.localizedDescription)
+					}
+				}
+			}
+		})
+	}
 	
 	func setupStepImage() {
 		let imageFile = step?.stepImage
@@ -50,6 +68,7 @@ class StepDetailsViewController: UIViewController {
     }
     
 	@IBAction func onAudioPlayTapped(_ sender: Any) {
+		audioPlayer?.play()
 	}
 	
     /*

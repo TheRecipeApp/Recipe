@@ -154,17 +154,41 @@
                                                     <constraint firstItem="sKu-Zq-6Xv" firstAttribute="leading" secondItem="8u6-0h-ErY" secondAttribute="leading" constant="20" id="x85-YH-NWx"/>
                                                 </constraints>
                                             </view>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YAk-MB-4P7">
+                                                <rect key="frame" x="0.0" y="254" width="375" height="169"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qcj-3b-Xh3">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2jG-rv-8xe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </view>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" name="GrayBackgroundScreen"/>
                                         <constraints>
                                             <constraint firstItem="b4f-5t-9cV" firstAttribute="leading" secondItem="GSy-t3-tjp" secondAttribute="leading" id="1NB-Qb-r66"/>
                                             <constraint firstItem="8u6-0h-ErY" firstAttribute="leading" secondItem="GSy-t3-tjp" secondAttribute="leading" id="1gp-NE-VcK"/>
                                             <constraint firstItem="b4f-5t-9cV" firstAttribute="top" secondItem="kA2-LT-1jX" secondAttribute="bottom" constant="2" id="2oc-ff-fiQ"/>
+                                            <constraint firstItem="YAk-MB-4P7" firstAttribute="top" secondItem="8u6-0h-ErY" secondAttribute="bottom" constant="2" id="7wN-V4-aLm"/>
                                             <constraint firstAttribute="trailing" secondItem="kA2-LT-1jX" secondAttribute="trailing" id="Sn9-Jp-K0c"/>
                                             <constraint firstItem="kA2-LT-1jX" firstAttribute="top" secondItem="GSy-t3-tjp" secondAttribute="top" id="VpE-we-4CL"/>
                                             <constraint firstAttribute="trailing" secondItem="8u6-0h-ErY" secondAttribute="trailing" id="XWa-a5-cfv"/>
+                                            <constraint firstAttribute="trailing" secondItem="YAk-MB-4P7" secondAttribute="trailing" id="aJU-yf-jav"/>
                                             <constraint firstAttribute="trailing" secondItem="b4f-5t-9cV" secondAttribute="trailing" id="am6-qD-O5y"/>
                                             <constraint firstItem="8u6-0h-ErY" firstAttribute="top" secondItem="b4f-5t-9cV" secondAttribute="bottom" constant="2" id="cik-qA-b8j"/>
+                                            <constraint firstAttribute="bottom" secondItem="YAk-MB-4P7" secondAttribute="bottom" id="mCU-sw-ylo"/>
+                                            <constraint firstItem="YAk-MB-4P7" firstAttribute="leading" secondItem="GSy-t3-tjp" secondAttribute="leading" id="ug9-tz-bmn"/>
                                             <constraint firstItem="kA2-LT-1jX" firstAttribute="leading" secondItem="GSy-t3-tjp" secondAttribute="leading" id="z34-aW-hm6"/>
                                         </constraints>
                                     </view>

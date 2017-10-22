@@ -17,9 +17,11 @@ class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var difficultyTextField: UITextField!
 	@IBOutlet weak var timeToCookTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
-	@IBOutlet weak var stepImage: UIImageView!
-	@IBOutlet weak var stepVideo: UIView!
+	@IBOutlet weak var recipeImage: UIImageView!
+	@IBOutlet weak var recipeVideo: UIView!
 	var cookingSteps: [CookingStep]? = nil
+	let imagePickerController = UIImagePickerController()
+	var recipeImageUploaded = false
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +37,18 @@ class RecipeSummaryViewController: UIViewController {
 				// initialize the steps in the steps table
 			}
 		}
-		stepImage.layer.borderWidth = 1
-		stepVideo.layer.borderWidth = 1
+		recipeImage.layer.borderWidth = 1
+		recipeVideo.layer.borderWidth = 1
+		imagePickerController.delegate = self
+		imagePickerController.allowsEditing = true
+		
+		if UIImagePickerController.isSourceTypeAvailable(.camera) {
+			print("Camera is available 📸")
+			imagePickerController.sourceType = .camera
+		} else {
+			print("Camera 🚫 available so we will use photo library instead")
+			imagePickerController.sourceType = .photoLibrary
+		}
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +92,9 @@ class RecipeSummaryViewController: UIViewController {
 				if let desc = descriptionTextField.text {
 					recipe.desc = desc
 				}
+				if recipeImageUploaded {
+					recipe.setImage(with: recipeImage.image)
+				}
 				// save the recipe
 				recipe.saveInBackground(block: { (success: Bool, error: Error?) in
 					if (success) {
@@ -106,6 +121,11 @@ class RecipeSummaryViewController: UIViewController {
 				nameTextField.becomeFirstResponder()
 			}
 		}
+	}
+	
+	@IBAction func onTaop(_ sender: UITapGestureRecognizer) {
+		present(imagePickerController, animated: true, completion: nil)
+		recipeImageUploaded = true
 	}
 	
 	// MARK: - Navigation
@@ -138,5 +158,24 @@ extension RecipeSummaryViewController : UITableViewDelegate, UITableViewDataSour
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "StepDetailsSegue", sender: nil)
+	}
+}
+
+extension RecipeSummaryViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+		// Get the image captured by the UIImagePickerController
+		let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+		let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+		
+		self.recipeImage.contentMode = .center
+		self.recipeImage.contentMode = .scaleAspectFit
+		if editedImage != nil {
+			self.recipeImage.image = editedImage
+		} else {
+			self.recipeImage.image = originalImage
+		}
+		
+		// Dismiss UIImagePickerController to go back to your original view controller
+		dismiss(animated: true, completion: nil)
 	}
 }

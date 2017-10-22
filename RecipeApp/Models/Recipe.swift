@@ -29,6 +29,16 @@ class Recipe: PFObject, PFSubclassing {
 	@NSManaged var image: PFFile?
 	@NSManaged var category: String?
 	
+	func setImage(with image: UIImage?) {
+		// check if image is not nil
+		if let recipeImage = image {
+			// get image data and check if that is not nil
+			if let imageData = UIImagePNGRepresentation(recipeImage) {
+				self.image = PFFile(name: "image.png", data: imageData)
+			}
+		}
+	}
+	
 	override init() {
 		super.init()
 	}	

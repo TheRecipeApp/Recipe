@@ -437,12 +437,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eeg-Nf-L9P">
                                 <rect key="frame" x="265" y="255.5" width="100" height="210"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-4o-p7L">
+                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload_image" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-4o-p7L">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="I8R-2o-KKV"/>
                                             <constraint firstAttribute="width" constant="100" id="yJn-qj-jir"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="w21-cf-LXA" appends="YES" id="hPi-Bs-3Tu"/>
+                                        </connections>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-Fc-ey1">
                                         <rect key="frame" x="0.0" y="110" width="100" height="100"/>
@@ -498,14 +502,19 @@
                         <outlet property="descriptionTextField" destination="Hlz-by-lWP" id="OQ3-uc-Oym"/>
                         <outlet property="difficultyTextField" destination="DOT-8c-XhC" id="uKp-9R-D6A"/>
                         <outlet property="nameTextField" destination="Y3n-nn-hUg" id="WTE-fK-0bo"/>
+                        <outlet property="recipeImage" destination="0Rz-4o-p7L" id="wVP-Om-ume"/>
                         <outlet property="recipeStepsTable" destination="idR-6g-kHU" id="FyA-k0-G39"/>
-                        <outlet property="stepImage" destination="0Rz-4o-p7L" id="EpH-Ca-ALY"/>
-                        <outlet property="stepVideo" destination="g0D-Fc-ey1" id="UTT-bn-jQl"/>
+                        <outlet property="recipeVideo" destination="g0D-Fc-ey1" id="TW7-td-uWl"/>
                         <outlet property="timeToCookTextField" destination="BDX-QH-VYN" id="mIT-xE-iUN"/>
                         <segue destination="MZT-yE-fDX" kind="show" identifier="StepDetailsSegue" id="Gve-pL-cHV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i80-mO-F3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="w21-cf-LXA">
+                    <connections>
+                        <action selector="onTaop:" destination="8vK-rh-AAc" id="d0u-pw-rbG"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1048.8" y="118.29085457271366"/>
         </scene>
@@ -641,7 +650,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mic" width="205" height="300"/>
+        <image name="mic" width="410" height="600"/>
         <image name="upload_image" width="263" height="264"/>
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

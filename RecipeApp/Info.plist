@@ -82,5 +82,7 @@
 	<string>Use Speech Recognition to transcribe recipe step instruction</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Use Speech Recognition to transcribe recipe step instruction</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Send invites to your friends</string>
 </dict>
 </plist>

@@ -262,7 +262,7 @@
                     <view key="view" contentMode="scaleToFill" id="iCt-FQ-oZ0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="GrayBackgroundScreen"/>
                         <viewLayoutGuide key="safeArea" id="ahE-v4-DE3"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZhF-ea-TMM"/>
@@ -300,6 +300,9 @@
     </scenes>
     <resources>
         <image name="AddProfile" width="100" height="100"/>
+        <namedColor name="GrayBackgroundScreen">
+            <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="GrayBackgroundScreen">
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

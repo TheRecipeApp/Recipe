@@ -19,7 +19,6 @@ class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var timeToCookTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
 	@IBOutlet weak var recipeImage: UIImageView!
-	@IBOutlet weak var recipeVideo: UIView!
 	var cookingSteps: [CookingStep]? = nil
 	let imagePickerController = UIImagePickerController()
 	var recipeImageUploaded = false
@@ -39,7 +38,6 @@ class RecipeSummaryViewController: UIViewController {
 			}
 		}
 		recipeImage.layer.borderWidth = 1
-		recipeVideo.layer.borderWidth = 1
 		imagePickerController.delegate = self
 		imagePickerController.allowsEditing = true
 		

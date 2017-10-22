@@ -11,6 +11,8 @@ import UIKit
 class StepDetailsViewController: UIViewController {
 	@IBOutlet weak var ingredientsTable: UITableView!
 	@IBOutlet weak var stepDescription: UITextView!
+	@IBOutlet weak var stepImage: UIImageView!
+	@IBOutlet weak var stepAudio: UIButton!
 	
 	var step: CookingStep?
 	
@@ -25,14 +27,31 @@ class StepDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 		stepDescription.text = step?.desc
+		setupStepImage()
+		stepAudio.layer.borderWidth = 1
     }
+	
+	func setupStepImage() {
+		let imageFile = step?.stepImage
+		imageFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
+			if error == nil {
+				if let imageData = data {
+					self.stepImage.image = UIImage(data: imageData)
+					self.stepImage.contentMode = .scaleAspectFit
+				}
+			}
+		})
+		
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+	@IBAction func onAudioPlayTapped(_ sender: Any) {
+	}
+	
     /*
     // MARK: - Navigation
 

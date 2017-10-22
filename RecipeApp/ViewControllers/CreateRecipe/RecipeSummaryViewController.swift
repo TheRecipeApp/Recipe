@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MobileCoreServices
 
 class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var recipeStepsTable: UITableView!

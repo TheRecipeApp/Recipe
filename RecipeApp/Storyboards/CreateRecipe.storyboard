@@ -434,30 +434,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eeg-Nf-L9P">
-                                <rect key="frame" x="265" y="255.5" width="100" height="210"/>
-                                <subviews>
-                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload_image" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-4o-p7L">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="I8R-2o-KKV"/>
-                                            <constraint firstAttribute="width" constant="100" id="yJn-qj-jir"/>
-                                        </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="w21-cf-LXA" appends="YES" id="hPi-Bs-3Tu"/>
-                                        </connections>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0D-Fc-ey1">
-                                        <rect key="frame" x="0.0" y="110" width="100" height="100"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="STw-9u-bVR"/>
-                                            <constraint firstAttribute="height" constant="100" id="yPZ-6t-UTP"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload_image" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-4o-p7L">
+                                <rect key="frame" x="265" y="251" width="100" height="100"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="I8R-2o-KKV"/>
+                                    <constraint firstAttribute="width" constant="100" id="yJn-qj-jir"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="w21-cf-LXA" appends="YES" id="hPi-Bs-3Tu"/>
+                                </connections>
+                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hlz-by-lWP">
                                 <rect key="frame" x="10" y="450.5" width="200" height="30"/>
                                 <constraints>
@@ -472,7 +459,9 @@
                         <constraints>
                             <constraint firstItem="BDX-QH-VYN" firstAttribute="top" secondItem="DOT-8c-XhC" secondAttribute="bottom" constant="10" id="1nL-ew-I4J"/>
                             <constraint firstItem="DOT-8c-XhC" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="10" id="1we-u9-bZG"/>
+                            <constraint firstItem="0Rz-4o-p7L" firstAttribute="top" secondItem="idR-6g-kHU" secondAttribute="bottom" constant="10" id="4sh-TD-XgZ"/>
                             <constraint firstItem="VmE-vX-uqk" firstAttribute="trailing" secondItem="Y5H-hS-tbI" secondAttribute="trailing" constant="60" id="5q0-0R-vng"/>
+                            <constraint firstItem="VmE-vX-uqk" firstAttribute="trailing" secondItem="0Rz-4o-p7L" secondAttribute="trailing" constant="10" id="FyM-IA-KhU"/>
                             <constraint firstItem="5Ad-mk-oW7" firstAttribute="top" secondItem="Nf6-dc-CRy" secondAttribute="bottom" constant="10" id="JQN-kJ-5OU"/>
                             <constraint firstItem="idR-6g-kHU" firstAttribute="top" secondItem="xWQ-5u-TI4" secondAttribute="bottom" constant="10" id="Li9-dz-8NN"/>
                             <constraint firstItem="Y3n-nn-hUg" firstAttribute="top" secondItem="idR-6g-kHU" secondAttribute="bottom" constant="10" id="Llf-eP-rrE"/>
@@ -482,12 +471,10 @@
                             <constraint firstItem="5Ad-mk-oW7" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="10" id="PUg-01-2fU"/>
                             <constraint firstItem="LSo-EN-sy0" firstAttribute="top" secondItem="Hlz-by-lWP" secondAttribute="bottom" constant="55" id="PyN-Qq-aGJ"/>
                             <constraint firstItem="idR-6g-kHU" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="10" id="Vf7-Gt-fy8"/>
-                            <constraint firstItem="eeg-Nf-L9P" firstAttribute="top" secondItem="idR-6g-kHU" secondAttribute="bottom" constant="15" id="bKE-vv-RHA"/>
                             <constraint firstItem="Nf6-dc-CRy" firstAttribute="top" secondItem="Y3n-nn-hUg" secondAttribute="bottom" constant="10" id="g4x-Po-0bx"/>
                             <constraint firstItem="DOT-8c-XhC" firstAttribute="top" secondItem="5Ad-mk-oW7" secondAttribute="bottom" constant="10" id="ggr-ow-aMc"/>
                             <constraint firstItem="Y3n-nn-hUg" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="10" id="ieZ-Ln-aA8"/>
                             <constraint firstItem="Nf6-dc-CRy" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="10" id="ka2-fb-yYB"/>
-                            <constraint firstItem="VmE-vX-uqk" firstAttribute="trailing" secondItem="eeg-Nf-L9P" secondAttribute="trailing" constant="10" id="lXY-mA-7MB"/>
                             <constraint firstItem="xWQ-5u-TI4" firstAttribute="top" secondItem="VmE-vX-uqk" secondAttribute="top" constant="10" id="mj7-rX-Lgy"/>
                             <constraint firstItem="BDX-QH-VYN" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="10" id="roM-Bn-E93"/>
                             <constraint firstItem="LSo-EN-sy0" firstAttribute="leading" secondItem="VmE-vX-uqk" secondAttribute="leading" constant="60" id="t1h-x1-CXV"/>
@@ -504,7 +491,6 @@
                         <outlet property="nameTextField" destination="Y3n-nn-hUg" id="WTE-fK-0bo"/>
                         <outlet property="recipeImage" destination="0Rz-4o-p7L" id="wVP-Om-ume"/>
                         <outlet property="recipeStepsTable" destination="idR-6g-kHU" id="FyA-k0-G39"/>
-                        <outlet property="recipeVideo" destination="g0D-Fc-ey1" id="TW7-td-uWl"/>
                         <outlet property="timeToCookTextField" destination="BDX-QH-VYN" id="mIT-xE-iUN"/>
                         <segue destination="MZT-yE-fDX" kind="show" identifier="StepDetailsSegue" id="Gve-pL-cHV"/>
                     </connections>

@@ -28,6 +28,7 @@ class Recipe: PFObject, PFSubclassing {
 	@NSManaged var servings: NSNumber?
 	@NSManaged var image: PFFile?
 	@NSManaged var category: String?
+	@NSManaged var videoId: String? // assuming a youtube video id
 	
 	func setImage(with image: UIImage?) {
 		// check if image is not nil

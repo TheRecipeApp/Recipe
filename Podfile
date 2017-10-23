@@ -16,6 +16,7 @@ target 'RecipeApp' do
   pod 'FacebookLogin'
   pod 'iCarousel'
   pod 'MobileCenter'
+  pod 'SwiftShareBubbles'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

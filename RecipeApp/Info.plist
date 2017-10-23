@@ -78,5 +78,11 @@
 	<string>Take photos of recipies, ingredients and upload your profile picture</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Use your camera roll to import photos of recipies, ingredients and set your profile picture</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Use Speech Recognition to transcribe recipe step instruction</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Use Speech Recognition to transcribe recipe step instruction</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Send invites to your friends</string>
 </dict>
 </plist>

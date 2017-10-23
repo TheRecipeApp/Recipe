@@ -21,6 +21,7 @@ class CookingStep: PFObject, PFSubclassing {
 	@NSManaged var stepImage: PFFile?
 	@NSManaged var recipeId: String?
 	@NSManaged var stepNumber: NSNumber
+	@NSManaged var stepAudio: PFFile?
 	
 	// TODO: add a property to store video guide
 	override init() {
@@ -35,5 +36,20 @@ class CookingStep: PFObject, PFSubclassing {
 		self.ingredientAmounts = ingredientAmounts ?? [Float]()
 		self.ingredientUnits = ingredientUnits ?? [String]()
 		self.stepImage = image ?? nil
+	}
+	
+	func setImage(with image: UIImage?) {
+		// check if image is not nil
+		if let recipeImage = image {
+			// get image data and check if that is not nil
+			if let imageData = UIImagePNGRepresentation(recipeImage) {
+				self.stepImage = PFFile(name: "image.png", data: imageData)
+			}
+		}
+	}
+	
+	func setAudioData(with data:NSData) {
+		let file = PFFile(name:"stepAudio.m4a", data:data as Data)
+		stepAudio = file
 	}
 }

@@ -9,12 +9,15 @@
 import UIKit
 
 class RecipeBlockView: UIView {
+    
 	@IBOutlet var contentView: UIView!
 	@IBOutlet weak private var recipeImage: UIImageView!
 	@IBOutlet weak private var imageTag: UILabel!
 	@IBOutlet weak private var recipeTitle: UILabel!
 	@IBOutlet weak private var createBy: UILabel!
 	
+    var recipeId: String?
+    
 	var image: UIImage? {
 		get { return recipeImage?.image }
 		set { recipeImage.image = newValue }

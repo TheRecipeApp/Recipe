@@ -421,7 +421,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNDER 5 MINUTES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQB-et-nAv" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="126" height="18.5"/>
+                                <rect key="frame" x="20" y="44" width="110" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -442,19 +442,19 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVITE SOME FRIENDS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub3-YM-dgg">
-                                <rect key="frame" x="16" y="184" width="140" height="16"/>
+                                <rect key="frame" x="16" y="176" width="140" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" name="GraySmallHeader"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe is more fun with friends. Would you like to invite some?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGf-7c-peN">
-                                <rect key="frame" x="16" y="208" width="343" height="57.5"/>
+                                <rect key="frame" x="16" y="200" width="343" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <color key="textColor" name="PrimaryColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sV-nH-N3h">
-                                <rect key="frame" x="30" y="305.5" width="315" height="45"/>
+                                <rect key="frame" x="30" y="297.5" width="315" height="45"/>
                                 <color key="backgroundColor" name="PrimaryColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="IVd-ZN-uvp"/>
@@ -469,7 +469,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SANDWICH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-fs-DhF" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="154" y="44" width="81.5" height="18.5"/>
+                                <rect key="frame" x="138" y="44" width="65.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -490,7 +490,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INDIAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFt-8f-m62" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="243.5" y="44" width="57.5" height="18.5"/>
+                                <rect key="frame" x="211.5" y="44" width="41.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -511,7 +511,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUBAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1H-lv-dvH" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="97" width="58.5" height="18.5"/>
+                                <rect key="frame" x="20" y="89" width="42.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -532,7 +532,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEXICAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daY-Rn-aDI" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="70.5" width="70.5" height="18.5"/>
+                                <rect key="frame" x="20" y="66.5" width="54.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -553,7 +553,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VEGETARIAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iba-mB-dEx" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="98.5" y="70.5" width="90.5" height="18.5"/>
+                                <rect key="frame" x="82.5" y="66.5" width="74.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -574,7 +574,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEDITERRANEAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSM-FB-X5j" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="197" y="70.5" width="117.5" height="18.5"/>
+                                <rect key="frame" x="165" y="66.5" width="101.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -595,7 +595,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRENCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfC-pP-I17" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="86.5" y="97" width="64.5" height="18.5"/>
+                                <rect key="frame" x="70.5" y="89" width="48.5" height="14.5"/>
                                 <color key="backgroundColor" name="GraySmallHeader"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -698,9 +698,6 @@
         </namedColor>
         <namedColor name="GraySmallHeader">
             <color red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="GraySmallHeader">
-            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

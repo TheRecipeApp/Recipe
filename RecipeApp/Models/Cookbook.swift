@@ -21,13 +21,7 @@ class Cookbook: PFObject, PFSubclassing {
 	@NSManaged var owner: UInt64
 	@NSManaged var recipes: [Recipe]?
 
-	init(name: String, owner: UInt64, category: String?, cuisine: String?, tags: [String]?, recipes: [Recipe]?) {
+	override init() {
 		super.init()
-		self.name = name
-		self.owner = owner
-		self.category = category ?? nil
-		self.cuisine = cuisine ?? nil
-		self.tags = tags ?? [String]()
-		self.recipes = recipes ?? [Recipe]()
-	}
+	}	
 }

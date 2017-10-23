@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import MobileCoreServices
+import SwiftShareBubbles
 
 class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var recipeStepsTable: UITableView!
@@ -19,12 +20,13 @@ class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var timeToCookTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
 	@IBOutlet weak var recipeImage: UIImageView!
-	@IBOutlet weak var recipeVideo: UIView!
 	var cookingSteps: [CookingStep]? = nil
 	let imagePickerController = UIImagePickerController()
 	var recipeImageUploaded = false
+	@IBOutlet weak var socialShareView: UIView!
+	var bubbles: SwiftShareBubbles?
 	
-    override func viewDidLoad() {
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -39,7 +41,6 @@ class RecipeSummaryViewController: UIViewController {
 			}
 		}
 		recipeImage.layer.borderWidth = 1
-		recipeVideo.layer.borderWidth = 1
 		imagePickerController.delegate = self
 		imagePickerController.allowsEditing = true
 		
@@ -50,6 +51,12 @@ class RecipeSummaryViewController: UIViewController {
 			print("Camera 🚫 available so we will use photo library instead")
 			imagePickerController.sourceType = .photoLibrary
 		}
+		
+		socialShareView.layer.borderWidth = 1
+		bubbles = SwiftShareBubbles(point: CGPoint(x: socialShareView.frame.width / 2, y: socialShareView.frame.height / 2), radius: 100, in: socialShareView)
+		bubbles?.showBubbleTypes = [Bubble.twitter, Bubble.facebook, Bubble.google, Bubble.instagram, Bubble.pintereset]
+		bubbles?.delegate = self
+		socialShareView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,40 +84,12 @@ class RecipeSummaryViewController: UIViewController {
 		} else {
 			recipe.owner = owner?.objectId
 			if let name = nameTextField.text {
-				recipe.name = name
-				if let cuisine = cuisineTextField.text {
-					recipe.cuisine = cuisine
-				}
-				if let category = categoryTextField.text {
-					recipe.category = category
-				}
-				if let difficulty = difficultyTextField.text {
-					recipe.difficultyLevel = difficulty
-				}
-				if let timeToCook = timeToCookTextField.text {
-					recipe.cookingTime = timeToCook
-				}
-				if let desc = descriptionTextField.text {
-					recipe.desc = desc
-				}
-				if recipeImageUploaded {
-					recipe.setImage(with: recipeImage.image)
-				}
+				setupRecipe(recipe: recipe, name: name)
 				// save the recipe
 				recipe.saveInBackground(block: { (success: Bool, error: Error?) in
 					if (success) {
 						// save the cooking steps for the recipe
-						for step in self.cookingSteps! {
-							step.recipeId = recipe.objectId
-							step.saveInBackground(block: { (success: Bool, error: Error?) in
-								if (!success) {
-									print("Error Saving Step: \(String(describing: error?.localizedDescription))")
-								}
-							})
-						}
-						let storyboard = UIStoryboard(name: "Main", bundle: nil)
-						let vc = storyboard.instantiateInitialViewController() as! UITabBarController
-						self.present(vc, animated: true, completion: nil)
+						self.saveCookingSteps(recipeId: recipe.objectId!)
 					} else {
 						print("Unable to Save Recipe")
 						print("Error: \(String(describing: error?.localizedDescription))")
@@ -122,6 +101,64 @@ class RecipeSummaryViewController: UIViewController {
 				nameTextField.becomeFirstResponder()
 			}
 		}
+	}
+	
+	private func saveCookingSteps(recipeId: String) {
+		for step in self.cookingSteps! {
+			step.recipeId = recipeId
+			step.saveInBackground(block: { (success: Bool, error: Error?) in
+				if success {
+					for ingredient in step.ingredients! {
+						self.saveIngredient(ingredient: ingredient)
+					}
+				} else {
+					print("Error Saving Step: ", error?.localizedDescription ?? "")
+				}
+			})
+		}
+	}
+	
+	private func saveIngredient(ingredient: Ingredient) {
+		ingredient.saveInBackground { (success: Bool, error: Error?) in
+			if error == nil {
+				if success {
+					print("Ingredient: \(ingredient.name) saved")
+				} else {
+					print("Error Saving Ingredient \(ingredient.name)")
+					print("Error:",error?.localizedDescription ?? "")
+				}
+			}
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let vc = storyboard.instantiateInitialViewController() as! UITabBarController
+			self.present(vc, animated: true, completion: nil)
+		}
+	}
+	
+	private func setupRecipe(recipe : Recipe, name: String) {
+		recipe.name = name
+		if let cuisine = cuisineTextField.text {
+			recipe.cuisine = cuisine
+		}
+		if let category = categoryTextField.text {
+			recipe.category = category
+		}
+		if let difficulty = difficultyTextField.text {
+			recipe.difficultyLevel = difficulty
+		}
+		if let timeToCook = timeToCookTextField.text {
+			recipe.cookingTime = timeToCook
+		}
+		if let desc = descriptionTextField.text {
+			recipe.desc = desc
+		}
+		if recipeImageUploaded {
+			recipe.setImage(with: recipeImage.image)
+		}
+	}
+	
+	@IBAction func onSocialShare(_ sender: Any) {
+		socialShareView.isHidden = false
+		bubbles?.show()
 	}
 	
 	@IBAction func onTaop(_ sender: UITapGestureRecognizer) {
@@ -178,5 +215,33 @@ extension RecipeSummaryViewController : UIImagePickerControllerDelegate, UINavig
 		
 		// Dismiss UIImagePickerController to go back to your original view controller
 		dismiss(animated: true, completion: nil)
+	}
+}
+
+extension RecipeSummaryViewController : SwiftShareBubblesDelegate {
+	func bubblesTapped(bubbles: SwiftShareBubbles, bubbleId: Int) {
+		if let bubble = Bubble(rawValue: bubbleId) {
+			print("\(bubble)")
+			switch bubble {
+			case .facebook:
+				break
+			case .twitter:
+				break
+			case .pintereset:
+				break
+			case .google:
+				break
+			case .instagram:
+				break
+			default:
+				break
+			}
+		} else {
+			// custom case
+		}
+	}
+	
+	func bubblesDidHide(bubbles: SwiftShareBubbles) {
+		socialShareView.isHidden = true
 	}
 }

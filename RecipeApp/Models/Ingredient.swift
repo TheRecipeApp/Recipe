@@ -19,12 +19,9 @@ class Ingredient: PFObject, PFSubclassing {
 	
 	@NSManaged var name: String
 	@NSManaged var image: PFFile?
-	@NSManaged var calories: NSNumber?
+	@NSManaged var calories: String?
 	
-	init(name: String, image: PFFile?, calories: NSNumber?) {
+	override init() {
 		super.init()
-		self.name = name
-		self.image = image ?? nil
-		self.calories = calories ?? 0
-	}
+	}	
 }

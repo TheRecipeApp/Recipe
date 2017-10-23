@@ -9,6 +9,7 @@
 import UIKit
 import Contacts
 import ContactsUI
+import Parse
 
 class AddFriendsViewController: UIViewController {
 
@@ -56,12 +57,24 @@ extension AddFriendsViewController: CNContactPickerDelegate {
         print("Contacts Selected")
         print(contacts.count)
         if contacts.count > 0 {
-            let alertController = UIAlertController(title: "Your friends have been invited", message: nil, preferredStyle: .alert)
+            let currentUser = PFUser.current()
+            for contact in contacts {
+                for email in contact.emailAddresses {
+                    let invite = PFObject(className: "FriendInvite")
+                    invite["sourceUser"] = currentUser
+                    invite["label"] = email.label!
+                    invite["email"] = email.value
+                    invite.saveInBackground()
+                }
+            }
+            let alertController = UIAlertController(title: "Thank you! Your friends have been invited.", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
                 // handle response here.
             }
             alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.present(alertController, animated: true, completion: nil)
+            })
         }
         // TODO: Sprint 3, wire this to parse to send emails
     }

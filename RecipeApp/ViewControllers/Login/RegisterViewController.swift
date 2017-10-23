@@ -77,6 +77,15 @@ class RegisterViewController: UIViewController {
 				self.password.text = ""
 				self.confirmPassword.text = ""
 				self.alertController.title = "Unable to Register User"
+                let errorCode = error._code
+                switch errorCode {
+                case 202:
+                    self.alertController.message = "Account already exists for this username. Please choose a different one."
+                case 203:
+                    self.alertController.message = "Account already exists for this email address. Please log in instead."
+                default:
+                    self.alertController.message = "An unexpected error has ocurred. Please try again later."
+                }
 				self.present(self.alertController, animated: true, completion: {
 				})
 			} else {

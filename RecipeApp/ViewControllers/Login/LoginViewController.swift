@@ -109,9 +109,21 @@ class LoginViewController: UIViewController {
 		User.logInWithUsername(inBackground: user, password: passwdHash) { (user: PFUser?, error: Error?) in
             if let error = error {
 				print("User log in failed: \(error.localizedDescription)")
-				self.alertController.title = "Invalid Login"
-				self.password.text = ""
-				self.present(self.alertController, animated: true, completion: nil)
+                let errorCode = error._code
+                print("User log in failed: \(errorCode)")
+                switch errorCode {
+                case 101:
+                    self.alertController.title = "Invalid login"
+                    self.alertController.message = "Please check credentials and try again"
+                case 205:
+                    self.alertController.title = "Confirm account"
+                    self.alertController.message = "Please check your email to verify your account first"
+                    break;
+                default:
+                    self.alertController.title = "Error"
+                    self.alertController.message = "An unexpected error has occurred. Please try again later"
+                }
+                self.present(self.alertController, animated: true, completion: nil)
 			} else {
 				print("User logged in successfully")
 				let currentUser = user

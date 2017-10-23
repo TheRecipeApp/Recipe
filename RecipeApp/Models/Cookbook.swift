@@ -18,7 +18,8 @@ class Cookbook: PFObject, PFSubclassing {
 	@NSManaged var category: String?
 	@NSManaged var cuisine: String?
 	@NSManaged var tags: [String]?
-	@NSManaged var owner: UInt64
+	@NSManaged var owner: PFUser
+    @NSManaged var likesAggregate: Int
 	@NSManaged var recipes: [Recipe]?
 
 	override init() {

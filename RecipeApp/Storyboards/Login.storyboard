@@ -348,7 +348,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onRegister:" destination="W8R-7X-NmK" eventType="touchUpInside" id="rPK-dY-fhW"/>
-                                    <segue destination="n5c-nW-ID7" kind="show" id="H2Y-bI-a3e"/>
+                                    <segue destination="n5c-nW-ID7" kind="show" identifier="nextSegue" id="H2Y-bI-a3e"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OOH-Ia-LjW">
@@ -399,6 +399,7 @@
                     <connections>
                         <outlet property="firstNameTextField" destination="Hu1-00-YFT" id="7Vn-Qf-rHJ"/>
                         <outlet property="lastNameTextField" destination="i5L-yR-sXa" id="QzC-fx-eL9"/>
+                        <outlet property="preferenceSegmentedControl" destination="Q9q-7X-x8E" id="svK-Km-Ih8"/>
                         <outlet property="profileImageView" destination="OOH-Ia-LjW" id="eMI-eL-Zyw"/>
                     </connections>
                 </viewController>

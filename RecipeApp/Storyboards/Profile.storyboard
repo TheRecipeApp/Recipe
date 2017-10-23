@@ -49,6 +49,9 @@
                                     <constraint firstAttribute="height" constant="120" id="J1w-lA-e8y"/>
                                 </constraints>
                                 <state key="normal" image="AddProfile"/>
+                                <connections>
+                                    <action selector="onAddProfilePicture:" destination="tVQ-Zt-gRl" eventType="touchUpInside" id="Auh-kL-CZy"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eov-65-vQG">
                                 <rect key="frame" x="30" y="30" width="120" height="120"/>
@@ -117,14 +120,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4f-5t-9cV" customClass="iCarousel">
-                                                <rect key="frame" x="0.0" y="46" width="375" height="160"/>
+                                                <rect key="frame" x="0.0" y="46" width="375" height="180"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="160" id="fLN-oJ-tDR"/>
+                                                    <constraint firstAttribute="height" constant="180" id="fLN-oJ-tDR"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8u6-0h-ErY">
-                                                <rect key="frame" x="0.0" y="208" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="228" width="375" height="44"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cookbooks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKu-Zq-6Xv">
                                                         <rect key="frame" x="20" y="11" width="94" height="22"/>
@@ -143,6 +146,9 @@
                                                             <segment title="All"/>
                                                         </segments>
                                                         <color key="tintColor" name="PrimaryColor"/>
+                                                        <connections>
+                                                            <action selector="onFilterChange:" destination="tVQ-Zt-gRl" eventType="valueChanged" id="7h6-Yr-e6O"/>
+                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -155,7 +161,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YAk-MB-4P7">
-                                                <rect key="frame" x="0.0" y="254" width="375" height="169"/>
+                                                <rect key="frame" x="0.0" y="274" width="375" height="149"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qcj-3b-Xh3">
                                                     <size key="itemSize" width="50" height="50"/>
@@ -262,6 +268,17 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="complimentsCountLabel" destination="sjA-nZ-SaQ" id="K8k-hI-bbO"/>
+                        <outlet property="cookbooksCollectionView" destination="YAk-MB-4P7" id="eS3-Jl-Dig"/>
+                        <outlet property="cookbooksCountLabel" destination="0Jb-D5-ZvT" id="AW0-ZE-G2f"/>
+                        <outlet property="displayScreen" destination="gDy-BR-KRI" id="jUe-D8-UuE"/>
+                        <outlet property="followersCountLabel" destination="zOU-2c-Y8d" id="HZy-Ja-T6w"/>
+                        <outlet property="nameLabel" destination="Ppe-xG-vZo" id="da6-nN-93s"/>
+                        <outlet property="profileImageView" destination="Eov-65-vQG" id="WHC-jy-Rwp"/>
+                        <outlet property="recipiesCountLabel" destination="rND-fM-M7D" id="1dI-WQ-u0y"/>
+                        <outlet property="topRecipiesView" destination="b4f-5t-9cV" id="Zef-n1-t7L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezx-L4-b9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

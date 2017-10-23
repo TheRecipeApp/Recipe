@@ -139,7 +139,7 @@ class ProfileViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let recipeDetailVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
         let recipeView = tapGestureRecognizer.view as! RecipeBlockView
-        recipeDetailVC.recipeBlockView = recipeView
+        recipeDetailVC.recipeId = recipeView.recipeId
         self.navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     

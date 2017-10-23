@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ProfileViewController: UIViewController {
 
@@ -25,6 +26,12 @@ class ProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func onLogout(_ sender: UIButton) {
+        PFUser.logOut()
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController() as! UINavigationController
+        self.present(vc, animated: false, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

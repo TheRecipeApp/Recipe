@@ -1,5 +1,7 @@
 # The Recipe App
 
+[![Build status](https://build.mobile.azure.com/v0.1/apps/a046a70f-dd1f-459d-9d1f-6d45057911b8/branches/master/badge)](https://mobile.azure.com)
+
 ## Summary
 
 The Recipe App is a new fun way to discover, share and make recipies. It doesn't matter if you are a cook enthusiast or you just want to learn how to cook, The Recipe App will help you in your journey. 

@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Parse
 
 class SelectPreferenceViewController: UIViewController {
 
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
     @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var preferenceSegmentedControl: UISegmentedControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +62,8 @@ class SelectPreferenceViewController: UIViewController {
     
     func displayProfilePicture(image: UIImage) {
         
-        let resizeRenderImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        resizeRenderImageView.layer.cornerRadius = 50
+        let resizeRenderImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
+        resizeRenderImageView.layer.cornerRadius = 60
         resizeRenderImageView.layer.borderColor = UIColor.white.cgColor
         resizeRenderImageView.layer.borderWidth = 1.0
         resizeRenderImageView.contentMode = .scaleAspectFit
@@ -71,7 +74,7 @@ class SelectPreferenceViewController: UIViewController {
         let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        profileImageView.layer.cornerRadius = 50
+        profileImageView.layer.cornerRadius = 60
         profileImageView.image = thumbnail
         profileImageView.clipsToBounds = true
         profileImageView.isHidden = false
@@ -79,7 +82,11 @@ class SelectPreferenceViewController: UIViewController {
     }
     
     func saveProfilePicture(image: UIImage) {
-        // TODO: Save the image in the background
+        let imageFile = PFFile(data: UIImagePNGRepresentation(image)!)
+        imageFile?.saveInBackground()
+        let currentUser = PFUser.current()
+        currentUser?["profileImage"] = imageFile
+        currentUser?.saveInBackground()
     }
     
     // MARK: Actions
@@ -114,16 +121,26 @@ class SelectPreferenceViewController: UIViewController {
 		self.present(vc, animated: true, completion: nil)
 	}
 	
-	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "nextSegue" {
+            let firstName = firstNameTextField.text
+            let lastName = lastNameTextField.text
+            let preference = preferenceSegmentedControl.selectedSegmentIndex
+            if firstName != "" || lastName != "" || preference != -1 {
+                let currentUser = PFUser.current()
+                currentUser?["firstName"] = firstName
+                currentUser?["lastName"] = lastName
+                if preference != -1 {
+                    currentUser?["preference"] = preference
+                }
+                currentUser?.saveInBackground()
+            }
+        }
     }
-    */
-
+    
 }
 
 extension SelectPreferenceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

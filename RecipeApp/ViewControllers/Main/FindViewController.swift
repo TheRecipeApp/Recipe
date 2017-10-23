@@ -13,6 +13,7 @@ import MBProgressHUD
 
 class FindViewController: UIViewController {
 
+    @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var recipesCarousel: iCarousel!
     @IBOutlet weak var searchBar: UISearchBar!
     var recipes = [Recipe]()
@@ -25,11 +26,24 @@ class FindViewController: UIViewController {
         recipesCarousel.dataSource = self
         searchBar.delegate = self
         searchBar.sizeToFit()
+        
+        self.recipesCarousel.contentOffset = CGSize(width: 0, height: 0)
+        self.categoryView.subviews.forEach { (view: UIView) in
+            print(view.debugDescription)
+            let label = view as! UILabel
+            addTapRecognizer(to: label)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func addTapRecognizer(to label: UILabel) {
+        label.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(FindViewController.categoryTapped(tapGestureRecognizer:)))
+        label.addGestureRecognizer(tapRecognizer)
     }
     
     @IBAction func onProfile(_ sender: UIBarButtonItem) {
@@ -38,6 +52,14 @@ class FindViewController: UIViewController {
     
     @IBAction func onAddRecipe(_ sender: UIBarButtonItem) {
         print("Add recipe button pressed")
+    }
+    
+    func categoryTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        print("Category tapped")
+        let primaryColor = UIColor(named: "PrimaryColor")
+        let label = tapGestureRecognizer.view as! UILabel
+        label.backgroundColor = primaryColor
+        doSearch()
     }
     
     func recipeTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -56,6 +78,27 @@ class FindViewController: UIViewController {
 		let vc = storyboard.instantiateInitialViewController() as! UINavigationController
 		self.present(vc, animated: true, completion: nil)
 	}
+    
+    func doSearch() {
+        searchBar.resignFirstResponder()
+        recipes.removeAll()
+        let query = PFQuery(className: "Recipe")
+        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) recipes.")
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        print(object.objectId!)
+                        self.recipes.append(object as! Recipe)
+                    }
+                    self.recipesCarousel.reloadData()
+                    self.recipesCarousel.type = .linear
+                }
+            }
+        })
+    }
 }
 
 // SearchBar methods
@@ -77,38 +120,7 @@ extension FindViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        
-        recipes.removeAll()
-        let user = PFUser.current()
-        let query = PFQuery(className: "Recipe")
-        if let user = user {
-//            query.whereKey("owner", equalTo: "eW8xBBf8t4")
-
-            let hud = MBProgressHUD(view: self.recipesCarousel)
-            hud.show(animated: true)
-            
-            query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-                if error == nil {
-                    // The find succeeded.
-                    print("Successfully retrieved \(objects!.count) recipes.")
-                    // Do something with the found objects
-                    if let objects = objects {
-                        for object in objects {
-                            print(object.objectId!)
-                            self.recipes.append(object as! Recipe)
-                        }
-                        self.recipesCarousel.reloadData()
-                        self.recipesCarousel.type = .linear
-                    }
-                    
-                    hud.hide(animated: true)
-                } else {
-                    // Log details of the failure
-                    print("Error: \(error?.localizedDescription)")
-                }
-            })
-        }
+        doSearch()
     }
 }
 
@@ -148,6 +160,8 @@ extension FindViewController: iCarouselDelegate, iCarouselDataSource {
         if (option == iCarouselOption.spacing) {
             return value * 1.1
         }
+        
+        
         return value
     }
 }

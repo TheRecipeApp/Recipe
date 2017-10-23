@@ -10,10 +10,19 @@ import UIKit
 
 class CookbookViewController: UIViewController {
 
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var cookbookNameLabel: UILabel!
+    @IBOutlet weak var recipeCountLabel: UILabel!
+    @IBOutlet weak var complimentCountLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        profileImageView.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Speech
+import AVFoundation
 
 class NewRecipeViewController: UIViewController {
 
@@ -18,6 +19,7 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var ingredientsTable: UITableView!
 	@IBOutlet weak var stepDescriptionTextView: UITextView!
 	@IBOutlet weak var micButton: UIButton!
+	@IBOutlet weak var stepImageView: UIImageView!
 	
 	private var stepNumber: Int = 1
 	var steps = [CookingStep]()
@@ -25,7 +27,12 @@ class NewRecipeViewController: UIViewController {
 	var stepIngredientAmounts = [Float]()
 	var stepIngredientUnits = [String]()
 	var stepNotSaved = false
+	var stepImageUploaded = false
 	
+	// image picker
+	let imagePickerController = UIImagePickerController()
+	var recipeImageUploaded = false
+
 	// variables needed for speech recognition and transcribing
 	var audioEngine = AVAudioEngine()
 	var speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
@@ -33,6 +40,15 @@ class NewRecipeViewController: UIViewController {
 	var speechRecognitionTask = SFSpeechRecognitionTask()
 	var speechRecognitionStarted = false
 	
+	
+	var recorder:AVAudioRecorder?
+	var recordingSession:AVAudioSession!
+	var meterTimer:Timer?
+	var recoderApc0:Float = 0
+	var recorderPeak0:Float = 0
+	var audioURL:URL?
+	var stepAudio:NSData? = nil
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -46,7 +62,19 @@ class NewRecipeViewController: UIViewController {
 
 		stepNumberLabel.text = String("\(stepNumber)")
 		stepDescriptionTextView.layer.borderWidth = 1
-    }
+
+		// image picker
+		imagePickerController.delegate = self
+		imagePickerController.allowsEditing = true
+		
+		if UIImagePickerController.isSourceTypeAvailable(.camera) {
+			print("Camera is available 📸")
+			imagePickerController.sourceType = .camera
+		} else {
+			print("Camera 🚫 available so we will use photo library instead")
+			imagePickerController.sourceType = .photoLibrary
+		}
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -78,8 +106,11 @@ class NewRecipeViewController: UIViewController {
 		stepIngredientUnits.removeAll()
 		stepIngredientAmounts.removeAll()
 		stepIngredients.removeAll()
-		self.stepDescriptionTextView.text = ""
+		stepDescriptionTextView.text = ""
 		stepNotSaved = false
+		stepImageView.image = UIImage(named: "upload_image.png")
+		stepImageUploaded = false
+
 	}
 	
 	private func clearIngregientLabels() {
@@ -90,7 +121,8 @@ class NewRecipeViewController: UIViewController {
 	
 	@IBAction func addIngredient(_ sender: Any) {
 		if let name = ingredientTextField.text {
-			let ingredient = Ingredient(name: name, image: nil, calories: 0)
+			let ingredient = Ingredient()
+			ingredient.name = name
 			stepIngredients.append(ingredient)
 			if let amountStr = amountTextField.text, let amount = Float(amountStr) {
 				stepIngredientAmounts.append(amount)
@@ -125,6 +157,12 @@ class NewRecipeViewController: UIViewController {
 			cookingStep.ingredients = stepIngredients
 			cookingStep.ingredientAmounts = stepIngredientAmounts
 			cookingStep.ingredientUnits = stepIngredientUnits
+			if let stepAudio = stepAudio {
+				cookingStep.setAudioData(with: stepAudio)
+			}
+			if stepImageUploaded {
+				cookingStep.setImage(with: stepImageView.image)
+			}
 			steps.append(cookingStep)
 			stepNumber = stepNumber + 1
 			stepNumberLabel.text = String("\(stepNumber)")
@@ -205,6 +243,28 @@ class NewRecipeViewController: UIViewController {
 		}
 	}
 	
+	@IBAction func onTap(_ sender: UITapGestureRecognizer) {
+		present(imagePickerController, animated: true, completion: nil)
+		stepImageUploaded = true
+	}
+	
+	@IBAction func onRecordAudioTapped(_ sender: Any) {
+		let status = self.record(filename: "testfile")
+		if status {
+			print("record successful")
+		} else {
+			print("record error")
+		}
+	}
+	
+	@IBAction func onStopRecordAudio(_ sender: Any) {
+		finishRecording()
+		stepAudio = NSData(contentsOf:audioURL!)
+		if stepAudio == nil {
+			print("Error: UNable to convert Audio URL to NSData")
+		}
+	}
+	
 	// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -282,3 +342,104 @@ extension NewRecipeViewController: SFSpeechRecognizerDelegate {
 		}))!
 	}
 }
+
+extension NewRecipeViewController : AVAudioRecorderDelegate {
+	func setup() {
+		recordingSession = AVAudioSession.sharedInstance()
+		
+		do {
+			try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+			try recordingSession.setActive(true)
+			
+			// We need to request permissions from the user otherwise we will be recording silence
+			recordingSession.requestRecordPermission({ (allowed: Bool) in
+				if allowed {
+					print("Mic Authorized")
+				} else {
+					print("Mic not authorized")
+				}
+			})
+		} catch {
+			print("Failed to set category", error.localizedDescription)
+		}
+	}
+	
+	// Start the record session
+	func record(filename: String) -> Bool {
+		let url = getUserPath().appendingPathComponent(filename + ".m4a")
+		audioURL = URL.init(fileURLWithPath: url.path)
+		
+		let recordSettings:[String:Any] = [
+			AVFormatIDKey:NSNumber(value: kAudioFormatAppleLossless),
+			AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue,
+			AVEncoderBitRateKey:12000.0,
+			AVNumberOfChannelsKey:1,
+			AVSampleRateKey:44100.0
+		]
+		
+		do {
+			recorder = try AVAudioRecorder(url: audioURL!, settings: recordSettings)
+			recorder?.delegate = self
+			recorder?.isMeteringEnabled = true
+			recorder?.prepareToRecord()
+			
+			self.meterTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer: Timer) in
+				// Here we should always update the recorder meter values so we can track the voice loudness
+				if let recorder = self.recorder {
+					recorder.updateMeters()
+					self.recoderApc0 = recorder.averagePower(forChannel: 0)
+					self.recorderPeak0 = recorder.peakPower(forChannel: 0)
+				}
+			})
+			
+			recorder?.record()
+			print("Recording")
+			
+			return true
+		} catch {
+			print("Error Recording")
+			return false
+		}
+	}
+	
+	// Stop the recorder
+	func finishRecording() {
+		self.recorder?.stop()
+		self.meterTimer?.invalidate()
+	}
+	
+	// Get the path for the folder we will be saving the file to
+	func getUserPath() -> URL {
+		return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+	}
+	
+	func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+		print("Audio Manager did Finish Recording")
+	}
+	
+	func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+		print("Error Encoding", error?.localizedDescription ?? "")
+	}
+
+}
+
+extension NewRecipeViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+		// Get the image captured by the UIImagePickerController
+		let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+		let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+		
+		self.stepImageView.contentMode = .center
+		self.stepImageView.contentMode = .scaleAspectFit
+		if editedImage != nil {
+			self.stepImageView.image = editedImage
+		} else {
+			self.stepImageView.image = originalImage
+		}
+		
+		// Dismiss UIImagePickerController to go back to your original view controller
+		dismiss(animated: true, completion: nil)
+	}
+}
+
+

@@ -228,7 +228,6 @@ extension ProfileViewController: iCarouselDelegate, iCarouselDataSource {
         return value
     }
     
-    
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

@@ -10,35 +10,35 @@ The Recipe App is a new fun way to discover, share and make recipies. It doesn't
 
 #### Sign Up / Sign In / Onboarding
 
-- [ ] As a user I want to be able to log into the app
-- [ ] As a user I want to be able to sign up for an account using my email address
-- [ ] As a user I want to be able to log in using Facebook Auth service
-- [ ] As a user I want to be able to add friends from different sources
-- [ ] As a user I want to know what this app is about in one screen
+- [x] As a user I want to be able to log into the app
+- [x] As a user I want to be able to sign up for an account using my email address
+- [x] As a user I want to be able to log in using Facebook Auth service
+- [x] As a user I want to be able to add friends from different sources
+- [x] As a user I want to know what this app is about in one screen
 
 #### View and Associate Recipies
 
-- [ ] As a user that just logged in I should land on the Home Page that includes a curated list of recipies organized by different subjects (what your friends like, your food preferences, most liked recipies)
-	- [ ] As a user I would like to quickly find something that I am looking for to cook
+- [x] As a user that just logged in I should land on the Home Page that includes a curated list of recipies organized by different subjects (what your friends like, your food preferences, most liked recipies)
+	- [x] As a user I would like to quickly find something that I am looking for to cook
 	- [ ] If available, as a user it would be cool to see an ARkit model representing the final dish
-- [ ] As a user I want to be able to associate recipies to myself
-- [ ] As a user I want to be able to see the recipe details (photos, time to cook, level of difficulty, ingredients, steps to cook it, how many people have added it to their profiles)
-- [ ] As a user I want to be able to see other people profile with their most popular recipies (from themselves or that they have added) and the rest of their recipies
+- [x] As a user I want to be able to associate recipies to myself
+- [x] As a user I want to be able to see the recipe details (photos, time to cook, level of difficulty, ingredients, steps to cook it, how many people have added it to their profiles)
+- [x] As a user I want to be able to see other people profile with their most popular recipies (from themselves or that they have added) and the rest of their recipies
 - [ ] Every user of the app has a number of recipies, a number that represents the how many times other people have associated their recipies and a score of popularity
-- [ ] As a user I want to be able to share recipies to other people that may or may not be into the app
+- [x] As a user I want to be able to share recipies to other people that may or may not be into the app
 
 #### Create Recipies
 
-- [ ] As a user I want to be able to create a recipe
-	- [ ] Add photos/videos (select main image)
-	- [ ] Add ingredients
-	- [ ] Add steps to cook, time to cook and ingredientes
-	- [ ] Based on number of the data input general a level of difficulty 
+- [x] As a user I want to be able to create a recipe
+	- [x] Add photos/audios (select main image)
+	- [x] Add ingredients
+	- [x] Add steps to cook, time to cook and ingredientes
+	- [x] Based on number of the data input general a level of difficulty 
 
 #### Profile pages
 
-- [ ] As a user I want to be able to visit my profile, see my info and the recipies associated with my user
-- [ ] As a user I want to be able to edit my profile (profile picture via camera or photo library), first name, last name
+- [x] As a user I want to be able to visit my profile, see my info and the recipies associated with my user
+- [x] As a user I want to be able to edit my profile (profile picture via camera or photo library), first name, last name
 - [ ] As a user I want to be able to create an association with another user
 
 #### Notifications

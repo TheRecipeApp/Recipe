@@ -24,6 +24,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet var topRecipiesView: iCarousel!
     
     var recipies: [Recipe] = []
+    var allCookbooks: [Cookbook] = []
+    var filteredCookbooks: [Cookbook] = []
+    var showAllCookbooks = true
+    // TODO: Change this to another user
+    let currentUser = User.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +41,6 @@ class ProfileViewController: UIViewController {
         topRecipiesView.viewpointOffset = CGSize(width: 95, height: 0)
 
         // TODO: Change this to another user
-        let currentUser = User.current()
         displayScreen.text = "@\(currentUser?.username ?? "NA")"
         recipiesCountLabel.text = "12"
         complimentsCountLabel.text = "1000"
@@ -58,6 +62,17 @@ class ProfileViewController: UIViewController {
         
         fetchTopRecipes()
         
+        for i in 1...10 {
+            let cookbook = Cookbook()
+            cookbook.name = "Summary BBQ"
+            if i % 2 == 0 {
+                cookbook.owner = currentUser!
+            }
+            cookbook.likesAggregate = 150
+            allCookbooks.append(cookbook)
+            filteredCookbooks.append(cookbook)
+        }
+        cookbooksCollectionView.reloadData()
         // TODO: If this is another user, hide the edit and the logout button
     }
     
@@ -140,7 +155,12 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func onFilterChange(_ sender: UISegmentedControl) {
-        
+        if sender.selectedSegmentIndex == 0 {
+            showAllCookbooks = true
+        } else {
+            showAllCookbooks = false
+        }
+        cookbooksCollectionView.reloadData()
     }
     
     @IBAction func onAddProfilePicture(_ sender: UIButton) {
@@ -181,11 +201,47 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookbookCollectionViewCell", for: indexPath) as! CookbookCollectionViewCell
+        var cookbook: Cookbook
+        if showAllCookbooks {
+            cookbook = allCookbooks[indexPath.row]
+        } else {
+            cookbook = filteredCookbooks[indexPath.row]
+        }
+        if cookbook.owner.objectId == currentUser?.objectId {
+            cell.authorLabel.isHidden = true
+        } else {
+            if let username = cookbook.owner.username {
+                cell.authorLabel.text = "by @\(username)"
+            }
+        }
+        var complimentsLabel = "\(cookbook.likesAggregate)"
+        // TODO: Find a fine
+        if cookbook.likesAggregate > 1000 {
+            complimentsLabel = "1K"
+        }
+        cell.complimentLabel.text = "\(complimentsLabel) compliments"
+        cell.cookbookLabel.text = cookbook.name
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        if showAllCookbooks {
+            return allCookbooks.count
+        } else {
+            return filteredCookbooks.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let cookbookVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
+        if showAllCookbooks {
+            // TODO: Add reference to the cookbook
+        } else {
+            // TODO: Add reference to the cookbook
+        }
+        self.navigationController?.pushViewController(cookbookVC, animated: true)
     }
 }
 

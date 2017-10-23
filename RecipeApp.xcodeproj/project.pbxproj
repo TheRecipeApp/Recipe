@@ -34,6 +34,8 @@
 		63D8CAFD3952C8959CD6C184 /* Pods_RecipeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B6A8422A02C8B20F2F48F6 /* Pods_RecipeApp.framework */; };
 		AF1374A51F8FB5B1004B98A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1374A41F8FB5B1004B98A8 /* User.swift */; };
 		AF1374A71F8FB8E0004B98A8 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1374A61F8FB8E0004B98A8 /* UserSettings.swift */; };
+		AF3033B11F9D9EE300DF8A01 /* CookingStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF3033B01F9D9EE300DF8A01 /* CookingStepView.xib */; };
+		AF3033B31F9D9F0200DF8A01 /* CookingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3033B21F9D9F0200DF8A01 /* CookingStepView.swift */; };
 		AF7EC2701F929C9D00A42121 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7EC26F1F929C9D00A42121 /* LoginViewController.swift */; };
 		AF88B5B21F9886CA00F9F702 /* RecipeSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88B5B11F9886CA00F9F702 /* RecipeSummaryViewController.swift */; };
 		AF88B5B41F9886E200F9F702 /* StepDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88B5B31F9886E200F9F702 /* StepDetailsViewController.swift */; };
@@ -82,6 +84,8 @@
 		5FD9E9301F8F403900976497 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		AF1374A41F8FB5B1004B98A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF1374A61F8FB8E0004B98A8 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		AF3033B01F9D9EE300DF8A01 /* CookingStepView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CookingStepView.xib; sourceTree = "<group>"; };
+		AF3033B21F9D9F0200DF8A01 /* CookingStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingStepView.swift; sourceTree = "<group>"; };
 		AF7EC26F1F929C9D00A42121 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AF88B5B11F9886CA00F9F702 /* RecipeSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSummaryViewController.swift; sourceTree = "<group>"; };
 		AF88B5B31F9886E200F9F702 /* StepDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDetailsViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +283,8 @@
 				AFC0E2471F99D49500454F33 /* IngredientsTableViewCell.swift */,
 				AFC0E2481F99D49500454F33 /* IngredientsTableViewCell.xib */,
 				5F2281651F9DBBBA00B4E110 /* CookbookCollectionViewCell.swift */,
+				AF3033B01F9D9EE300DF8A01 /* CookingStepView.xib */,
+				AF3033B21F9D9F0200DF8A01 /* CookingStepView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			files = (
 				AFC0E24A1F99D49500454F33 /* IngredientsTableViewCell.xib in Resources */,
 				5FD9E9311F8F403900976497 /* Login.storyboard in Resources */,
+				AF3033B11F9D9EE300DF8A01 /* CookingStepView.xib in Resources */,
 				5F576D771F94512E0037228B /* Cooking.storyboard in Resources */,
 				AFAF0A031F9727D1008DF5D2 /* RecipeBlockView.xib in Resources */,
 				5FD28DDF1F8B2B1D005BAD06 /* LaunchScreen.storyboard in Resources */,
@@ -482,6 +489,7 @@
 				5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */,
 				AF1374A51F8FB5B1004B98A8 /* User.swift in Sources */,
 				5F95FA771F99CB3000F4D87B /* UILabelCategory.swift in Sources */,
+				AF3033B31F9D9F0200DF8A01 /* CookingStepView.swift in Sources */,
 				5F576D731F944D190037228B /* ProfileViewController.swift in Sources */,
 				5F2281661F9DBBBA00B4E110 /* CookbookCollectionViewCell.swift in Sources */,
 				5F576D8A1F9453D20037228B /* RecipeViewController.swift in Sources */,

@@ -10,10 +10,18 @@ import UIKit
 
 class RecipeViewController: UIViewController {
 
+    @IBOutlet weak var recipeImage: UIImageView!
+    var recipeBlockView: RecipeBlockView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+   
+        if let recipeBlockView = recipeBlockView {
+            self.recipeImage.image = recipeBlockView.image
+        }
+        
+
     }
 
     override func didReceiveMemoryWarning() {

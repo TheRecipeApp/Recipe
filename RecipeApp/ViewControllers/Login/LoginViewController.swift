@@ -127,7 +127,7 @@ class LoginViewController: UIViewController {
 				})
 				// display view controller that needs to shown after successful login
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let vc = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! UITabBarController
+				let vc = storyboard.instantiateViewController(withIdentifier: "HomeTabController") as! UITabBarController
 				self.show(vc, sender: self)
 			}
 		}

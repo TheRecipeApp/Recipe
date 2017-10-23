@@ -340,7 +340,6 @@
                         <viewLayoutGuide key="safeArea" id="d5V-eN-i4T"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create" id="XdV-MZ-riS">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="taG-Nx-rMz"/>
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="nK5-p9-qje">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

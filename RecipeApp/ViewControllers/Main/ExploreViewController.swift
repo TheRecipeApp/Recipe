@@ -97,7 +97,7 @@ class ExploreViewController: UIViewController {
         let recipeDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
         
         let recipeView = tapGestureRecognizer.view as! RecipeBlockView
-        recipeDetailVC.recipeBlockView = recipeView
+		recipeDetailVC.recipeId = recipeView.recipeId!
         
         self.navigationController?.pushViewController(recipeDetailVC, animated: true)
     }

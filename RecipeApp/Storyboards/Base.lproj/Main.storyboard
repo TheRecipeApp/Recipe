@@ -633,8 +633,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="category" destination="kLc-Sj-TUI" id="6BD-LI-sAa"/>
+                        <outlet property="cuisine" destination="KUI-HU-A4e" id="92N-Zx-bGY"/>
+                        <outlet property="difficulty" destination="BrZ-h6-q5O" id="N40-Rs-Mat"/>
+                        <outlet property="recipeDescription" destination="FYv-Nc-EaB" id="weu-LS-Yb7"/>
                         <outlet property="recipeImage" destination="nox-4K-Dsy" id="COj-Oy-a1N"/>
+                        <outlet property="recipeName" destination="Ra2-da-yAl" id="yf0-Xn-MwZ"/>
                         <outlet property="stepsCarousel" destination="5GQ-0z-dIz" id="FAl-OX-9bK"/>
+                        <outlet property="timeToCook" destination="iVR-8N-ion" id="d5S-AV-DKo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MT5-y4-4Ai" userLabel="First Responder" sceneMemberID="firstResponder"/>

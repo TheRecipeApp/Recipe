@@ -43,12 +43,14 @@ class CookingStepView: UIView {
 	}
 	
 	func initSubviews() {
-		let nib = UINib(nibName: "RecipeBlockView", bundle: nil)
+		let nib = UINib(nibName: "CookingStepView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 		contentView.frame = bounds
 		addSubview(contentView)
+		stepImage.layer.borderWidth = 1
+		stepAudioButton.layer.borderWidth = 1
 	}
 	
-	func customInit() {
+	func customInit(cookingStep: CookingStep) {
 	}
 }

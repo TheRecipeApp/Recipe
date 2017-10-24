@@ -33,7 +33,15 @@ class RecipeViewController: UIViewController {
 
 		// fetch the cooking steps for the recipe
 		fetchRecipe()
-		
+		stepsCarousel.type = .linear
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+	
+	func setupRecipeFields() {
 		if recipe != nil {
 			if let nameStr = recipe?.name {
 				recipeName.text = nameStr
@@ -53,19 +61,24 @@ class RecipeViewController: UIViewController {
 			if let categoryStr = recipe?.category {
 				category.text = categoryStr
 			}
+			// get recipe image
+			setupRecipeImage()
+			
 		}
-		
-		fetchCookingSteps()
-		
-		stepsCarousel.reloadData()
-		stepsCarousel.type = .linear
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	}
 	
+	func setupRecipeImage() {
+		let imageFile = recipe?.image
+		imageFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
+			if error == nil {
+				if let imageData = data {
+					self.recipeImage.image = UIImage(data: imageData)
+					self.recipeImage.contentMode = .scaleAspectFit
+				}
+			}
+		})
+	}
+
 	func fetchRecipe() {
 		let query = PFQuery(className: "Recipe")
 		query.whereKey("objectId", equalTo: self.recipeId)
@@ -76,6 +89,9 @@ class RecipeViewController: UIViewController {
 				// Do something with the found objects
 				if let objects = objects {
 					self.recipe = objects[0] as! Recipe
+					self.setupRecipeFields()
+					self.fetchCookingSteps()
+					self.stepsCarousel.reloadData()
 				}
 			}
 		})

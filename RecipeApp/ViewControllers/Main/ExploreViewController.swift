@@ -36,6 +36,11 @@ class ExploreViewController: UIViewController {
         self.localTrendsCarousel.delegate = self
         self.localTrendsCarousel.dataSource = self
         
+        trendingCarousel.viewpointOffset = CGSize(width: 90, height: -4)
+        favoritesCarousel.viewpointOffset = CGSize(width: 90, height: -4)
+        localTrendsCarousel.viewpointOffset = CGSize(width: 90, height: -4)
+
+        
         fetchRecipes(carouselName: "trending")
         fetchRecipes(carouselName: "favorites")
         fetchRecipes(carouselName: "localTrends")
@@ -43,40 +48,36 @@ class ExploreViewController: UIViewController {
     
     func fetchRecipes(carouselName type: String) {
         let query = PFQuery(className: "Recipe")
-        //query.whereKey("owner", equalTo: "eW8xBBf8t4")
-        let user = PFUser.current()
-        if let user = user {
-            query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-                if error == nil {
-                    print("CarouselType: \(type)")
-                    
-                    // The find succeeded.
-                    print("Successfully retrieved \(objects!.count) recipes.")
-                    // Do something with the found objects
-                    if let objects = objects {
-                        for object in objects {
-                            print(object as! Recipe)
-                            switch type {
-                                case "trending":
-                                    self.trending.append(object as! Recipe)
-                                    self.trendingCarousel.type = .linear
-                                    self.trendingCarousel.reloadData()
-                                case "favorites":
-                                    self.favorites.append(object as! Recipe)
-                                    self.favoritesCarousel.type = .linear
-                                    self.favoritesCarousel.reloadData()
-                                case "localTrends":
-                                    self.localTrends.append(object as! Recipe)
-                                    self.localTrendsCarousel.type = .linear
-                                    self.localTrendsCarousel.reloadData()
-                                default:
-                                    print("unrecognized carousel type")
-                            }
+        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+            if error == nil {
+                print("CarouselType: \(type)")
+                
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) recipes.")
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        print(object as! Recipe)
+                        switch type {
+                        case "trending":
+                            self.trending.append(object as! Recipe)
+                            self.trendingCarousel.type = .linear
+                            self.trendingCarousel.reloadData()
+                        case "favorites":
+                            self.favorites.append(object as! Recipe)
+                            self.favoritesCarousel.type = .linear
+                            self.favoritesCarousel.reloadData()
+                        case "localTrends":
+                            self.localTrends.append(object as! Recipe)
+                            self.localTrendsCarousel.type = .linear
+                            self.localTrendsCarousel.reloadData()
+                        default:
+                            print("unrecognized carousel type")
                         }
                     }
                 }
-            })
-        }
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -162,7 +163,7 @@ extension ExploreViewController: iCarouselDelegate, iCarouselDataSource {
 
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         if (option == iCarouselOption.spacing) {
-            return value * 1.1
+            return value * 1.05
         }
         return value
     }

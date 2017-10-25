@@ -95,22 +95,22 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yia-lB-RBC">
-                                        <rect key="frame" x="279" y="-1" width="40" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yia-lB-RBC">
+                                        <rect key="frame" x="289" y="-0.5" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="5Wc-dc-IIn"/>
                                             <constraint firstAttribute="width" constant="40" id="KCW-Jt-FV1"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="LA5-Sl-rBT"/>
                                             <constraint firstAttribute="height" constant="40" id="ZV3-WT-UVc"/>
                                         </constraints>
-                                        <state key="normal" title="Add"/>
+                                        <state key="normal" image="add"/>
                                         <connections>
                                             <action selector="addIngredient:" destination="8NP-LO-Ewe" eventType="touchUpInside" id="KvZ-Xw-L7D"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuK-Mk-rXp">
-                                        <rect key="frame" x="329" y="4" width="36" height="30"/>
-                                        <state key="normal" title="Clear"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuK-Mk-rXp">
+                                        <rect key="frame" x="339" y="6" width="26" height="26"/>
+                                        <state key="normal" image="cancel"/>
                                         <connections>
                                             <action selector="clearIngredient:" destination="8NP-LO-Ewe" eventType="touchUpInside" id="VeW-VJ-t3C"/>
                                         </connections>
@@ -210,12 +210,12 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xG-dy-td6">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" red="0.0023855071247908697" green="0.84012135152284262" blue="0.0037013315055737551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="rLG-oZ-5yx"/>
                                                     <constraint firstAttribute="width" constant="40" id="wGx-Gj-41Y"/>
                                                 </constraints>
-                                                <state key="normal" title="Start" image="record_button">
+                                                <state key="normal" title="Start" image="record">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -224,12 +224,12 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4h0-6g-HON">
                                                 <rect key="frame" x="120" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="LxF-cJ-JrI"/>
                                                     <constraint firstAttribute="width" constant="40" id="rwb-fz-73Z"/>
                                                 </constraints>
-                                                <state key="normal" title="Stop" image="stop_button">
+                                                <state key="normal" title="Stop" image="stop">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -720,12 +720,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add" width="26" height="29"/>
+        <image name="cancel" width="26" height="26"/>
         <image name="mic" width="205" height="300"/>
-        <image name="record_button" width="274" height="274"/>
+        <image name="record" width="26" height="26"/>
         <image name="save_button" width="299" height="299"/>
         <image name="share" width="299" height="299"/>
         <image name="speaker_off" width="278" height="278"/>
-        <image name="stop_button" width="271" height="271"/>
+        <image name="stop" width="26" height="26"/>
         <image name="upload_image" width="263" height="264"/>
         <namedColor name="GrayBackgroundScreen">
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -24,9 +24,9 @@ class IngredientsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 	
-	func customInit(name: String, amount: Float, units: String) {
+	func customInit(name: String, amount: String, units: String) {
 		ingredientNameLabel.text = name + ": "
-		ingredientAmountLabel.text = String("\(amount)")
+		ingredientAmountLabel.text = amount
 		ingredientUnitsLabel.text = "(" + units + ")"
 	}
 	

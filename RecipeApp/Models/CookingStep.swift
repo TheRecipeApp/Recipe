@@ -15,8 +15,8 @@ class CookingStep: PFObject, PFSubclassing {
 	}
 	
 	@NSManaged var desc: String
-	@NSManaged var ingredients: [Ingredient]?
-	@NSManaged var ingredientAmounts: [Float]
+	@NSManaged var ingredients: [String]?
+	@NSManaged var ingredientAmounts: [String]
 	@NSManaged var ingredientUnits: [String]
 	@NSManaged var stepImage: PFFile?
 	@NSManaged var recipeId: String?
@@ -28,12 +28,12 @@ class CookingStep: PFObject, PFSubclassing {
 		super.init()
 	}
 
-	func custom_init(recipeId: String, stepNumber: NSNumber, desc: String, ingredients: [Ingredient]?, ingredientAmounts: [Float]?, ingredientUnits: [String]?, image: PFFile?) {
+	func custom_init(recipeId: String, stepNumber: NSNumber, desc: String, ingredients: [String]?, ingredientAmounts: [String]?, ingredientUnits: [String]?, image: PFFile?) {
 		self.desc = desc
 		self.stepNumber = stepNumber
 		self.recipeId = recipeId
-		self.ingredients = ingredients ?? [Ingredient]()
-		self.ingredientAmounts = ingredientAmounts ?? [Float]()
+		self.ingredients = ingredients ?? [String]()
+		self.ingredientAmounts = ingredientAmounts ?? [String]()
 		self.ingredientUnits = ingredientUnits ?? [String]()
 		self.stepImage = image ?? nil
 	}

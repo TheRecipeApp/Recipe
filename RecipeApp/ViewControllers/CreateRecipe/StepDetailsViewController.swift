@@ -89,7 +89,7 @@ extension StepDetailsViewController : UITableViewDataSource, UITableViewDelegate
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientsTableViewCell", for: indexPath) as! IngredientsTableViewCell
-		cell.ingredientNameLabel.text = step?.ingredients?[indexPath.row].name
+		cell.ingredientNameLabel.text = step?.ingredients?[indexPath.row]
 		if let amount = step?.ingredientAmounts[indexPath.row] {
 			cell.ingredientAmountLabel.text = String("\(amount)")
 		}

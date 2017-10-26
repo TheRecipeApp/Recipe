@@ -154,7 +154,6 @@ extension ExploreViewController: iCarouselDelegate, iCarouselDataSource {
         tempView.owner = PFUser.current()?.username
         tempView.title = self.trending[index].name
         tempView.isUserInteractionEnabled = true
-
         let recipeTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.recipeTapped(tapGestureRecognizer:)))
         tempView.addGestureRecognizer(recipeTapRecognizer)
 

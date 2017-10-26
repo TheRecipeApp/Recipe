@@ -60,7 +60,6 @@ class NewRecipeViewController: UIViewController {
 		ingredientsTable.rowHeight = UITableViewAutomaticDimension
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
-		ingredientsTable.layer.borderWidth = 1
 
 		stepNumberLabel.text = String("\(stepNumber)")
 		stepDescriptionTextView.layer.borderWidth = 1

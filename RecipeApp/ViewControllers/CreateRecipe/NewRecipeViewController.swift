@@ -20,6 +20,7 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var stepDescriptionTextView: UITextView!
 	@IBOutlet weak var micButton: UIButton!
 	@IBOutlet weak var stepImageView: UIImageView!
+	@IBOutlet weak var doneButton: UIButton!
 	
 	private var stepNumber: Int = 1
 	var steps = [CookingStep]()
@@ -59,6 +60,7 @@ class NewRecipeViewController: UIViewController {
 		ingredientsTable.rowHeight = UITableViewAutomaticDimension
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
+		ingredientsTable.layer.borderWidth = 1
 
 		stepNumberLabel.text = String("\(stepNumber)")
 		stepDescriptionTextView.layer.borderWidth = 1
@@ -74,6 +76,8 @@ class NewRecipeViewController: UIViewController {
 			print("Camera 🚫 available so we will use photo library instead")
 			imagePickerController.sourceType = .photoLibrary
 		}
+		
+		doneButton.layer.cornerRadius = 3
 }
 
     override func didReceiveMemoryWarning() {

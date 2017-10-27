@@ -10,12 +10,11 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
             <string>HelveticaNeue-Bold</string>
         </array>
     </customFonts>
     <scenes>
-        <!--Discover-->
+        <!--Find View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="FindViewController" id="BYZ-38-t0r" customClass="FindViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,151 +29,215 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hg5-tV-It5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT A CATEGORY" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1X-9T-q9b">
-                                        <rect key="frame" x="9" y="89" width="164" height="19"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICK A CATEGORY" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1X-9T-q9b">
+                                        <rect key="frame" x="9" y="89" width="114" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" name="GraySmallHeader"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR TYPE AN INGREDIENT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVS-6Y-28E">
-                                        <rect key="frame" x="9" y="230" width="193" height="19"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru2-NQ-pkm" userLabel="Category View">
-                                        <rect key="frame" x="0.0" y="118" width="375" height="77"/>
-                                        <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAU-IM-NuI">
-                                                <rect key="frame" x="8" y="8" width="109" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <gestureRecognizers/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="UNDER 5 MINUTES">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WO-69-C48">
-                                                <rect key="frame" x="57" y="34" width="60" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="MEXICAN">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G49-28-nye">
-                                                <rect key="frame" x="8" y="34" width="39" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="ASIAN">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cd-pT-eh2">
-                                                <rect key="frame" x="125" y="34" width="40" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="INDIAN">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmR-sw-rO3">
-                                                <rect key="frame" x="172" y="8" width="91" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="SANDWHICHES">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3x-oX-Vc3">
-                                                <rect key="frame" x="132" y="8" width="26" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="BBQ">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yca-RL-WI3">
-                                                <rect key="frame" x="276" y="8" width="36" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="SUSHI">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-3s-vXd">
-                                                <rect key="frame" x="173" y="34" width="101" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="MEDITERANNEAN">
-                                                        <attributes>
-                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.82023299999999999" green="0.82025199999999998" blue="0.82024200000000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="77" id="LiP-ZZ-p0L"/>
-                                        </constraints>
-                                    </view>
                                     <searchBar contentMode="redraw" text="" placeholder="What's in your fridge?" translatesAutoresizingMaskIntoConstraints="NO" id="ZIG-mf-ups">
-                                        <rect key="frame" x="0.0" y="264" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="115" width="375" height="56"/>
+                                        <color key="barTintColor" name="GrayBackgroundScreen"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru2-NQ-pkm" userLabel="Category View">
+                                        <rect key="frame" x="0.0" y="115" width="375" height="77"/>
+                                        <subviews>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNDER 5 MINUTES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAU-IM-NuI" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="8" width="126" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <gestureRecognizers/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEXICAN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WO-69-C48" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="68" y="35" width="71" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASIAN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G49-28-nye" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="35" width="52" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INDIAN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Cd-pT-eh2" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="147" y="35" width="58" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SANDWHICHES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmR-sw-rO3" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="192" y="8" width="106" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BBQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3x-oX-Vc3" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="142" y="8" width="42" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEDITERANNEAN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-3s-vXd" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="213" y="35" width="119" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUSHI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yca-RL-WI3" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
+                                                <rect key="frame" x="306" y="8" width="53" height="19"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="GrayBackgroundScreen"/>
+                                        <constraints>
+                                            <constraint firstItem="Mep-3s-vXd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Cd-pT-eh2" secondAttribute="trailing" constant="8" symbolic="YES" id="66K-Yv-dEo"/>
+                                            <constraint firstItem="7Cd-pT-eh2" firstAttribute="leading" secondItem="1WO-69-C48" secondAttribute="trailing" constant="8" id="8hQ-be-hbb"/>
+                                            <constraint firstItem="C3x-oX-Vc3" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="top" constant="8" id="937-96-ftf"/>
+                                            <constraint firstItem="G49-28-nye" firstAttribute="leading" secondItem="ru2-NQ-pkm" secondAttribute="leading" constant="8" id="9f2-wk-S1P"/>
+                                            <constraint firstItem="C3x-oX-Vc3" firstAttribute="leading" secondItem="WAU-IM-NuI" secondAttribute="trailing" constant="8" id="9xy-Qj-UNU"/>
+                                            <constraint firstItem="7Cd-pT-eh2" firstAttribute="top" secondItem="HmR-sw-rO3" secondAttribute="bottom" constant="8" id="BTt-iF-S5C"/>
+                                            <constraint firstItem="WAU-IM-NuI" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="top" constant="8" id="FyD-EL-7rM"/>
+                                            <constraint firstItem="WAU-IM-NuI" firstAttribute="leading" secondItem="ru2-NQ-pkm" secondAttribute="leading" constant="8" id="G0Y-q6-xS5"/>
+                                            <constraint firstItem="1WO-69-C48" firstAttribute="leading" secondItem="G49-28-nye" secondAttribute="trailing" constant="8" id="HMf-25-tdi"/>
+                                            <constraint firstItem="Yca-RL-WI3" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="top" constant="8" id="Kaa-2B-8hC"/>
+                                            <constraint firstAttribute="height" constant="77" id="LiP-ZZ-p0L"/>
+                                            <constraint firstItem="Mep-3s-vXd" firstAttribute="top" secondItem="HmR-sw-rO3" secondAttribute="bottom" constant="8" id="QAB-AT-trd"/>
+                                            <constraint firstItem="G49-28-nye" firstAttribute="top" secondItem="WAU-IM-NuI" secondAttribute="bottom" constant="8" id="ag0-bo-iXx"/>
+                                            <constraint firstItem="Yca-RL-WI3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HmR-sw-rO3" secondAttribute="trailing" constant="8" symbolic="YES" id="d2Y-S6-Sa7"/>
+                                            <constraint firstItem="HmR-sw-rO3" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="top" constant="8" id="gOm-x8-Hdc"/>
+                                            <constraint firstItem="1WO-69-C48" firstAttribute="top" secondItem="WAU-IM-NuI" secondAttribute="bottom" constant="8" id="h9D-h1-rQ2"/>
+                                            <constraint firstAttribute="trailing" secondItem="Mep-3s-vXd" secondAttribute="trailing" constant="43" id="nBp-Y6-gJc"/>
+                                            <constraint firstItem="HmR-sw-rO3" firstAttribute="leading" secondItem="C3x-oX-Vc3" secondAttribute="trailing" constant="8" id="x2f-VP-Aay"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yca-RL-WI3" secondAttribute="trailing" constant="16" id="yj9-Iu-hmq"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="What do you feel like for today?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXM-PJ-6ah">
-                                        <rect key="frame" x="9" y="15" width="205" height="66"/>
+                                        <rect key="frame" x="9" y="15" width="358" height="66"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="66" id="1Tu-aI-GK1"/>
                                         </constraints>
@@ -182,30 +245,49 @@
                                         <color key="textColor" name="PrimaryColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVk-Kr-uPk" customClass="iCarousel">
-                                        <rect key="frame" x="0.0" y="370" width="375" height="131"/>
-                                        <color key="backgroundColor" red="0.82023299999999999" green="0.82025199999999998" blue="0.82024200000000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="131" id="eUf-UQ-vIi"/>
-                                        </constraints>
-                                    </view>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TdQ-8N-AU2">
+                                        <rect key="frame" x="0.0" y="192" width="375" height="318"/>
+                                        <color key="backgroundColor" name="GrayBackgroundScreen"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="15" id="iZ7-za-ahj">
+                                            <size key="itemSize" width="300" height="300"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1o2-py-Z7f">
+                                                <rect key="frame" x="15" y="9" width="300" height="300"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-bz-TTN">
+                                        <rect key="frame" x="335" y="79" width="32" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" image="FindOn"/>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.82023299999999999" green="0.82025199999999998" blue="0.82024200000000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="GrayBackgroundScreen"/>
                                 <constraints>
-                                    <constraint firstItem="tVk-Kr-uPk" firstAttribute="top" secondItem="ZIG-mf-ups" secondAttribute="bottom" constant="50" id="1et-Yy-lLa"/>
-                                    <constraint firstItem="UVS-6Y-28E" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="bottom" constant="35" id="4ty-qj-yAy"/>
-                                    <constraint firstItem="ZIG-mf-ups" firstAttribute="top" secondItem="UVS-6Y-28E" secondAttribute="bottom" constant="15" id="ED7-A1-4n0"/>
                                     <constraint firstItem="L1X-9T-q9b" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="9" id="JRH-F4-0CD"/>
+                                    <constraint firstItem="TdQ-8N-AU2" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="bottom" id="SOh-64-d6H"/>
                                     <constraint firstItem="ru2-NQ-pkm" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" id="UTM-FM-y2b"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L1X-9T-q9b" secondAttribute="trailing" constant="20" symbolic="YES" id="Vrc-ZJ-Gv0"/>
                                     <constraint firstItem="ZIG-mf-ups" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" id="YfH-31-eto"/>
-                                    <constraint firstItem="tVk-Kr-uPk" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" id="Zlc-Xg-EZY"/>
-                                    <constraint firstAttribute="trailing" secondItem="tVk-Kr-uPk" secondAttribute="trailing" id="bZX-er-YIu"/>
                                     <constraint firstItem="L1X-9T-q9b" firstAttribute="top" secondItem="NXM-PJ-6ah" secondAttribute="bottom" constant="8" id="bda-to-WGV"/>
                                     <constraint firstItem="NXM-PJ-6ah" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="9" id="cE0-ke-1Q6"/>
                                     <constraint firstAttribute="trailing" secondItem="ru2-NQ-pkm" secondAttribute="trailing" id="dvk-RR-Roo"/>
-                                    <constraint firstItem="UVS-6Y-28E" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="9" id="e7H-GQ-yd9"/>
-                                    <constraint firstAttribute="trailing" secondItem="NXM-PJ-6ah" secondAttribute="trailing" constant="161" id="mOJ-4G-yLo"/>
+                                    <constraint firstAttribute="bottom" secondItem="TdQ-8N-AU2" secondAttribute="bottom" id="emo-uv-EIB"/>
+                                    <constraint firstItem="TdQ-8N-AU2" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" id="jdO-XB-vXf"/>
+                                    <constraint firstAttribute="trailing" secondItem="NXM-PJ-6ah" secondAttribute="trailing" constant="8" id="mOJ-4G-yLo"/>
+                                    <constraint firstItem="ZIG-mf-ups" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="top" id="pNy-HK-u8E"/>
                                     <constraint firstAttribute="trailing" secondItem="ZIG-mf-ups" secondAttribute="trailing" id="tqI-PX-0HO"/>
+                                    <constraint firstAttribute="trailing" secondItem="TdQ-8N-AU2" secondAttribute="trailing" id="vXn-wa-gvy"/>
                                     <constraint firstItem="NXM-PJ-6ah" firstAttribute="top" secondItem="hg5-tV-It5" secondAttribute="top" constant="15" id="xbh-HI-R9L"/>
                                     <constraint firstItem="ru2-NQ-pkm" firstAttribute="top" secondItem="L1X-9T-q9b" secondAttribute="bottom" constant="10" id="zVK-Va-36c"/>
                                 </constraints>
@@ -224,15 +306,15 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Discover" id="OMY-1q-bvg">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="y0e-5J-hkF">
+                    <navigationItem key="navigationItem" id="OMY-1q-bvg">
+                        <barButtonItem key="leftBarButtonItem" image="Profile" style="plain" id="y0e-5J-hkF">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onProfile:" destination="BYZ-38-t0r" id="S8j-oU-1am"/>
                                 <segue destination="i6e-iH-bwK" kind="show" id="daK-Ik-oNb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add Recipe" id="SdY-8f-bf4">
+                        <barButtonItem key="rightBarButtonItem" image="AddRecipe" id="SdY-8f-bf4">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onAddRecipe:" destination="BYZ-38-t0r" id="5Q6-1f-Yt2"/>
@@ -243,7 +325,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="categoryView" destination="ru2-NQ-pkm" id="FfP-8a-ba2"/>
-                        <outlet property="recipesCarousel" destination="tVk-Kr-uPk" id="lo6-hF-zjw"/>
+                        <outlet property="collectionView" destination="TdQ-8N-AU2" id="Re1-fr-ffy"/>
                         <outlet property="searchBar" destination="ZIG-mf-ups" id="SRd-im-Y9J"/>
                     </connections>
                 </viewController>
@@ -800,6 +882,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="PrimaryColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="2Tw-XZ-JID" kind="relationship" relationship="viewControllers" id="d9U-bO-qxK"/>
@@ -849,11 +933,20 @@
         <namedColor name="GrayBackgroundScreen">
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="GrayBackgroundScreen">
+            <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GraySmallHeader">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PrimaryColor">
+            <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.63921568630000003" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KjQ-FT-k5H"/>
+        <segue reference="daK-Ik-oNb"/>
     </inferredMetricsTieBreakers>
 </document>

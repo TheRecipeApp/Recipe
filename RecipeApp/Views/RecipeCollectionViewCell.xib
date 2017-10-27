@@ -19,9 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="185" height="185"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqP-NR-dGI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uqP-NR-dGI">
                         <rect key="frame" x="0.0" y="0.0" width="185" height="185"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BBQ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HO3-Ht-h6M" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
                         <rect key="frame" x="8" y="8" width="35" height="20"/>
@@ -92,10 +91,14 @@
             <constraints>
                 <constraint firstItem="Bqt-k5-xuB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="71e-Hk-pUz"/>
                 <constraint firstItem="HO3-Ht-h6M" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Bhu-Ti-2gg"/>
+                <constraint firstItem="uqP-NR-dGI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="DzA-ws-do4"/>
                 <constraint firstAttribute="bottom" secondItem="yU0-Lz-qYs" secondAttribute="bottom" id="PVe-lt-tc7"/>
                 <constraint firstItem="HO3-Ht-h6M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Xgy-dq-eOR"/>
+                <constraint firstAttribute="trailing" secondItem="uqP-NR-dGI" secondAttribute="trailing" id="eTo-yi-6DZ"/>
                 <constraint firstAttribute="trailing" secondItem="Bqt-k5-xuB" secondAttribute="trailing" constant="5" id="fDk-4k-iSh"/>
+                <constraint firstItem="uqP-NR-dGI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fs0-uf-jEd"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yU0-Lz-qYs" secondAttribute="trailing" id="muk-Kc-XaH"/>
+                <constraint firstAttribute="bottom" secondItem="uqP-NR-dGI" secondAttribute="bottom" id="nWi-XB-ak8"/>
                 <constraint firstItem="yU0-Lz-qYs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xap-X5-NJZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>

@@ -98,7 +98,7 @@ class LoginViewController: UIViewController {
 		fieldBorder.borderWidth = width
 		field.layer.addSublayer(fieldBorder)
 		field.layer.masksToBounds = true
-		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
+		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
 	}
 
     private func loginUser() {		

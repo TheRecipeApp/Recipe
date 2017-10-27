@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */; };
 		5F2281661F9DBBBA00B4E110 /* CookbookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2281651F9DBBBA00B4E110 /* CookbookCollectionViewCell.swift */; };
+		5F33D7471FA1925600ABAD42 /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F33D7451FA1925600ABAD42 /* RecipeCollectionViewCell.swift */; };
+		5F33D7481FA1925600ABAD42 /* RecipeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F33D7461FA1925600ABAD42 /* RecipeCollectionViewCell.xib */; };
 		5F3AE7951F9C67D700259442 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3AE7931F9C67CB00259442 /* Contacts.framework */; };
 		5F3AE7961F9C67DC00259442 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3AE7941F9C67CB00259442 /* ContactsUI.framework */; };
 		5F576D6B1F944C1B0037228B /* SelectPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D6A1F944C1B0037228B /* SelectPreferenceViewController.swift */; };
@@ -57,6 +59,8 @@
 /* Begin PBXFileReference section */
 		5F08B0031F9413280050E639 /* FacebookAuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthDelegate.swift; sourceTree = "<group>"; };
 		5F2281651F9DBBBA00B4E110 /* CookbookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookCollectionViewCell.swift; sourceTree = "<group>"; };
+		5F33D7451FA1925600ABAD42 /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
+		5F33D7461FA1925600ABAD42 /* RecipeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeCollectionViewCell.xib; sourceTree = "<group>"; };
 		5F3AE7931F9C67CB00259442 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		5F3AE7941F9C67CB00259442 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		5F576D6A1F944C1B0037228B /* SelectPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPreferenceViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 			children = (
 				AFAF0A021F9727D1008DF5D2 /* RecipeBlockView.xib */,
 				AFAF0A061F972817008DF5D2 /* RecipeBlockView.swift */,
+				5F33D7451FA1925600ABAD42 /* RecipeCollectionViewCell.swift */,
+				5F33D7461FA1925600ABAD42 /* RecipeCollectionViewCell.xib */,
 				5F95FA761F99CB3000F4D87B /* UILabelCategory.swift */,
 				AFC0E2451F99C5ED00454F33 /* RecipeStepCell.swift */,
 				AFC0E2471F99D49500454F33 /* IngredientsTableViewCell.swift */,
@@ -373,6 +379,7 @@
 				5FD28DDF1F8B2B1D005BAD06 /* LaunchScreen.storyboard in Resources */,
 				5F576D711F944CDA0037228B /* Profile.storyboard in Resources */,
 				5F576D7E1F9451F00037228B /* CreateRecipe.storyboard in Resources */,
+				5F33D7481FA1925600ABAD42 /* RecipeCollectionViewCell.xib in Resources */,
 				AFAF0A091F97310C008DF5D2 /* RecipesCarousel.storyboard in Resources */,
 				5FD28DDC1F8B2B1D005BAD06 /* Assets.xcassets in Resources */,
 				5FD28DDA1F8B2B1D005BAD06 /* Main.storyboard in Resources */,
@@ -479,6 +486,7 @@
 				5F576D6B1F944C1B0037228B /* SelectPreferenceViewController.swift in Sources */,
 				AF88B5B21F9886CA00F9F702 /* RecipeSummaryViewController.swift in Sources */,
 				5F576D791F94518C0037228B /* StepsViewController.swift in Sources */,
+				5F33D7471FA1925600ABAD42 /* RecipeCollectionViewCell.swift in Sources */,
 				AF88B5B41F9886E200F9F702 /* StepDetailsViewController.swift in Sources */,
 				AF1374A71F8FB8E0004B98A8 /* UserSettings.swift in Sources */,
 				5F576D7B1F94519A0037228B /* FinishViewController.swift in Sources */,

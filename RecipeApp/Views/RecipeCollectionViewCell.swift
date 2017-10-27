@@ -2,17 +2,24 @@
 //  RecipeCollectionViewCell.swift
 //  RecipeApp
 //
-//  Created by Alexander Doan on 10/25/17.
+//  Created by Cesar Cavazos on 10/25/17.
 //  Copyright © 2017 The Recipe App. All rights reserved.
 //
 
 import UIKit
 
 class RecipeCollectionViewCell: UICollectionViewCell {
+
+    @IBOutlet var recipeImage: UIImageView!
+    @IBOutlet var categoryLabel: UILabelCategory!
+    @IBOutlet var createdByLabel: UILabel!
+    @IBOutlet var recipeTitle: UILabel!
     
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var imageTag: UILabel!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var createBy: UILabel!
-        
+    var recipeId: String?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
 }

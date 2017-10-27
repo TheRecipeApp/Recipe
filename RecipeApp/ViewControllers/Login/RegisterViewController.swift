@@ -89,7 +89,7 @@ class RegisterViewController: UIViewController {
 				self.present(self.alertController, animated: true, completion: {
 				})
 			} else {
-				print("User Registered successfully")
+				print("User Registered successfully \(success)")
 				// manually segue to logged in view
 				self.performSegue(withIdentifier: "SelectPreferenceNavigationSegue", sender: nil)
 			}
@@ -109,7 +109,7 @@ class RegisterViewController: UIViewController {
 		fieldBorder.borderWidth = width
 		field.layer.addSublayer(fieldBorder)
 		field.layer.masksToBounds = true
-		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
+		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
 	}
 	
     // MARK: - Navigation

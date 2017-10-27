@@ -153,8 +153,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             })
         }
         
-        cell.imageTag.text = "image tag"
-        cell.createBy.text = PFUser.current()?.username
+        cell.categoryLabel.text = "image tag"
+        cell.createdByLabel.text = PFUser.current()?.username
         cell.recipeTitle.text = self.trending[indexPath.row].name
         cell.isUserInteractionEnabled = true
         

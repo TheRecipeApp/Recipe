@@ -23,8 +23,8 @@ class NewRecipeViewController: UIViewController {
 	
 	private var stepNumber: Int = 1
 	var steps = [CookingStep]()
-	var stepIngredients = [Ingredient]()
-	var stepIngredientAmounts = [Float]()
+	var stepIngredients = [String]()
+	var stepIngredientAmounts = [String]()
 	var stepIngredientUnits = [String]()
 	var stepNotSaved = false
 	var stepImageUploaded = false
@@ -121,11 +121,10 @@ class NewRecipeViewController: UIViewController {
 	
 	@IBAction func addIngredient(_ sender: Any) {
 		if let name = ingredientTextField.text {
-			let ingredient = Ingredient()
-			ingredient.name = name
+			let ingredient = name
 			stepIngredients.append(ingredient)
-			if let amountStr = amountTextField.text, let amount = Float(amountStr) {
-				stepIngredientAmounts.append(amount)
+			if let amountStr = amountTextField.text {
+				stepIngredientAmounts.append(amountStr)
 			}
 			else {
 				print("InvalidAmount")
@@ -288,7 +287,7 @@ extension NewRecipeViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = ingredientsTable.dequeueReusableCell(withIdentifier: "IngredientsTableViewCell", for: indexPath) as! IngredientsTableViewCell
-		cell.customInit(name: stepIngredients[indexPath.row].name, amount: stepIngredientAmounts[indexPath.row], units: stepIngredientUnits[indexPath.row])
+		cell.customInit(name: stepIngredients[indexPath.row], amount: stepIngredientAmounts[indexPath.row], units: stepIngredientUnits[indexPath.row])
 		return cell
 	}
 }

@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet var followersCountLabel: UILabel!
     @IBOutlet var cookbooksCountLabel: UILabel!
     
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var recipiesCollectionView: UICollectionView!
     @IBOutlet var cookbooksCollectionView: UICollectionView!
     @IBOutlet var topRecipiesView: iCarousel!
     
@@ -33,13 +35,15 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        recipiesCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
+        recipiesCollectionView.dataSource = self
+        recipiesCollectionView.delegate = self
+        
         cookbooksCollectionView.dataSource = self
         cookbooksCollectionView.delegate = self
         
-        topRecipiesView.dataSource = self
-        topRecipiesView.delegate = self
-        topRecipiesView.viewpointOffset = CGSize(width: 95, height: 0)
-
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height + 100)
+        
         // TODO: Change this to another user
         displayScreen.text = "@\(currentUser?.username ?? "NA")"
         recipiesCountLabel.text = "12"
@@ -64,7 +68,7 @@ class ProfileViewController: UIViewController {
         
         for i in 1...10 {
             let cookbook = Cookbook()
-            cookbook.name = "Summary BBQ"
+            cookbook.name = "Summer BBQ"
             if i % 2 == 0 {
                 cookbook.owner = currentUser!
             }
@@ -83,11 +87,10 @@ class ProfileViewController: UIViewController {
         // TODO: Add filter by user
         query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
             if error == nil {
-                // Recipies founds
+                // Recipies found
                 print("Successfully retrieved \(objects!.count) recipes.")
-                // Do something with the found objects
                 self.recipies = objects as! [Recipe]
-                self.topRecipiesView.reloadData()
+                self.recipiesCollectionView.reloadData()
             }
         })
     }
@@ -201,89 +204,85 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookbookCollectionViewCell", for: indexPath) as! CookbookCollectionViewCell
-        var cookbook: Cookbook
-        if showAllCookbooks {
-            cookbook = allCookbooks[indexPath.row]
-        } else {
-            cookbook = filteredCookbooks[indexPath.row]
-        }
-        if cookbook.owner.objectId == currentUser?.objectId {
-            cell.authorLabel.isHidden = true
-        } else {
-            if let username = cookbook.owner.username {
-                cell.authorLabel.text = "by @\(username)"
+        if collectionView.tag == 0 {
+            // Cell for Top 5 recipies
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+            let recipe = self.recipies[indexPath.row]
+            
+            let recipeImageFile = recipe.image
+            if recipeImageFile != nil {
+                recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                    if error == nil {
+                        if let imageData = imageData {
+                            cell.recipeImage.image = UIImage(data: imageData)
+                        }
+                    }
+                })
             }
+            cell.recipeId = recipe.objectId
+            cell.categoryLabel.text = "INDIAN"
+            if let username = PFUser.current()?.username {
+                cell.createdByLabel.text = "by @\(username)"
+            } else {
+                cell.createdByLabel.text = ""
+            }
+            cell.recipeTitle.text = recipe.name
+            
+            return cell
+        } else {
+            // Cell for Cookbooks
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CookbookCollectionViewCell", for: indexPath) as! CookbookCollectionViewCell
+            var cookbook: Cookbook
+            if showAllCookbooks {
+                cookbook = allCookbooks[indexPath.row]
+            } else {
+                cookbook = filteredCookbooks[indexPath.row]
+            }
+            if cookbook.owner.objectId == currentUser?.objectId {
+                cell.authorLabel.isHidden = true
+            } else {
+                if let username = cookbook.owner.username {
+                    cell.authorLabel.text = "by @\(username)"
+                }
+            }
+            var complimentsLabel = "\(cookbook.likesAggregate)"
+            // TODO: Find a fine
+            if cookbook.likesAggregate > 1000 {
+                complimentsLabel = "1K"
+            }
+            cell.complimentLabel.text = "\(complimentsLabel) compliments"
+            cell.cookbookLabel.text = cookbook.name
+            
+            return cell
         }
-        var complimentsLabel = "\(cookbook.likesAggregate)"
-        // TODO: Find a fine
-        if cookbook.likesAggregate > 1000 {
-            complimentsLabel = "1K"
-        }
-        cell.complimentLabel.text = "\(complimentsLabel) compliments"
-        cell.cookbookLabel.text = cookbook.name
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if showAllCookbooks {
-            return allCookbooks.count
+        if collectionView.tag == 0 {
+            return recipies.count
         } else {
-            return filteredCookbooks.count
+            if showAllCookbooks {
+                return allCookbooks.count
+            } else {
+                return filteredCookbooks.count
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let cookbookVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
-        if showAllCookbooks {
-            // TODO: Add reference to the cookbook
+        if collectionView.tag == 0 {
+            print("TODO: Navigate to the recipe detail")
         } else {
-            // TODO: Add reference to the cookbook
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let cookbookVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
+            if showAllCookbooks {
+                // TODO: Add reference to the cookbook
+            } else {
+                // TODO: Add reference to the cookbook
+            }
+            self.navigationController?.pushViewController(cookbookVC, animated: true)
         }
-        self.navigationController?.pushViewController(cookbookVC, animated: true)
     }
-}
-
-extension ProfileViewController: iCarouselDelegate, iCarouselDataSource {
-    func numberOfItems(in carousel: iCarousel) -> Int {
-        return recipies.count
-    }
-    
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        let recipeView = RecipeBlockView(frame: CGRect(x: 0, y: 0, width: 172, height: 172))
-        let recipe = self.recipies[index]
-        let recipeImageFile = recipe.image
-        if recipeImageFile != nil {
-            recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
-                if error == nil {
-                    if let imageData = imageData {
-                        let image = UIImage(data:imageData)
-                        recipeView.image = image
-                    }
-                }
-            })
-        }
-        
-        recipeView.recipeId = recipe.objectId
-        recipeView.imgTag = "INDIAN"
-        recipeView.owner = PFUser.current()?.username
-        recipeView.title = recipe.name
-        recipeView.isUserInteractionEnabled = true
-        
-        let recipeTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.recipeTapped(tapGestureRecognizer:)))
-        recipeView.addGestureRecognizer(recipeTapRecognizer)
-        
-        return recipeView
-    }
-    
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if (option == iCarouselOption.spacing) {
-            return value * 1.05
-        }
-        return value
-    }
-    
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

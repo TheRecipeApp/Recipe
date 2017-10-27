@@ -11,22 +11,32 @@ import Parse
 import iCarousel
 import MBProgressHUD
 
-
 class ExploreViewController: UIViewController {
     
     @IBOutlet weak var trendingCarousel: iCarousel!
-    
     @IBOutlet weak var favoritesCarousel: iCarousel!
     @IBOutlet weak var localTrendsCarousel: iCarousel!
+    @IBOutlet weak var trendingCollectionView: UICollectionView!
     
     fileprivate var trending = [Recipe]()
     fileprivate var favorites = [Recipe]()
     fileprivate var localTrends = [Recipe]()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        if (view.traitCollection.forceTouchCapability == .available) {
+            print("force touch is enabled for this device")
+            registerForPreviewing(with: self, sourceView: self.trendingCollectionView)
+        }
+        
+        self.trendingCollectionView.register(UINib(nibName: "RecipeView", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
 
+        self.trendingCollectionView.dataSource = self
+        self.trendingCollectionView.delegate = self
+        
         self.trendingCarousel.delegate = self
         self.trendingCarousel.dataSource = self
         
@@ -44,6 +54,8 @@ class ExploreViewController: UIViewController {
         fetchRecipes(carouselName: "trending")
         fetchRecipes(carouselName: "favorites")
         fetchRecipes(carouselName: "localTrends")
+        
+        
     }
     
     func fetchRecipes(carouselName type: String) {
@@ -76,6 +88,10 @@ class ExploreViewController: UIViewController {
                         }
                     }
                 }
+                
+                // reload the trending collection view
+                self.trendingCollectionView.reloadData()
+                
             }
         })
     }
@@ -103,7 +119,6 @@ class ExploreViewController: UIViewController {
         self.navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
-    
     /*
     // MARK: - Navigation
 
@@ -116,8 +131,63 @@ class ExploreViewController: UIViewController {
 
 }
 
-extension ExploreViewController: iCarouselDelegate, iCarouselDataSource {
+extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return trending.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+        
+//        let tempView = RecipeBlockView(frame: CGRect(x: 0, y: 0, width: 172, height: 172))
+        let recipeImageFile = self.trending[indexPath.row].image
+        if recipeImageFile != nil {
+            recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                if error == nil {
+                    if let imageData = imageData {
+                        let image = UIImage(data:imageData)
+                        cell.recipeImage.image = image
+                    }
+                }
+            })
+        }
+        
+        cell.imageTag.text = "image tag"
+        cell.createBy.text = PFUser.current()?.username
+        cell.recipeTitle.text = self.trending[indexPath.row].name
+        cell.isUserInteractionEnabled = true
+        
+        let recipeTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.recipeTapped(tapGestureRecognizer:)))
+        cell.addGestureRecognizer(recipeTapRecognizer)
 
+        return cell
+    }
+    
+}
+extension ExploreViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = self.trendingCollectionView?.indexPathForItem(at: location) else { return nil }
+        guard let cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        // in order to initialize outlets on the view
+        let view = detailVC.view
+        detailVC.imageView.image = cell.recipeImage?.image
+        detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+        previewingContext.sourceRect = cell.frame
+        return detailVC
+     }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+}
+
+extension ExploreViewController: iCarouselDelegate, iCarouselDataSource {
+    
     func numberOfItems(in carousel: iCarousel) -> Int {
         if carousel == self.trendingCarousel {
             return self.trending.count

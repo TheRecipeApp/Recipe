@@ -307,6 +307,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="OMY-1q-bvg">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="Profile" style="plain" id="y0e-5J-hkF">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -314,6 +315,17 @@
                                 <segue destination="i6e-iH-bwK" kind="show" id="daK-Ik-oNb"/>
                             </connections>
                         </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="lIz-EB-7ZW">
+                            <rect key="frame" x="187.5" y="22" width="0.0" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LogoWhiteBig" translatesAutoresizingMaskIntoConstraints="NO" id="Ok7-h7-NPj">
+                                    <rect key="frame" x="-35" y="-19" width="70" height="38"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" image="AddRecipe" id="SdY-8f-bf4">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -923,6 +935,7 @@
         <image name="DiscoverOn" width="24" height="22"/>
         <image name="FindOff" width="24" height="22"/>
         <image name="FindOn" width="24" height="22"/>
+        <image name="LogoWhiteBig" width="170" height="97"/>
         <image name="Profile" width="24" height="22"/>
         <image name="calories_icon" width="299" height="299"/>
         <image name="likes" width="278" height="278"/>

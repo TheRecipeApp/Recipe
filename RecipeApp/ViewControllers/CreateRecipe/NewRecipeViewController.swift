@@ -62,7 +62,6 @@ class NewRecipeViewController: UIViewController {
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 
 		stepNumberLabel.text = String("\(stepNumber)")
-		stepDescriptionTextView.layer.borderWidth = 1
 
 		// image picker
 		imagePickerController.delegate = self
@@ -83,18 +82,6 @@ class NewRecipeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-	private func setupTextFieldAtributes(field: UITextField, string: String) {
-		let width = CGFloat(2.0)
-		field.textColor = UIColor.black
-		let fieldBorder = CALayer()
-		fieldBorder.borderColor = UIColor.black.cgColor
-		fieldBorder.frame = CGRect(x: 0, y: field.frame.size.height - width, width:  field.frame.size.width, height: field.frame.size.height)
-		fieldBorder.borderWidth = width
-		field.layer.addSublayer(fieldBorder)
-		field.layer.masksToBounds = true
-		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
-	}
 
 	@IBAction func onCancel(_ sender: UIBarButtonItem) {
 		dismiss(animated: true, completion: nil)
@@ -159,8 +146,9 @@ class NewRecipeViewController: UIViewController {
 			cookingStep.ingredients = stepIngredients
 			cookingStep.ingredientAmounts = stepIngredientAmounts
 			cookingStep.ingredientUnits = stepIngredientUnits
-			if let stepAudio = stepAudio {
-				cookingStep.setAudioData(with: stepAudio)
+			if let audio = stepAudio {
+				cookingStep.setAudioData(with: audio)
+				stepAudio = nil
 			}
 			if stepImageUploaded {
 				cookingStep.setImage(with: stepImageView.image)

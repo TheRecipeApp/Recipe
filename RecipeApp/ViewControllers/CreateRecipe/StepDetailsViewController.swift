@@ -31,22 +31,26 @@ class StepDetailsViewController: UIViewController {
 		stepDescription.text = step?.desc
 		setupStepImage()
 		setupStepAudio()
-		stepAudio.layer.borderWidth = 1
     }
 	
 	func setupStepAudio() {
 		let audioFile = step?.stepAudio
-		audioFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
-			if error == nil {
-				if let audioData = data {
-					do {
-						try self.audioPlayer = AVAudioPlayer(data: audioData)
-					} catch {
-						print("Unable to create audio player:", error.localizedDescription)
+		if let audioFile = step?.stepAudio {
+			stepAudio.isHidden = false
+			audioFile.getDataInBackground(block: { (data: Data?, error: Error?) in
+				if error == nil {
+					if let audioData = data {
+						do {
+							try self.audioPlayer = AVAudioPlayer(data: audioData)
+						} catch {
+							print("Unable to create audio player:", error.localizedDescription)
+						}
 					}
 				}
-			}
-		})
+			})
+		} else {
+			stepAudio.isHidden = true
+		}
 	}
 	
 	func setupStepImage() {

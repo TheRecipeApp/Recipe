@@ -128,19 +128,19 @@ class RecipeSummaryViewController: UIViewController {
 	}
 	
 	private func saveCookingSteps(recipeId: String) {
+		print("Recipe Id for Cooking Step:\(recipeId)")
 		for step in self.cookingSteps! {
 			step.recipeId = recipeId
-			step.saveInBackground(block: { (success: Bool, error: Error?) in
-				if success {
-					print("Saved Cooking Step")
-					let storyboard = UIStoryboard(name: "Main", bundle: nil)
-					let vc = storyboard.instantiateInitialViewController() as! UITabBarController
-					self.present(vc, animated: true, completion: nil)
-				} else {
-					print("Error Saving Step: ", error?.localizedDescription ?? "")
-				}
-			})
+			do {
+				print("Saved Cooking Step \(step)")
+				try step.save()
+			} catch {
+				print("Error Saving Step, ", error.localizedDescription)
+			}
 		}
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let vc = storyboard.instantiateInitialViewController() as! UITabBarController
+		self.present(vc, animated: true, completion: nil)
 	}
 	
 	private func setupRecipe(recipe : Recipe, name: String) {

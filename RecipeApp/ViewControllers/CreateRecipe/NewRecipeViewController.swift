@@ -22,7 +22,7 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var stepImageView: UIImageView!
 	@IBOutlet weak var doneButton: UIButton!
 	
-	private var stepNumber: Int = 1
+	private var stepNumber = 1
 	var steps = [CookingStep]()
 	var stepIngredients = [String]()
 	var stepIngredientAmounts = [String]()
@@ -156,12 +156,11 @@ class NewRecipeViewController: UIViewController {
 				cookingStep.setImage(with: stepImageView.image)
 			}
 			steps.append(cookingStep)
+			clearAll()
 			stepNumber = stepNumber + 1
 			stepNumberLabel.text = String("\(stepNumber)")
-			stepDescriptionTextView.text = ""
-			ingredientTextField.becomeFirstResponder()
-			clearAll()
 			ingredientsTable.reloadData()
+			ingredientTextField.becomeFirstResponder()
 			stepNotSaved = false
 		} else {
 			print("step description is not present")
@@ -243,7 +242,9 @@ class NewRecipeViewController: UIViewController {
 	}
 	
 	@IBAction func onRecordAudioTapped(_ sender: Any) {
-		let status = self.record(filename: "testfile")
+		let audioFileName = String("step\(stepNumber)")
+		print(audioFileName)
+		let status = self.record(filename: audioFileName!)
 		if status {
 			print("record successful")
 		} else {

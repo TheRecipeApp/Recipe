@@ -9,7 +9,6 @@
 import UIKit
 import Parse
 import MobileCoreServices
-import SwiftShareBubbles
 
 class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var recipeStepsTable: UITableView!
@@ -23,8 +22,7 @@ class RecipeSummaryViewController: UIViewController {
 	var cookingSteps: [CookingStep]? = nil
 	let imagePickerController = UIImagePickerController()
 	var recipeImageUploaded = false
-	@IBOutlet weak var socialShareView: UIView!
-	var bubbles: SwiftShareBubbles?
+	var nameFieldEntered = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +32,14 @@ class RecipeSummaryViewController: UIViewController {
 		recipeStepsTable.dataSource = self
 		recipeStepsTable.estimatedRowHeight = 100
 		recipeStepsTable.rowHeight = UITableViewAutomaticDimension
-
+		
+		nameTextField.delegate = self
+		
 		if let cookingSteps = cookingSteps {
 			if cookingSteps.count > 0 {
 				// initialize the steps in the steps table
 			}
 		}
-		recipeImage.layer.borderWidth = 1
 		imagePickerController.delegate = self
 		imagePickerController.allowsEditing = true
 		
@@ -51,12 +50,6 @@ class RecipeSummaryViewController: UIViewController {
 			print("Camera 🚫 available so we will use photo library instead")
 			imagePickerController.sourceType = .photoLibrary
 		}
-		
-		socialShareView.layer.borderWidth = 1
-		bubbles = SwiftShareBubbles(point: CGPoint(x: socialShareView.frame.width / 2, y: socialShareView.frame.height / 2), radius: 100, in: socialShareView)
-		bubbles?.showBubbleTypes = [Bubble.twitter, Bubble.facebook, Bubble.google, Bubble.instagram, Bubble.pintereset]
-		bubbles?.delegate = self
-		socialShareView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,41 +59,69 @@ class RecipeSummaryViewController: UIViewController {
     
 	@IBAction func onSaveRecipe(_ sender: Any) {
 		// save the recipe
-		let recipe = Recipe()
-		let owner = PFUser.current()
-		if (owner == nil) {
-			let alertController = UIAlertController()
-			// create an OK action
-			let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-				// handle response here.
-				let storyboard = UIStoryboard(name: "Login", bundle: nil)
-				let vc = storyboard.instantiateInitialViewController() as! UINavigationController
-				self.present(vc, animated: true, completion: nil)
-			}
-			// add the OK action to the alert controller
-			alertController.addAction(OKAction)
-			alertController.title = "NO Current User. Please Login"
-			present(alertController, animated: true, completion: nil)
-		} else {
-			recipe.owner = owner?.objectId
-			if let name = nameTextField.text {
-				setupRecipe(recipe: recipe, name: name)
-				// save the recipe
-				recipe.saveInBackground(block: { (success: Bool, error: Error?) in
-					if (success) {
-						// save the cooking steps for the recipe
-						self.saveCookingSteps(recipeId: recipe.objectId!)
-					} else {
-						print("Unable to Save Recipe")
-						print("Error: \(String(describing: error?.localizedDescription))")
-					}
-				})
+		if nameFieldEntered {
+			let recipe = Recipe()
+			let owner = PFUser.current()
+			if (owner == nil) {
+				let alertController = UIAlertController()
+				// create an OK action
+				let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+					// handle response here.
+					let storyboard = UIStoryboard(name: "Login", bundle: nil)
+					let vc = storyboard.instantiateInitialViewController() as! UINavigationController
+					self.present(vc, animated: true, completion: nil)
+				}
+				// add the OK action to the alert controller
+				alertController.addAction(OKAction)
+				alertController.title = "NO Current User. Please Login"
+				present(alertController, animated: true, completion: nil)
 			} else {
-				// name is a required field
-				print("requires name of recipe")
-				nameTextField.becomeFirstResponder()
+				recipe.owner = owner?.objectId
+				if let name = nameTextField.text {
+					setupRecipe(recipe: recipe, name: name)
+					// save the recipe
+					recipe.saveInBackground(block: { (success: Bool, error: Error?) in
+						if (success) {
+							// save the cooking steps for the recipe
+							self.saveCookingSteps(recipeId: recipe.objectId!)
+						} else {
+							print("Unable to Save Recipe")
+							print("Error: \(String(describing: error?.localizedDescription))")
+						}
+					})
+				} else {
+					// name is a required field
+					print("requires name of recipe")
+					nameTextField.becomeFirstResponder()
+				}
 			}
+		} else {
+			presentAlert(alertTitle: "Requires Name of Recipe", showCancel: false)
+			nameTextField.becomeFirstResponder()
 		}
+	}
+	
+	private func presentAlert(alertTitle:String, showCancel: Bool) {
+		let alertController = UIAlertController()
+		// Alert Saying Step Not Saved
+		print(alertTitle)
+		// create a cancel action
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+			// handle cancel response here. Doing nothing will dismiss the view.
+		}
+		// add the cancel action to the alertController
+		if (showCancel) {
+			alertController.addAction(cancelAction)
+		}
+		
+		// create an OK action
+		let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+			// handle response here.
+		}
+		// add the OK action to the alert controller
+		alertController.addAction(OKAction)
+		alertController.title = alertTitle
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	private func saveCookingSteps(recipeId: String) {
@@ -139,11 +160,6 @@ class RecipeSummaryViewController: UIViewController {
 		if recipeImageUploaded {
 			recipe.setImage(with: recipeImage.image)
 		}
-	}
-	
-	@IBAction func onSocialShare(_ sender: Any) {
-		socialShareView.isHidden = false
-		bubbles?.show()
 	}
 	
 	@IBAction func onTaop(_ sender: UITapGestureRecognizer) {
@@ -203,30 +219,9 @@ extension RecipeSummaryViewController : UIImagePickerControllerDelegate, UINavig
 	}
 }
 
-extension RecipeSummaryViewController : SwiftShareBubblesDelegate {
-	func bubblesTapped(bubbles: SwiftShareBubbles, bubbleId: Int) {
-		if let bubble = Bubble(rawValue: bubbleId) {
-			print("\(bubble)")
-			switch bubble {
-			case .facebook:
-				break
-			case .twitter:
-				break
-			case .pintereset:
-				break
-			case .google:
-				break
-			case .instagram:
-				break
-			default:
-				break
-			}
-		} else {
-			// custom case
-		}
-	}
-	
-	func bubblesDidHide(bubbles: SwiftShareBubbles) {
-		socialShareView.isHidden = true
+extension RecipeSummaryViewController : UITextFieldDelegate {
+	func textViewDidChange(_ textView: UITextView) {
+		nameFieldEntered = true
 	}
 }
+

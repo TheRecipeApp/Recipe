@@ -1,39 +1,53 @@
 //
-//  StepDetailsViewController.swift
+//  CookingStepViewController.swift
 //  RecipeApp
 //
-//  Created by Vijayanand on 10/19/17.
+//  Created by Vijayanand on 10/27/17.
 //  Copyright © 2017 The Recipe App. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-class StepDetailsViewController: UIViewController {
+class CookingStepViewController: UIViewController {
+
 	@IBOutlet weak var ingredientsTable: UITableView!
 	@IBOutlet weak var stepDescription: UITextView!
 	@IBOutlet weak var stepImage: UIImageView!
 	@IBOutlet weak var stepAudio: UIButton!
+	@IBOutlet weak var nextStepButton: UIButton!
+	@IBOutlet weak var prevStepButton: UIButton!
+	@IBOutlet weak var stepNumberLabel: UILabel!
 	
+	var steps: [CookingStep]?
 	var step: CookingStep?
 	var audioPlayer: AVAudioPlayer?
+	var stepNumber = 1;
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		ingredientsTable.delegate = self
 		ingredientsTable.dataSource = self
 		ingredientsTable.estimatedRowHeight = 50
 		ingredientsTable.rowHeight = UITableViewAutomaticDimension
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
-
-        // Do any additional setup after loading the view.
+		
+		// Do any additional setup after loading the view.
+		step = steps?[stepNumber-1]
 		stepDescription.text = step?.desc
 		setupStepImage()
 		setupStepAudio()
-    }
+		prevStepButton.isHidden = true
+		if steps?.count == 1 {
+			nextStepButton.isHidden = true
+		}
+		stepNumberLabel.text = "Step No: \(stepNumber)"
+	}
 	
 	func setupStepAudio() {
+		print("step: \(String(describing: step))")
+		print("step audio: \(String(describing: step?.stepAudio))")
 		if let audioFile = step?.stepAudio {
 			stepAudio.isHidden = false
 			audioFile.getDataInBackground(block: { (data: Data?, error: Error?) in
@@ -64,28 +78,62 @@ class StepDetailsViewController: UIViewController {
 		})
 		
 	}
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
+	
+	private func clearStep() {
+		stepDescription.text = ""
+		stepImage.image = nil
+		audioPlayer = nil
+	}
+	
+	@IBAction func onPrevButtonTapped(_ sender: Any) {
+		clearStep()
+		stepNumber = stepNumber - 1
+		stepNumberLabel.text = "Step No: \(stepNumber)"
+		step = steps?[stepNumber-1]
+		stepDescription.text = step?.desc
+		setupStepImage()
+		setupStepAudio()
+		if stepNumber == 1 {
+			prevStepButton.isHidden = true
+			nextStepButton.isHidden = false
+		}
+	}
+	
+	@IBAction func onNextButtonTapped(_ sender: Any) {
+		clearStep()
+		stepNumber = stepNumber + 1
+		stepNumberLabel.text = "Step No: \(stepNumber)"
+		step = steps?[stepNumber-1]
+		stepDescription.text = step?.desc
+		setupStepImage()
+		setupStepAudio()
+		if stepNumber == steps?.count {
+			prevStepButton.isHidden = false
+			nextStepButton.isHidden = true
+		}
+	}
+	
 	@IBAction func onAudioPlayTapped(_ sender: Any) {
 		audioPlayer?.play()
 	}
 	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	/*
+	// MARK: - Navigation
+	
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+	// Get the new view controller using segue.destinationViewController.
+	// Pass the selected object to the new view controller.
+	}
+	*/
 }
 
-extension StepDetailsViewController : UITableViewDataSource, UITableViewDelegate {
+extension CookingStepViewController : UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return (step?.ingredients?.count)!
 	}
@@ -99,6 +147,4 @@ extension StepDetailsViewController : UITableViewDataSource, UITableViewDelegate
 		cell.ingredientUnitsLabel.text = step?.ingredientUnits[indexPath.row]
 		return cell
 	}
-	
-	
 }

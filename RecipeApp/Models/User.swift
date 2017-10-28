@@ -21,8 +21,8 @@ class User: PFUser {
 	@NSManaged var followers: [UInt64]?
 	@NSManaged var settings: UserSettings?
 	@NSManaged var phone: String?
-	// TODO: need to setup the profile image field
 	@NSManaged var profileImage: PFFile?
+    @NSManaged var preference: Int
 	
 	func custom_init(screenName: String?, firstName: String?, lastName: String?, phone: String?, shareMyCooking: Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?, stars: NSNumber?) {
 		self.email = email
@@ -35,6 +35,7 @@ class User: PFUser {
 		self.following = [UInt64]()
 		self.settings = UserSettings(shareMyCooking: shareMyCooking, learnToCook: learnToCook, enablePushNotifications: enablePushNotifications, favoriteCuisines: favoriteCuisines)
 		self.stars = stars
+        self.preference = -1
 		self.saveInBackground(block: { (success, error) in
 			if (success) {
 				// The object has been saved.
@@ -46,4 +47,22 @@ class User: PFUser {
 			}
 		})
 	}
+	
+	static func fetchUser(by objectId: String) -> User? {
+		let query = PFUser.query()
+		query?.whereKey("objectId", equalTo: objectId)
+		do {
+			let objects = try query?.findObjects()
+			if let objects = objects {
+				for object in objects {
+					return object as? User
+				}
+			}
+			return nil
+		} catch {
+			print("error retrieving user: " + objectId + ", \(error.localizedDescription)")
+			return nil
+		}
+	}
+
 }

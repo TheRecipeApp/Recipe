@@ -13,21 +13,21 @@ import MBProgressHUD
 
 class FindViewController: UIViewController {
 
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var categoryView: UIView!
-    @IBOutlet weak var recipesCarousel: iCarousel!
     @IBOutlet weak var searchBar: UISearchBar!
     var recipes = [Recipe]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
-        recipesCarousel.delegate = self
-        recipesCarousel.dataSource = self
         searchBar.delegate = self
         searchBar.sizeToFit()
         
-        self.recipesCarousel.contentOffset = CGSize(width: 0, height: 0)
+        collectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         self.categoryView.subviews.forEach { (view: UIView) in
             print(view.debugDescription)
             let label = view as! UILabel
@@ -72,14 +72,7 @@ class FindViewController: UIViewController {
         self.navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
-	@IBAction func onLogout(_ sender: Any) {
-		PFUser.logOut()
-		let storyboard = UIStoryboard(name: "Login", bundle: nil)
-		let vc = storyboard.instantiateInitialViewController() as! UINavigationController
-		self.present(vc, animated: true, completion: nil)
-	}
-    
-    func doSearch() {
+	func doSearch() {
         searchBar.resignFirstResponder()
         recipes.removeAll()
         let query = PFQuery(className: "Recipe")
@@ -93,8 +86,7 @@ class FindViewController: UIViewController {
                         print(object.objectId!)
                         self.recipes.append(object as! Recipe)
                     }
-                    self.recipesCarousel.reloadData()
-                    self.recipesCarousel.type = .linear
+                    self.collectionView.reloadData()
                 }
             }
         })
@@ -124,6 +116,44 @@ extension FindViewController: UISearchBarDelegate {
     }
 }
 
+extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+        let recipe = self.recipes[indexPath.row]
+        
+        let recipeImageFile = recipe.image
+        if recipeImageFile != nil {
+            recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                if error == nil {
+                    if let imageData = imageData {
+                        cell.recipeImage.image = UIImage(data: imageData)
+                    }
+                }
+            })
+        }
+        cell.recipeId = recipe.objectId
+        cell.categoryLabel.text = "INDIAN"
+        if let username = PFUser.current()?.username {
+            cell.createdByLabel.text = "by @\(username)"
+        } else {
+            cell.createdByLabel.text = ""
+        }
+        cell.recipeTitle.text = recipe.name
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("TODO: Navigate to the recipe detail")
+    }
+}
+
+/*
 extension FindViewController: iCarouselDelegate, iCarouselDataSource {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
@@ -165,4 +195,4 @@ extension FindViewController: iCarouselDelegate, iCarouselDataSource {
         return value
     }
 }
-
+*/

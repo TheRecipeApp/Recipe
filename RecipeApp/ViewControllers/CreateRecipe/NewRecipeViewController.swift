@@ -20,6 +20,7 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var stepDescriptionTextView: UITextView!
 	@IBOutlet weak var micButton: UIButton!
 	@IBOutlet weak var stepImageView: UIImageView!
+	@IBOutlet weak var doneButton: UIButton!
 	
 	private var stepNumber: Int = 1
 	var steps = [CookingStep]()
@@ -61,7 +62,7 @@ class NewRecipeViewController: UIViewController {
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 
 		stepNumberLabel.text = String("\(stepNumber)")
-		stepDescriptionTextView.layer.borderWidth = 1
+		stepDescriptionTextView.delegate = self
 
 		// image picker
 		imagePickerController.delegate = self
@@ -74,24 +75,14 @@ class NewRecipeViewController: UIViewController {
 			print("Camera 🚫 available so we will use photo library instead")
 			imagePickerController.sourceType = .photoLibrary
 		}
+		
+		doneButton.layer.cornerRadius = 3
 }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-	private func setupTextFieldAtributes(field: UITextField, string: String) {
-		let width = CGFloat(2.0)
-		field.textColor = UIColor.black
-		let fieldBorder = CALayer()
-		fieldBorder.borderColor = UIColor.black.cgColor
-		fieldBorder.frame = CGRect(x: 0, y: field.frame.size.height - width, width:  field.frame.size.width, height: field.frame.size.height)
-		fieldBorder.borderWidth = width
-		field.layer.addSublayer(fieldBorder)
-		field.layer.masksToBounds = true
-		field.attributedPlaceholder = NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.white])
-	}
 
 	@IBAction func onCancel(_ sender: UIBarButtonItem) {
 		dismiss(animated: true, completion: nil)
@@ -136,6 +127,7 @@ class NewRecipeViewController: UIViewController {
 				stepIngredientUnits.append(units)
 				ingredientTextField.becomeFirstResponder()
 				ingredientsTable.reloadData()
+				stepNotSaved = true
 			} else {
 				print("Invalid Units")
 				stepIngredients.removeLast()
@@ -156,8 +148,9 @@ class NewRecipeViewController: UIViewController {
 			cookingStep.ingredients = stepIngredients
 			cookingStep.ingredientAmounts = stepIngredientAmounts
 			cookingStep.ingredientUnits = stepIngredientUnits
-			if let stepAudio = stepAudio {
-				cookingStep.setAudioData(with: stepAudio)
+			if let audio = stepAudio {
+				cookingStep.setAudioData(with: audio)
+				stepAudio = nil
 			}
 			if stepImageUploaded {
 				cookingStep.setImage(with: stepImageView.image)
@@ -169,6 +162,7 @@ class NewRecipeViewController: UIViewController {
 			ingredientTextField.becomeFirstResponder()
 			clearAll()
 			ingredientsTable.reloadData()
+			stepNotSaved = false
 		} else {
 			print("step description is not present")
 			stepDescriptionTextView.becomeFirstResponder()
@@ -193,36 +187,38 @@ class NewRecipeViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func stepDescriptionChanged(_ sender: Any) {
-		if !(stepDescriptionTextView.text?.isEmpty)! {
-			stepNotSaved = true
-		}
-	}
-	
 	@IBAction func onDone(_ sender: UIButton) {
 		if stepNotSaved {
-			let alertController = UIAlertController()
-			// Alert Saying Step Not Saved
-			print("Step Not Saved")
-			// create a cancel action
-			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-				// handle cancel response here. Doing nothing will dismiss the view.
-			}
-			// add the cancel action to the alertController
-			alertController.addAction(cancelAction)
-			
-			// create an OK action
-			let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-				// handle response here.
-				self.clearAll()
-			}
-			// add the OK action to the alert controller
-			alertController.addAction(OKAction)
-			alertController.title = "Step Not Saved, Clear Current Step?"
-			present(alertController, animated: true, completion: nil)
+			presentAlert(alertTitle: "Step Not Saved, Clear Current Step?", showCancel: true)
+		} else if steps.count == 0 {
+			presentAlert(alertTitle: "No Steps in Recipe Yet, Cannot Proceed", showCancel: false)
 		} else {
 			performSegue(withIdentifier: "RecipeSummarySegue", sender: nil)
 		}
+	}
+	
+	private func presentAlert(alertTitle:String, showCancel: Bool) {
+		let alertController = UIAlertController()
+		// Alert Saying Step Not Saved
+		print(alertTitle)
+		// create a cancel action
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+			// handle cancel response here. Doing nothing will dismiss the view.
+		}
+		// add the cancel action to the alertController
+		if (showCancel) {
+			alertController.addAction(cancelAction)
+		}
+		
+		// create an OK action
+		let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+			// handle response here.
+			self.clearAll()
+		}
+		// add the OK action to the alert controller
+		alertController.addAction(OKAction)
+		alertController.title = alertTitle
+		present(alertController, animated: true, completion: nil)
 	}
 	
 	@IBAction func speechButtonTapped(_ sender: UIButton) {
@@ -234,7 +230,6 @@ class NewRecipeViewController: UIViewController {
 				node.removeTap(onBus: 0)
 			}
 			speechRecognitionRequest.endAudio() // Added line to mark end of recording
-//			speechRecognitionTask.cancel()
 			speechRecognitionStarted = false
 		} else {
 			self.micButton.setImage(#imageLiteral(resourceName: "mic green"), for: .normal)
@@ -258,6 +253,7 @@ class NewRecipeViewController: UIViewController {
 	
 	@IBAction func onStopRecordAudio(_ sender: Any) {
 		finishRecording()
+		stepNotSaved = true
 		stepAudio = NSData(contentsOf:audioURL!)
 		if stepAudio == nil {
 			print("Error: UNable to convert Audio URL to NSData")
@@ -274,6 +270,12 @@ class NewRecipeViewController: UIViewController {
 		recipeSummaryViewController.cookingSteps = steps
     }
 
+}
+
+extension NewRecipeViewController : UITextViewDelegate {
+	func textViewDidChange(_ textView: UITextView!) {
+		stepNotSaved = true
+	}
 }
 
 extension NewRecipeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -430,6 +432,7 @@ extension NewRecipeViewController : UIImagePickerControllerDelegate, UINavigatio
 		
 		self.stepImageView.contentMode = .center
 		self.stepImageView.contentMode = .scaleAspectFit
+		self.stepNotSaved = true
 		if editedImage != nil {
 			self.stepImageView.image = editedImage
 		} else {

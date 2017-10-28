@@ -26,6 +26,7 @@
 		5F576D861F9453640037228B /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D851F9453640037228B /* ExploreViewController.swift */; };
 		5F576D881F9453C60037228B /* CookbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D871F9453C60037228B /* CookbookViewController.swift */; };
 		5F576D8A1F9453D20037228B /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F576D891F9453D20037228B /* RecipeViewController.swift */; };
+		5F926E891FA2A36F0050E5F7 /* RPContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F926E881FA2A36F0050E5F7 /* RPContactPickerViewController.swift */; };
 		5F95FA771F99CB3000F4D87B /* UILabelCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F95FA761F99CB3000F4D87B /* UILabelCategory.swift */; };
 		5FD28DD51F8B2B1D005BAD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */; };
 		5FD28DD71F8B2B1D005BAD06 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD28DD61F8B2B1D005BAD06 /* FindViewController.swift */; };
@@ -76,6 +77,7 @@
 		5F576D851F9453640037228B /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		5F576D871F9453C60037228B /* CookbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookViewController.swift; sourceTree = "<group>"; };
 		5F576D891F9453D20037228B /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		5F926E881FA2A36F0050E5F7 /* RPContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPContactPickerViewController.swift; sourceTree = "<group>"; };
 		5F95FA761F99CB3000F4D87B /* UILabelCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelCategory.swift; sourceTree = "<group>"; };
 		5FD28DD11F8B2B1D005BAD06 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD28DD41F8B2B1D005BAD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				5F2281651F9DBBBA00B4E110 /* CookbookCollectionViewCell.swift */,
 				AF3033B01F9D9EE300DF8A01 /* CookingStepView.xib */,
 				AF3033B21F9D9F0200DF8A01 /* CookingStepView.swift */,
+				5F926E881FA2A36F0050E5F7 /* RPContactPickerViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */,
 				AFF8ED791F92C7A8007A34CE /* RegisterViewController.swift in Sources */,
 				AFD1FCE51F90507F00190961 /* Cookbook.swift in Sources */,
+				5F926E891FA2A36F0050E5F7 /* RPContactPickerViewController.swift in Sources */,
 				5FD28DD71F8B2B1D005BAD06 /* FindViewController.swift in Sources */,
 				5F576D6D1F944C310037228B /* AddFriendsViewController.swift in Sources */,
 				AF92FF261F97A548007CBFCB /* CreateViewController.swift in Sources */,

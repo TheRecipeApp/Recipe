@@ -333,7 +333,7 @@
                         <viewLayoutGuide key="safeArea" id="i69-mD-gWq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="WfW-6b-dwp">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="LYa-Sc-qID">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="LYa-Sc-qID">
                             <connections>
                                 <action selector="onClose:" destination="tVQ-Zt-gRl" id="S7r-AX-z4L"/>
                             </connections>
@@ -361,21 +361,124 @@
             </objects>
             <point key="canvasLocation" x="672.79999999999995" y="98.050974512743636"/>
         </scene>
-        <!--Edit Profile View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="ncO-k7-6IP">
             <objects>
                 <viewController id="cjM-rc-cs7" customClass="EditProfileViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iCt-FQ-oZ0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR INFO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyG-0w-4Jy">
+                                <rect key="frame" x="15" y="20" width="70" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" name="GraySmallHeader"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR PROFILE PREFERENCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-vb-car">
+                                <rect key="frame" x="15" y="161" width="178" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" name="GraySmallHeader"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="awX-t5-nXd">
+                                <rect key="frame" x="15" y="197" width="345" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Tkc-Vg-jYo"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="I am here to share recipies out of this world"/>
+                                    <segment title="I want to learn and try new things"/>
+                                </segments>
+                                <color key="tintColor" name="PrimaryColor"/>
+                            </segmentedControl>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ok6-kp-PLg">
+                                <rect key="frame" x="15" y="61" width="345" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KMs-Om-TA4"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" textContentType="given-name"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PDV-TM-s6L">
+                                <rect key="frame" x="15" y="101" width="345" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0EU-qZ-Ehc"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" textContentType="given-name"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVITE SOME FRIENDS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZo-2X-Q5m">
+                                <rect key="frame" x="15" y="275" width="140" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" name="GraySmallHeader"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe is more fun with friends. Would you like to invite some?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgF-gi-aHi">
+                                <rect key="frame" x="15" y="299" width="345" height="57.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <color key="textColor" name="PrimaryColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiV-j4-9Pw">
+                                <rect key="frame" x="30" y="397" width="315" height="45"/>
+                                <color key="backgroundColor" name="PrimaryColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="YNE-Mz-bg1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="YES! LET'S DO IT">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="inviteFriendsTapped:" destination="cjM-rc-cs7" eventType="touchUpInside" id="D4e-5F-eOa"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" name="GrayBackgroundScreen"/>
+                        <constraints>
+                            <constraint firstItem="MZo-2X-Q5m" firstAttribute="top" secondItem="awX-t5-nXd" secondAttribute="bottom" constant="30" id="2au-Hy-CZX"/>
+                            <constraint firstItem="PDV-TM-s6L" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="3xq-xI-lFc"/>
+                            <constraint firstItem="PDV-TM-s6L" firstAttribute="top" secondItem="Ok6-kp-PLg" secondAttribute="bottom" constant="10" id="6L2-9A-7A6"/>
+                            <constraint firstItem="ahE-v4-DE3" firstAttribute="trailing" secondItem="PDV-TM-s6L" secondAttribute="trailing" constant="15" id="B9B-qf-N6G"/>
+                            <constraint firstItem="lgF-gi-aHi" firstAttribute="top" secondItem="MZo-2X-Q5m" secondAttribute="bottom" constant="8" id="CGB-hr-8ia"/>
+                            <constraint firstItem="lyG-0w-4Jy" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="DMz-sr-FzM"/>
+                            <constraint firstAttribute="trailing" secondItem="lgF-gi-aHi" secondAttribute="trailing" constant="15" id="DOM-y7-IbY"/>
+                            <constraint firstItem="awX-t5-nXd" firstAttribute="top" secondItem="eIX-vb-car" secondAttribute="bottom" constant="20" id="KHl-U3-ViO"/>
+                            <constraint firstItem="PiV-j4-9Pw" firstAttribute="top" secondItem="lgF-gi-aHi" secondAttribute="bottom" constant="40" id="KRD-lX-BEU"/>
+                            <constraint firstItem="awX-t5-nXd" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="LRG-MF-B0T"/>
+                            <constraint firstItem="lyG-0w-4Jy" firstAttribute="top" secondItem="ahE-v4-DE3" secondAttribute="top" constant="20" id="MqZ-k1-kOi"/>
+                            <constraint firstItem="ahE-v4-DE3" firstAttribute="trailing" secondItem="Ok6-kp-PLg" secondAttribute="trailing" constant="15" id="OYV-oX-VIw"/>
+                            <constraint firstItem="Ok6-kp-PLg" firstAttribute="top" secondItem="lyG-0w-4Jy" secondAttribute="bottom" constant="25" id="PAa-4j-Rsb"/>
+                            <constraint firstItem="PiV-j4-9Pw" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="30" id="Rtt-75-3yi"/>
+                            <constraint firstItem="ahE-v4-DE3" firstAttribute="trailing" secondItem="awX-t5-nXd" secondAttribute="trailing" constant="15" id="a9E-5w-Qqg"/>
+                            <constraint firstItem="MZo-2X-Q5m" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="aPa-Tn-kib"/>
+                            <constraint firstItem="ahE-v4-DE3" firstAttribute="trailing" secondItem="PiV-j4-9Pw" secondAttribute="trailing" constant="30" id="fNR-ZA-Xya"/>
+                            <constraint firstItem="eIX-vb-car" firstAttribute="top" secondItem="PDV-TM-s6L" secondAttribute="bottom" constant="30" id="jez-L8-Yxb"/>
+                            <constraint firstItem="eIX-vb-car" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="q1F-w1-9Cb"/>
+                            <constraint firstItem="lgF-gi-aHi" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="qiP-0n-3j2"/>
+                            <constraint firstItem="Ok6-kp-PLg" firstAttribute="leading" secondItem="ahE-v4-DE3" secondAttribute="leading" constant="15" id="rl3-BD-NiN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ahE-v4-DE3"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ZhF-ea-TMM"/>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="ZhF-ea-TMM">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sj4-Fg-JSw">
+                            <connections>
+                                <action selector="onSave:" destination="cjM-rc-cs7" id="Esv-0S-gQb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="firstNameTextField" destination="Ok6-kp-PLg" id="oqp-Fr-Kzb"/>
+                        <outlet property="lastNameTextField" destination="PDV-TM-s6L" id="PQy-cm-cNX"/>
+                        <outlet property="preferenceSegmentedControl" destination="awX-t5-nXd" id="Sov-PZ-5q9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L99-dI-GNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471" y="99"/>
+            <point key="canvasLocation" x="1469.5999999999999" y="98.50074962518741"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3LI-uh-lKH">

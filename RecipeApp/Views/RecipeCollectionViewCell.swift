@@ -19,6 +19,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Initialization code
         self.contentView.layer.cornerRadius = 5
         self.layer.cornerRadius = 5
     }

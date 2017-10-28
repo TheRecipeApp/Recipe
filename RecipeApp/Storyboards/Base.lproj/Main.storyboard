@@ -311,7 +311,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="766"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GF2-fJ-hLw">
-                                                <rect key="frame" x="0.0" y="72" width="375" height="199"/>
+                                                <rect key="frame" x="0.0" y="66" width="375" height="205"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oIx-Qg-MtE">
@@ -321,14 +321,14 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CookbookCollectionViewCell" id="y1E-XW-uTn" customClass="CookbookCollectionViewCell" customModule="RecipeApp">
-                                                        <rect key="frame" x="0.0" y="36" width="158" height="127"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCollectionViewCell" id="y1E-XW-uTn" userLabel="RecipeCollectionViewCell" customClass="RecipeCollectionViewCell" customModule="RecipeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="39" width="158" height="127"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="158" height="127"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1qh-d3-3Js">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1qh-d3-3Js">
                                                                     <rect key="frame" x="0.0" y="0.0" width="158" height="127"/>
                                                                 </imageView>
                                                                 <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUw-KL-L0E">
@@ -425,7 +425,81 @@
                                                     <constraint firstAttribute="height" constant="64" id="gAM-Ex-cPK"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUt-4B-CQh" customClass="iCarousel">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oc1-7x-Xcb" userLabel="Favorites Collection View">
+                                                <rect key="frame" x="4" y="306" width="367" height="173"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DUy-1r-OYW">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCollectionViewCell" id="8Ip-gm-NX2" userLabel="RecipeCollectionViewCell" customClass="RecipeCollectionViewCell" customModule="RecipeApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="23" width="158" height="127"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="158" height="127"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b2Y-wT-DcI">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="158" height="127"/>
+                                                                </imageView>
+                                                                <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nL-Y8-yt5">
+                                                                    <rect key="frame" x="8" y="0.0" width="158" height="127"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jKu-ru-6aG">
+                                                                    <rect key="frame" x="20" y="10" width="158" height="107"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Summer BBQ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPW-Ns-d3S">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="158" height="60"/>
+                                                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Semibold" family="American Typewriter" pointSize="17"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by @vijay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15u-fg-nqG">
+                                                                            <rect key="frame" x="0.0" y="63" width="158" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1K+ Compliments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S20-6r-V8s">
+                                                                            <rect key="frame" x="0.0" y="86.5" width="158" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </view>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="b2Y-wT-DcI" secondAttribute="trailing" id="4tb-3D-Ho7"/>
+                                                            <constraint firstAttribute="bottom" secondItem="0nL-Y8-yt5" secondAttribute="bottom" id="5Ay-YA-xAV"/>
+                                                            <constraint firstAttribute="trailing" secondItem="0nL-Y8-yt5" secondAttribute="trailing" id="Gsi-CG-9aa"/>
+                                                            <constraint firstAttribute="trailing" secondItem="jKu-ru-6aG" secondAttribute="trailing" constant="20" id="Ht7-WT-o0h"/>
+                                                            <constraint firstItem="0nL-Y8-yt5" firstAttribute="leading" secondItem="8Ip-gm-NX2" secondAttribute="leading" constant="8" id="Is8-YP-s1N"/>
+                                                            <constraint firstItem="b2Y-wT-DcI" firstAttribute="top" secondItem="8Ip-gm-NX2" secondAttribute="top" id="NHa-Hi-IH9"/>
+                                                            <constraint firstItem="jKu-ru-6aG" firstAttribute="top" secondItem="8Ip-gm-NX2" secondAttribute="top" constant="10" id="WP3-Tu-J2X"/>
+                                                            <constraint firstAttribute="bottom" secondItem="b2Y-wT-DcI" secondAttribute="bottom" id="hkn-X7-ppf"/>
+                                                            <constraint firstItem="0nL-Y8-yt5" firstAttribute="top" secondItem="8Ip-gm-NX2" secondAttribute="top" id="i2g-GE-9Qh"/>
+                                                            <constraint firstItem="b2Y-wT-DcI" firstAttribute="leading" secondItem="8Ip-gm-NX2" secondAttribute="leading" id="pWs-zd-LMb"/>
+                                                            <constraint firstItem="jKu-ru-6aG" firstAttribute="leading" secondItem="8Ip-gm-NX2" secondAttribute="leading" constant="20" id="rOf-KX-ewk"/>
+                                                            <constraint firstAttribute="bottom" secondItem="jKu-ru-6aG" secondAttribute="bottom" constant="10" id="zMl-6V-jGc"/>
+                                                        </constraints>
+                                                        <size key="customSize" width="158" height="127"/>
+                                                        <connections>
+                                                            <outlet property="authorLabel" destination="15u-fg-nqG" id="gH1-TO-2EU"/>
+                                                            <outlet property="complimentLabel" destination="S20-6r-V8s" id="kOA-ML-q14"/>
+                                                            <outlet property="cookbookLabel" destination="cPW-Ns-d3S" id="gfx-fF-b2P"/>
+                                                            <outlet property="coverImageView" destination="b2Y-wT-DcI" id="eTc-QH-rZU"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUt-4B-CQh" customClass="iCarousel">
                                                 <rect key="frame" x="0.0" y="306" width="375" height="180"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -519,6 +593,7 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="favoritesCarousel" destination="XUt-4B-CQh" id="Qua-R5-hZC"/>
+                        <outlet property="favoritesCollectionView" destination="Oc1-7x-Xcb" id="all-ZI-Dnv"/>
                         <outlet property="localTrendsCarousel" destination="nbA-JX-N70" id="Pa1-BP-ejt"/>
                         <outlet property="trendingCarousel" destination="qi4-hT-QL9" id="lg5-nF-p48"/>
                         <outlet property="trendingCollectionView" destination="GF2-fJ-hLw" id="WJh-IL-syF"/>

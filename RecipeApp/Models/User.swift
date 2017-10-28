@@ -47,4 +47,22 @@ class User: PFUser {
 			}
 		})
 	}
+	
+	static func fetchUser(by objectId: String) -> User? {
+		let query = PFUser.query()
+		query?.whereKey("objectId", equalTo: objectId)
+		do {
+			let objects = try query?.findObjects()
+			if let objects = objects {
+				for object in objects {
+					return object as? User
+				}
+			}
+			return nil
+		} catch {
+			print("error retrieving user: " + objectId + ", \(error.localizedDescription)")
+			return nil
+		}
+	}
+
 }

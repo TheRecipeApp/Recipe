@@ -20,6 +20,8 @@ class RecipeViewController: UIViewController {
 	@IBOutlet weak var category: UILabel!
 	@IBOutlet weak var recipeImage: UIImageView!
 	@IBOutlet weak var owner: UILabel!
+	@IBOutlet weak var cookThisButton: UIButton!
+	
 	var recipeId : String?
 	var recipe: Recipe?
 	var recipeOwner: User?
@@ -30,7 +32,8 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		// Do any additional setup after loading the view.
-		
+		cookThisButton.setTitle("No Steps", for: .disabled)
+		cookThisButton.layer.cornerRadius = 3
 		// fetch the cooking steps for the recipe
 		fetchRecipe()
     }
@@ -102,7 +105,7 @@ class RecipeViewController: UIViewController {
 				if let objects = objects {
 					self.recipe = objects[0] as? Recipe
 					self.fetchOwner()
-					// self.fetchCookingSteps()
+					self.fetchCookingSteps()
 				}
 			}
 		})
@@ -126,17 +129,20 @@ class RecipeViewController: UIViewController {
 				}
 				print("number of cooking steps: \(self.cookingSteps.count)")
 			}
+			if self.cookingSteps.count == 0 {
+				self.cookThisButton.isEnabled = false
+			}
 		})
 	}
 
-	/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+		let destVC = segue.destination as! CookingStepViewController
+		destVC.steps = cookingSteps
     }
-    */
 
 }

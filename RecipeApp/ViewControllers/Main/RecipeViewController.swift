@@ -33,6 +33,7 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		cookThisButton.setTitle("No Steps", for: .disabled)
+		cookThisButton.layer.cornerRadius = 3
 		// fetch the cooking steps for the recipe
 		fetchRecipe()
     }

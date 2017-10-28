@@ -98,9 +98,11 @@ class CookingStepViewController: UIViewController {
 		stepDescription.text = step?.desc
 		setupStepImage()
 		setupStepAudio()
+		nextStepButton.isHidden = false
 		if stepNumber == 1 {
 			prevStepButton.isHidden = true
-			nextStepButton.isHidden = false
+		} else {
+			prevStepButton.isHidden = false
 		}
 	}
 	
@@ -112,9 +114,11 @@ class CookingStepViewController: UIViewController {
 		stepDescription.text = step?.desc
 		setupStepImage()
 		setupStepAudio()
+		prevStepButton.isHidden = false
 		if stepNumber == steps?.count {
-			prevStepButton.isHidden = false
 			nextStepButton.isHidden = true
+		} else {
+			nextStepButton.isHidden = false
 		}
 	}
 	

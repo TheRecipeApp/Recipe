@@ -32,9 +32,7 @@ class RecipeSummaryViewController: UIViewController {
 		recipeStepsTable.dataSource = self
 		recipeStepsTable.estimatedRowHeight = 100
 		recipeStepsTable.rowHeight = UITableViewAutomaticDimension
-		
-		nameTextField.delegate = self
-		
+				
 		if let cookingSteps = cookingSteps {
 			if cookingSteps.count > 0 {
 				// initialize the steps in the steps table
@@ -59,46 +57,51 @@ class RecipeSummaryViewController: UIViewController {
     
 	@IBAction func onSaveRecipe(_ sender: Any) {
 		// save the recipe
-		if nameFieldEntered {
-			let recipe = Recipe()
-			let owner = PFUser.current()
-			if (owner == nil) {
-				let alertController = UIAlertController()
-				// create an OK action
-				let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-					// handle response here.
-					let storyboard = UIStoryboard(name: "Login", bundle: nil)
-					let vc = storyboard.instantiateInitialViewController() as! UINavigationController
-					self.present(vc, animated: true, completion: nil)
-				}
-				// add the OK action to the alert controller
-				alertController.addAction(OKAction)
-				alertController.title = "NO Current User. Please Login"
-				present(alertController, animated: true, completion: nil)
-			} else {
-				recipe.owner = owner?.objectId
-				if let name = nameTextField.text {
-					setupRecipe(recipe: recipe, name: name)
-					// save the recipe
-					recipe.saveInBackground(block: { (success: Bool, error: Error?) in
-						if (success) {
-							// save the cooking steps for the recipe
-							self.saveCookingSteps(recipeId: recipe.objectId!)
-						} else {
-							print("Unable to Save Recipe")
-							print("Error: \(String(describing: error?.localizedDescription))")
-						}
-					})
+		if let nameField = nameTextField, let name = nameTextField.text {
+			if (!name.isEmpty) {
+				let recipe = Recipe()
+				let owner = PFUser.current()
+				if (owner == nil) {
+					let alertController = UIAlertController()
+					// create an OK action
+					let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+						// handle response here.
+						let storyboard = UIStoryboard(name: "Login", bundle: nil)
+						let vc = storyboard.instantiateInitialViewController() as! UINavigationController
+						self.present(vc, animated: true, completion: nil)
+					}
+					// add the OK action to the alert controller
+					alertController.addAction(OKAction)
+					alertController.title = "NO Current User. Please Login"
+					present(alertController, animated: true, completion: nil)
 				} else {
-					// name is a required field
-					print("requires name of recipe")
-					nameTextField.becomeFirstResponder()
+					recipe.owner = owner?.objectId
+					if let name = nameTextField.text {
+						setupRecipe(recipe: recipe, name: name)
+						// save the recipe
+						recipe.saveInBackground(block: { (success: Bool, error: Error?) in
+							if (success) {
+								// save the cooking steps for the recipe
+								self.saveCookingSteps(recipeId: recipe.objectId!)
+							} else {
+								print("Unable to Save Recipe")
+								print("Error: \(String(describing: error?.localizedDescription))")
+							}
+						})
+					} else {
+						// name is a required field
+						print("requires name of recipe")
+						nameTextField.becomeFirstResponder()
+					}
 				}
+			} else {
+				presentAlert(alertTitle: "Requires Name of Recipe", showCancel: false)
+				nameTextField.becomeFirstResponder()
 			}
 		} else {
 			presentAlert(alertTitle: "Requires Name of Recipe", showCancel: false)
 			nameTextField.becomeFirstResponder()
-		}
+		}		
 	}
 	
 	private func presentAlert(alertTitle:String, showCancel: Bool) {
@@ -216,12 +219,6 @@ extension RecipeSummaryViewController : UIImagePickerControllerDelegate, UINavig
 		
 		// Dismiss UIImagePickerController to go back to your original view controller
 		dismiss(animated: true, completion: nil)
-	}
-}
-
-extension RecipeSummaryViewController : UITextFieldDelegate {
-	func textViewDidChange(_ textView: UITextView) {
-		nameFieldEntered = true
 	}
 }
 

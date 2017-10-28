@@ -13,13 +13,13 @@ import MBProgressHUD
 
 class ExploreViewController: UIViewController {
     
-    @IBOutlet weak var trendingCarousel: iCarousel!
-    @IBOutlet weak var favoritesCarousel: iCarousel!
-    @IBOutlet weak var localTrendsCarousel: iCarousel!
-    
+//    @IBOutlet weak var trendingCarousel: iCarousel!
+//    @IBOutlet weak var favoritesCarousel: iCarousel!
+//    @IBOutlet weak var localTrendsCarousel: iCarousel!
     
     @IBOutlet weak var trendingCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
+    @IBOutlet weak var localTrendsCollectionView: UICollectionView!
     
     fileprivate var trending = [Recipe]()
     fileprivate var favorites = [Recipe]()
@@ -33,16 +33,23 @@ class ExploreViewController: UIViewController {
         if (view.traitCollection.forceTouchCapability == .available) {
             print("force touch is enabled for this device")
             registerForPreviewing(with: self, sourceView: self.trendingCollectionView)
+            registerForPreviewing(with: self, sourceView: self.favoritesCollectionView)
+            registerForPreviewing(with: self, sourceView: self.localTrendsCollectionView)
         }
         
         self.trendingCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
         self.favoritesCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
+        self.localTrendsCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
 
         
         self.trendingCollectionView.dataSource = self
         self.trendingCollectionView.delegate = self
+       
         self.favoritesCollectionView.dataSource = self
         self.favoritesCollectionView.delegate = self
+        
+        self.localTrendsCollectionView.dataSource = self
+        self.localTrendsCollectionView.delegate = self
 //
 //        self.trendingCarousel.delegate = self
 //        self.trendingCarousel.dataSource = self
@@ -53,15 +60,14 @@ class ExploreViewController: UIViewController {
 //        self.localTrendsCarousel.delegate = self
 //        self.localTrendsCarousel.dataSource = self
         
-        trendingCarousel.viewpointOffset = CGSize(width: 90, height: -4)
-        favoritesCarousel.viewpointOffset = CGSize(width: 90, height: -4)
-        localTrendsCarousel.viewpointOffset = CGSize(width: 90, height: -4)
+//        trendingCarousel.viewpointOffset = CGSize(width: 90, height: -4)
+//        favoritesCarousel.viewpointOffset = CGSize(width: 90, height: -4)
+//        localTrendsCarousel.viewpointOffset = CGSize(width: 90, height: -4)
 
         
         fetchRecipes(carouselName: "trending")
         fetchRecipes(carouselName: "favorites")
         fetchRecipes(carouselName: "localTrends")
-        
         
     }
     
@@ -80,16 +86,16 @@ class ExploreViewController: UIViewController {
                         switch type {
                         case "trending":
                             self.trending.append(object as! Recipe)
-                            self.trendingCarousel.type = .linear
-                            self.trendingCarousel.reloadData()
+//                            self.trendingCarousel.type = .linear
+//                            self.trendingCarousel.reloadData()
                         case "favorites":
                             self.favorites.append(object as! Recipe)
-                            self.favoritesCarousel.type = .linear
-                            self.favoritesCarousel.reloadData()
+//                            self.favoritesCarousel.type = .linear
+//                            self.favoritesCarousel.reloadData()
                         case "localTrends":
                             self.localTrends.append(object as! Recipe)
-                            self.localTrendsCarousel.type = .linear
-                            self.localTrendsCarousel.reloadData()
+//                            self.localTrendsCarousel.type = .linear
+//                            self.localTrendsCarousel.reloadData()
                         default:
                             print("unrecognized carousel type")
                         }
@@ -98,7 +104,8 @@ class ExploreViewController: UIViewController {
                 
                 // reload the trending collection view
                 self.trendingCollectionView.reloadData()
-                
+                self.favoritesCollectionView.reloadData()
+                self.localTrendsCollectionView.reloadData()
             }
         })
     }
@@ -146,15 +153,25 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         } else if collectionView == self.favoritesCollectionView {
             return favorites.count
         } else {
-            return 0
+            return localTrends.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
-//        let tempView = RecipeBlockView(frame: CGRect(x: 0, y: 0, width: 172, height: 172))
-        let recipeImageFile = self.trending[indexPath.row].image
+        var recipeImageFile: PFFile? = nil
+        if collectionView == self.trendingCollectionView {
+            recipeImageFile = self.trending[indexPath.row].image
+            cell.recipeTitle.text = self.trending[indexPath.row].name
+        } else if collectionView == self.favoritesCollectionView {
+            recipeImageFile = self.favorites[indexPath.row].image
+            cell.recipeTitle.text = self.favorites[indexPath.row].name
+        } else {
+            recipeImageFile = self.localTrends[indexPath.row].image
+            cell.recipeTitle.text = self.localTrends[indexPath.row].name
+        }
+        
         if recipeImageFile != nil {
             recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
                 if error == nil {
@@ -168,7 +185,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.categoryLabel.text = "image tag"
         cell.createdByLabel.text = PFUser.current()?.username
-        cell.recipeTitle.text = self.trending[indexPath.row].name
+//        cell.recipeTitle.text = self.trending[indexPath.row].name
         cell.isUserInteractionEnabled = true
         
         let recipeTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.recipeTapped(tapGestureRecognizer:)))

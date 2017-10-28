@@ -97,29 +97,45 @@ class ExploreViewController: UIViewController {
         print("Add recipe button pressed")
     }
     
-    func recipeTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        print("Recipe tapped")
-//        let recipeDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
-//
-//        let recipeView = tapGestureRecognizer.view as! RecipeColl
-//        recipeDetailVC.recipeId = recipeView.recipeId!
-//
-//        self.navigationController?.pushViewController(recipeDetailVC, animated: true)
+//     In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+// leave this here incase we need it again
+//        if let segueId = segue.identifier {
+//            switch segueId {
+//                case "trendingToRecipeVC":
+//                    let recipeVC = segue.destination as! RecipeViewController
+//                    if let cell = sender as? RecipeCollectionViewCell, let indexPath = trendingCollectionView.indexPath(for: cell) {
+//                        trendingCollectionView.deselectItem(at: indexPath, animated: true)
+//                        recipeVC.recipeId = cell.recipeId
+//                    }
+//                default:
+//                    print("Unrecognzied segue")
+//            }
+//        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var cell: RecipeCollectionViewCell? = nil
+        
+        if collectionView == self.trendingCollectionView {
+            cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell
+        } else if collectionView == self.favoritesCollectionView {
+            cell = self.favoritesCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell
+        } else {
+            cell = self.localTrendsCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell
+        }
+        
+        let recipeVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        recipeVC.recipeId = cell?.recipeId
+        self.navigationController?.pushViewController(recipeVC, animated: true)
+
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.trendingCollectionView {
@@ -138,12 +154,15 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView == self.trendingCollectionView {
             recipeImageFile = self.trending[indexPath.row].image
             cell.recipeTitle.text = self.trending[indexPath.row].name
+            cell.recipeId = self.trending[indexPath.row].objectId
         } else if collectionView == self.favoritesCollectionView {
             recipeImageFile = self.favorites[indexPath.row].image
             cell.recipeTitle.text = self.favorites[indexPath.row].name
+            cell.recipeId = self.favorites[indexPath.row].objectId
         } else {
             recipeImageFile = self.localTrends[indexPath.row].image
             cell.recipeTitle.text = self.localTrends[indexPath.row].name
+            cell.recipeId = self.localTrends[indexPath.row].objectId
         }
         
         if recipeImageFile != nil {
@@ -159,11 +178,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.categoryLabel.text = "image tag"
         cell.createdByLabel.text = PFUser.current()?.username
-//        cell.recipeTitle.text = self.trending[indexPath.row].name
         cell.isUserInteractionEnabled = true
-        
-        let recipeTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ExploreViewController.recipeTapped(tapGestureRecognizer:)))
-        cell.addGestureRecognizer(recipeTapRecognizer)
 
         return cell
     }
@@ -173,9 +188,17 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
+//        if previewingContext.sourceView == self.trendingCollectionView {
+//            guard let indexPath = self.trendingCollectionView?.indexPathForItem(at: location) else { return nil }
+//            guard let cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+//        } else if previewingContext.sourceView == self.favorites {
+//
+//        } else {
+//
+//        }
+        
         guard let indexPath = self.trendingCollectionView?.indexPathForItem(at: location) else { return nil }
         guard let cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
-
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         // in order to initialize outlets on the view
         let view = detailVC.view

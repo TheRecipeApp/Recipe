@@ -276,6 +276,12 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="FindOn"/>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry. No results found for this search =(" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMb-UN-Foi">
+                                        <rect key="frame" x="30" y="242" width="315" height="53"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" name="GrayBackgroundScreen"/>
                                 <constraints>
@@ -287,13 +293,17 @@
                                     <constraint firstItem="L1X-9T-q9b" firstAttribute="top" secondItem="NXM-PJ-6ah" secondAttribute="bottom" constant="8" id="bda-to-WGV"/>
                                     <constraint firstItem="NXM-PJ-6ah" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="9" id="cE0-ke-1Q6"/>
                                     <constraint firstAttribute="trailing" secondItem="ru2-NQ-pkm" secondAttribute="trailing" id="dvk-RR-Roo"/>
+                                    <constraint firstItem="fMb-UN-Foi" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="bottom" constant="50" id="eTO-0M-RhC"/>
                                     <constraint firstAttribute="bottom" secondItem="TdQ-8N-AU2" secondAttribute="bottom" id="emo-uv-EIB"/>
                                     <constraint firstItem="TdQ-8N-AU2" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" id="jdO-XB-vXf"/>
                                     <constraint firstAttribute="trailing" secondItem="NXM-PJ-6ah" secondAttribute="trailing" constant="8" id="mOJ-4G-yLo"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fMb-UN-Foi" secondAttribute="trailing" id="pFd-5M-hHz"/>
                                     <constraint firstItem="ZIG-mf-ups" firstAttribute="top" secondItem="ru2-NQ-pkm" secondAttribute="top" id="pNy-HK-u8E"/>
                                     <constraint firstAttribute="trailing" secondItem="ZIG-mf-ups" secondAttribute="trailing" id="tqI-PX-0HO"/>
                                     <constraint firstAttribute="trailing" secondItem="TdQ-8N-AU2" secondAttribute="trailing" id="vXn-wa-gvy"/>
+                                    <constraint firstItem="fMb-UN-Foi" firstAttribute="centerX" secondItem="hg5-tV-It5" secondAttribute="centerX" id="wl7-W1-RZr"/>
                                     <constraint firstItem="NXM-PJ-6ah" firstAttribute="top" secondItem="hg5-tV-It5" secondAttribute="top" constant="15" id="xbh-HI-R9L"/>
+                                    <constraint firstItem="fMb-UN-Foi" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="30" id="yyZ-rl-faJ"/>
                                     <constraint firstItem="ru2-NQ-pkm" firstAttribute="top" secondItem="L1X-9T-q9b" secondAttribute="bottom" constant="10" id="zVK-Va-36c"/>
                                 </constraints>
                             </view>
@@ -343,6 +353,7 @@
                     <connections>
                         <outlet property="categoryView" destination="ru2-NQ-pkm" id="FfP-8a-ba2"/>
                         <outlet property="collectionView" destination="TdQ-8N-AU2" id="Re1-fr-ffy"/>
+                        <outlet property="noResultsLabel" destination="fMb-UN-Foi" id="Quq-tP-G2R"/>
                         <outlet property="searchBar" destination="ZIG-mf-ups" id="SRd-im-Y9J"/>
                     </connections>
                 </viewController>
@@ -1378,33 +1389,15 @@
         <namedColor name="GrayBackgroundScreen">
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="GrayBackgroundScreen">
-            <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="GraySmallHeader">
             <color red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="GraySmallHeader">
-            <color red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="GraySmallHeader">
-            <color red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="GraySmallHeader">
-            <color red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="GraySmallHeader">
-            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="PrimaryColor">
-            <color red="0.63921568630000003" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KjQ-FT-k5H"/>
-        <segue reference="H52-z1-JcG"/>
+        <segue reference="daK-Ik-oNb"/>
+        <segue reference="QOT-s7-KA3"/>
     </inferredMetricsTieBreakers>
 </document>

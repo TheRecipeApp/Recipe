@@ -241,7 +241,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 })
             }
             cell.recipeId = recipe.objectId
-            cell.categoryLabel.text = "INDIAN"
+            cell.categoryLabel.text = recipe.category
             if let owner = User.fetchUser(by: recipe.owner!) {
                 cell.createdByLabel.text = "by @\(owner.username!)"
             } else {

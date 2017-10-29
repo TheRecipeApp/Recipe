@@ -149,8 +149,8 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         cell.recipeId = recipe.objectId
         cell.categoryLabel.text = recipe.category?.uppercased()
-        if let username = PFUser.current()?.username {
-            cell.createdByLabel.text = "by @\(username)"
+        if let owner = User.fetchUser(by: recipe.owner!) {
+            cell.createdByLabel.text = "by @\(owner.username!)"
         } else {
             cell.createdByLabel.text = ""
         }

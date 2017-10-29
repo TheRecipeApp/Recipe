@@ -12,24 +12,18 @@ import AVFoundation
 
 class NewRecipeViewController: UIViewController {
 
-	@IBOutlet weak var ingredientTextField: UITextField!
-	@IBOutlet weak var amountTextField: UITextField!
-	@IBOutlet weak var unitsTextField: UITextField!
-	@IBOutlet weak var stepNumberLabel: UILabel!
-	@IBOutlet weak var ingredientsTable: UITableView!
-	@IBOutlet weak var stepDescriptionTextView: UITextView!
-	@IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var stepDescription: UITextView!
+    @IBOutlet weak var micButton: UIButton!
 	@IBOutlet weak var stepImageView: UIImageView!
-	@IBOutlet weak var doneButton: UIButton!
 	@IBOutlet weak var stopRecordButton: UIButton!
 	@IBOutlet weak var recordStepAudioButton: UIButton!
-	
-	private var stepNumber = 1
-	var steps = [CookingStep]()
-	var stepIngredients = [String]()
-	var stepIngredientAmounts = [String]()
-	var stepIngredientUnits = [String]()
-	var stepNotSaved = false
+    @IBOutlet weak var stepAudioButton: UIButton!
+    @IBOutlet weak var descriptionSwitch: UISwitch!
+    @IBOutlet weak var stepDescriptionTextStyleView: UIView!
+    @IBOutlet weak var stepDescriptionAudioView: UIView!
+    
+    var steps:[CookingStep]?
+    var stepNumber = 0;
 	var stepImageUploaded = false
 	
 	// image picker
@@ -43,7 +37,6 @@ class NewRecipeViewController: UIViewController {
 	var speechRecognitionTask = SFSpeechRecognitionTask()
 	var speechRecognitionStarted = false
 	
-	
 	var recorder:AVAudioRecorder?
 	var recordingSession:AVAudioSession!
 	var meterTimer:Timer?
@@ -51,22 +44,16 @@ class NewRecipeViewController: UIViewController {
 	var recorderPeak0:Float = 0
 	var audioURL:URL?
 	var stepAudio:NSData? = nil
+	
+	var audioPlaying: Bool  = false
+	var audioPlayer: AVAudioPlayer?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		ingredientsTable.delegate = self
-		ingredientsTable.dataSource = self
-		ingredientsTable.estimatedRowHeight = 50
-		ingredientsTable.rowHeight = UITableViewAutomaticDimension
-		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
-		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 
-		stepNumberLabel.text = String("\(stepNumber)")
-		stepDescriptionTextView.delegate = self
-
-		// image picker
+        // image picker
 		imagePickerController.delegate = self
 		imagePickerController.allowsEditing = true
 		
@@ -78,150 +65,86 @@ class NewRecipeViewController: UIViewController {
 			imagePickerController.sourceType = .photoLibrary
 		}
 		
-		doneButton.layer.cornerRadius = 3
-}
+        stepNumber = (steps?.count)!
+        self.title = "Add Step \(stepNumber) - Description"
+        stepAudioButton.isHidden = true
+        if descriptionSwitch.isOn {
+            stepDescriptionTextStyleView.isHidden = false
+            stepDescriptionAudioView.isHidden = true
+        } else {
+            stepDescriptionTextStyleView.isHidden = true
+            stepDescriptionAudioView.isHidden = false
+        }
+        
+        stepDescription.layer.borderWidth = 1
+        stepDescription.layer.borderColor = UIColor.lightGray.cgColor
+		stepAudioButton.isHidden = true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-	@IBAction func onCancel(_ sender: UIBarButtonItem) {
+    @IBAction func onDescriptionSwitchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            stepDescriptionTextStyleView.isHidden = false
+            stepDescriptionAudioView.isHidden = true
+        } else {
+            stepDescriptionTextStyleView.isHidden = true
+            stepDescriptionAudioView.isHidden = false
+        }
+    }
+    
+    @IBAction func onCancel(_ sender: UIBarButtonItem) {
 		dismiss(animated: true, completion: nil)
 	}
-	
-	@IBAction func clearIngredient(_ sender: Any) {
-		clearIngregientLabels()
-	}
-	
-	private func clearAll() {
-		clearIngregientLabels()
-		stepIngredientUnits.removeAll()
-		stepIngredientAmounts.removeAll()
-		stepIngredients.removeAll()
-		stepDescriptionTextView.text = ""
-		stepNotSaved = false
-		stepImageView.image = UIImage(named: "upload_image.png")
-		stepImageUploaded = false
-
-	}
-	
-	private func clearIngregientLabels() {
-		ingredientTextField.text = ""
-		amountTextField.text = ""
-		unitsTextField.text = ""
-	}
-	
-	@IBAction func addIngredient(_ sender: Any) {
-		if let name = ingredientTextField.text {
-			let ingredient = name
-			stepIngredients.append(ingredient)
-			if let amountStr = amountTextField.text {
-				stepIngredientAmounts.append(amountStr)
-			}
-			else {
-				print("InvalidAmount")
-				stepIngredients.removeLast()
-				amountTextField.becomeFirstResponder()
-				stepNotSaved = true
-			}
-			if let units = unitsTextField.text {
-				stepIngredientUnits.append(units)
-				ingredientTextField.becomeFirstResponder()
-				ingredientsTable.reloadData()
-				stepNotSaved = true
+    
+    @IBAction func onDescriptionNext(_ sender: UIButton) {
+        let cookingStep = steps?[stepNumber-1]
+		if descriptionSwitch.isOn {
+			if let stepDesc = stepDescription.text {
+				cookingStep?.desc = stepDesc
+				if stepImageUploaded {
+					cookingStep?.setImage(with: stepImageView.image)
+				}
 			} else {
-				print("Invalid Units")
-				stepIngredients.removeLast()
-				stepIngredientAmounts.removeLast()
-				unitsTextField.becomeFirstResponder()
+				print("step description is not present")
+				stepDescription.becomeFirstResponder()
 			}
 		} else {
-			print("Invalid Ingredient Name")
-			ingredientTextField.becomeFirstResponder()
-		}
-		clearIngregientLabels()
-	}
-	
-	@IBAction func onSave(_ sender: UIButton) {
-		if let stepDesc = stepDescriptionTextView.text {
-			let cookingStep = CookingStep()
-			cookingStep.desc = stepDesc
-			cookingStep.ingredients = stepIngredients
-			cookingStep.ingredientAmounts = stepIngredientAmounts
-			cookingStep.ingredientUnits = stepIngredientUnits
 			if let audio = stepAudio {
-				cookingStep.setAudioData(with: audio)
+				cookingStep?.setAudioData(with: audio)
 				stepAudio = nil
 			}
-			if stepImageUploaded {
-				cookingStep.setImage(with: stepImageView.image)
-			}
-			steps.append(cookingStep)
-			clearAll()
-			stepNumber = stepNumber + 1
-			stepNumberLabel.text = String("\(stepNumber)")
-			ingredientsTable.reloadData()
-			ingredientTextField.becomeFirstResponder()
-			stepNotSaved = false
-		} else {
-			print("step description is not present")
-			stepDescriptionTextView.becomeFirstResponder()
 		}
-	}
-	
-	@IBAction func onIngredientChanged(_ sender: UITextField) {
-		if !(ingredientTextField.text?.isEmpty)! {
-			stepNotSaved = true
+		if stepImageUploaded {
+			cookingStep?.setImage(with: stepImageView.image)
 		}
-	}
-	
-	@IBAction func onAmountChanged(_ sender: Any) {
-		if !((amountTextField.text?.isEmpty)!) {
-			stepNotSaved = true
-		}
-	}
-	
-	@IBAction func onUnitsChanged(_ sender: Any) {
-		if !(unitsTextField.text?.isEmpty)! {
-			stepNotSaved = true
-		}
-	}
-	
-	@IBAction func onDone(_ sender: UIButton) {
-		sender.pulsate()
-		if stepNotSaved {
-			presentAlert(alertTitle: "Step Not Saved, Clear Current Step?", showCancel: true)
-		} else if steps.count == 0 {
-			presentAlert(alertTitle: "No Steps in Recipe Yet, Cannot Proceed", showCancel: false)
-		} else {
-			performSegue(withIdentifier: "RecipeSummarySegue", sender: nil)
-		}
-	}
-	
-	private func presentAlert(alertTitle:String, showCancel: Bool) {
-		let alertController = UIAlertController()
-		// Alert Saying Step Not Saved
-		print(alertTitle)
-		// create a cancel action
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-			// handle cancel response here. Doing nothing will dismiss the view.
-		}
-		// add the cancel action to the alertController
-		if (showCancel) {
-			alertController.addAction(cancelAction)
-		}
-		
-		// create an OK action
-		let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-			// handle response here.
-			self.clearAll()
-		}
-		// add the OK action to the alert controller
-		alertController.addAction(OKAction)
-		alertController.title = alertTitle
-		present(alertController, animated: true, completion: nil)
-	}
+        presentStepDone()
+    }
+
+    private func presentStepDone() {
+        let alertController = UIAlertController()
+        // Alert Saying Step Not Saved
+        alertController.title = "Done With Steps?"
+        // create a cancel action
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (action) in
+            // handle cancel response here. Doing nothing will dismiss the view.
+			self.performSegue(withIdentifier: "IngredientsViewSegue", sender: nil)
+        }
+        // add the cancel action to the alertController
+        alertController.addAction(noAction)
+        
+        // create an OK action
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            // handle response here.
+            self.performSegue(withIdentifier: "RecipeSummarySegue", sender: nil)
+        }
+        // add the OK action to the alert controller
+        alertController.addAction(yesAction)
+        present(alertController, animated: true, completion: nil)
+    }
 	
 	@IBAction func speechButtonTapped(_ sender: UIButton) {
 		if speechRecognitionStarted {
@@ -260,45 +183,43 @@ class NewRecipeViewController: UIViewController {
 	@IBAction func onStopRecordAudio(_ sender: UIButton) {
 		recordStepAudioButton.stopFlash()
 		finishRecording()
-		stepNotSaved = true
 		stepAudio = NSData(contentsOf:audioURL!)
 		if stepAudio == nil {
 			print("Error: UNable to convert Audio URL to NSData")
+			stepAudioButton.isHidden = true
+		} else {
+			let data = stepAudio as Data?
+			stepAudioButton.isHidden = false
+			do {
+				try self.audioPlayer = AVAudioPlayer(data: data!)
+				self.audioPlayer?.delegate = self
+			} catch {
+				print("Unable to create audio player:", error.localizedDescription)
+			}
 		}
+	}
+
+	@IBAction func onAudioPlayTapped(_ sender: Any) {
+		stepAudioButton.setImage(#imageLiteral(resourceName: "speaker_on"), for: .normal)
+		stepAudioButton.flash()
+		audioPlayer?.play()
 	}
 	
 	// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-		let recipeSummaryViewController = segue.destination as! RecipeSummaryViewController
-        // Pass the selected object to the new view controller.
-		recipeSummaryViewController.cookingSteps = steps
+		if segue.identifier == "IngredientsViewSegue" {
+			let destVC = segue.destination as! IngredientsViewController
+			destVC.steps = self.steps
+		} else {
+			// Get the new view controller using segue.destinationViewController.
+			let recipeSummaryViewController = segue.destination as! RecipeSummaryViewController
+			// Pass the selected object to the new view controller.
+			recipeSummaryViewController.cookingSteps = steps
+		}
     }
 
-}
-
-extension NewRecipeViewController : UITextViewDelegate {
-	func textViewDidChange(_ textView: UITextView!) {
-		stepNotSaved = true
-	}
-}
-
-extension NewRecipeViewController: UITableViewDelegate, UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if (stepIngredients.count > 0) {
-			return stepIngredients.count
-		} else {
-			return 0
-		}
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = ingredientsTable.dequeueReusableCell(withIdentifier: "IngredientsTableViewCell", for: indexPath) as! IngredientsTableViewCell
-		cell.customInit(name: stepIngredients[indexPath.row], amount: stepIngredientAmounts[indexPath.row], units: stepIngredientUnits[indexPath.row])
-		return cell
-	}
 }
 
 extension NewRecipeViewController: SFSpeechRecognizerDelegate {
@@ -343,7 +264,7 @@ extension NewRecipeViewController: SFSpeechRecognizerDelegate {
 		speechRecognitionTask = (speechRecognizer?.recognitionTask(with: speechRecognitionRequest, resultHandler: { (result: SFSpeechRecognitionResult?, error: Error?) in
 			if let result = result {
 				let instructionString = result.bestTranscription.formattedString
-				self.stepDescriptionTextView.text = instructionString
+				self.stepDescription.text = instructionString
 			} else if let error = error {
 				print(error)
 			}
@@ -439,7 +360,6 @@ extension NewRecipeViewController : UIImagePickerControllerDelegate, UINavigatio
 		
 		self.stepImageView.contentMode = .center
 		self.stepImageView.contentMode = .scaleAspectFit
-		self.stepNotSaved = true
 		if editedImage != nil {
 			self.stepImageView.image = editedImage
 		} else {
@@ -448,6 +368,13 @@ extension NewRecipeViewController : UIImagePickerControllerDelegate, UINavigatio
 		
 		// Dismiss UIImagePickerController to go back to your original view controller
 		dismiss(animated: true, completion: nil)
+	}
+}
+
+extension NewRecipeViewController : AVAudioPlayerDelegate {
+	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+		stepAudioButton.stopFlash()
+		stepAudioButton.setImage(#imageLiteral(resourceName: "speaker_off"), for: .normal)
 	}
 }
 

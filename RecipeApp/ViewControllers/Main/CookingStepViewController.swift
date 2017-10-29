@@ -55,6 +55,7 @@ class CookingStepViewController: UIViewController {
 					if let audioData = data {
 						do {
 							try self.audioPlayer = AVAudioPlayer(data: audioData)
+							self.audioPlayer?.delegate = self
 						} catch {
 							print("Unable to create audio player:", error.localizedDescription)
 						}
@@ -123,6 +124,8 @@ class CookingStepViewController: UIViewController {
 	}
 	
 	@IBAction func onAudioPlayTapped(_ sender: Any) {
+		stepAudio.setImage(#imageLiteral(resourceName: "speaker_on"), for: .normal)
+		stepAudio.flash()
 		audioPlayer?.play()
 	}
 	
@@ -150,5 +153,12 @@ extension CookingStepViewController : UITableViewDataSource, UITableViewDelegate
 		}
 		cell.ingredientUnitsLabel.text = step?.ingredientUnits[indexPath.row]
 		return cell
+	}
+}
+
+extension CookingStepViewController : AVAudioPlayerDelegate {
+	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+		stepAudio.stopFlash()
+		stepAudio.setImage(#imageLiteral(resourceName: "speaker_off"), for: .normal)
 	}
 }

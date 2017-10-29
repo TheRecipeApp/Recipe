@@ -19,6 +19,7 @@ class RecipeSummaryViewController: UIViewController {
 	@IBOutlet weak var timeToCookTextField: UITextField!
 	@IBOutlet weak var descriptionTextField: UITextField!
 	@IBOutlet weak var recipeImage: UIImageView!
+	@IBOutlet weak var saveButton: UIButton!
 	var cookingSteps: [CookingStep]? = nil
 	let imagePickerController = UIImagePickerController()
 	var recipeImageUploaded = false
@@ -40,6 +41,7 @@ class RecipeSummaryViewController: UIViewController {
 		}
 		imagePickerController.delegate = self
 		imagePickerController.allowsEditing = true
+		saveButton.layer.cornerRadius = 3
 		
 		if UIImagePickerController.isSourceTypeAvailable(.camera) {
 			print("Camera is available 📸")
@@ -56,6 +58,7 @@ class RecipeSummaryViewController: UIViewController {
     }
     
 	@IBAction func onSaveRecipe(_ sender: Any) {
+		saveButton.pulsate()
 		// save the recipe
 		if let nameField = nameTextField, let name = nameTextField.text {
 			if (!name.isEmpty) {

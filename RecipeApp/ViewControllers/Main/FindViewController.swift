@@ -31,9 +31,7 @@ class FindViewController: UIViewController {
         collectionView.dataSource = self
         
         self.categoryView.subviews.forEach { (view: UIView) in
-            print(view.debugDescription)
-            let label = view as! UILabel
-            addTapRecognizer(to: label)
+            addTapRecognizer(to: view as! UILabelCategory)
         }
         
         self.noResultsLabel.isHidden = true
@@ -60,9 +58,15 @@ class FindViewController: UIViewController {
     
     func categoryTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         print("Category tapped")
-        let primaryColor = UIColor(named: "PrimaryColor")
-        let label = tapGestureRecognizer.view as! UILabel
-        label.backgroundColor = primaryColor
+        let label = tapGestureRecognizer.view as! UILabelCategory
+        if label.isActive == true {
+            let color = UIColor(named: "GraySmallHeader")
+            label.backgroundColor = color
+        } else {
+            let color = UIColor(named: "PrimaryColor")
+            label.backgroundColor = color
+        }
+        label.isActive = !label.isActive
         doSearch()
     }
     

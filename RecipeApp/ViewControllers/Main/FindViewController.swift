@@ -17,8 +17,10 @@ class FindViewController: UIViewController {
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var noResultsLabel: UILabel!
+    @IBOutlet var searchButton: UIButton!
     
     var recipes = [Recipe]()
+    var isSearchShown = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +50,15 @@ class FindViewController: UIViewController {
         label.addGestureRecognizer(tapRecognizer)
     }
     
-    @IBAction func onProfile(_ sender: UIBarButtonItem) {
-        print("Profile button pressed")
+    @IBAction func onShowSearch(_ sender: UIButton) {
+        if isSearchShown == true {
+            searchBar.isHidden = true
+            categoryView.isHidden = false
+        } else {
+            searchBar.isHidden = false
+            categoryView.isHidden = true
+        }
+        isSearchShown = !isSearchShown
     }
     
     @IBAction func onAddRecipe(_ sender: UIBarButtonItem) {
@@ -124,6 +133,7 @@ extension FindViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        onShowSearch(UIButton())
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

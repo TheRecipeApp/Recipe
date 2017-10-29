@@ -913,7 +913,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nox-4K-Dsy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="nox-4K-Dsy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1093,7 +1093,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KCl-I9-Fsu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="KCl-I9-Fsu">
                                 <rect key="frame" x="22" y="40" width="330" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="ktW-LJ-p3V"/>
@@ -1255,7 +1255,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xho-LR-osS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="Xho-LR-osS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1388,6 +1388,7 @@
         <image name="FindOff" width="24" height="22"/>
         <image name="FindOn" width="24" height="22"/>
         <image name="LogoWhiteBig" width="170" height="97"/>
+        <image name="NoRecipeImage" width="375" height="250"/>
         <image name="Profile" width="24" height="22"/>
         <image name="likes" width="278" height="278"/>
         <image name="sample_profile_image" width="480" height="480"/>

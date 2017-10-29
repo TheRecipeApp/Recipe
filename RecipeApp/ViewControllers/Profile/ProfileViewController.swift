@@ -45,8 +45,7 @@ class ProfileViewController: UIViewController {
         if (view.traitCollection.forceTouchCapability == .available) {
             print("Force touch is enabled for this device")
             registerForPreviewing(with: self, sourceView: self.recipiesCollectionView)
-            // TODO: Uncomment this once the cookbook view controller is implemented
-//            registerForPreviewing(with: self, sourceView: self.cookbooksCollectionView)
+            registerForPreviewing(with: self, sourceView: self.cookbooksCollectionView)
         }
         
         // TODO: Change this to another user
@@ -313,32 +312,49 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        // TODO: Add check for the cookbook collection view
-        let collection = previewingContext.sourceView as! UICollectionView
-        guard let indexPath = collection.indexPathForItem(at: location) else { return nil }
-        guard let cell = collection.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+        let collectionView = previewingContext.sourceView as! UICollectionView
+        guard let indexPath = collectionView.indexPathForItem(at: location) else { return nil }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        
-        // in order to initialize the outlets on the view
-        let view = detailVC.view
-        
-        detailVC.recipeId = cell.recipeId
-        detailVC.recipeImage.image = cell.recipeImage?.image
-        
-        detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
-        previewingContext.sourceRect = cell.frame
-        
-        return detailVC
+        if collectionView.tag == 0 {
+            let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            // in order to initialize the outlets on the view
+            let view = detailVC.view
+            
+            detailVC.recipeId = cell.recipeId
+            detailVC.recipeImage.image = cell.recipeImage?.image
+            
+            detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+            previewingContext.sourceRect = cell.frame
+            
+            return detailVC
+        } else {
+            // TODO: Figure out how to open the correctly
+            let detailVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
+            // TODO: Add missing parameter
+            detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+            previewingContext.sourceRect = cell.frame
+            
+            return detailVC
+        }
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let collectionView = previewingContext.sourceView as! UICollectionView
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
-        let detailVC = viewControllerToCommit as! DetailViewController
-        recipeVC.recipeId = detailVC.recipeId
-        show(recipeVC, sender: self)
+        if collectionView.tag == 0 {
+            let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+            let detailVC = viewControllerToCommit as! DetailViewController
+            recipeVC.recipeId = detailVC.recipeId
+            show(recipeVC, sender: self)
+        } else {
+            // TODO: Figure out how to open the correctly
+            let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+//            let detailVC = viewControllerToCommit as! CookbookViewController
+            // TODO: Add missing parameter
+            show(recipeVC, sender: self)
+        }
     }
 }
 

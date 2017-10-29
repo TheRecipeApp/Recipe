@@ -14,7 +14,8 @@ class StepDetailsViewController: UIViewController {
 	@IBOutlet weak var stepDescription: UITextView!
 	@IBOutlet weak var stepImage: UIImageView!
 	@IBOutlet weak var stepAudio: UIButton!
-	
+
+	var audioPlaying: Bool  = false
 	var step: CookingStep?
 	var audioPlayer: AVAudioPlayer?
 	
@@ -26,6 +27,8 @@ class StepDetailsViewController: UIViewController {
 		ingredientsTable.rowHeight = UITableViewAutomaticDimension
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
+		
+		audioPlayer?.delegate = self
 
         // Do any additional setup after loading the view.
 		stepDescription.text = step?.desc
@@ -41,6 +44,7 @@ class StepDetailsViewController: UIViewController {
 					if let audioData = data {
 						do {
 							try self.audioPlayer = AVAudioPlayer(data: audioData)
+							self.audioPlayer?.delegate = self
 						} catch {
 							print("Unable to create audio player:", error.localizedDescription)
 						}
@@ -71,6 +75,8 @@ class StepDetailsViewController: UIViewController {
     }
     
 	@IBAction func onAudioPlayTapped(_ sender: Any) {
+		stepAudio.setImage(#imageLiteral(resourceName: "speaker_on"), for: .normal)
+		stepAudio.flash()
 		audioPlayer?.play()
 	}
 	
@@ -99,6 +105,12 @@ extension StepDetailsViewController : UITableViewDataSource, UITableViewDelegate
 		cell.ingredientUnitsLabel.text = step?.ingredientUnits[indexPath.row]
 		return cell
 	}
-	
-	
 }
+
+extension StepDetailsViewController : AVAudioPlayerDelegate {
+	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+		stepAudio.stopFlash()
+		stepAudio.setImage(#imageLiteral(resourceName: "speaker_off"), for: .normal)
+	}
+}
+

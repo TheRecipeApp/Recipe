@@ -980,7 +980,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="1W6-fg-8R1" kind="show" id="QbQ-kf-DeS"/>
+                                            <action selector="onCookThis:" destination="Y1v-pJ-waA" eventType="touchUpInside" id="EEW-i7-XLV"/>
+                                            <segue destination="1W6-fg-8R1" kind="show" identifier="CookingStepDetailsSegue" id="QbQ-kf-DeS"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Owner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hr-5Z-cdm">

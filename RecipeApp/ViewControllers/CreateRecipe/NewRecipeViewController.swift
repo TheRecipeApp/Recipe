@@ -21,8 +21,10 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var micButton: UIButton!
 	@IBOutlet weak var stepImageView: UIImageView!
 	@IBOutlet weak var doneButton: UIButton!
+	@IBOutlet weak var stopRecordButton: UIButton!
+	@IBOutlet weak var recordStepAudioButton: UIButton!
 	
-	private var stepNumber: Int = 1
+	private var stepNumber = 1
 	var steps = [CookingStep]()
 	var stepIngredients = [String]()
 	var stepIngredientAmounts = [String]()
@@ -156,12 +158,11 @@ class NewRecipeViewController: UIViewController {
 				cookingStep.setImage(with: stepImageView.image)
 			}
 			steps.append(cookingStep)
+			clearAll()
 			stepNumber = stepNumber + 1
 			stepNumberLabel.text = String("\(stepNumber)")
-			stepDescriptionTextView.text = ""
-			ingredientTextField.becomeFirstResponder()
-			clearAll()
 			ingredientsTable.reloadData()
+			ingredientTextField.becomeFirstResponder()
 			stepNotSaved = false
 		} else {
 			print("step description is not present")
@@ -188,6 +189,7 @@ class NewRecipeViewController: UIViewController {
 	}
 	
 	@IBAction func onDone(_ sender: UIButton) {
+		sender.pulsate()
 		if stepNotSaved {
 			presentAlert(alertTitle: "Step Not Saved, Clear Current Step?", showCancel: true)
 		} else if steps.count == 0 {
@@ -224,6 +226,7 @@ class NewRecipeViewController: UIViewController {
 	@IBAction func speechButtonTapped(_ sender: UIButton) {
 		if speechRecognitionStarted {
 			self.micButton.setImage(#imageLiteral(resourceName: "mic"), for: .normal)
+			self.micButton.stopFlash()
 			audioEngine.stop()
 			
 			if let node = audioEngine.inputNode {
@@ -233,6 +236,7 @@ class NewRecipeViewController: UIViewController {
 			speechRecognitionStarted = false
 		} else {
 			self.micButton.setImage(#imageLiteral(resourceName: "mic green"), for: .normal)
+			self.micButton.flash()
 			self.recordAndRecognizeSpeech()
 		}
 	}
@@ -242,8 +246,10 @@ class NewRecipeViewController: UIViewController {
 		stepImageUploaded = true
 	}
 	
-	@IBAction func onRecordAudioTapped(_ sender: Any) {
-		let status = self.record(filename: "testfile")
+	@IBAction func onRecordAudioTapped(_ sender: UIButton) {
+		let audioFileName = String("step\(stepNumber)")
+		sender.flash()
+		let status = self.record(filename: audioFileName!)
 		if status {
 			print("record successful")
 		} else {
@@ -251,7 +257,8 @@ class NewRecipeViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func onStopRecordAudio(_ sender: Any) {
+	@IBAction func onStopRecordAudio(_ sender: UIButton) {
+		recordStepAudioButton.stopFlash()
 		finishRecording()
 		stepNotSaved = true
 		stepAudio = NSData(contentsOf:audioURL!)
@@ -444,4 +451,34 @@ extension NewRecipeViewController : UIImagePickerControllerDelegate, UINavigatio
 	}
 }
 
+extension UIButton {
+	func flash() {
+		let flash = CABasicAnimation(keyPath: "opacity")
+		flash.duration = 0.5
+		flash.fromValue = 1
+		flash.toValue = 0.1
+		flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+		flash.autoreverses = true
+		flash.repeatCount = 1000
+		
+		layer.add(flash, forKey: nil)
+	}
+	
+	func pulsate() {
+		let pulse = CASpringAnimation(keyPath: "transform.scale")
+		pulse.duration = 0.6
+		pulse.fromValue = 0.95
+		pulse.toValue = 1.0
+		pulse.autoreverses = true
+		pulse.repeatCount = 2
+		pulse.initialVelocity = 0.5
+		pulse.damping = 1.0
+		
+		layer.add(pulse, forKey: "pulse")
+	}
+
+	func stopFlash() {
+		layer.removeAllAnimations()
+	}
+}
 

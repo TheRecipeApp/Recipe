@@ -295,9 +295,11 @@
                         <outlet property="ingredientTextField" destination="owf-xG-KAP" id="2Qg-cP-uam"/>
                         <outlet property="ingredientsTable" destination="pN7-Nt-bUF" id="rzr-18-rAx"/>
                         <outlet property="micButton" destination="zgG-E2-Pbg" id="keH-N7-l4H"/>
+                        <outlet property="recordStepAudioButton" destination="GcL-91-MeI" id="HWS-5w-bcg"/>
                         <outlet property="stepDescriptionTextView" destination="xoy-YJ-Do5" id="qUX-9V-0Ar"/>
                         <outlet property="stepImageView" destination="RE8-4L-pTY" id="C3J-Np-gOc"/>
                         <outlet property="stepNumberLabel" destination="MZa-jb-uSG" id="bzK-cx-JWR"/>
+                        <outlet property="stopRecordButton" destination="xUy-Cw-zJq" id="1D8-vC-Hqu"/>
                         <outlet property="unitsTextField" destination="PCq-P4-MQt" id="odh-h9-RWL"/>
                         <segue destination="8vK-rh-AAc" kind="show" identifier="RecipeSummarySegue" id="nAb-Gp-m4j"/>
                     </connections>
@@ -520,6 +522,7 @@
                         <outlet property="nameTextField" destination="Y3n-nn-hUg" id="WTE-fK-0bo"/>
                         <outlet property="recipeImage" destination="0Rz-4o-p7L" id="wVP-Om-ume"/>
                         <outlet property="recipeStepsTable" destination="idR-6g-kHU" id="FyA-k0-G39"/>
+                        <outlet property="saveButton" destination="LSo-EN-sy0" id="ZZo-aL-yYr"/>
                         <outlet property="timeToCookTextField" destination="BDX-QH-VYN" id="mIT-xE-iUN"/>
                         <segue destination="MZT-yE-fDX" kind="show" identifier="StepDetailsSegue" id="Gve-pL-cHV"/>
                     </connections>

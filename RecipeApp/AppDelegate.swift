@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             // For testing cookbook vc - remove when done
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "CookbookNavigationController")
-//            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
+//            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "CookbookNavigationController")
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
 		} else {
 			// Override point for customization after application launch.
 			let storyboard = UIStoryboard(name: "Login", bundle: nil)

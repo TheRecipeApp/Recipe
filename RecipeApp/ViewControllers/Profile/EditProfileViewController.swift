@@ -11,11 +11,20 @@ import Parse
 import Contacts
 import ContactsUI
 
+@objc protocol EditProfileViewControllerDelegate {
+    @objc optional func editProfileViewController(editProfileViewController: EditProfileViewController, didUpdateUser user: User?)
+}
+
+
 class EditProfileViewController: UIViewController {
 
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
     @IBOutlet var preferenceSegmentedControl: UISegmentedControl!
+    
+    var userObject: User?
+    
+    weak var delegate: EditProfileViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +38,18 @@ class EditProfileViewController: UIViewController {
         lastNameTextField.delegate = self
         
         let currentUser = User.current()
-        firstNameTextField.text = currentUser?.firstName
-        lastNameTextField.text = currentUser?.lastName
-        if currentUser?.preference == 0 || currentUser?.preference == 1 {
-            preferenceSegmentedControl.selectedSegmentIndex = currentUser!.preference
+        userObject = User.fetchUser(by: (currentUser?.objectId)!)
+        firstNameTextField.text = userObject?.firstName
+        lastNameTextField.text = userObject?.lastName
+        if let preference = userObject?.preference {
+            if preference == 1 || preference == 0 {
+                preferenceSegmentedControl.selectedSegmentIndex = preference
+            }
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +68,14 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func onSave(_ sender: UIBarButtonItem) {
-        // TODO: Save Info back to Parse
+        let firstName = firstNameTextField.text
+        let lastName = lastNameTextField.text
+        let selectedPreference = preferenceSegmentedControl.selectedSegmentIndex
+        userObject?.firstName = firstName
+        userObject?.lastName = lastName
+        userObject?.preference = selectedPreference
+        userObject?.saveInBackground()
+        delegate?.editProfileViewController?(editProfileViewController: self, didUpdateUser: userObject)
         self.navigationController?.popViewController(animated: true)
     }
     

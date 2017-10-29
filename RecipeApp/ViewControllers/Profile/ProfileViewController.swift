@@ -42,26 +42,25 @@ class ProfileViewController: UIViewController {
         cookbooksCollectionView.dataSource = self
         cookbooksCollectionView.delegate = self
         
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height + 100)
+        if (view.traitCollection.forceTouchCapability == .available) {
+            print("Force touch is enabled for this device")
+            registerForPreviewing(with: self, sourceView: self.recipiesCollectionView)
+            registerForPreviewing(with: self, sourceView: self.cookbooksCollectionView)
+        }
         
         // TODO: Change this to another user
-        displayScreen.text = "@\(currentUser?.username ?? "NA")"
-        recipiesCountLabel.text = "12"
-        complimentsCountLabel.text = "1000"
-        followersCountLabel.text = "188"
-        cookbooksCountLabel.text = "12"
-        if currentUser!["firstName"] == nil {
-            if currentUser!["lastName"] == nil {
-                nameLabel.text = "@\(currentUser?.username ?? "NA")"
-            } else {
-                nameLabel.text = "\(currentUser!["lastName"])"
-            }
-        } else {
-            if currentUser!["lastName"] == nil {
-                nameLabel.text = "\(currentUser!["firstName"])"
-            } else {
-                nameLabel.text = "\(currentUser!["firstName"]) \(currentUser!["lastName"])"
-            }
+        let userObject = User.fetchUser(by: (currentUser?.objectId)!)
+        populateUser(user: userObject!)
+        
+        let userImage = userObject?.profileImage
+        if userImage != nil {
+            userImage?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                if error == nil {
+                    if let imageData = imageData {
+                        self.displayProfilePicture(image: UIImage(data: imageData)!)
+                    }
+                }
+            })
         }
         
         fetchTopRecipes()
@@ -93,6 +92,27 @@ class ProfileViewController: UIViewController {
                 self.recipiesCollectionView.reloadData()
             }
         })
+    }
+    
+    func populateUser(user: User) {
+        displayScreen.text = "@\(user.username ?? "username")"
+        recipiesCountLabel.text = "12"
+        complimentsCountLabel.text = "1000"
+        followersCountLabel.text = "188"
+        cookbooksCountLabel.text = "12"
+        if user.firstName == nil {
+            if user.lastName == nil {
+                nameLabel.text = "@\(user.username!)"
+            } else {
+                nameLabel.text = "\(user.lastName!)"
+            }
+        } else {
+            if user.lastName == nil {
+                nameLabel.text = "\(user.firstName!)"
+            } else {
+                nameLabel.text = "\(user.firstName!) \(user.lastName!)"
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -189,16 +209,16 @@ class ProfileViewController: UIViewController {
         
         present(actionSheet, animated: true, completion: nil)
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "editSegue" {
+            let editProfileViewController = segue.destination as! EditProfileViewController
+            editProfileViewController.delegate = self
+        }
     }
-    */
-
 }
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -220,9 +240,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 })
             }
             cell.recipeId = recipe.objectId
-            cell.categoryLabel.text = "INDIAN"
-            if let username = PFUser.current()?.username {
-                cell.createdByLabel.text = "by @\(username)"
+            cell.categoryLabel.text = recipe.category
+            if let owner = User.fetchUser(by: recipe.owner!) {
+                cell.createdByLabel.text = "by @\(owner.username!)"
             } else {
                 cell.createdByLabel.text = ""
             }
@@ -271,7 +291,10 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 0 {
-            print("TODO: Navigate to the recipe detail")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+            recipeVC.recipeId = recipies[indexPath.row].objectId
+            show(recipeVC, sender: self)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cookbookVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
@@ -282,6 +305,62 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             self.navigationController?.pushViewController(cookbookVC, animated: true)
         }
+    }
+}
+
+extension ProfileViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let collectionView = previewingContext.sourceView as! UICollectionView
+        guard let indexPath = collectionView.indexPathForItem(at: location) else { return nil }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if collectionView.tag == 0 {
+            let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            // in order to initialize the outlets on the view
+            let view = detailVC.view
+            
+            detailVC.recipeId = cell.recipeId
+            detailVC.recipeImage.image = cell.recipeImage?.image
+            
+            detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+            previewingContext.sourceRect = cell.frame
+            
+            return detailVC
+        } else {
+            // TODO: Figure out how to open the correctly
+            let detailVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
+            // TODO: Add missing parameter
+            detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+            previewingContext.sourceRect = cell.frame
+            
+            return detailVC
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let collectionView = previewingContext.sourceView as! UICollectionView
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if collectionView.tag == 0 {
+            let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+            let detailVC = viewControllerToCommit as! DetailViewController
+            recipeVC.recipeId = detailVC.recipeId
+            show(recipeVC, sender: self)
+        } else {
+            // TODO: Figure out how to open the correctly
+            let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+//            let detailVC = viewControllerToCommit as! CookbookViewController
+            // TODO: Add missing parameter
+            show(recipeVC, sender: self)
+        }
+    }
+}
+
+extension ProfileViewController: EditProfileViewControllerDelegate {
+    func editProfileViewController(editProfileViewController: EditProfileViewController, didUpdateUser user: User?) {
+        populateUser(user: user!)
     }
 }
 

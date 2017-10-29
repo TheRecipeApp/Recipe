@@ -16,7 +16,11 @@ class FindViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet var noResultsLabel: UILabel!
+    @IBOutlet var searchButton: UIButton!
+    
     var recipes = [Recipe]()
+    var isSearchShown = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +33,10 @@ class FindViewController: UIViewController {
         collectionView.dataSource = self
         
         self.categoryView.subviews.forEach { (view: UIView) in
-            print(view.debugDescription)
-            let label = view as! UILabel
-            addTapRecognizer(to: label)
+            addTapRecognizer(to: view as! UILabelCategory)
         }
+        
+        self.noResultsLabel.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,8 +50,15 @@ class FindViewController: UIViewController {
         label.addGestureRecognizer(tapRecognizer)
     }
     
-    @IBAction func onProfile(_ sender: UIBarButtonItem) {
-        print("Profile button pressed")
+    @IBAction func onShowSearch(_ sender: UIButton) {
+        if isSearchShown == true {
+            searchBar.isHidden = true
+            categoryView.isHidden = false
+        } else {
+            searchBar.isHidden = false
+            categoryView.isHidden = true
+        }
+        isSearchShown = !isSearchShown
     }
     
     @IBAction func onAddRecipe(_ sender: UIBarButtonItem) {
@@ -56,9 +67,15 @@ class FindViewController: UIViewController {
     
     func categoryTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         print("Category tapped")
-        let primaryColor = UIColor(named: "PrimaryColor")
-        let label = tapGestureRecognizer.view as! UILabel
-        label.backgroundColor = primaryColor
+        let label = tapGestureRecognizer.view as! UILabelCategory
+        if label.isActive == true {
+            let color = UIColor(named: "GraySmallHeader")
+            label.backgroundColor = color
+        } else {
+            let color = UIColor(named: "PrimaryColor")
+            label.backgroundColor = color
+        }
+        label.isActive = !label.isActive
         doSearch()
     }
     
@@ -82,11 +99,18 @@ class FindViewController: UIViewController {
                 print("Successfully retrieved \(objects!.count) recipes.")
                 // Do something with the found objects
                 if let objects = objects {
-                    for object in objects {
-                        print(object.objectId!)
-                        self.recipes.append(object as! Recipe)
+                    if objects.count > 0 {
+                        self.noResultsLabel.isHidden = true
+                        self.collectionView.isHidden = false
+                        for object in objects {
+                            print(object.objectId!)
+                            self.recipes.append(object as! Recipe)
+                        }
+                        self.collectionView.reloadData()
+                    } else {
+                        self.noResultsLabel.isHidden = false
+                        self.collectionView.isHidden = true
                     }
-                    self.collectionView.reloadData()
                 }
             }
         })
@@ -109,6 +133,7 @@ extension FindViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        onShowSearch(UIButton())
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -133,9 +158,9 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
             })
         }
         cell.recipeId = recipe.objectId
-        cell.categoryLabel.text = "INDIAN"
-        if let username = PFUser.current()?.username {
-            cell.createdByLabel.text = "by @\(username)"
+        cell.categoryLabel.text = recipe.category?.uppercased()
+        if let owner = User.fetchUser(by: recipe.owner!) {
+            cell.createdByLabel.text = "by @\(owner.username!)"
         } else {
             cell.createdByLabel.text = ""
         }
@@ -153,46 +178,3 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-/*
-extension FindViewController: iCarouselDelegate, iCarouselDataSource {
-    
-    func numberOfItems(in carousel: iCarousel) -> Int {
-        return recipes.count
-    }
-    
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        let tempView = RecipeBlockView(frame: CGRect(x: 0, y: 0, width: 172, height: 172))
-        let recipeImageFile = recipes[index].image
-        if recipeImageFile != nil {
-            recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
-                if error == nil {
-                    if let imageData = imageData {
-                        let image = UIImage(data:imageData)
-                        tempView.image = image
-                    }
-                }
-            })
-        }
-        
-        tempView.recipeId = recipes[index].objectId
-        tempView.imgTag = "test"
-        tempView.owner = PFUser.current()?.username
-        tempView.title = recipes[index].name
-        tempView.isUserInteractionEnabled = true
-        
-        let recipeTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(FindViewController.recipeTapped(tapGestureRecognizer:)))
-        tempView.addGestureRecognizer(recipeTapRecognizer)
-        
-        return tempView
-    }
-    
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if (option == iCarouselOption.spacing) {
-            return value * 1.1
-        }
-        
-        
-        return value
-    }
-}
-*/

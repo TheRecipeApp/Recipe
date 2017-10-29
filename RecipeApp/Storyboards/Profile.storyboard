@@ -340,7 +340,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="FM8-0O-GZs">
                             <connections>
-                                <segue destination="cjM-rc-cs7" kind="show" id="HUh-Vx-3px"/>
+                                <segue destination="cjM-rc-cs7" kind="show" identifier="editSegue" id="HUh-Vx-3px"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

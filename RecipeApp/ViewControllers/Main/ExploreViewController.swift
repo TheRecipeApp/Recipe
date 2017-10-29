@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-import iCarousel
 import MBProgressHUD
 
 class ExploreViewController: UIViewController {
@@ -56,7 +55,6 @@ class ExploreViewController: UIViewController {
         query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
             if error == nil {
                 print("CarouselType: \(type)")
-                
                 // The find succeeded.
                 print("Successfully retrieved \(objects!.count) recipes.")
                 // Do something with the found objects
@@ -184,6 +182,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
 }
+
 extension ExploreViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -199,17 +198,26 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
         
         guard let indexPath = self.trendingCollectionView?.indexPathForItem(at: location) else { return nil }
         guard let cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+        
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        // in order to initialize outlets on the view
+        
+        // in order to initialize the outlets on the view
         let view = detailVC.view
-        detailVC.imageView.image = cell.recipeImage?.image
+        
+        detailVC.recipeId = cell.recipeId
+        detailVC.recipeImage.image = cell.recipeImage?.image
+        
         detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
         previewingContext.sourceRect = cell.frame
+        
         return detailVC
      }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        show(viewControllerToCommit, sender: self)
+        let recipeVC = storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        let detailVC = viewControllerToCommit as! DetailViewController
+        recipeVC.recipeId = detailVC.recipeId
+        show(recipeVC, sender: self)
     }
 }
 

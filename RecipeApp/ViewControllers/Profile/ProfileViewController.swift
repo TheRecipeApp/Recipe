@@ -48,6 +48,17 @@ class ProfileViewController: UIViewController {
         let userObject = User.fetchUser(by: (currentUser?.objectId)!)
         populateUser(user: userObject!)
         
+        let userImage = userObject?.profileImage
+        if userImage != nil {
+            userImage?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                if error == nil {
+                    if let imageData = imageData {
+                        self.displayProfilePicture(image: UIImage(data: imageData)!)
+                    }
+                }
+            })
+        }
+        
         fetchTopRecipes()
         
         for i in 1...10 {

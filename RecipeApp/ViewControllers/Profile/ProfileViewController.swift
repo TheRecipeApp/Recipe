@@ -45,24 +45,8 @@ class ProfileViewController: UIViewController {
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height + 100)
         
         // TODO: Change this to another user
-        displayScreen.text = "@\(currentUser?.username ?? "NA")"
-        recipiesCountLabel.text = "12"
-        complimentsCountLabel.text = "1000"
-        followersCountLabel.text = "188"
-        cookbooksCountLabel.text = "12"
-        if currentUser!["firstName"] == nil {
-            if currentUser!["lastName"] == nil {
-                nameLabel.text = "@\(currentUser?.username ?? "NA")"
-            } else {
-                nameLabel.text = "\(currentUser!["lastName"])"
-            }
-        } else {
-            if currentUser!["lastName"] == nil {
-                nameLabel.text = "\(currentUser!["firstName"])"
-            } else {
-                nameLabel.text = "\(currentUser!["firstName"]) \(currentUser!["lastName"])"
-            }
-        }
+        let userObject = User.fetchUser(by: (currentUser?.objectId)!)
+        populateUser(user: userObject!)
         
         fetchTopRecipes()
         
@@ -93,6 +77,27 @@ class ProfileViewController: UIViewController {
                 self.recipiesCollectionView.reloadData()
             }
         })
+    }
+    
+    func populateUser(user: User) {
+        displayScreen.text = "@\(user.username ?? "username")"
+        recipiesCountLabel.text = "12"
+        complimentsCountLabel.text = "1000"
+        followersCountLabel.text = "188"
+        cookbooksCountLabel.text = "12"
+        if user.firstName == nil {
+            if user.lastName == nil {
+                nameLabel.text = "@\(user.username!)"
+            } else {
+                nameLabel.text = "\(user.lastName!)"
+            }
+        } else {
+            if user.lastName == nil {
+                nameLabel.text = "\(user.firstName!)"
+            } else {
+                nameLabel.text = "\(user.firstName!) \(user.lastName!)"
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -189,16 +194,16 @@ class ProfileViewController: UIViewController {
         
         present(actionSheet, animated: true, completion: nil)
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "editSegue" {
+            let editProfileViewController = segue.destination as! EditProfileViewController
+            editProfileViewController.delegate = self
+        }
     }
-    */
-
 }
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -282,6 +287,12 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             self.navigationController?.pushViewController(cookbookVC, animated: true)
         }
+    }
+}
+
+extension ProfileViewController: EditProfileViewControllerDelegate {
+    func editProfileViewController(editProfileViewController: EditProfileViewController, didUpdateUser user: User?) {
+        populateUser(user: user!)
     }
 }
 

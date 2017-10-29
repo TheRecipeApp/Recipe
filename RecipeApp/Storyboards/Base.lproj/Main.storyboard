@@ -988,15 +988,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsT-UE-BR7">
-                                        <rect key="frame" x="285" y="4" width="80" height="33"/>
+                                        <rect key="frame" x="265" y="4" width="100" height="33"/>
                                         <color key="backgroundColor" name="PrimaryColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="mEU-fy-01z"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <state key="normal" title="Cook This">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="onCookThis:" destination="Y1v-pJ-waA" eventType="touchUpInside" id="EEW-i7-XLV"/>
-                                            <segue destination="1W6-fg-8R1" kind="show" identifier="CookingStepDetailsSegue" id="QbQ-kf-DeS"/>
+                                            <segue destination="1W6-fg-8R1" kind="show" id="neF-G1-Xtg"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Owner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hr-5Z-cdm">
@@ -1065,7 +1067,7 @@
                     </view>
                     <connections>
                         <outlet property="category" destination="kLc-Sj-TUI" id="6BD-LI-sAa"/>
-                        <outlet property="cookThisButton" destination="EsT-UE-BR7" id="bBZ-3X-R9i"/>
+                        <outlet property="cookThisButton" destination="EsT-UE-BR7" id="ksI-82-T4d"/>
                         <outlet property="cuisine" destination="KUI-HU-A4e" id="92N-Zx-bGY"/>
                         <outlet property="difficulty" destination="BrZ-h6-q5O" id="N40-Rs-Mat"/>
                         <outlet property="owner" destination="6hr-5Z-cdm" id="kvl-rl-pai"/>

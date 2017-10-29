@@ -42,7 +42,12 @@ class ProfileViewController: UIViewController {
         cookbooksCollectionView.dataSource = self
         cookbooksCollectionView.delegate = self
         
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height + 100)
+        if (view.traitCollection.forceTouchCapability == .available) {
+            print("Force touch is enabled for this device")
+            registerForPreviewing(with: self, sourceView: self.recipiesCollectionView)
+            // TODO: Uncomment this once the cookbook view controller is implemented
+//            registerForPreviewing(with: self, sourceView: self.cookbooksCollectionView)
+        }
         
         // TODO: Change this to another user
         let userObject = User.fetchUser(by: (currentUser?.objectId)!)
@@ -237,8 +242,8 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             cell.recipeId = recipe.objectId
             cell.categoryLabel.text = "INDIAN"
-            if let username = PFUser.current()?.username {
-                cell.createdByLabel.text = "by @\(username)"
+            if let owner = User.fetchUser(by: recipe.owner!) {
+                cell.createdByLabel.text = "by @\(owner.username!)"
             } else {
                 cell.createdByLabel.text = ""
             }
@@ -287,7 +292,10 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 0 {
-            print("TODO: Navigate to the recipe detail")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+            recipeVC.recipeId = recipies[indexPath.row].objectId
+            show(recipeVC, sender: self)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cookbookVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
@@ -298,6 +306,39 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             self.navigationController?.pushViewController(cookbookVC, animated: true)
         }
+    }
+}
+
+extension ProfileViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        // TODO: Add check for the cookbook collection view
+        let collection = previewingContext.sourceView as! UICollectionView
+        guard let indexPath = collection.indexPathForItem(at: location) else { return nil }
+        guard let cell = collection.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        
+        // in order to initialize the outlets on the view
+        let view = detailVC.view
+        
+        detailVC.recipeId = cell.recipeId
+        detailVC.recipeImage.image = cell.recipeImage?.image
+        
+        detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+        previewingContext.sourceRect = cell.frame
+        
+        return detailVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let recipeVC = storyboard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        let detailVC = viewControllerToCommit as! DetailViewController
+        recipeVC.recipeId = detailVC.recipeId
+        show(recipeVC, sender: self)
     }
 }
 

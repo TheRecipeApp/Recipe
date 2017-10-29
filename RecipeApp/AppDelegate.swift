@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
+        // Force all nav bar items to appear white
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
 		Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
 			configuration.applicationId = self.parseApplicationId
 			configuration.server = "http://\(self.parseServer)"
@@ -35,7 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let user = PFUser.current()
         if user != nil {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-			window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
+            
+            // For testing cookbook vc - remove when done
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "CookbookNavigationController")
+//            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
 		} else {
 			// Override point for customization after application launch.
 			let storyboard = UIStoryboard(name: "Login", bundle: nil)

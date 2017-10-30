@@ -17,7 +17,7 @@ class RecipeViewController: UIViewController {
 	@IBOutlet weak var timeToCook: UILabel!
 	@IBOutlet weak var difficulty: UILabel!
 	@IBOutlet weak var cuisine: UILabel!
-	@IBOutlet weak var category: UILabel!
+    @IBOutlet var categoryLabel: UILabelCategory!
 	@IBOutlet weak var recipeImage: UIImageView!
 	@IBOutlet weak var owner: UILabel!
 	@IBOutlet weak var cookThisButton: UIButton!
@@ -37,6 +37,8 @@ class RecipeViewController: UIViewController {
 		cookThisButton.layer.cornerRadius = 3
 		// fetch the cooking steps for the recipe
 		fetchRecipe()
+        
+        categoryLabel.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +49,7 @@ class RecipeViewController: UIViewController {
 	func setupRecipeFields() {
 		if recipe != nil {
 			if let nameStr = recipe?.name {
-				recipeName.text = nameStr
+                recipeName.text = nameStr
 			}
 			if let desc = recipe?.desc {
 				recipeDescription.text = desc
@@ -62,10 +64,11 @@ class RecipeViewController: UIViewController {
 				cuisine.text = cuisineStr
 			}
 			if let categoryStr = recipe?.category {
-				category.text = categoryStr
+				categoryLabel.text = categoryStr.uppercased()
+                categoryLabel.isHidden = false
 			}
             if let likes = recipe?.likes {
-                likesCount.text = "\(likes)"
+                likesCount.text = "\(likes) Compliments"
             }
 			if let ownerStr = recipeOwner?.username {
 				owner.text = "@" + ownerStr
@@ -93,7 +96,6 @@ class RecipeViewController: UIViewController {
 			if error == nil {
 				if let imageData = data {
 					self.recipeImage.image = UIImage(data: imageData)
-					self.recipeImage.contentMode = .scaleAspectFit
 				}
 			}
 		})

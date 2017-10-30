@@ -21,8 +21,9 @@ class RecipeViewController: UIViewController {
 	@IBOutlet weak var recipeImage: UIImageView!
 	@IBOutlet weak var owner: UILabel!
 	@IBOutlet weak var cookThisButton: UIButton!
-	
-	var recipeId : String?
+    @IBOutlet weak var likesCount: UILabel!
+    
+    var recipeId : String?
 	var recipe: Recipe?
 	var recipeOwner: User?
 	
@@ -63,11 +64,15 @@ class RecipeViewController: UIViewController {
 			if let categoryStr = recipe?.category {
 				category.text = categoryStr
 			}
+            if let likes = recipe?.likes {
+                likesCount.text = "\(likes)"
+            }
 			if let ownerStr = recipeOwner?.username {
 				owner.text = "@" + ownerStr
 			} else {
 				owner.text = "@..."
 			}
+            
 			// get recipe image
 			setupRecipeImage()
 		}

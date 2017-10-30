@@ -12,6 +12,7 @@ import MBProgressHUD
 
 class ExploreViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var trendingCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     @IBOutlet weak var localTrendsCollectionView: UICollectionView!
@@ -25,6 +26,15 @@ class ExploreViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // Set up delegate and datasource
+        self.trendingCollectionView.dataSource = self
+        self.trendingCollectionView.delegate = self
+        self.favoritesCollectionView.dataSource = self
+        self.favoritesCollectionView.delegate = self
+        self.localTrendsCollectionView.dataSource = self
+        self.localTrendsCollectionView.delegate = self
+        
+        // For setting up peek and pop functionality
         if (view.traitCollection.forceTouchCapability == .available) {
             print("force touch is enabled for this device")
             registerForPreviewing(with: self, sourceView: self.trendingCollectionView)
@@ -32,29 +42,33 @@ class ExploreViewController: UIViewController {
             registerForPreviewing(with: self, sourceView: self.localTrendsCollectionView)
         }
         
+        // For using custom xib for each recipe
         self.trendingCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
         self.favoritesCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
         self.localTrendsCollectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
 
-        self.trendingCollectionView.dataSource = self
-        self.trendingCollectionView.delegate = self
-       
-        self.favoritesCollectionView.dataSource = self
-        self.favoritesCollectionView.delegate = self
         
-        self.localTrendsCollectionView.dataSource = self
-        self.localTrendsCollectionView.delegate = self
+        // for pull-down refresh action
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self.scrollView, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching...")
+        self.scrollView.insertSubview(refreshControl, at: 0)
         
-        fetchRecipes(carouselName: "trending")
-        fetchRecipes(carouselName: "favorites")
-        fetchRecipes(carouselName: "localTrends")
+        fetchRecipes(collectionViewName: "trending")
+        fetchRecipes(collectionViewName: "favorites")
+        fetchRecipes(collectionViewName: "localTrends")
     }
     
-    func fetchRecipes(carouselName type: String) {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchRecipes(collectionViewName type: String) {
         let query = PFQuery(className: "Recipe")
         query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
             if error == nil {
-                print("CarouselType: \(type)")
+                print("collectionViewName: \(type)")
                 // The find succeeded.
                 print("Successfully retrieved \(objects!.count) recipes.")
                 // Do something with the found objects
@@ -82,18 +96,14 @@ class ExploreViewController: UIViewController {
         })
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @objc private func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        print("Refresh action called")
+        fetchRecipes(collectionViewName: "trending")
+        fetchRecipes(collectionViewName: "favorites")
+        fetchRecipes(collectionViewName: "localTrends")
+        refreshControl.endRefreshing()
     }
     
-    @IBAction func onProfile(_ sender: UIBarButtonItem) {
-        print("Profile button pressed")
-    }
-    
-    @IBAction func onAddRecipe(_ sender: Any) {
-        print("Add recipe button pressed")
-    }
     
 //     In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -146,21 +156,60 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+        cell.isUserInteractionEnabled = true
         
         var recipeImageFile: PFFile? = nil
+        
         if collectionView == self.trendingCollectionView {
-            recipeImageFile = self.trending[indexPath.row].image
-            cell.recipeTitle.text = self.trending[indexPath.row].name
-            cell.recipeId = self.trending[indexPath.row].objectId
+            let recipe = self.trending[indexPath.row]
+           
+            cell.recipeId = recipe.objectId
+            cell.recipe = recipe
+            cell.recipeTitle.text = recipe.name
+            cell.categoryLabel.text = recipe.category?.uppercased()
+            recipeImageFile = recipe.image
+
+//            cell.createdByLabel.text = recipe.owner
+            if let owner = User.fetchUser(by: recipe.owner!) {
+                cell.createdByLabel.text = "by @\(owner.username!)"
+            } else {
+                cell.createdByLabel.text = ""
+            }
+            
         } else if collectionView == self.favoritesCollectionView {
-            recipeImageFile = self.favorites[indexPath.row].image
-            cell.recipeTitle.text = self.favorites[indexPath.row].name
-            cell.recipeId = self.favorites[indexPath.row].objectId
+            let recipe = self.favorites[indexPath.row]
+            
+            cell.recipeId = recipe.objectId
+            cell.recipe = recipe
+            cell.recipeTitle.text = recipe.name
+            cell.categoryLabel.text = recipe.category?.uppercased()
+            recipeImageFile = recipe.image
+//            cell.createdByLabel.text = recipe.owner
+
+            if let owner = User.fetchUser(by: recipe.owner!) {
+                cell.createdByLabel.text = "by @\(owner.username!)"
+            } else {
+                cell.createdByLabel.text = ""
+            }
+        
         } else {
-            recipeImageFile = self.localTrends[indexPath.row].image
-            cell.recipeTitle.text = self.localTrends[indexPath.row].name
-            cell.recipeId = self.localTrends[indexPath.row].objectId
+            let recipe = self.localTrends[indexPath.row]
+
+            cell.recipeId = recipe.objectId
+            cell.recipe = recipe
+            cell.recipeTitle.text = recipe.name
+            cell.categoryLabel.text = recipe.category?.uppercased()
+            recipeImageFile = recipe.image
+//            cell.createdByLabel.text = recipe.owner
+
+            if let owner = User.fetchUser(by: recipe.owner!) {
+                cell.createdByLabel.text = "by @\(owner.username!)"
+            } else {
+                cell.createdByLabel.text = ""
+            }
+            
         }
         
         if recipeImageFile != nil {
@@ -174,10 +223,6 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             })
         }
         
-        cell.categoryLabel.text = "image tag"
-        cell.createdByLabel.text = PFUser.current()?.username
-        cell.isUserInteractionEnabled = true
-
         return cell
     }
     
@@ -187,30 +232,59 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-//        if previewingContext.sourceView == self.trendingCollectionView {
-//            guard let indexPath = self.trendingCollectionView?.indexPathForItem(at: location) else { return nil }
-//            guard let cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
-//        } else if previewingContext.sourceView == self.favorites {
-//
-//        } else {
-//
-//        }
+        var indexPath: IndexPath?
+        var cell: RecipeCollectionViewCell?
         
-        guard let indexPath = self.trendingCollectionView?.indexPathForItem(at: location) else { return nil }
-        guard let cell = self.trendingCollectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+        if previewingContext.sourceView == self.trendingCollectionView {
+            indexPath = self.trendingCollectionView?.indexPathForItem(at: location)
+            if indexPath != nil {
+                cell = self.trendingCollectionView?.cellForItem(at: indexPath!) as? RecipeCollectionViewCell
+            }
+        } else if previewingContext.sourceView == self.favoritesCollectionView {
+            indexPath = self.favoritesCollectionView?.indexPathForItem(at: location)
+            if indexPath != nil {
+                cell = self.favoritesCollectionView?.cellForItem(at: indexPath!) as? RecipeCollectionViewCell
+            }
+        } else {
+            indexPath = self.localTrendsCollectionView?.indexPathForItem(at: location)
+            if indexPath != nil {
+                cell = self.localTrendsCollectionView?.cellForItem(at: indexPath!) as? RecipeCollectionViewCell
+            }
+        }
         
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        
-        // in order to initialize the outlets on the view
-        let view = detailVC.view
-        
-        detailVC.recipeId = cell.recipeId
-        detailVC.recipeImage.image = cell.recipeImage?.image
-        
-        detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
-        previewingContext.sourceRect = cell.frame
-        
-        return detailVC
+        if indexPath == nil {
+            return nil
+        } else {
+            let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            
+            // in order to initialize the outlets on the view
+            let view = detailVC.view
+            
+            detailVC.recipeId = cell!.recipeId
+            detailVC.recipe = cell!.recipe
+            detailVC.recipeImage.image = cell!.recipeImage?.image
+            
+            let recipe = cell!.recipe
+            if recipe != nil {
+                if let nameStr = recipe?.name {
+                    detailVC.recipeName.text = nameStr
+                }
+                if let desc = recipe?.desc {
+                    detailVC.recipeDescription.text = desc
+                }
+                if let likes = recipe?.likes {
+                    detailVC.likesCount.text = "\(likes)"
+                }
+                if let ownerStr = cell?.createdByLabel {
+                    detailVC.owner.text = ownerStr.text!
+                }
+            }
+            
+            detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+            previewingContext.sourceRect = cell!.frame
+            
+            return detailVC
+        }
      }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {

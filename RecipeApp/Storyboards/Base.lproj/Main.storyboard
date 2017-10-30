@@ -31,20 +31,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hg5-tV-It5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICK A CATEGORY" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1X-9T-q9b">
-                                        <rect key="frame" x="9" y="89" width="114" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICK SOME CATEGORIES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1X-9T-q9b">
+                                        <rect key="frame" x="9" y="89" width="154" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" name="GraySmallHeader"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <searchBar contentMode="redraw" text="" placeholder="What's in your fridge?" translatesAutoresizingMaskIntoConstraints="NO" id="ZIG-mf-ups">
-                                        <rect key="frame" x="0.0" y="115" width="375" height="56"/>
+                                        <rect key="frame" x="0.0" y="109" width="375" height="56"/>
                                         <color key="tintColor" name="PrimaryColor"/>
                                         <color key="barTintColor" name="GrayBackgroundScreen"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru2-NQ-pkm" userLabel="Category View">
-                                        <rect key="frame" x="0.0" y="115" width="375" height="77"/>
+                                        <rect key="frame" x="0.0" y="109" width="375" height="77"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESSERTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAU-IM-NuI" customClass="UILabelCategory" customModule="RecipeApp" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="61.5" height="15"/>
@@ -247,7 +247,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TdQ-8N-AU2">
-                                        <rect key="frame" x="0.0" y="192" width="375" height="318"/>
+                                        <rect key="frame" x="0.0" y="186" width="375" height="324"/>
                                         <color key="backgroundColor" name="GrayBackgroundScreen"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="15" id="iZ7-za-ahj">
                                             <size key="itemSize" width="300" height="300"/>
@@ -257,7 +257,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1o2-py-Z7f">
-                                                <rect key="frame" x="15" y="9" width="300" height="300"/>
+                                                <rect key="frame" x="15" y="12" width="300" height="300"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
@@ -276,7 +276,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry. No results found for this search =(" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMb-UN-Foi">
-                                        <rect key="frame" x="30" y="242" width="315" height="53"/>
+                                        <rect key="frame" x="30" y="236" width="315" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -304,7 +304,7 @@
                                     <constraint firstItem="fMb-UN-Foi" firstAttribute="centerX" secondItem="hg5-tV-It5" secondAttribute="centerX" id="wl7-W1-RZr"/>
                                     <constraint firstItem="NXM-PJ-6ah" firstAttribute="top" secondItem="hg5-tV-It5" secondAttribute="top" constant="15" id="xbh-HI-R9L"/>
                                     <constraint firstItem="fMb-UN-Foi" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="30" id="yyZ-rl-faJ"/>
-                                    <constraint firstItem="ru2-NQ-pkm" firstAttribute="top" secondItem="L1X-9T-q9b" secondAttribute="bottom" constant="10" id="zVK-Va-36c"/>
+                                    <constraint firstItem="ru2-NQ-pkm" firstAttribute="top" secondItem="L1X-9T-q9b" secondAttribute="bottom" constant="4" id="zVK-Va-36c"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -352,6 +352,9 @@
                     <connections>
                         <outlet property="categoryView" destination="ru2-NQ-pkm" id="FfP-8a-ba2"/>
                         <outlet property="collectionView" destination="TdQ-8N-AU2" id="Re1-fr-ffy"/>
+                        <outlet property="dessertsLabel" destination="WAU-IM-NuI" id="8pE-g8-4yX"/>
+                        <outlet property="headerLabel" destination="L1X-9T-q9b" id="rNW-dQ-yhm"/>
+                        <outlet property="label2" destination="C3x-oX-Vc3" id="5be-UL-raf"/>
                         <outlet property="noResultsLabel" destination="fMb-UN-Foi" id="Quq-tP-G2R"/>
                         <outlet property="searchBar" destination="ZIG-mf-ups" id="SRd-im-Y9J"/>
                         <outlet property="searchButton" destination="HWQ-bz-TTN" id="2hR-rn-JjS"/>
@@ -1253,7 +1256,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KjQ-FT-k5H"/>
-        <segue reference="H52-z1-JcG"/>
+        <segue reference="daK-Ik-oNb"/>
+        <segue reference="QOT-s7-KA3"/>
     </inferredMetricsTieBreakers>
 </document>

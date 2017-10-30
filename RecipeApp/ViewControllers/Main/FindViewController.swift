@@ -18,13 +18,41 @@ class FindViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var noResultsLabel: UILabel!
     @IBOutlet var searchButton: UIButton!
+    @IBOutlet weak var headerLabel: UILabel!
+    
+    @IBOutlet weak var dessertsLabel: UILabelCategory!
+    @IBOutlet weak var label2: UILabelCategory!
     
     var recipes = [Recipe]()
     var isSearchShown = false
     var categories: [String] = []
+    var categoryLabels = [UILabelCategory]()
+    var animated: Set<Int>?
+    var indexed: Set<Int>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        indexed = []
+        // set up the category labels
+        let allCategories: [String] = Recipe.categories
+        self.categoryView.subviews.forEach { (view: UIView) in
+            let label = view as! UILabelCategory
+            addCategoryTapRecognizer(to: label)
+            
+            
+            var index = random(0, allCategories.count - 1)
+            if (!(indexed?.contains(index))!) {
+                label.text = allCategories[index]
+                indexed?.insert(index)
+            }
+//            while !(indexed!.contains(index) && (indexed?.count)! < self.categoryView.subviews.count) {
+//                index = random(0, allCategories.count - 1)
+//            }
+            
+//            label.text = allCategories[index]
+//            indexed?.insert(index)
+        }
         
         searchBar.delegate = self
         searchBar.sizeToFit()
@@ -39,10 +67,6 @@ class FindViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        self.categoryView.subviews.forEach { (view: UIView) in
-            addTapRecognizer(to: view as! UILabelCategory)
-        }
-        
         self.noResultsLabel.isHidden = true
 //        fetchCategories()
     }
@@ -52,24 +76,34 @@ class FindViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func random(_ lower: Int ,_ upper: Int) -> Int {
+        return Int(lower + arc4random_uniform(upper - lower + 1))
+    }
+    
     @IBAction func onTapView(_ sender: Any) {
         print("tapped on view")
         self.searchBar.endEditing(true)
     }
     
-    func addTapRecognizer(to label: UILabel) {
+    func addCategoryTapRecognizer(to label: UILabel) {
         label.isUserInteractionEnabled = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(FindViewController.categoryTapped(tapGestureRecognizer:)))
         label.addGestureRecognizer(tapRecognizer)
     }
     
     @IBAction func onShowSearch(_ sender: UIButton) {
-        if isSearchShown == true {
+        if isSearchShown {
             searchBar.isHidden = true
-            categoryView.isHidden = false
+            UIView.animate(withDuration: 0.50, animations: {
+                self.headerLabel.text = "PICK SOME CATEGORIES"
+                self.categoryView.isHidden = false
+            })
         } else {
             searchBar.isHidden = false
-            categoryView.isHidden = true
+            UIView.animate(withDuration: 0.50, animations: {
+                self.headerLabel.text = "SEARCH FOR RECIPES"
+                self.categoryView.isHidden = true
+            })
         }
         isSearchShown = !isSearchShown
     }
@@ -81,7 +115,7 @@ class FindViewController: UIViewController {
     func categoryTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         print("Category tapped")
         let label = tapGestureRecognizer.view as! UILabelCategory
-        if label.isActive == true {
+        if label.isActive {
             let color = UIColor(named: "GraySmallHeader")
             label.backgroundColor = color
             let index = self.categories.index(where: { (key: String) -> Bool in
@@ -110,31 +144,29 @@ class FindViewController: UIViewController {
         self.navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
-    
-//    func fetchCategories() {
-//        let query = PFQuery(className: "Recipe")
-//        query.countObjectsInBackground { (count: Int, error: Error?) in
-//            <#code#>
-//        }
-//        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-//
-//        }
-//    }
-    //_ searchString: String?, category: Bool
-    
     func doSearch(_ searchTerm: String?, categories: Bool) {
         
-        searchBar.resignFirstResponder()
-        recipes.removeAll()
+        self.searchBar.resignFirstResponder()
+        self.recipes.removeAll()
+        self.animated = []
         
         var query: PFQuery? = nil
         if categories {
             var queries: [PFQuery] = [PFQuery]()
+            if self.categories.isEmpty {
+                self.collectionView.isHidden = true
+            }
             self.categories.forEach({ (category: String) in
-                let query = PFQuery(className: "Recipe")
                 let searchTermRegex = String(format: "(?i)%@", category)
+
+                let query = PFQuery(className: "Recipe")
                 query.whereKey("category", matchesRegex: searchTermRegex)
+
+                let query2 = PFQuery(className: "Recipe")
+                query2.whereKey("cuisine", matchesRegex: searchTermRegex)
+
                 queries.append(query)
+                queries.append(query2)
             })
             if queries.count > 0 {
                 query = PFQuery.orQuery(withSubqueries: queries)
@@ -154,10 +186,13 @@ class FindViewController: UIViewController {
                 let query3 = PFQuery(className: "Recipe")
                 query3.whereKey("name", matchesRegex: searchTermRegex)
                 
+                let query4 = PFQuery(className: "CookingStep")
+                query4.whereKey("ingredients", matchesRegex: searchTermRegex)
+                
                 queries.append(query1)
                 queries.append(query2)
                 queries.append(query3)
-                
+//                queries.append(query4)
                 query = PFQuery.orQuery(withSubqueries: queries)
             }
         }
@@ -233,6 +268,15 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.categoryLabel.text = recipe.category?.uppercased()
         cell.createdByLabel.text = "@\(recipe.ownerName!)"
         cell.recipeTitle.text = recipe.name
+        
+        if !(animated?.contains(indexPath.row))! {
+            cell.backgroundColor = .white
+            cell.alpha = 0
+            UIView.animate(withDuration: 0.50, animations: {
+                cell.alpha = 1
+                self.animated!.insert(indexPath.row)
+            })
+        }
         
         return cell
     }

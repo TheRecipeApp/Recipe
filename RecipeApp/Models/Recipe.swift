@@ -14,7 +14,7 @@ class Recipe: PFObject, PFSubclassing {
 		return "Recipe"
 	}
 	
-    static var categories = ["Desserts", "Fusion", "Asian", "Indian", "American", "Vietnamese", "Mexican", "BBQ", "Sushi", "Sandwhiches"]
+    static var categories = ["DESSERTS", "FUSION", "VIETNAMESE", "INDIAN", "AMERICAN", "MEXICAN", "BBQ", "SUSHI", "SANDWHICHES"]
 	static var cookingTechniques = ["Baking","Basting","Boiling","Boning","Brining","Broiling","Canning","Caramelizing","Chiffonade","Chopping","Cold Storage","Creaming","Cubing","Deep Frying","Deglazing","Degorging","Drying","Fermenting","Grilling","Julienning","Marinating","Melting","Microwaving","Mincing","Pickling","Poaching","Pressure Cooking","Puree","Roasting","Sauteing","Simmering","Slicing","Smoking","Soak","Spice rubs","Steaming","Stir Frying"]
 	
 	@NSManaged var name: String

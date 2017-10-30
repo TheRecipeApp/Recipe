@@ -21,10 +21,19 @@ class ExploreViewController: UIViewController {
     fileprivate var favorites = [Recipe]()
     fileprivate var localTrends = [Recipe]()
     
+    var animatedTrending: Set<Int>?
+    var animatedFavorites: Set<Int>?
+    var animatedLocalTrends: Set<Int>?
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // set up animation datastructures
+        self.animatedTrending = []
+        self.animatedFavorites = []
+        self.animatedLocalTrends = []
         
         // Set up delegate and datasource
         self.trendingCollectionView.dataSource = self
@@ -57,6 +66,7 @@ class ExploreViewController: UIViewController {
         fetchRecipes(collectionViewName: "trending")
         fetchRecipes(collectionViewName: "favorites")
         fetchRecipes(collectionViewName: "localTrends")
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -193,15 +203,14 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.categoryLabel.text = recipe.category?.uppercased()
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
-
-
-//            cell.createdByLabel.text = recipe.owner
-//            if let owner = User.fetchUser(by: recipe.owner!) {
-//                cell.createdByLabel.text = "by @\(owner.username!)"
-//            } else {
-//                cell.createdByLabel.text = ""
-//            }
-            
+            if !(animatedTrending?.contains(indexPath.row))! {
+                cell.backgroundColor = .white
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.50, animations: {
+                    cell.alpha = 1
+                    self.animatedTrending!.insert(indexPath.row)
+                })
+            }
         } else if collectionView == self.favoritesCollectionView {
             let recipe = self.favorites[indexPath.row]
             
@@ -211,14 +220,15 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.categoryLabel.text = recipe.category?.uppercased()
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
-//            cell.createdByLabel.text = recipe.owner
-
-//            if let owner = User.fetchUser(by: recipe.owner!) {
-//                cell.createdByLabel.text = "by @\(owner.username!)"
-//            } else {
-//                cell.createdByLabel.text = ""
-//            }
-//
+            if !(animatedFavorites?.contains(indexPath.row))! {
+                cell.backgroundColor = .white
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.50, animations: {
+                    cell.alpha = 1
+                    self.animatedFavorites!.insert(indexPath.row)
+                })
+            }
+            
         } else {
             let recipe = self.localTrends[indexPath.row]
 
@@ -228,14 +238,14 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.categoryLabel.text = recipe.category?.uppercased()
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
-//            cell.createdByLabel.text = recipe.owner
-
-//            if let owner = User.fetchUser(by: recipe.owner!) {
-//                cell.createdByLabel.text = "by @\(owner.username!)"
-//            } else {
-//                cell.createdByLabel.text = ""
-//            }
-            
+            if !(animatedLocalTrends?.contains(indexPath.row))! {
+                cell.backgroundColor = .white
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.50, animations: {
+                    cell.alpha = 1
+                    self.animatedLocalTrends!.insert(indexPath.row)
+                })
+            }
         }
         
         if recipeImageFile != nil {

@@ -329,7 +329,7 @@
         <!--Create Recipe-->
         <scene sceneID="xkf-de-Ooi">
             <objects>
-                <viewController id="XPL-O0-4VM" sceneMemberID="viewController">
+                <viewController id="XPL-O0-4VM" customClass="WelcomeViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i1j-q4-JQf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -355,7 +355,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="65b-cB-TaV" kind="show" id="056-ex-4qX"/>
+                                    <segue destination="kr2-lR-aDu" kind="show" id="DXg-XQ-qEv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -369,11 +369,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="viy-E2-HEd"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Recipe" id="qiu-Ke-dN3"/>
+                    <navigationItem key="navigationItem" title="Create Recipe" id="qiu-Ke-dN3">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="rRJ-0o-JD8">
+                            <connections>
+                                <action selector="onCancel:" destination="XPL-O0-4VM" id="92n-Y5-AB3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhX-gd-l5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-535" y="-591"/>
+            <point key="canvasLocation" x="-596" y="-591"/>
         </scene>
         <!--Add Step - Ingredients-->
         <scene sceneID="Bpv-PC-Bls">
@@ -488,7 +494,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="252" y="-591.45427286356824"/>
+            <point key="canvasLocation" x="68" y="137"/>
         </scene>
         <!--Add Step - Description-->
         <scene sceneID="dly-ae-RLQ">
@@ -511,33 +517,25 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4d-06-LLc" userLabel="Step Desc Title View">
                                 <rect key="frame" x="0.0" y="252" width="375" height="125"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio instruction?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBQ-Uf-Qe3">
-                                        <rect key="frame" x="10" y="52.5" width="146" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Audio instruction?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBQ-Uf-Qe3">
+                                        <rect key="frame" x="10" y="52.5" width="203.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transcribe/Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fq-3g-k58">
-                                        <rect key="frame" x="241" y="52.5" width="124" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="buW-4B-Nws">
-                                        <rect key="frame" x="163" y="47.5" width="51" height="31"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="buW-4B-Nws">
+                                        <rect key="frame" x="316" y="47.5" width="51" height="31"/>
                                         <connections>
-                                            <action selector="onDescriptionSwitchChanged:" destination="rBt-JM-23b" eventType="valueChanged" id="VDO-jU-07g"/>
+                                            <action selector="onenableAudioInstructionChanged:" destination="rBt-JM-23b" eventType="valueChanged" id="AiF-74-WKq"/>
                                         </connections>
                                     </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="4fq-3g-k58" secondAttribute="trailing" constant="10" id="4Nk-bI-2Re"/>
+                                    <constraint firstAttribute="trailing" secondItem="buW-4B-Nws" secondAttribute="trailing" constant="10" id="5oa-Qy-o2J"/>
                                     <constraint firstItem="mBQ-Uf-Qe3" firstAttribute="leading" secondItem="a4d-06-LLc" secondAttribute="leading" constant="10" id="Lp6-LH-vvg"/>
                                     <constraint firstAttribute="height" constant="125" id="MOM-fz-7XT"/>
                                     <constraint firstItem="buW-4B-Nws" firstAttribute="centerY" secondItem="a4d-06-LLc" secondAttribute="centerY" id="WT1-vx-TPw"/>
-                                    <constraint firstItem="buW-4B-Nws" firstAttribute="centerX" secondItem="a4d-06-LLc" secondAttribute="centerX" id="q0R-j6-DUS"/>
                                     <constraint firstItem="mBQ-Uf-Qe3" firstAttribute="centerY" secondItem="a4d-06-LLc" secondAttribute="centerY" id="uMU-mA-tCa"/>
-                                    <constraint firstItem="4fq-3g-k58" firstAttribute="centerY" secondItem="a4d-06-LLc" secondAttribute="centerY" id="v3X-JC-nXr"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mi8-Pn-RHI" userLabel="Step Description Content View">
@@ -664,7 +662,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="descriptionSwitch" destination="buW-4B-Nws" id="3Lu-HG-c82"/>
+                        <outlet property="enableAudioInstruction" destination="buW-4B-Nws" id="xCH-Rb-Xik"/>
                         <outlet property="micButton" destination="Psf-lJ-Ai0" id="1ZV-aY-pi0"/>
                         <outlet property="recordStepAudioButton" destination="KZf-45-yuM" id="RCc-20-yMJ"/>
                         <outlet property="stepAudioButton" destination="TYc-FU-2rQ" id="7KW-DV-Ooq"/>
@@ -674,7 +672,7 @@
                         <outlet property="stepImageView" destination="hCt-m4-UP9" id="obc-8F-6rO"/>
                         <outlet property="stopRecordButton" destination="nYt-Lf-jiq" id="d0H-0h-sfR"/>
                         <segue destination="8vK-rh-AAc" kind="show" identifier="RecipeSummarySegue" id="tZY-3z-3oA"/>
-                        <segue destination="65b-cB-TaV" kind="show" identifier="IngredientsViewSegue" id="OeE-cS-PqU"/>
+                        <segue destination="kr2-lR-aDu" kind="show" identifier="IngredientsViewSegue" id="OeE-cS-PqU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JwE-YY-BWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -684,7 +682,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1048.8" y="-591.45427286356824"/>
+            <point key="canvasLocation" x="1388" y="-591.45427286356824"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a2t-ox-Nfn">
@@ -708,6 +706,25 @@
             </objects>
             <point key="canvasLocation" x="-1289" y="-591"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nIb-HM-IyD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kr2-lR-aDu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="EPe-hG-eSg">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="PrimaryColor"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="65b-cB-TaV" kind="relationship" relationship="rootViewController" id="mfE-hU-nWB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Tw-Ka-xIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="-591"/>
+        </scene>
     </scenes>
     <resources>
         <image name="NoRecipeImage" width="375" height="250"/>
@@ -719,16 +736,10 @@
             <color red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PrimaryColor">
-            <color red="0.63921568630000003" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="PrimaryColor">
-            <color red="0.63921568630000003" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="056-ex-4qX"/>
+        <segue reference="DXg-XQ-qEv"/>
     </inferredMetricsTieBreakers>
 </document>

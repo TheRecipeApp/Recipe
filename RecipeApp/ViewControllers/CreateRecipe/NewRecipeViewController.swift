@@ -18,7 +18,7 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var stopRecordButton: UIButton!
 	@IBOutlet weak var recordStepAudioButton: UIButton!
     @IBOutlet weak var stepAudioButton: UIButton!
-    @IBOutlet weak var descriptionSwitch: UISwitch!
+    @IBOutlet weak var enableAudioInstruction: UISwitch!
     @IBOutlet weak var stepDescriptionTextStyleView: UIView!
     @IBOutlet weak var stepDescriptionAudioView: UIView!
     
@@ -68,12 +68,12 @@ class NewRecipeViewController: UIViewController {
         stepNumber = (steps?.count)!
         self.title = "Add Step \(stepNumber) - Description"
         stepAudioButton.isHidden = true
-        if descriptionSwitch.isOn {
-            stepDescriptionTextStyleView.isHidden = false
-            stepDescriptionAudioView.isHidden = true
+        if enableAudioInstruction.isOn {
+			stepDescriptionTextStyleView.isHidden = true
+			stepDescriptionAudioView.isHidden = false
         } else {
-            stepDescriptionTextStyleView.isHidden = true
-            stepDescriptionAudioView.isHidden = false
+			stepDescriptionTextStyleView.isHidden = false
+			stepDescriptionAudioView.isHidden = true
         }
         
         stepDescription.layer.borderWidth = 1
@@ -86,13 +86,13 @@ class NewRecipeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func onDescriptionSwitchChanged(_ sender: UISwitch) {
+    @IBAction func onenableAudioInstructionChanged(_ sender: UISwitch) {
         if sender.isOn {
-            stepDescriptionTextStyleView.isHidden = false
-            stepDescriptionAudioView.isHidden = true
+			stepDescriptionTextStyleView.isHidden = true
+			stepDescriptionAudioView.isHidden = false
         } else {
-            stepDescriptionTextStyleView.isHidden = true
-            stepDescriptionAudioView.isHidden = false
+			stepDescriptionTextStyleView.isHidden = false
+			stepDescriptionAudioView.isHidden = true
         }
     }
     
@@ -102,7 +102,7 @@ class NewRecipeViewController: UIViewController {
     
     @IBAction func onDescriptionNext(_ sender: UIButton) {
         let cookingStep = steps?[stepNumber-1]
-		if descriptionSwitch.isOn {
+		if enableAudioInstruction.isOn {
 			if let stepDesc = stepDescription.text {
 				cookingStep?.desc = stepDesc
 				if stepImageUploaded {

@@ -27,7 +27,8 @@ class StepDetailsViewController: UIViewController {
 		ingredientsTable.rowHeight = UITableViewAutomaticDimension
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
-		
+		ingredientsTable.separatorStyle = UITableViewCellSeparatorStyle.none
+
 		audioPlayer?.delegate = self
 
         // Do any additional setup after loading the view.

@@ -15,14 +15,19 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeDescription: UILabel!
     @IBOutlet weak var owner: UILabel!
+    @IBOutlet weak var likesCount: UILabel!
     
     var recipeId: String?
     var recipe: Recipe?
     var recipeOwner: User?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        recipeDescription.sizeToFit()
+        recipeName.sizeToFit()
+        owner.sizeToFit()
+        
+//        setupRecipeFields()
         // Do any additional setup after loading the view.
     }
 
@@ -31,72 +36,53 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setupRecipeFields() {
-        if recipe != nil {
-            if let nameStr = recipe?.name {
-                recipeName.text = nameStr
-            }
-            if let desc = recipe?.desc {
-                recipeDescription.text = desc
-            }
-//            if let cookingTime = recipe?.cookingTime {
-//                timeToCook.text = cookingTime
+//    func setupRecipeFields() {
+//        print("Setting up recipe fields in DetailViewController")
+//        if recipe != nil {
+//            if let nameStr = recipe?.name {
+//                recipeName.text = nameStr
 //            }
-//            if let difficultyLevel = recipe?.difficultyLevel {
-//                difficulty.text = difficultyLevel
+//            if let desc = recipe?.desc {
+//                recipeDescription.text = desc
 //            }
-//            if let cuisineStr = recipe?.cuisine {
-//                cuisine.text = cuisineStr
+//            if let likes = recipe?.likes {
+//                likesCount.text = "\(likes)"
 //            }
-//            if let categoryStr = recipe?.category {
-//                category.text = categoryStr
+//            if let ownerStr = recipeOwner?.username {
+//                owner.text = "@" + ownerStr
+//            } else {
+//                owner.text = "@..."
 //            }
-            if let ownerStr = recipeOwner?.username {
-                owner.text = "@" + ownerStr
-            } else {
-                owner.text = "@..."
-            }
-            // get recipe image
-            setupRecipeImage()
-        }
-    }
+//        }
+//    }
     
-    private func fetchOwner() {
-        if let user = User.fetchUser(by: (recipe?.owner)!) {
-            recipeOwner = user
-            setupRecipeFields()
-        } else {
-            print("error retrieving user: " + (recipe?.owner)!)
-        }
-    }
-    
-    func fetchRecipe() {
-        let query = PFQuery(className: "Recipe")
-        query.whereKey("objectId", equalTo: self.recipeId!)
-        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-            if error == nil {
-                // The find succeeded.
-                print("Successfully retrieved \(objects!.count) cooking steps.")
-                // Do something with the found objects
-                if let objects = objects {
-                    self.recipe = objects[0] as? Recipe
-                    self.fetchOwner()
-                }
-            }
-        })
-    }
-    
-    private func setupRecipeImage() {
-        let imageFile = recipe?.image
-        imageFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
-            if error == nil {
-                if let imageData = data {
-                    self.recipeImage.image = UIImage(data: imageData)
-                    self.recipeImage.contentMode = .scaleAspectFit
-                }
-            }
-        })
-    }
+//    func fetchRecipe() {
+//        let query = PFQuery(className: "Recipe")
+//        query.whereKey("objectId", equalTo: self.recipeId!)
+//        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+//            if error == nil {
+//                // The find succeeded.
+//                print("Successfully retrieved \(objects!.count) cooking steps.")
+//                // Do something with the found objects
+//                if let objects = objects {
+//                    self.recipe = objects[0] as? Recipe
+//                    self.fetchOwner()
+//                }
+//            }
+//        })
+//    }
+//
+//    private func setupRecipeImage() {
+//        let imageFile = recipe?.image
+//        imageFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
+//            if error == nil {
+//                if let imageData = data {
+//                    self.recipeImage.image = UIImage(data: imageData)
+//                    self.recipeImage.contentMode = .scaleAspectFit
+//                }
+//            }
+//        })
+//    }
     
     /*
     // MARK: - Navigation

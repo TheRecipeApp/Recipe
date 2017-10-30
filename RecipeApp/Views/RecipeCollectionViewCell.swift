@@ -14,9 +14,10 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     @IBOutlet var categoryLabel: UILabelCategory!
     @IBOutlet var createdByLabel: UILabel!
     @IBOutlet var recipeTitle: UILabel!
-    
+
     var recipeId: String?
-    
+    var recipe: Recipe?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -21,10 +21,19 @@ class ExploreViewController: UIViewController {
     fileprivate var favorites = [Recipe]()
     fileprivate var localTrends = [Recipe]()
     
+    var animatedTrending: Set<Int>?
+    var animatedFavorites: Set<Int>?
+    var animatedLocalTrends: Set<Int>?
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // set up animation datastructures
+        self.animatedTrending = []
+        self.animatedFavorites = []
+        self.animatedLocalTrends = []
         
         // Set up delegate and datasource
         self.trendingCollectionView.dataSource = self
@@ -57,6 +66,7 @@ class ExploreViewController: UIViewController {
         fetchRecipes(collectionViewName: "trending")
         fetchRecipes(collectionViewName: "favorites")
         fetchRecipes(collectionViewName: "localTrends")
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,35 +75,57 @@ class ExploreViewController: UIViewController {
     }
     
     func fetchRecipes(collectionViewName type: String) {
-        let query = PFQuery(className: "Recipe")
-        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-            if error == nil {
-                print("collectionViewName: \(type)")
-                // The find succeeded.
-                print("Successfully retrieved \(objects!.count) recipes.")
-                // Do something with the found objects
-                if let objects = objects {
-                    for object in objects {
-                        print(object as! Recipe)
-                        switch type {
-                        case "trending":
-                            self.trending.append(object as! Recipe)
-                        case "favorites":
-                            self.favorites.append(object as! Recipe)
-                        case "localTrends":
-                            self.localTrends.append(object as! Recipe)
-                        default:
-                            print("unrecognized carousel type")
+        switch type {
+            case "trending":
+                let query = PFQuery(className: "Recipe")
+                query.order(byDescending: "likes")
+                query.limit = 5
+                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                    if error == nil {
+                        print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
+                        if let objects = objects {
+                            for object in objects {
+                                print(object as! Recipe)
+                                self.trending.append(object as! Recipe)
+                            }
                         }
+                        self.trendingCollectionView.reloadData()
                     }
-                }
-                
-                // reload the trending collection view
-                self.trendingCollectionView.reloadData()
-                self.favoritesCollectionView.reloadData()
-                self.localTrendsCollectionView.reloadData()
-            }
-        })
+                })
+            case "favorites":
+                let query = PFQuery(className: "Recipe")
+                query.order(byDescending: "likes")
+                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                    if error == nil {
+                        print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
+                        if let objects = objects {
+                            for object in objects {
+                                print(object as! Recipe)
+                                self.favorites.append(object as! Recipe)
+                            }
+                        }
+                        self.favoritesCollectionView.reloadData()
+                    }
+                })
+            case "localTrends":
+                let query = PFQuery(className: "Recipe")
+                query.order(byDescending: "likes")
+                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                    if error == nil {
+                        print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
+                        if let objects = objects {
+                            for object in objects {
+                                print(object as! Recipe)
+                                self.localTrends.append(object as! Recipe)
+                            }
+                        }
+                        self.localTrendsCollectionView.reloadData()
+                    }
+                })
+            default:
+                print("unrecognized collectionView type type")
+        }
+        
     }
 
     @objc private func refreshControlAction(_ refreshControl: UIRefreshControl) {
@@ -170,14 +202,15 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeTitle.text = recipe.name
             cell.categoryLabel.text = recipe.category?.uppercased()
             recipeImageFile = recipe.image
-
-//            cell.createdByLabel.text = recipe.owner
-            if let owner = User.fetchUser(by: recipe.owner!) {
-                cell.createdByLabel.text = "by @\(owner.username!)"
-            } else {
-                cell.createdByLabel.text = ""
+            cell.createdByLabel.isHidden = true
+            if !(animatedTrending?.contains(indexPath.row))! {
+                cell.backgroundColor = .white
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.50, animations: {
+                    cell.alpha = 1
+                    self.animatedTrending!.insert(indexPath.row)
+                })
             }
-            
         } else if collectionView == self.favoritesCollectionView {
             let recipe = self.favorites[indexPath.row]
             
@@ -186,14 +219,16 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeTitle.text = recipe.name
             cell.categoryLabel.text = recipe.category?.uppercased()
             recipeImageFile = recipe.image
-//            cell.createdByLabel.text = recipe.owner
-
-            if let owner = User.fetchUser(by: recipe.owner!) {
-                cell.createdByLabel.text = "by @\(owner.username!)"
-            } else {
-                cell.createdByLabel.text = ""
+            cell.createdByLabel.isHidden = true
+            if !(animatedFavorites?.contains(indexPath.row))! {
+                cell.backgroundColor = .white
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.50, animations: {
+                    cell.alpha = 1
+                    self.animatedFavorites!.insert(indexPath.row)
+                })
             }
-        
+            
         } else {
             let recipe = self.localTrends[indexPath.row]
 
@@ -202,14 +237,15 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeTitle.text = recipe.name
             cell.categoryLabel.text = recipe.category?.uppercased()
             recipeImageFile = recipe.image
-//            cell.createdByLabel.text = recipe.owner
-
-            if let owner = User.fetchUser(by: recipe.owner!) {
-                cell.createdByLabel.text = "by @\(owner.username!)"
-            } else {
-                cell.createdByLabel.text = ""
+            cell.createdByLabel.isHidden = true
+            if !(animatedLocalTrends?.contains(indexPath.row))! {
+                cell.backgroundColor = .white
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.50, animations: {
+                    cell.alpha = 1
+                    self.animatedLocalTrends!.insert(indexPath.row)
+                })
             }
-            
         }
         
         if recipeImageFile != nil {

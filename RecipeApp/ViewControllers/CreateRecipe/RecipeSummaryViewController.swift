@@ -33,6 +33,8 @@ class RecipeSummaryViewController: UIViewController {
 		recipeStepsTable.dataSource = self
 		recipeStepsTable.estimatedRowHeight = 100
 		recipeStepsTable.rowHeight = UITableViewAutomaticDimension
+		self.recipeStepsTable.separatorStyle = UITableViewCellSeparatorStyle.none
+
 				
 		if let cookingSteps = cookingSteps {
 			if cookingSteps.count > 0 {

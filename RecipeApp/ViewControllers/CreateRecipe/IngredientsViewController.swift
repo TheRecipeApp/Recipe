@@ -33,6 +33,8 @@ class IngredientsViewController: UIViewController {
         ingredientsTable.rowHeight = UITableViewAutomaticDimension
         let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
         ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
+		ingredientsTable.separatorStyle = UITableViewCellSeparatorStyle.none
+
         
         if steps == nil {
             stepNumber = 1;

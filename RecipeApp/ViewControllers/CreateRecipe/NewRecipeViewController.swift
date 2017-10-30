@@ -14,7 +14,6 @@ class NewRecipeViewController: UIViewController {
 
     @IBOutlet weak var stepDescription: UITextView!
     @IBOutlet weak var micButton: UIButton!
-	@IBOutlet weak var stepImageView: UIImageView!
 	@IBOutlet weak var stopRecordButton: UIButton!
 	@IBOutlet weak var recordStepAudioButton: UIButton!
     @IBOutlet weak var stepAudioButton: UIButton!
@@ -24,11 +23,7 @@ class NewRecipeViewController: UIViewController {
     
     var steps:[CookingStep]?
     var stepNumber = 0;
-	var stepImageUploaded = false
 	
-	// image picker
-	let imagePickerController = UIImagePickerController()
-	var recipeImageUploaded = false
 
 	// variables needed for speech recognition and transcribing
 	var audioEngine = AVAudioEngine()
@@ -54,18 +49,6 @@ class NewRecipeViewController: UIViewController {
 		// Do any additional setup after loading the view.
 		self.hideKeyboardWhenTappedAround()
 
-        // image picker
-		imagePickerController.delegate = self
-		imagePickerController.allowsEditing = true
-		
-		if UIImagePickerController.isSourceTypeAvailable(.camera) {
-			print("Camera is available 📸")
-			imagePickerController.sourceType = .camera
-		} else {
-			print("Camera 🚫 available so we will use photo library instead")
-			imagePickerController.sourceType = .photoLibrary
-		}
-		
         stepNumber = (steps?.count)!
         self.title = "Add Step \(stepNumber) - Description"
         stepAudioButton.isHidden = true
@@ -102,13 +85,10 @@ class NewRecipeViewController: UIViewController {
 	}
     
     @IBAction func onDescriptionNext(_ sender: UIButton) {
-        let cookingStep = steps?[stepNumber-1]
+		let cookingStep = steps?[stepNumber-1]
 		if enableAudioInstruction.isOn {
 			if let stepDesc = stepDescription.text {
 				cookingStep?.desc = stepDesc
-				if stepImageUploaded {
-					cookingStep?.setImage(with: stepImageView.image)
-				}
 			} else {
 				print("step description is not present")
 				stepDescription.becomeFirstResponder()
@@ -119,34 +99,9 @@ class NewRecipeViewController: UIViewController {
 				stepAudio = nil
 			}
 		}
-		if stepImageUploaded {
-			cookingStep?.setImage(with: stepImageView.image)
-		}
-        presentStepDone()
+		performSegue(withIdentifier: "AddStepPictureSegue", sender: nil)
     }
 
-    private func presentStepDone() {
-        let alertController = UIAlertController()
-        // Alert Saying Step Not Saved
-        alertController.title = "Done With Steps?"
-        // create a cancel action
-        let noAction = UIAlertAction(title: "No", style: .cancel) { (action) in
-            // handle cancel response here. Doing nothing will dismiss the view.
-			self.performSegue(withIdentifier: "IngredientsViewSegue", sender: nil)
-        }
-        // add the cancel action to the alertController
-        alertController.addAction(noAction)
-        
-        // create an OK action
-        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) in
-            // handle response here.
-            self.performSegue(withIdentifier: "RecipeSummarySegue", sender: nil)
-        }
-        // add the OK action to the alert controller
-        alertController.addAction(yesAction)
-        present(alertController, animated: true, completion: nil)
-    }
-	
 	@IBAction func speechButtonTapped(_ sender: UIButton) {
 		if speechRecognitionStarted {
 			self.micButton.setImage(#imageLiteral(resourceName: "mic"), for: .normal)
@@ -163,11 +118,6 @@ class NewRecipeViewController: UIViewController {
 			self.micButton.flash()
 			self.recordAndRecognizeSpeech()
 		}
-	}
-	
-	@IBAction func onTap(_ sender: UITapGestureRecognizer) {
-		present(imagePickerController, animated: true, completion: nil)
-		stepImageUploaded = true
 	}
 	
 	@IBAction func onRecordAudioTapped(_ sender: UIButton) {
@@ -207,20 +157,11 @@ class NewRecipeViewController: UIViewController {
 	}
 	
 	// MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "IngredientsViewSegue" {
-			let destVC = segue.destination as! IngredientsViewController
-			destVC.steps = self.steps
-		} else {
-			// Get the new view controller using segue.destinationViewController.
-			let recipeSummaryViewController = segue.destination as! RecipeSummaryViewController
-			// Pass the selected object to the new view controller.
-			recipeSummaryViewController.cookingSteps = steps
-		}
-    }
-
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		let destVC = segue.destination as! AddStepPictureViewController
+		destVC.steps = steps
+	}
 }
 
 extension NewRecipeViewController: SFSpeechRecognizerDelegate {
@@ -351,25 +292,6 @@ extension NewRecipeViewController : AVAudioRecorderDelegate {
 		print("Error Encoding", error?.localizedDescription ?? "")
 	}
 
-}
-
-extension NewRecipeViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-		// Get the image captured by the UIImagePickerController
-		let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-		let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-		
-		self.stepImageView.contentMode = .center
-		self.stepImageView.contentMode = .scaleAspectFit
-		if editedImage != nil {
-			self.stepImageView.image = editedImage
-		} else {
-			self.stepImageView.image = originalImage
-		}
-		
-		// Dismiss UIImagePickerController to go back to your original view controller
-		dismiss(animated: true, completion: nil)
-	}
 }
 
 extension NewRecipeViewController : AVAudioPlayerDelegate {

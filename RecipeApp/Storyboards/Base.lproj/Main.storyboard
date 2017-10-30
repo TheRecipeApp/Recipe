@@ -825,6 +825,9 @@
                                             <constraint firstAttribute="width" constant="32" id="UC9-MW-gj1"/>
                                         </constraints>
                                         <state key="normal" image="LikeOff"/>
+                                        <connections>
+                                            <action selector="onLikeTapped:" destination="Y1v-pJ-waA" eventType="touchUpInside" id="Vpl-RI-XQK"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Indian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUI-HU-A4e">
                                         <rect key="frame" x="72" y="184" width="41.5" height="18"/>
@@ -916,6 +919,7 @@
                         <outlet property="cookThisButton" destination="EsT-UE-BR7" id="ksI-82-T4d"/>
                         <outlet property="cuisine" destination="KUI-HU-A4e" id="92N-Zx-bGY"/>
                         <outlet property="difficulty" destination="BrZ-h6-q5O" id="N40-Rs-Mat"/>
+                        <outlet property="likeButton" destination="S0E-7U-1zy" id="dS1-4W-cdb"/>
                         <outlet property="likesCount" destination="PsN-q5-wmG" id="OR7-wI-bm9"/>
                         <outlet property="owner" destination="6hr-5Z-cdm" id="kvl-rl-pai"/>
                         <outlet property="recipeDescription" destination="FYv-Nc-EaB" id="weu-LS-Yb7"/>

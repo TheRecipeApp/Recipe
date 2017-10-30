@@ -22,10 +22,12 @@ class RecipeViewController: UIViewController {
 	@IBOutlet weak var owner: UILabel!
 	@IBOutlet weak var cookThisButton: UIButton!
     @IBOutlet weak var likesCount: UILabel!
+    @IBOutlet var likeButton: UIButton!
     
     var recipeId : String?
 	var recipe: Recipe?
 	var recipeOwner: User?
+    var isLiked: Bool = false
 	
 	// cooking steps
 	var cookingSteps = [CookingStep]()
@@ -141,7 +143,26 @@ class RecipeViewController: UIViewController {
 			}
 		})
 	}
+    
+    // MARK: - Actions
 
+    @IBAction func onLikeTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.1, animations: {
+            sender.alpha = 0.1
+        }, completion:{(finished) in
+            if self.isLiked == true {
+                self.likeButton.setImage(UIImage(named: "LikeOff"), for: .normal)
+            } else {
+                self.likeButton.setImage(UIImage(named: "LikeOn"), for: .normal)
+            }
+            UIView.animate(withDuration: 0.3, animations:{
+                sender.alpha = 1.0
+            },completion:nil)
+            
+            self.isLiked = !self.isLiked
+        })
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

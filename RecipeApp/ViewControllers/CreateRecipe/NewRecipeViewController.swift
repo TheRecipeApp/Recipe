@@ -52,6 +52,7 @@ class NewRecipeViewController: UIViewController {
         super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
+		self.hideKeyboardWhenTappedAround()
 
         // image picker
 		imagePickerController.delegate = self
@@ -406,6 +407,18 @@ extension UIButton {
 
 	func stopFlash() {
 		layer.removeAllAnimations()
+	}
+}
+
+extension UIViewController {
+	func hideKeyboardWhenTappedAround() {
+		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+		tap.cancelsTouchesInView = false
+		view.addGestureRecognizer(tap)
+	}
+	
+	func dismissKeyboard() {
+		view.endEditing(true)
 	}
 }
 

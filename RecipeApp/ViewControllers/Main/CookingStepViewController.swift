@@ -32,7 +32,8 @@ class CookingStepViewController: UIViewController {
 		ingredientsTable.rowHeight = UITableViewAutomaticDimension
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
-		
+		ingredientsTable.separatorStyle = UITableViewCellSeparatorStyle.none
+
 		// Do any additional setup after loading the view.
 		step = steps?[stepNumber-1]
 		stepDescription.text = step?.desc

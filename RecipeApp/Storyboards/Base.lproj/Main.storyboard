@@ -759,77 +759,78 @@
                                 <rect key="frame" x="0.0" y="254" width="375" height="349"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ra2-da-yAl">
-                                        <rect key="frame" x="10" y="4" width="101" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <rect key="frame" x="10" y="4" width="116.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likes" translatesAutoresizingMaskIntoConstraints="NO" id="cmB-H0-FMS">
-                                        <rect key="frame" x="10" y="27" width="20" height="20"/>
+                                        <rect key="frame" x="10" y="30" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="lqf-px-lIk"/>
                                             <constraint firstAttribute="width" constant="20" id="t8w-2w-ICJ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PsN-q5-wmG">
-                                        <rect key="frame" x="32" y="30" width="36" height="14.5"/>
+                                        <rect key="frame" x="32" y="33" width="36" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This recipe is for making this. This is a big enough description that will wrap on multiple lines to see how long this is " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYv-Nc-EaB">
-                                        <rect key="frame" x="10" y="85.5" width="348.5" height="50.5"/>
+                                        <rect key="frame" x="10" y="88.5" width="348.5" height="50.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Indian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUI-HU-A4e">
-                                        <rect key="frame" x="67" y="151.5" width="41.5" height="18"/>
+                                        <rect key="frame" x="67" y="154.5" width="41.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cuisine:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aX1-Fx-wJt" userLabel="Cuisine Header">
-                                        <rect key="frame" x="10" y="151.5" width="55" height="18"/>
+                                        <rect key="frame" x="10" y="154.5" width="55" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="GraySmallHeader"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXt-NU-a2p" userLabel="Category Header">
-                                        <rect key="frame" x="10" y="173.5" width="68" height="18"/>
+                                        <rect key="frame" x="10" y="176.5" width="68" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="GraySmallHeader"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sides" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLc-Sj-TUI">
-                                        <rect key="frame" x="80" y="173.5" width="37" height="18"/>
+                                        <rect key="frame" x="80" y="176.5" width="37" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZo-gg-bpK" userLabel="Difficulty Header">
-                                        <rect key="frame" x="10" y="195.5" width="66" height="18"/>
+                                        <rect key="frame" x="10" y="198.5" width="66" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="GraySmallHeader"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to Cook:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-Pf-zeO" userLabel="TimetoCook Header">
-                                        <rect key="frame" x="10" y="217.5" width="96" height="18"/>
+                                        <rect key="frame" x="10" y="220.5" width="96" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" name="GraySmallHeader"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVR-8N-ion">
-                                        <rect key="frame" x="108" y="218.5" width="42.5" height="17"/>
+                                        <rect key="frame" x="108" y="221.5" width="42.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsT-UE-BR7">
-                                        <rect key="frame" x="265" y="4" width="100" height="33"/>
+                                        <rect key="frame" x="225" y="4" width="140" height="45"/>
                                         <color key="backgroundColor" name="PrimaryColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="mEU-fy-01z"/>
+                                            <constraint firstAttribute="height" constant="45" id="C1p-dp-AAv"/>
+                                            <constraint firstAttribute="width" constant="140" id="mEU-fy-01z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Cook This">
+                                        <state key="normal" title="COOK THIS">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -837,12 +838,12 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Owner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hr-5Z-cdm">
-                                        <rect key="frame" x="10" y="49" width="68.5" height="20.5"/>
+                                        <rect key="frame" x="10" y="52" width="68.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BrZ-h6-q5O">
-                                        <rect key="frame" x="78" y="196" width="52" height="17"/>
+                                        <rect key="frame" x="78" y="199" width="52" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

@@ -263,7 +263,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 })
             }
             cell.recipeId = recipe.objectId
-            cell.categoryLabel.text = recipe.category
+            cell.categoryLabel.text = recipe.category?.uppercased()
             cell.createdByLabel.isHidden = true
             // Commented out since we don't want to show the owner in this screen
 //            if let owner = User.fetchUser(by: recipe.owner!) {

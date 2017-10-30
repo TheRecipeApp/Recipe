@@ -21,12 +21,19 @@ class FindViewController: UIViewController {
     
     var recipes = [Recipe]()
     var isSearchShown = false
+    var categories: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchBar.delegate = self
         searchBar.sizeToFit()
+        
+        // For setting up peek and pop functionality
+        if (view.traitCollection.forceTouchCapability == .available) {
+            print("force touch is enabled for this device")
+            registerForPreviewing(with: self, sourceView: self.collectionView)
+        }
         
         collectionView.register(UINib(nibName: "RecipeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "RecipeCollectionViewCell")
         collectionView.delegate = self
@@ -37,11 +44,17 @@ class FindViewController: UIViewController {
         }
         
         self.noResultsLabel.isHidden = true
+//        fetchCategories()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onTapView(_ sender: Any) {
+        print("tapped on view")
+        self.searchBar.endEditing(true)
     }
     
     func addTapRecognizer(to label: UILabel) {
@@ -71,12 +84,20 @@ class FindViewController: UIViewController {
         if label.isActive == true {
             let color = UIColor(named: "GraySmallHeader")
             label.backgroundColor = color
+            let index = self.categories.index(where: { (key: String) -> Bool in
+                return key == label.text!.lowercased()
+            })
+            if let index = index {
+                categories.remove(at: index)
+            }
         } else {
             let color = UIColor(named: "PrimaryColor")
+            self.categories.append(label.text!.lowercased())
             label.backgroundColor = color
         }
+        
         label.isActive = !label.isActive
-        doSearch()
+        doSearch(nil, categories: true)
     }
     
     func recipeTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -89,31 +110,81 @@ class FindViewController: UIViewController {
         self.navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
-	func doSearch() {
+    
+//    func fetchCategories() {
+//        let query = PFQuery(className: "Recipe")
+//        query.countObjectsInBackground { (count: Int, error: Error?) in
+//            <#code#>
+//        }
+//        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
+//
+//        }
+//    }
+    //_ searchString: String?, category: Bool
+    
+    func doSearch(_ searchTerm: String?, categories: Bool) {
+        
         searchBar.resignFirstResponder()
         recipes.removeAll()
-        let query = PFQuery(className: "Recipe")
-        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-            if error == nil {
-                // The find succeeded.
-                print("Successfully retrieved \(objects!.count) recipes.")
-                // Do something with the found objects
-                if let objects = objects {
-                    if objects.count > 0 {
-                        self.noResultsLabel.isHidden = true
-                        self.collectionView.isHidden = false
-                        for object in objects {
-                            print(object.objectId!)
-                            self.recipes.append(object as! Recipe)
+        
+        var query: PFQuery? = nil
+        if categories {
+            var queries: [PFQuery] = [PFQuery]()
+            self.categories.forEach({ (category: String) in
+                let query = PFQuery(className: "Recipe")
+                let searchTermRegex = String(format: "(?i)%@", category)
+                query.whereKey("category", matchesRegex: searchTermRegex)
+                queries.append(query)
+            })
+            if queries.count > 0 {
+                query = PFQuery.orQuery(withSubqueries: queries)
+            }
+        } else {
+            if let searchTerm = searchTerm {
+                var queries: [PFQuery] = [PFQuery]()
+                
+                let searchTermRegex = String(format: "(?i)%@", searchTerm)
+                
+                let query1 = PFQuery(className: "Recipe")
+                query1.whereKey("category", matchesRegex: searchTermRegex)
+                
+                let query2 = PFQuery(className: "Recipe")
+                query2.whereKey("cuisine", matchesRegex: searchTermRegex)
+
+                let query3 = PFQuery(className: "Recipe")
+                query3.whereKey("name", matchesRegex: searchTermRegex)
+                
+                queries.append(query1)
+                queries.append(query2)
+                queries.append(query3)
+                
+                query = PFQuery.orQuery(withSubqueries: queries)
+            }
+        }
+        
+        if let query = query {
+            query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                if error == nil {
+                    // The find succeeded.
+                    print("Successfully retrieved \(objects!.count) recipes.")
+                    // Do something with the found objects
+                    if let objects = objects {
+                        if objects.count > 0 {
+                            self.noResultsLabel.isHidden = true
+                            self.collectionView.isHidden = false
+                            for object in objects {
+                                print(object.objectId!)
+                                self.recipes.append(object as! Recipe)
+                            }
+                            self.collectionView.reloadData()
+                        } else {
+                            //                        self.noResultsLabel.isHidden = false
+                            self.collectionView.isHidden = true
                         }
-                        self.collectionView.reloadData()
-                    } else {
-                        self.noResultsLabel.isHidden = false
-                        self.collectionView.isHidden = true
                     }
                 }
-            }
-        })
+            })
+        }
     }
 }
 
@@ -137,7 +208,7 @@ extension FindViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        doSearch()
+        doSearch(searchBar.text, categories: false)
     }
 }
 
@@ -158,12 +229,9 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
             })
         }
         cell.recipeId = recipe.objectId
+        cell.recipe = recipe
         cell.categoryLabel.text = recipe.category?.uppercased()
-        if let owner = User.fetchUser(by: recipe.owner!) {
-            cell.createdByLabel.text = "by @\(owner.username!)"
-        } else {
-            cell.createdByLabel.text = ""
-        }
+        cell.createdByLabel.text = "@\(recipe.ownerName!)"
         cell.recipeTitle.text = recipe.name
         
         return cell
@@ -174,7 +242,66 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("TODO: Navigate to the recipe detail")
+        let cell = self.collectionView?.cellForItem(at: indexPath) as? RecipeCollectionViewCell
+        let recipeVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        recipeVC.recipeId = cell?.recipeId
+        self.navigationController?.pushViewController(recipeVC, animated: true)
+    }
+}
+
+extension FindViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        var indexPath: IndexPath?
+        var cell: RecipeCollectionViewCell?
+        
+        indexPath = self.collectionView?.indexPathForItem(at: location)
+        if indexPath != nil {
+            cell = self.collectionView?.cellForItem(at: indexPath!) as? RecipeCollectionViewCell
+            if cell == nil { return nil }
+        }
+        
+        if indexPath == nil {
+            return nil
+        } else {
+            let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            
+            // in order to initialize the outlets on the view
+            let view = detailVC.view
+            
+            detailVC.recipeId = cell!.recipeId
+            detailVC.recipe = cell!.recipe
+            detailVC.recipeImage.image = cell!.recipeImage?.image
+            
+            let recipe = cell!.recipe
+            if recipe != nil {
+                if let nameStr = recipe?.name {
+                    detailVC.recipeName.text = nameStr
+                }
+                if let desc = recipe?.desc {
+                    detailVC.recipeDescription.text = desc
+                }
+                if let likes = recipe?.likes {
+                    detailVC.likesCount.text = "\(likes)"
+                }
+                if let ownerStr = cell?.createdByLabel {
+                    detailVC.owner.text = ownerStr.text!
+                }
+            }
+            
+            detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+            previewingContext.sourceRect = cell!.frame
+            
+            return detailVC
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let recipeVC = storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        let detailVC = viewControllerToCommit as! DetailViewController
+        recipeVC.recipeId = detailVC.recipeId
+        show(recipeVC, sender: self)
     }
 }
 

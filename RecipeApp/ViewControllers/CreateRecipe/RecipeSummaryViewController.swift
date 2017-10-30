@@ -29,6 +29,8 @@ class RecipeSummaryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+		self.hideKeyboardWhenTappedAround()
+
 		recipeStepsTable.delegate = self
 		recipeStepsTable.dataSource = self
 		recipeStepsTable.estimatedRowHeight = 100

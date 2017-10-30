@@ -49,6 +49,7 @@
 		AFD1FCDF1F8FC2A100190961 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCDE1F8FC2A100190961 /* Recipe.swift */; };
 		AFD1FCE11F90505900190961 /* CookingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCE01F90505900190961 /* CookingStep.swift */; };
 		AFD1FCE51F90507F00190961 /* Cookbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCE41F90507F00190961 /* Cookbook.swift */; };
+		AFF6A1221FA6B43600B96B0A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF6A1211FA6B43600B96B0A /* WelcomeViewController.swift */; };
 		AFF8ED791F92C7A8007A34CE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */; };
 		BE1121011FA1BC44005F2427 /* RecipeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1121001FA1BC44005F2427 /* RecipeView.xib */; };
 		BE3F069E1FA32D6E000623FC /* RecipeCollectionViewCell.swift in Resources */ = {isa = PBXBuildFile; fileRef = BE1120FE1FA1BA0D005F2427 /* RecipeCollectionViewCell.swift */; };
@@ -105,6 +106,7 @@
 		AFD1FCDE1F8FC2A100190961 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		AFD1FCE01F90505900190961 /* CookingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingStep.swift; sourceTree = "<group>"; };
 		AFD1FCE41F90507F00190961 /* Cookbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookbook.swift; sourceTree = "<group>"; };
+		AFF6A1211FA6B43600B96B0A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BE1120FE1FA1BA0D005F2427 /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE1121001FA1BC44005F2427 /* RecipeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeView.xib; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			children = (
 				5F576D7F1F9452300037228B /* NewRecipeViewController.swift */,
 				AF88B5B11F9886CA00F9F702 /* RecipeSummaryViewController.swift */,
+				AFF6A1211FA6B43600B96B0A /* WelcomeViewController.swift */,
 				AF88B5B31F9886E200F9F702 /* StepDetailsViewController.swift */,
 				AFBBD46C1FA658F900A6DB4F /* IngredientsViewController.swift */,
 			);
@@ -353,6 +356,7 @@
 				TargetAttributes = {
 					5FD28DD01F8B2B1D005BAD06 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 278DEM2K6B;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -450,7 +454,6 @@
 				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
 				"${BUILT_PRODUCTS_DIR}/ParseFacebookUtilsV4/ParseFacebookUtilsV4.framework",
 				"${BUILT_PRODUCTS_DIR}/ParseUI/ParseUI.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftShareBubbles/SwiftShareBubbles.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -466,7 +469,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParseFacebookUtilsV4.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParseUI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftShareBubbles.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +489,7 @@
 				5F576D751F944D260037228B /* EditProfileViewController.swift in Sources */,
 				AFAF0A071F972817008DF5D2 /* RecipeBlockView.swift in Sources */,
 				5F576D881F9453C60037228B /* CookbookViewController.swift in Sources */,
+				AFF6A1221FA6B43600B96B0A /* WelcomeViewController.swift in Sources */,
 				BEAD7EBD1FA334F4007168F8 /* UILabelCategory.swift in Sources */,
 				AF7EC2701F929C9D00A42121 /* LoginViewController.swift in Sources */,
 				5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */,
@@ -640,10 +643,10 @@
 			baseConfigurationReference = DF996A821FC7F80EAEFDFE1E /* Pods-RecipeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 278DEM2K6B;
 				INFOPLIST_FILE = RecipeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp.vijay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -654,10 +657,10 @@
 			baseConfigurationReference = D0D52C27226C49A1233A307F /* Pods-RecipeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 278DEM2K6B;
 				INFOPLIST_FILE = RecipeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp.vijay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

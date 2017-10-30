@@ -54,7 +54,6 @@ PODS:
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
-  - SwiftShareBubbles (0.2.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -67,7 +66,6 @@ DEPENDENCIES:
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
-  - SwiftShareBubbles
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -83,8 +81,7 @@ SPEC CHECKSUMS:
   Parse: 7daa8804b876d250a65420534c97d2d786c3b0b4
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
-  SwiftShareBubbles: 963ed76f7f305b8c3f967f417eaa1c58a44f0fd0
 
-PODFILE CHECKSUM: 9e4a8cf66a58a6bf6f87c381dd94ba5547148bdc
+PODFILE CHECKSUM: ae7326cfec6f6ff6a4f4fbe6083acf179a48da35
 
 COCOAPODS: 1.3.1

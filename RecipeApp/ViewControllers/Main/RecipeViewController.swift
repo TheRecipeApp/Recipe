@@ -41,6 +41,10 @@ class RecipeViewController: UIViewController {
 		fetchRecipe()
         
         categoryLabel.isHidden = true
+        
+        owner.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecipeViewController.goToProfile(tapGestureRecognizer:)))
+        owner.addGestureRecognizer(tapRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -148,7 +152,7 @@ class RecipeViewController: UIViewController {
 
     @IBAction func onLikeTapped(_ sender: UIButton) {
         UIView.animate(withDuration: 0.1, animations: {
-            sender.alpha = 0.1
+            self.likeButton.alpha = 0.1
         }, completion:{(finished) in
             if self.isLiked == true {
                 self.likeButton.setImage(UIImage(named: "LikeOff"), for: .normal)
@@ -156,11 +160,19 @@ class RecipeViewController: UIViewController {
                 self.likeButton.setImage(UIImage(named: "LikeOn"), for: .normal)
             }
             UIView.animate(withDuration: 0.3, animations:{
-                sender.alpha = 1.0
+                self.likeButton.alpha = 1.0
             },completion:nil)
             
             self.isLiked = !self.isLiked
         })
+    }
+    
+    func goToProfile(tapGestureRecognizer: UITapGestureRecognizer) {
+        print("User profile tapped")
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        profileVC.userId = recipeOwner!.objectId
+        self.navigationController?.pushViewController(profileVC, animated: true)
     }
     
     // MARK: - Navigation

@@ -63,6 +63,7 @@ class ProfileViewController: UIViewController {
             rightNavButton.isEnabled = false
             updateProfilePicture.isEnabled = false
             updateProfilePicture.isHidden = true
+            navigationItem.leftBarButtonItem = nil
         } else {
             print("This is the current user")
         }
@@ -76,9 +77,15 @@ class ProfileViewController: UIViewController {
                 if error == nil {
                     if let imageData = imageData {
                         self.displayProfilePicture(image: UIImage(data: imageData)!)
+                    } else {
+                        self.displayProfilePicture(image: UIImage(named: "UserPicture")!)
                     }
+                } else {
+                    self.displayProfilePicture(image: UIImage(named: "UserPicture")!)
                 }
             })
+        } else {
+            displayProfilePicture(image: UIImage(named: "UserPicture")!)
         }
         
         fetchTopRecipes(ownerId: userObject!.objectId!)
@@ -166,11 +173,14 @@ class ProfileViewController: UIViewController {
         let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        profileImageView.alpha = 0.0
         profileImageView.layer.cornerRadius = 60
         profileImageView.image = thumbnail
         profileImageView.clipsToBounds = true
         profileImageView.isHidden = false
-        // TODO: Add a little animation to show the profile picture
+        UIView.animate(withDuration: 0.3, animations:{
+            self.profileImageView.alpha = 1.0
+        },completion:nil)
     }
     
     func saveProfilePicture(image: UIImage) {
@@ -190,7 +200,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func onClose(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        if userId == User.current()?.objectId {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func onLogout(_ sender: UIButton) {

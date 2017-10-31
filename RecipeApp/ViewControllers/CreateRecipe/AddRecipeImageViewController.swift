@@ -67,9 +67,37 @@ class AddRecipeImageViewController: UIViewController {
             }
         }
     }
+
+    private func showPhotoPicker(type: UIImagePickerControllerSourceType) {
+        let imagePickerViewController = UIImagePickerController()
+        imagePickerViewController.delegate = self
+        imagePickerViewController.allowsEditing = true
+        imagePickerViewController.sourceType = type
+        present(imagePickerViewController, animated: true, completion: nil)
+    }
     
     @IBAction func onTaop(_ sender: UITapGestureRecognizer) {
-        present(imagePickerController, animated: true, completion: nil)
+        let actionSheet = UIAlertController(title: "Set your profile picture", message: nil, preferredStyle: .actionSheet)
+        
+        // Make sure the simulator does not show the camera option
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+                self.showPhotoPicker(type: UIImagePickerControllerSourceType.camera)
+            }
+            actionSheet.addAction(cameraAction)
+        }
+        
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            self.showPhotoPicker(type: UIImagePickerControllerSourceType.photoLibrary)
+        }
+        actionSheet.addAction(photoLibraryAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
         recipeImageUploaded = true
     }
     

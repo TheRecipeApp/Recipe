@@ -114,18 +114,18 @@ class RecipeViewController: UIViewController {
 	func fetchRecipe() {
 		let query = PFQuery(className: "Recipe")
 		query.whereKey("objectId", equalTo: self.recipeId!)
-		query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-			if error == nil {
-				// The find succeeded.
-				print("Successfully retrieved \(objects!.count) cooking steps.")
-				// Do something with the found objects
-				if let objects = objects {
-					self.recipe = objects[0] as? Recipe
-					self.fetchOwner()
-					self.fetchCookingSteps()
-				}
+		do {
+			let objects:[PFObject]? = try query.findObjects()
+			print("Successfully retrieved \(objects?.count) cooking steps.")
+			// Do something with the found objects
+			if let objects = objects {
+				self.recipe = objects[0] as? Recipe
+				self.fetchOwner()
+				self.fetchCookingSteps()
 			}
-		})
+		} catch {
+			
+		}
 	}
 	
 	func fetchCookingSteps() {

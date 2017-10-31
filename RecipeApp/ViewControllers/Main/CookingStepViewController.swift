@@ -35,6 +35,8 @@ class CookingStepViewController: UIViewController {
 		ingredientsTable.separatorStyle = UITableViewCellSeparatorStyle.none
 
 		// Do any additional setup after loading the view.
+		print("step number: \(stepNumber)")
+		
 		step = steps?[stepNumber-1]
 		stepDescription.text = step?.desc
 		setupStepImage()

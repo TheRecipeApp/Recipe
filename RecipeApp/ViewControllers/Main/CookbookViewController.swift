@@ -19,6 +19,8 @@ class CookbookViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var recipeCollectionView: UICollectionView!
 
+    var cookbook: Cookbook?
+    
     var recipes = [Recipe]()
     
     override func viewDidLoad() {
@@ -33,7 +35,49 @@ class CookbookViewController: UIViewController {
         recipeCollectionView.delegate = self
         recipeCollectionView.dataSource = self
         
-        fetchRecipes()
+        if view.traitCollection.forceTouchCapability == .available {
+            print("Force touch is enabled for this device")
+            registerForPreviewing(with: self, sourceView: self.recipeCollectionView)
+        }
+        
+        if cookbook != nil {
+            do {
+                try cookbook!.fetchIfNeeded()
+                try cookbook?.owner.fetchIfNeeded()
+            } catch {
+                print("[Error] Error while retriving the user")
+            }
+            cookbookNameLabel.text = cookbook?.name
+            recipeCountLabel.text = "\(cookbook?.recipes?.count ?? 0)"
+            print("Hello")
+            print(cookbook?.recipes)
+            complimentCountLabel.text = "\(cookbook?.likesAggregate ?? 0)"
+            if let owner = cookbook?.owner as? User {
+                usernameLabel.text = "@\(owner.username!)"
+            } else {
+                usernameLabel.text = ""
+                print("User not found")
+            }
+            let imageFile = cookbook!.featuredImage
+            if imageFile != nil {
+                imageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                    if error == nil {
+                        if let imageData = imageData {
+                            self.profileImageView.image = UIImage(data: imageData)
+                        } else {
+                            self.profileImageView.image = UIImage(named: "NoRecipeImage")
+                        }
+                    } else {
+                        self.profileImageView.image = UIImage(named: "NoRecipeImage")
+                    }
+                })
+            } else {
+                self.profileImageView.image = UIImage(named: "NoRecipeImage")
+            }
+            fetchRecipes()
+        } else{
+            print("[ERROR] CookbookViewController cookbookId not set")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,7 +102,6 @@ class CookbookViewController: UIViewController {
                 
                 // reload the header section of this view
                 self.recipeCountLabel.text = String(self.recipes.count)
-                
                 
                 // reload the trending collection view
                 self.recipeCollectionView.reloadData()
@@ -103,6 +146,8 @@ extension CookbookViewController: UICollectionViewDelegate, UICollectionViewData
         cell.recipeTitle.text = recipe.name
         cell.recipeId = recipe.objectId
         
+        cell.recipe = recipe
+        
         if recipeImageFile != nil {
             recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
                 if error == nil {
@@ -115,10 +160,58 @@ extension CookbookViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         cell.categoryLabel.text = recipe.category?.uppercased()
-        cell.createdByLabel.text = "@\(PFUser.current()!.username!)"
+        cell.createdByLabel.text = "@\(recipe.ownerName!)"
         cell.isUserInteractionEnabled = true
         
         return cell
     }
     
+}
+
+extension CookbookViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let collectionView = previewingContext.sourceView as! UICollectionView
+        guard let indexPath = collectionView.indexPathForItem(at: location) else { return nil }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RecipeCollectionViewCell else { return nil }
+        
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        
+        // in order to initialize the outlets on the view
+        let view = detailVC.view
+        
+        detailVC.recipeId = cell.recipeId
+        detailVC.recipe = cell.recipe
+        detailVC.recipeImage.image = cell.recipeImage.image
+        
+        let recipe = cell.recipe
+        if recipe != nil {
+            if let nameStr = recipe?.name {
+                detailVC.recipeName.text = nameStr
+            }
+            if let desc = recipe?.desc {
+                detailVC.recipeDescription.text = desc
+            }
+            if let likes = recipe?.likes {
+                detailVC.likesCount.text = "\(likes)"
+            }
+            if let ownerStr = cell.createdByLabel {
+                detailVC.owner.text = ownerStr.text!
+            }
+        }
+        
+        detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
+        previewingContext.sourceRect = cell.frame
+        
+        return detailVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let collectionView = previewingContext.sourceView as! UICollectionView
+        let recipeVC = storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+        let detailVC = viewControllerToCommit as! DetailViewController
+        recipeVC.recipeId = detailVC.recipeId
+        show(recipeVC, sender: self)
+    }
 }

@@ -28,30 +28,66 @@ class FindViewController: UIViewController {
     var categories: [String] = []
     var categoryLabels = [UILabelCategory]()
     var animated: Set<Int>?
-    var indexed: Set<Int>?
+    var indexed: Set<Int> = []
+    
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            print("Shake gesture detected")
+            layoutCategoryLabels()
+        }
+    }
+
+    func layoutCategoryLabels() {
+        self.indexed = []
+        self.categories = []
+        self.collectionView.isHidden = true
+        
+        let allCategories: [String] = Recipe.categories
+        self.categoryView.subviews.forEach { (view: UIView) in
+            let label = view as! UILabelCategory
+            if label.isActive {
+                label.isActive = false
+                let color = UIColor(named: "GraySmallHeader")
+                label.backgroundColor = color
+            }
+            label.sizeToFit()
+
+            var index = random(0, allCategories.count - 1)
+            while (indexed.contains(index)) {
+                index = random(0, allCategories.count - 1)
+            }
+            
+            label.text = allCategories[index]
+            indexed.insert(index)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        indexed = []
+        // for shake gesture
+        self.becomeFirstResponder()
+        
         // set up the category labels
         let allCategories: [String] = Recipe.categories
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
             addCategoryTapRecognizer(to: label)
-            
+            label.sizeToFit()
             
             var index = random(0, allCategories.count - 1)
-            if (!(indexed?.contains(index))!) {
-                label.text = allCategories[index]
-                indexed?.insert(index)
+            while (indexed.contains(index)) {
+                index = random(0, allCategories.count - 1)
             }
-//            while !(indexed!.contains(index) && (indexed?.count)! < self.categoryView.subviews.count) {
-//                index = random(0, allCategories.count - 1)
-//            }
             
-//            label.text = allCategories[index]
-//            indexed?.insert(index)
+            label.text = allCategories[index]
+            indexed.insert(index)
         }
         
         searchBar.delegate = self

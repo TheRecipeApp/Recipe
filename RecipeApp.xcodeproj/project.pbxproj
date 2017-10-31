@@ -58,7 +58,6 @@
 		BE4644F01FA054D700F9E8CF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4644EF1FA054D700F9E8CF /* DetailViewController.swift */; };
 		BE46D7531F9743A00060A49A /* DiscoverRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46D7521F9743A00060A49A /* DiscoverRecipeCell.swift */; };
 		BE65E0151FA6B84F00765161 /* Recipe.swift in Resources */ = {isa = PBXBuildFile; fileRef = AFD1FCDE1F8FC2A100190961 /* Recipe.swift */; };
-		BE65E0171FA6D0D600765161 /* RecipeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65E0161FA6D0D600765161 /* RecipeCollectionViewLayout.swift */; };
 		BEAD7EBD1FA334F4007168F8 /* UILabelCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F06A01FA32E93000623FC /* UILabelCategory.swift */; };
 		BEAD7EBE1FA3364E007168F8 /* UILabelCategory.swift in Resources */ = {isa = PBXBuildFile; fileRef = BE3F06A01FA32E93000623FC /* UILabelCategory.swift */; };
 /* End PBXBuildFile section */
@@ -117,7 +116,6 @@
 		BE3F06A01FA32E93000623FC /* UILabelCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelCategory.swift; sourceTree = "<group>"; };
 		BE4644EF1FA054D700F9E8CF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BE46D7521F9743A00060A49A /* DiscoverRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverRecipeCell.swift; sourceTree = "<group>"; };
-		BE65E0161FA6D0D600765161 /* RecipeCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewLayout.swift; sourceTree = "<group>"; };
 		D0D52C27226C49A1233A307F /* Pods-RecipeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp.release.xcconfig"; sourceTree = "<group>"; };
 		DF996A821FC7F80EAEFDFE1E /* Pods-RecipeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E9B6A8422A02C8B20F2F48F6 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,7 +305,6 @@
 				BE1121001FA1BC44005F2427 /* RecipeView.xib */,
 				BE1120FE1FA1BA0D005F2427 /* RecipeCollectionViewCell.swift */,
 				5F926E881FA2A36F0050E5F7 /* RPContactPickerViewController.swift */,
-				BE65E0161FA6D0D600765161 /* RecipeCollectionViewLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,7 +360,7 @@
 				TargetAttributes = {
 					5FD28DD01F8B2B1D005BAD06 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6MQNBF25VG;
+						DevelopmentTeam = 3MD4YW58C8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -505,7 +502,6 @@
 				5F08B0041F9413280050E639 /* FacebookAuthDelegate.swift in Sources */,
 				AFF8ED791F92C7A8007A34CE /* RegisterViewController.swift in Sources */,
 				AFD1FCE51F90507F00190961 /* Cookbook.swift in Sources */,
-				BE65E0171FA6D0D600765161 /* RecipeCollectionViewLayout.swift in Sources */,
 				5F926E891FA2A36F0050E5F7 /* RPContactPickerViewController.swift in Sources */,
 				AF6013AC1FA6F5780014DA3D /* AddStepPictureViewController.swift in Sources */,
 				5FD28DD71F8B2B1D005BAD06 /* FindViewController.swift in Sources */,
@@ -653,7 +649,7 @@
 			baseConfigurationReference = DF996A821FC7F80EAEFDFE1E /* Pods-RecipeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6MQNBF25VG;
+				DEVELOPMENT_TEAM = 3MD4YW58C8;
 				INFOPLIST_FILE = RecipeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp;
@@ -667,7 +663,7 @@
 			baseConfigurationReference = D0D52C27226C49A1233A307F /* Pods-RecipeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6MQNBF25VG;
+				DEVELOPMENT_TEAM = 3MD4YW58C8;
 				INFOPLIST_FILE = RecipeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp;

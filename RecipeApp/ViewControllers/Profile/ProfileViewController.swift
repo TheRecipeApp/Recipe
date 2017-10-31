@@ -89,18 +89,7 @@ class ProfileViewController: UIViewController {
         }
         
         fetchTopRecipes(ownerId: userObject!.objectId!)
-        
-        for i in 1...10 {
-            let cookbook = Cookbook()
-            cookbook.name = "Summer BBQ"
-            if i % 2 == 0 {
-                cookbook.owner = userObject!
-            }
-            cookbook.likesAggregate = 150
-            allCookbooks.append(cookbook)
-            filteredCookbooks.append(cookbook)
-        }
-        cookbooksCollectionView.reloadData()
+        fetchCookbooks(ownerId: userObject!.objectId!)
     }
     
     func fetchTopRecipes(ownerId: String) {
@@ -120,6 +109,29 @@ class ProfileViewController: UIViewController {
                 } else {
                     self.noRecipiesLabel.isHidden = false
                     self.recipiesCollectionView.isHidden = true
+                }
+            }
+        })
+    }
+    
+    func fetchCookbooks(ownerId: String) {
+        let query = PFQuery(className: "Cookbook")
+        query.order(byDescending: "created_at")
+        // TODO: Modify this query to display cookbooks that I follow
+//        query.whereKey("owner", equalTo: ownerId)
+        query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+            if error == nil {
+                // Cookbooks found
+                print("Successfully retrieved \(objects!.count) cookbooks.")
+                self.allCookbooks = objects as! [Cookbook]
+                self.filteredCookbooks = objects as! [Cookbook]
+                if self.filteredCookbooks.count > 0 {
+//                    self.noCookbooksLabel.isHidden = true
+                    self.cookbooksCollectionView.isHidden = false
+                    self.cookbooksCollectionView.reloadData()
+                } else {
+//                    self.noCookbooksLabel.isHidden = false
+                    self.cookbooksCollectionView.isHidden = true
                 }
             }
         })
@@ -266,6 +278,8 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
             let recipe = self.recipies[indexPath.row]
             
+            cell.recipe = recipe
+            
             let recipeImageFile = recipe.image
             if recipeImageFile != nil {
                 recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
@@ -297,20 +311,37 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             } else {
                 cookbook = filteredCookbooks[indexPath.row]
             }
+            print(cookbook)
             if cookbook.owner.objectId == userId {
                 cell.authorLabel.isHidden = true
             } else {
-                if let username = cookbook.owner.username {
-                    cell.authorLabel.text = "by @\(username)"
+                do {
+                    try cookbook.owner.fetchIfNeeded()
+                    if let username = cookbook.owner.username {
+                        cell.authorLabel.text = "by @\(username)"
+                    }
+                } catch {
+                    print("Error retriving user")
                 }
             }
             var complimentsLabel = "\(cookbook.likesAggregate)"
-            // TODO: Find a fine
+            // TODO: Create a helper to fix this
             if cookbook.likesAggregate > 1000 {
                 complimentsLabel = "1K"
             }
             cell.complimentLabel.text = "\(complimentsLabel) compliments"
             cell.cookbookLabel.text = cookbook.name
+            
+            let imageFile = cookbook.featuredImage
+            if imageFile != nil {
+                imageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
+                    if error == nil {
+                        if let imageData = imageData {
+                            cell.coverImageView.image = UIImage(data: imageData)
+                        }
+                    }
+                })
+            }
             
             return cell
         }
@@ -338,9 +369,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cookbookVC = storyboard.instantiateViewController(withIdentifier: "CookbookViewController") as! CookbookViewController
             if showAllCookbooks {
-                // TODO: Add reference to the cookbook
+                cookbookVC.cookbook = self.allCookbooks[indexPath.row]
             } else {
-                // TODO: Add reference to the cookbook
+                cookbookVC.cookbook = self.filteredCookbooks[indexPath.row]
             }
             self.navigationController?.pushViewController(cookbookVC, animated: true)
         }
@@ -358,11 +389,29 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if collectionView.tag == 0 {
             let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            
             // in order to initialize the outlets on the view
             let view = detailVC.view
             
             detailVC.recipeId = cell.recipeId
-            detailVC.recipeImage.image = cell.recipeImage?.image
+            detailVC.recipe = cell.recipe
+            detailVC.recipeImage.image = cell.recipeImage.image
+            
+            let recipe = cell.recipe
+            if recipe != nil {
+                if let nameStr = recipe?.name {
+                    detailVC.recipeName.text = nameStr
+                }
+                if let desc = recipe?.desc {
+                    detailVC.recipeDescription.text = desc
+                }
+                if let likes = recipe?.likes {
+                    detailVC.likesCount.text = "\(likes)"
+                }
+                if let ownerStr = cell.createdByLabel {
+                    detailVC.owner.text = ownerStr.text!
+                }
+            }
             
             detailVC.preferredContentSize = CGSize(width: 0.0, height: 500)
             previewingContext.sourceRect = cell.frame

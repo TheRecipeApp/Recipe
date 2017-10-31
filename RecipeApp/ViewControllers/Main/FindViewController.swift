@@ -47,12 +47,7 @@ class FindViewController: UIViewController {
         self.indexed = []
         self.categories = []
         self.collectionView.isHidden = true
-//        self.collectionView.fadeOut { (completed: Bool) in
-//            if (completed) {
-//                self.collectionView.isHidden = true
-//            }
-//        }
-        
+
         let allCategories: [String] = Recipe.categories
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
@@ -414,12 +409,12 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
 
 extension UIView {
     
-    func fadeIn(duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+    func fadeIn(duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
         UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 1.0
         }, completion: completion)  }
     
-    func fadeOut(duration: TimeInterval = 1.0, delay: TimeInterval = 3.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+    func fadeOut(duration: TimeInterval = 0.5, delay: TimeInterval = 3.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
         UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 0.0
         }, completion: completion)

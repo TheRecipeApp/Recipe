@@ -28,6 +28,7 @@ class RecipeViewController: UIViewController {
 	var recipe: Recipe?
 	var recipeOwner: User?
     var isLiked: Bool = false
+    var fromRecipeCreate = false
 	
 	// cooking steps
 	var cookingSteps = [CookingStep]()
@@ -45,6 +46,9 @@ class RecipeViewController: UIViewController {
         owner.isUserInteractionEnabled = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecipeViewController.goToProfile(tapGestureRecognizer:)))
         owner.addGestureRecognizer(tapRecognizer)
+        if fromRecipeCreate {
+            cookThisButton.setTitle("ViewSteps", for: .normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {

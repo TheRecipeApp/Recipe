@@ -274,6 +274,13 @@
                                             <constraint firstItem="kA2-LT-1jX" firstAttribute="leading" secondItem="GSy-t3-tjp" secondAttribute="leading" id="z34-aW-hm6"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User does not have recipies yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wu3-I6-STP">
+                                        <rect key="frame" x="30" y="107" width="315" height="53"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -350,11 +357,15 @@
                         <outlet property="cookbooksCountLabel" destination="0Jb-D5-ZvT" id="AW0-ZE-G2f"/>
                         <outlet property="displayScreen" destination="gDy-BR-KRI" id="jUe-D8-UuE"/>
                         <outlet property="followersCountLabel" destination="zOU-2c-Y8d" id="HZy-Ja-T6w"/>
+                        <outlet property="logoutButton" destination="YsB-JI-9jG" id="b8g-mY-pBO"/>
                         <outlet property="nameLabel" destination="Ppe-xG-vZo" id="da6-nN-93s"/>
+                        <outlet property="noRecipiesLabel" destination="Wu3-I6-STP" id="PUi-iK-wT5"/>
                         <outlet property="profileImageView" destination="Eov-65-vQG" id="WHC-jy-Rwp"/>
                         <outlet property="recipiesCollectionView" destination="dU8-Xp-m5Z" id="nx4-eY-pkE"/>
                         <outlet property="recipiesCountLabel" destination="rND-fM-M7D" id="1dI-WQ-u0y"/>
+                        <outlet property="rightNavButton" destination="FM8-0O-GZs" id="CIA-4n-HKo"/>
                         <outlet property="scrollView" destination="jnl-s5-ZHp" id="zNI-Kw-q0T"/>
+                        <outlet property="updateProfilePicture" destination="37i-vX-8vX" id="X5a-wP-2Pq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezx-L4-b9P" userLabel="First Responder" sceneMemberID="firstResponder"/>

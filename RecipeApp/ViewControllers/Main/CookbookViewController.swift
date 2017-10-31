@@ -94,23 +94,14 @@ extension CookbookViewController: UICollectionViewDelegate, UICollectionViewData
         return recipes.count
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//
-//        let padding = 50
-//        let collectionViewSize = collectionView.frame.size.width
-//
-//
-//        return CGSizeMake(collectionViewSize/2, collectionViewSize/2)
-//
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
         
+        let recipe = self.recipes[indexPath.row]
         var recipeImageFile: PFFile? = nil
-        recipeImageFile = self.recipes[indexPath.row].image
-        cell.recipeTitle.text = self.recipes[indexPath.row].name
-        cell.recipeId = self.recipes[indexPath.row].objectId
+        recipeImageFile = recipe.image
+        cell.recipeTitle.text = recipe.name
+        cell.recipeId = recipe.objectId
         
         if recipeImageFile != nil {
             recipeImageFile?.getDataInBackground(block: { (imageData: Data?, error: Error?) in
@@ -123,8 +114,8 @@ extension CookbookViewController: UICollectionViewDelegate, UICollectionViewData
             })
         }
         
-        cell.categoryLabel.text = "image tag"
-        cell.createdByLabel.text = PFUser.current()?.username
+        cell.categoryLabel.text = recipe.category?.uppercased()
+        cell.createdByLabel.text = "@\(PFUser.current()!.username!)"
         cell.isUserInteractionEnabled = true
         
         return cell

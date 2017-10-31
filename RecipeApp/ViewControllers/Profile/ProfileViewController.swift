@@ -19,18 +19,20 @@ class ProfileViewController: UIViewController {
     @IBOutlet var complimentsCountLabel: UILabel!
     @IBOutlet var followersCountLabel: UILabel!
     @IBOutlet var cookbooksCountLabel: UILabel!
+    @IBOutlet var noRecipiesLabel: UILabel!
+    @IBOutlet var logoutButton: UIButton!
+    @IBOutlet var updateProfilePicture: UIButton!
+    @IBOutlet var rightNavButton: UIBarButtonItem!
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var recipiesCollectionView: UICollectionView!
     @IBOutlet var cookbooksCollectionView: UICollectionView!
-    @IBOutlet var topRecipiesView: iCarousel!
     
     var recipies: [Recipe] = []
     var allCookbooks: [Cookbook] = []
     var filteredCookbooks: [Cookbook] = []
     var showAllCookbooks = true
-    // TODO: Change this to another user
-    let currentUser = User.current()
+    var userId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +44,31 @@ class ProfileViewController: UIViewController {
         cookbooksCollectionView.dataSource = self
         cookbooksCollectionView.delegate = self
         
-        if (view.traitCollection.forceTouchCapability == .available) {
+        if view.traitCollection.forceTouchCapability == .available {
             print("Force touch is enabled for this device")
             registerForPreviewing(with: self, sourceView: self.recipiesCollectionView)
             registerForPreviewing(with: self, sourceView: self.cookbooksCollectionView)
         }
         
-        // TODO: Change this to another user
-        let userObject = User.fetchUser(by: (currentUser?.objectId)!)
+        print("Profile User Id: \(userId ?? "nil")")
+        if userId == nil {
+            print("Using current user")
+            userId = User.current()?.objectId
+        }
+        // If this is not the current user hide some actions
+        if userId != User.current()?.objectId {
+            print("This is another user")
+            logoutButton.isHidden = true
+            rightNavButton.title = ""
+            rightNavButton.isEnabled = false
+            updateProfilePicture.isEnabled = false
+            updateProfilePicture.isHidden = true
+            navigationItem.leftBarButtonItem = nil
+        } else {
+            print("This is the current user")
+        }
+        
+        let userObject = User.fetchUser(by: userId!)
         populateUser(user: userObject!)
         
         let userImage = userObject?.profileImage
@@ -58,38 +77,50 @@ class ProfileViewController: UIViewController {
                 if error == nil {
                     if let imageData = imageData {
                         self.displayProfilePicture(image: UIImage(data: imageData)!)
+                    } else {
+                        self.displayProfilePicture(image: UIImage(named: "UserPicture")!)
                     }
+                } else {
+                    self.displayProfilePicture(image: UIImage(named: "UserPicture")!)
                 }
             })
+        } else {
+            displayProfilePicture(image: UIImage(named: "UserPicture")!)
         }
         
-        fetchTopRecipes()
+        fetchTopRecipes(ownerId: userObject!.objectId!)
         
         for i in 1...10 {
             let cookbook = Cookbook()
             cookbook.name = "Summer BBQ"
             if i % 2 == 0 {
-                cookbook.owner = currentUser!
+                cookbook.owner = userObject!
             }
             cookbook.likesAggregate = 150
             allCookbooks.append(cookbook)
             filteredCookbooks.append(cookbook)
         }
         cookbooksCollectionView.reloadData()
-        // TODO: If this is another user, hide the edit and the logout button
     }
     
-    func fetchTopRecipes() {
+    func fetchTopRecipes(ownerId: String) {
         let query = PFQuery(className: "Recipe")
         query.order(byDescending: "likes")
         query.limit = 5
-        // TODO: Add filter by user
+        query.whereKey("owner", equalTo: ownerId)
         query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
             if error == nil {
                 // Recipies found
                 print("Successfully retrieved \(objects!.count) recipes.")
                 self.recipies = objects as! [Recipe]
-                self.recipiesCollectionView.reloadData()
+                if self.recipies.count > 0 {
+                    self.noRecipiesLabel.isHidden = true
+                    self.recipiesCollectionView.isHidden = false
+                    self.recipiesCollectionView.reloadData()
+                } else {
+                    self.noRecipiesLabel.isHidden = false
+                    self.recipiesCollectionView.isHidden = true
+                }
             }
         })
     }
@@ -142,17 +173,19 @@ class ProfileViewController: UIViewController {
         let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        profileImageView.alpha = 0.0
         profileImageView.layer.cornerRadius = 60
         profileImageView.image = thumbnail
         profileImageView.clipsToBounds = true
         profileImageView.isHidden = false
-        // TODO: Add a little animation to show the profile picture
+        UIView.animate(withDuration: 0.3, animations:{
+            self.profileImageView.alpha = 1.0
+        },completion:nil)
     }
     
     func saveProfilePicture(image: UIImage) {
         let imageFile = PFFile(data: UIImagePNGRepresentation(image)!)
         imageFile?.saveInBackground()
-        // TODO: Change this when there is a new issue
         let currentUser = PFUser.current()
         currentUser?["profileImage"] = imageFile
         currentUser?.saveInBackground()
@@ -167,7 +200,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func onClose(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        if userId == User.current()?.objectId {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func onLogout(_ sender: UIButton) {
@@ -240,12 +277,14 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 })
             }
             cell.recipeId = recipe.objectId
-            cell.categoryLabel.text = recipe.category
-            if let owner = User.fetchUser(by: recipe.owner!) {
-                cell.createdByLabel.text = "by @\(owner.username!)"
-            } else {
-                cell.createdByLabel.text = ""
-            }
+            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.createdByLabel.isHidden = true
+            // Commented out since we don't want to show the owner in this screen
+//            if let owner = User.fetchUser(by: recipe.owner!) {
+//                cell.createdByLabel.text = "by @\(owner.username!)"
+//            } else {
+//                cell.createdByLabel.text = ""
+//            }
             cell.recipeTitle.text = recipe.name
             
             return cell
@@ -258,7 +297,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             } else {
                 cookbook = filteredCookbooks[indexPath.row]
             }
-            if cookbook.owner.objectId == currentUser?.objectId {
+            if cookbook.owner.objectId == userId {
                 cell.authorLabel.isHidden = true
             } else {
                 if let username = cookbook.owner.username {

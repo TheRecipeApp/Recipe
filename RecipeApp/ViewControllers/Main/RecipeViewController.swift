@@ -17,15 +17,17 @@ class RecipeViewController: UIViewController {
 	@IBOutlet weak var timeToCook: UILabel!
 	@IBOutlet weak var difficulty: UILabel!
 	@IBOutlet weak var cuisine: UILabel!
-	@IBOutlet weak var category: UILabel!
+    @IBOutlet var categoryLabel: UILabelCategory!
 	@IBOutlet weak var recipeImage: UIImageView!
 	@IBOutlet weak var owner: UILabel!
 	@IBOutlet weak var cookThisButton: UIButton!
     @IBOutlet weak var likesCount: UILabel!
+    @IBOutlet var likeButton: UIButton!
     
     var recipeId : String?
 	var recipe: Recipe?
 	var recipeOwner: User?
+    var isLiked: Bool = false
 	
 	// cooking steps
 	var cookingSteps = [CookingStep]()
@@ -37,6 +39,12 @@ class RecipeViewController: UIViewController {
 		cookThisButton.layer.cornerRadius = 3
 		// fetch the cooking steps for the recipe
 		fetchRecipe()
+        
+        categoryLabel.isHidden = true
+        
+        owner.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecipeViewController.goToProfile(tapGestureRecognizer:)))
+        owner.addGestureRecognizer(tapRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +55,7 @@ class RecipeViewController: UIViewController {
 	func setupRecipeFields() {
 		if recipe != nil {
 			if let nameStr = recipe?.name {
-				recipeName.text = nameStr
+                recipeName.text = nameStr
 			}
 			if let desc = recipe?.desc {
 				recipeDescription.text = desc
@@ -62,10 +70,11 @@ class RecipeViewController: UIViewController {
 				cuisine.text = cuisineStr
 			}
 			if let categoryStr = recipe?.category {
-				category.text = categoryStr
+				categoryLabel.text = categoryStr.uppercased()
+                categoryLabel.isHidden = false
 			}
             if let likes = recipe?.likes {
-                likesCount.text = "\(likes)"
+                likesCount.text = "\(likes) Compliments"
             }
 			if let ownerStr = recipeOwner?.username {
 				owner.text = "@" + ownerStr
@@ -93,7 +102,6 @@ class RecipeViewController: UIViewController {
 			if error == nil {
 				if let imageData = data {
 					self.recipeImage.image = UIImage(data: imageData)
-					self.recipeImage.contentMode = .scaleAspectFit
 				}
 			}
 		})
@@ -139,7 +147,34 @@ class RecipeViewController: UIViewController {
 			}
 		})
 	}
+    
+    // MARK: - Actions
 
+    @IBAction func onLikeTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.likeButton.alpha = 0.1
+        }, completion:{(finished) in
+            if self.isLiked == true {
+                self.likeButton.setImage(UIImage(named: "LikeOff"), for: .normal)
+            } else {
+                self.likeButton.setImage(UIImage(named: "LikeOn"), for: .normal)
+            }
+            UIView.animate(withDuration: 0.3, animations:{
+                self.likeButton.alpha = 1.0
+            },completion:nil)
+            
+            self.isLiked = !self.isLiked
+        })
+    }
+    
+    func goToProfile(tapGestureRecognizer: UITapGestureRecognizer) {
+        print("User profile tapped")
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        profileVC.userId = recipeOwner!.objectId
+        self.navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

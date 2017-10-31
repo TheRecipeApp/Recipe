@@ -124,7 +124,7 @@ class RecipeViewController: UIViewController {
 				self.fetchCookingSteps()
 			}
 		} catch {
-			
+			print("Unable to fetch Recipe Details", error.localizedDescription)
 		}
 	}
 	
@@ -132,24 +132,24 @@ class RecipeViewController: UIViewController {
 		self.cookingSteps.removeAll()
 		let query = PFQuery(className: "CookingStep")
 		query.whereKey("recipeId", equalTo: self.recipeId!)
-		query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-			if error == nil {
-				// The find succeeded.
-				print("Successfully retrieved \(objects!.count) cooking steps.")
-				// Do something with the found objects
-				if let objects = objects {
-					for object in objects {
-						let cookingStep = object as! CookingStep
-						print("cooking step: \(cookingStep)")
-						self.cookingSteps.append(cookingStep)
-					}
+		do {
+			let objects:[PFObject]? = try query.findObjects()
+			// The find succeeded.
+			print("Successfully retrieved \(objects!.count) cooking steps.")
+			// Do something with the found objects
+			if let objects = objects {
+				for object in objects {
+					let cookingStep = object as! CookingStep
+					print("cooking step: \(cookingStep)")
+					self.cookingSteps.append(cookingStep)
 				}
-				print("number of cooking steps: \(self.cookingSteps.count)")
 			}
 			if self.cookingSteps.count == 0 {
 				self.cookThisButton.isEnabled = false
 			}
-		})
+		} catch {
+			print("Unable to fetch cooking steps", error.localizedDescription)
+		}
 	}
     
     // MARK: - Actions

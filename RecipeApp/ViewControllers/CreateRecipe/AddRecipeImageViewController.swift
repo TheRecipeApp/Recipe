@@ -53,7 +53,9 @@ class AddRecipeImageViewController: UIViewController {
         } catch {
             print("Error Saving Recipe, ", error.localizedDescription)
         }
-        performSegue(withIdentifier: "RecipeViewController", sender: nil)
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let homeController = storyboard.instantiateInitialViewController() as! UITabBarController
+		present(homeController, animated: true, completion: nil)
     }
     
     private func saveCookingSteps(recipeId: String) {
@@ -102,14 +104,15 @@ class AddRecipeImageViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
-        let destVC = segue.destination as! RecipeViewController
-        destVC.recipeId = self.recipe?.objectId
-        destVC.fromRecipeCreate = true
+//        let destVC = segue.destination as! RecipeViewController
+//        destVC.recipeId = self.recipe?.objectId
+//        destVC.fromRecipeCreate = true
     }
+*/
 }
 
 extension AddRecipeImageViewController : UITableViewDelegate, UITableViewDataSource {

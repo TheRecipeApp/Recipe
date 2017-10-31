@@ -23,6 +23,7 @@ class NewRecipeViewController: UIViewController {
 	
     var steps:[CookingStep]?
     var stepNumber = 0;
+	let placeholderText = "Please Enter a Description for this Cooking Step Here"
 	
 
 	// variables needed for speech recognition and transcribing
@@ -59,10 +60,11 @@ class NewRecipeViewController: UIViewController {
 			textDescriptionView.isHidden = false
 			audioDescriptionView.isHidden = true
         }
-        
-        stepDescription.layer.borderWidth = 1
-        stepDescription.layer.borderColor = UIColor.lightGray.cgColor
+		
 		stepAudioButton.isHidden = true
+		stepDescription.delegate = self
+		stepDescription.text = placeholderText
+		stepDescription.textColor = UIColor.lightGray
     }
 
     override func didReceiveMemoryWarning() {
@@ -331,6 +333,22 @@ extension UIButton {
 	}
 }
 
+extension NewRecipeViewController : UITextViewDelegate {
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		if stepDescription.textColor == UIColor.lightGray {
+			stepDescription.text = nil
+			stepDescription.textColor = UIColor.black
+		}
+	}
+	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		if stepDescription.text.isEmpty {
+			stepDescription.text = placeholderText
+			stepDescription.textColor = UIColor.lightGray
+		}
+	}
+}
+
 extension UIViewController {
 	func hideKeyboardWhenTappedAround() {
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -342,4 +360,5 @@ extension UIViewController {
 		view.endEditing(true)
 	}
 }
+
 

@@ -59,7 +59,7 @@ class ExploreViewController: UIViewController {
         
         // for pull-down refresh action
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self.scrollView, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching...")
         self.scrollView.insertSubview(refreshControl, at: 0)
         
@@ -130,6 +130,9 @@ class ExploreViewController: UIViewController {
 
     @objc private func refreshControlAction(_ refreshControl: UIRefreshControl) {
         print("Refresh action called")
+        animatedTrending = []
+        animatedFavorites = []
+        animatedLocalTrends = []
         fetchRecipes(collectionViewName: "trending")
         fetchRecipes(collectionViewName: "favorites")
         fetchRecipes(collectionViewName: "localTrends")

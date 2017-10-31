@@ -18,9 +18,9 @@ class NewRecipeViewController: UIViewController {
 	@IBOutlet weak var recordStepAudioButton: UIButton!
     @IBOutlet weak var stepAudioButton: UIButton!
     @IBOutlet weak var enableAudioInstruction: UISwitch!
-    @IBOutlet weak var stepDescriptionTextStyleView: UIView!
-    @IBOutlet weak var stepDescriptionAudioView: UIView!
-    
+	@IBOutlet weak var textDescriptionView: UIStackView!
+	@IBOutlet weak var audioDescriptionView: UIStackView!
+	
     var steps:[CookingStep]?
     var stepNumber = 0;
 	
@@ -50,14 +50,14 @@ class NewRecipeViewController: UIViewController {
 		self.hideKeyboardWhenTappedAround()
 
         stepNumber = (steps?.count)!
-        self.title = "Add Step \(stepNumber) - Description"
+		self.title = "Add Step:\(stepNumber) Description"
         stepAudioButton.isHidden = true
         if enableAudioInstruction.isOn {
-			stepDescriptionTextStyleView.isHidden = true
-			stepDescriptionAudioView.isHidden = false
+			textDescriptionView.isHidden = true
+			audioDescriptionView.isHidden = false
         } else {
-			stepDescriptionTextStyleView.isHidden = false
-			stepDescriptionAudioView.isHidden = true
+			textDescriptionView.isHidden = false
+			audioDescriptionView.isHidden = true
         }
         
         stepDescription.layer.borderWidth = 1
@@ -72,11 +72,11 @@ class NewRecipeViewController: UIViewController {
 
     @IBAction func onenableAudioInstructionChanged(_ sender: UISwitch) {
         if sender.isOn {
-			stepDescriptionTextStyleView.isHidden = true
-			stepDescriptionAudioView.isHidden = false
+			textDescriptionView.isHidden = true
+			audioDescriptionView.isHidden = false
         } else {
-			stepDescriptionTextStyleView.isHidden = false
-			stepDescriptionAudioView.isHidden = true
+			textDescriptionView.isHidden = false
+			audioDescriptionView.isHidden = true
         }
     }
     
@@ -87,16 +87,15 @@ class NewRecipeViewController: UIViewController {
     @IBAction func onDescriptionNext(_ sender: UIButton) {
 		let cookingStep = steps?[stepNumber-1]
 		if enableAudioInstruction.isOn {
+			if let audio = stepAudio {
+				cookingStep?.setAudioData(with: audio)
+			}
+		} else {
 			if let stepDesc = stepDescription.text {
 				cookingStep?.desc = stepDesc
 			} else {
 				print("step description is not present")
 				stepDescription.becomeFirstResponder()
-			}
-		} else {
-			if let audio = stepAudio {
-				cookingStep?.setAudioData(with: audio)
-				stepAudio = nil
 			}
 		}
 		performSegue(withIdentifier: "AddStepPictureSegue", sender: nil)

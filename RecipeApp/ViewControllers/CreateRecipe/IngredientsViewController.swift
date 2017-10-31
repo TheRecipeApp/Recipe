@@ -43,7 +43,7 @@ class IngredientsViewController: UIViewController {
         else {
             stepNumber = (steps?.count)! + 1
         }
-        self.title = "Add Step \(stepNumber) - Ingredients"
+		self.title = "Add Step:\(stepNumber) Ingredients"
         clearIngregients()
         ingredientsTable.reloadData()
     }

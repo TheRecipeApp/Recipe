@@ -466,7 +466,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="4sm-7N-xoR">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="qrg-Oy-2Sg">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="onCancel:" destination="65b-cB-TaV" id="4uv-ej-g6w"/>
                             </connections>
@@ -528,10 +527,10 @@
                                     <constraint firstItem="mBQ-Uf-Qe3" firstAttribute="centerY" secondItem="a4d-06-LLc" secondAttribute="centerY" id="uMU-mA-tCa"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agg-Bl-zk7" userLabel="Record step instruction view">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agg-Bl-zk7" userLabel="Step Desc View">
                                 <rect key="frame" x="0.0" y="84" width="375" height="300"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ewk-rz-F2P">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ewk-rz-F2P" userLabel="Text Description View">
                                         <rect key="frame" x="17.5" y="10" width="340" height="280"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="shn-gZ-4R2">
@@ -559,7 +558,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="h4m-v5-ke5">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="h4m-v5-ke5" userLabel="Audio Description View">
                                         <rect key="frame" x="90.5" y="70" width="194.5" height="160.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Step Instruction:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEj-kg-4bz">
@@ -636,12 +635,6 @@
                         <viewLayoutGuide key="safeArea" id="45H-qe-aZg"/>
                     </view>
                     <navigationItem key="navigationItem" id="CHL-8c-S29">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qtW-5g-eAQ">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="onCancel:" destination="rBt-JM-23b" id="fyz-Pz-PPZ"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="fastForward" id="tQN-eX-V1U">
                             <connections>
                                 <action selector="onDescriptionNext:" destination="rBt-JM-23b" id="Bem-oN-lHW"/>
@@ -649,14 +642,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="audioDescriptionView" destination="h4m-v5-ke5" id="kr7-q4-ixc"/>
                         <outlet property="enableAudioInstruction" destination="buW-4B-Nws" id="xCH-Rb-Xik"/>
                         <outlet property="micButton" destination="Psf-lJ-Ai0" id="1ZV-aY-pi0"/>
                         <outlet property="recordStepAudioButton" destination="KZf-45-yuM" id="RCc-20-yMJ"/>
                         <outlet property="stepAudioButton" destination="TYc-FU-2rQ" id="7KW-DV-Ooq"/>
                         <outlet property="stepDescription" destination="shn-gZ-4R2" id="UPn-GP-OF5"/>
-                        <outlet property="stepDescriptionAudioView" destination="agg-Bl-zk7" id="Mse-Ay-hvt"/>
                         <outlet property="stopRecordButton" destination="nYt-Lf-jiq" id="d0H-0h-sfR"/>
-                        <segue destination="U8b-yi-uAv" kind="show" identifier="AddStepPictureSegue" id="aOM-5d-zHJ"/>
+                        <outlet property="textDescriptionView" destination="Ewk-rz-F2P" id="ga8-iS-cKy"/>
+                        <segue destination="WQj-FO-8bC" kind="show" identifier="AddStepPictureSegue" id="R58-kZ-V7q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JwE-YY-BWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -666,7 +660,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="879" y="-591"/>
+            <point key="canvasLocation" x="890" y="-591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a2t-ox-Nfn">
@@ -709,15 +703,15 @@
             </objects>
             <point key="canvasLocation" x="-788" y="-583"/>
         </scene>
-        <!--Step Details-->
-        <scene sceneID="wbd-Un-72E">
+        <!--Add Step - Step Picture-->
+        <scene sceneID="QO5-Fa-CVA">
             <objects>
-                <viewController title="Step Details" id="U8b-yi-uAv" customClass="AddStepPictureViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gYa-r4-XpJ">
+                <viewController id="WQj-FO-8bC" userLabel="Add Step - Step Picture" customClass="AddStepPictureViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BBp-mO-Zf5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="jM6-nJ-Gvw">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NoRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="jM6-nJ-Gvw">
                                 <rect key="frame" x="0.0" y="20" width="375" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -725,88 +719,77 @@
                                     <constraint firstAttribute="height" constant="250" id="1av-Sm-0Ml"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="eab-Bp-xwZ" appends="YES" id="Sf2-9C-583"/>
+                                    <outletCollection property="gestureRecognizers" destination="U4P-kI-HBs" appends="YES" id="UZo-eo-P8v"/>
                                 </connections>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqF-b8-80X">
-                                <rect key="frame" x="0.0" y="274" width="375" height="100"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TG-Ob-yg6">
+                                <rect key="frame" x="0.0" y="272" width="375" height="395"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlZ-5O-qdD">
-                                        <rect key="frame" x="325" y="4" width="40" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idl-CX-LgI">
+                                        <rect key="frame" x="30" y="174.5" width="140" height="45"/>
+                                        <color key="backgroundColor" name="PrimaryColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="6dG-8u-sAd"/>
-                                            <constraint firstAttribute="width" constant="40" id="MrU-PT-koN"/>
+                                            <constraint firstAttribute="width" constant="140" id="7yU-XN-TIf"/>
+                                            <constraint firstAttribute="height" constant="45" id="VSz-6C-3GC"/>
                                         </constraints>
-                                        <state key="normal" image="speaker_off"/>
+                                        <state key="normal" title="Next Step">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="onAudioPlayTapped:" destination="U8b-yi-uAv" eventType="touchUpInside" id="0kt-V8-wDj"/>
+                                            <action selector="onNextStep:" destination="WQj-FO-8bC" eventType="touchUpInside" id="rzs-cg-L29"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko7-13-iyY">
-                                        <rect key="frame" x="10" y="4" width="97.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aIW-IS-qcR">
-                                        <rect key="frame" x="10" y="28.5" width="300" height="65"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKW-DS-diM">
+                                        <rect key="frame" x="205" y="174.5" width="140" height="45"/>
+                                        <color key="backgroundColor" name="PrimaryColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="65" id="AFv-Lr-ixj"/>
-                                            <constraint firstAttribute="width" constant="300" id="Ek4-QN-zQp"/>
+                                            <constraint firstAttribute="height" constant="45" id="6ps-lp-dC0"/>
+                                            <constraint firstAttribute="width" constant="140" id="LoP-db-Z4a"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <state key="normal" title="Save Recipe">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onSaveRecipe:" destination="WQj-FO-8bC" eventType="touchUpInside" id="hOM-gc-Dc9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="NlZ-5O-qdD" firstAttribute="top" secondItem="zqF-b8-80X" secondAttribute="top" constant="4" id="0is-fh-QEZ"/>
-                                    <constraint firstAttribute="height" constant="100" id="368-7e-5Ee"/>
-                                    <constraint firstAttribute="trailing" secondItem="NlZ-5O-qdD" secondAttribute="trailing" constant="10" id="FpB-VM-YeA"/>
-                                    <constraint firstItem="aIW-IS-qcR" firstAttribute="leading" secondItem="zqF-b8-80X" secondAttribute="leading" constant="10" id="SCV-hw-A8h"/>
-                                    <constraint firstItem="Ko7-13-iyY" firstAttribute="leading" secondItem="zqF-b8-80X" secondAttribute="leading" constant="10" id="YDi-B9-7FT"/>
-                                    <constraint firstItem="Ko7-13-iyY" firstAttribute="top" secondItem="zqF-b8-80X" secondAttribute="top" constant="4" id="jRA-kA-zW6"/>
-                                    <constraint firstItem="aIW-IS-qcR" firstAttribute="top" secondItem="Ko7-13-iyY" secondAttribute="bottom" constant="4" id="tjg-kq-bZO"/>
+                                    <constraint firstItem="idl-CX-LgI" firstAttribute="leading" secondItem="7TG-Ob-yg6" secondAttribute="leading" constant="30" id="6qM-se-0wI"/>
+                                    <constraint firstItem="idl-CX-LgI" firstAttribute="centerY" secondItem="7TG-Ob-yg6" secondAttribute="centerY" id="8ld-nk-d4s"/>
+                                    <constraint firstAttribute="trailing" secondItem="iKW-DS-diM" secondAttribute="trailing" constant="30" id="OTB-Wh-6Wx"/>
+                                    <constraint firstItem="iKW-DS-diM" firstAttribute="centerY" secondItem="7TG-Ob-yg6" secondAttribute="centerY" id="UAQ-7a-9Yr"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Qk-Yv-5aG">
-                                <rect key="frame" x="0.0" y="378" width="375" height="289"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" name="GrayBackgroundScreen"/>
                         <constraints>
-                            <constraint firstItem="zqF-b8-80X" firstAttribute="top" secondItem="jM6-nJ-Gvw" secondAttribute="bottom" constant="4" id="5pE-Ah-VGc"/>
-                            <constraint firstItem="jM6-nJ-Gvw" firstAttribute="top" secondItem="LSx-sV-wk8" secondAttribute="top" id="6YT-Wz-9HY"/>
-                            <constraint firstItem="1Qk-Yv-5aG" firstAttribute="top" secondItem="zqF-b8-80X" secondAttribute="bottom" constant="4" id="H9L-pc-VRQ"/>
-                            <constraint firstItem="1Qk-Yv-5aG" firstAttribute="leading" secondItem="LSx-sV-wk8" secondAttribute="leading" id="IMR-Tu-Mi7"/>
-                            <constraint firstItem="1Qk-Yv-5aG" firstAttribute="bottom" secondItem="LSx-sV-wk8" secondAttribute="bottom" id="OHE-vw-2JR"/>
-                            <constraint firstItem="zqF-b8-80X" firstAttribute="leading" secondItem="LSx-sV-wk8" secondAttribute="leading" id="QRQ-FJ-Rry"/>
-                            <constraint firstItem="LSx-sV-wk8" firstAttribute="trailing" secondItem="1Qk-Yv-5aG" secondAttribute="trailing" id="WgL-mz-VuX"/>
-                            <constraint firstItem="jM6-nJ-Gvw" firstAttribute="leading" secondItem="LSx-sV-wk8" secondAttribute="leading" id="cRf-ys-da8"/>
-                            <constraint firstItem="jM6-nJ-Gvw" firstAttribute="trailing" secondItem="LSx-sV-wk8" secondAttribute="trailing" id="oNg-tw-xzu"/>
-                            <constraint firstItem="zqF-b8-80X" firstAttribute="trailing" secondItem="LSx-sV-wk8" secondAttribute="trailing" id="t3l-eH-63D"/>
+                            <constraint firstItem="jM6-nJ-Gvw" firstAttribute="trailing" secondItem="YT8-J4-hCi" secondAttribute="trailing" id="C1w-3r-fjX"/>
+                            <constraint firstItem="jM6-nJ-Gvw" firstAttribute="leading" secondItem="YT8-J4-hCi" secondAttribute="leading" id="PU9-1C-3qu"/>
+                            <constraint firstItem="YT8-J4-hCi" firstAttribute="trailing" secondItem="7TG-Ob-yg6" secondAttribute="trailing" id="TK5-Me-ggM"/>
+                            <constraint firstItem="jM6-nJ-Gvw" firstAttribute="top" secondItem="YT8-J4-hCi" secondAttribute="top" id="ebs-qq-8oV"/>
+                            <constraint firstItem="7TG-Ob-yg6" firstAttribute="leading" secondItem="YT8-J4-hCi" secondAttribute="leading" id="jXs-Ai-yhP"/>
+                            <constraint firstItem="YT8-J4-hCi" firstAttribute="bottom" secondItem="7TG-Ob-yg6" secondAttribute="bottom" id="vH3-RS-IDW"/>
+                            <constraint firstItem="7TG-Ob-yg6" firstAttribute="top" secondItem="jM6-nJ-Gvw" secondAttribute="bottom" constant="2" id="yIA-yY-8DQ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="LSx-sV-wk8"/>
+                        <viewLayoutGuide key="safeArea" id="YT8-J4-hCi"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Q9z-fR-sDi"/>
                     <connections>
-                        <outlet property="ingredientsTable" destination="1Qk-Yv-5aG" id="Afy-jC-Eag"/>
-                        <outlet property="stepAudio" destination="NlZ-5O-qdD" id="HMz-9S-d1k"/>
-                        <outlet property="stepDescription" destination="aIW-IS-qcR" id="r90-go-A7x"/>
-                        <outlet property="stepImage" destination="jM6-nJ-Gvw" id="OcS-5T-9x6"/>
-                        <segue destination="8vK-rh-AAc" kind="show" identifier="RecipeSummarySegue" id="vJ7-jg-C0p"/>
-                        <segue destination="65b-cB-TaV" kind="show" identifier="IngredientsViewSegue" id="joX-9p-HHP"/>
+                        <outlet property="stepImage" destination="jM6-nJ-Gvw" id="Af4-dg-47t"/>
+                        <segue destination="65b-cB-TaV" kind="show" identifier="IngredientsViewSegue" id="jZW-3s-Id9"/>
+                        <segue destination="8vK-rh-AAc" kind="show" identifier="RecipeSummarySegue" id="IIQ-OH-lPy"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5dj-cA-bdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="eab-Bp-xwZ">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="20M-Qy-qS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="U4P-kI-HBs">
                     <connections>
-                        <action selector="onTap:" destination="U8b-yi-uAv" id="rKK-el-qqL"/>
+                        <action selector="onTap:" destination="WQj-FO-8bC" id="Evb-Px-3fL"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1810" y="-591"/>
+            <point key="canvasLocation" x="1821.5999999999999" y="-591.45427286356824"/>
         </scene>
     </scenes>
     <resources>
@@ -821,8 +804,12 @@
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="PrimaryColor">
+            <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="joX-9p-HHP"/>
+        <segue reference="ynU-HQ-XHX"/>
+        <segue reference="jZW-3s-Id9"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -41,7 +41,7 @@
                                         <rect key="frame" x="0.0" y="109" width="375" height="56"/>
                                         <color key="tintColor" name="PrimaryColor"/>
                                         <color key="barTintColor" name="GrayBackgroundScreen"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
                                     </searchBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ru2-NQ-pkm" userLabel="Category View">
                                         <rect key="frame" x="0.0" y="109" width="375" height="77"/>
@@ -1365,7 +1365,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KjQ-FT-k5H"/>
-        <segue reference="H52-z1-JcG"/>
+        <segue reference="daK-Ik-oNb"/>
+        <segue reference="QOT-s7-KA3"/>
     </inferredMetricsTieBreakers>
 </document>

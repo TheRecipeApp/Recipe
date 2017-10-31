@@ -148,17 +148,25 @@ class FindViewController: UIViewController {
     
     @IBAction func onShowSearch(_ sender: UIButton) {
         if isSearchShown {
+            
+            self.searchBar.fadeOut()
             searchBar.isHidden = true
-            UIView.animate(withDuration: 0.50, animations: {
-                self.headerLabel.text = "PICK SOME CATEGORIES"
-                self.categoryView.isHidden = false
-            })
+            self.searchBar.fadeIn()
+            
+            self.headerLabel.fadeOut()
+            self.headerLabel.text = "PICK SOME CATEGORIES"
+            self.headerLabel.fadeIn()
+            self.categoryView.isHidden = false
         } else {
+            
+            self.searchBar.fadeOut()
             searchBar.isHidden = false
-            UIView.animate(withDuration: 0.50, animations: {
-                self.headerLabel.text = "SEARCH FOR RECIPES"
-                self.categoryView.isHidden = true
-            })
+            self.searchBar.fadeIn()
+            
+            self.headerLabel.fadeOut()
+            self.headerLabel.text = "SEARCH FOR RECIPES"
+            self.headerLabel.fadeIn()
+            self.categoryView.isHidden = true
         }
         isSearchShown = !isSearchShown
     }

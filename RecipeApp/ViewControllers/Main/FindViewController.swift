@@ -47,7 +47,7 @@ class FindViewController: UIViewController {
         self.indexed = []
         self.categories = []
         self.collectionView.isHidden = true
-        
+
         let allCategories: [String] = Recipe.categories
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
@@ -56,8 +56,11 @@ class FindViewController: UIViewController {
                 let color = UIColor(named: "GraySmallHeader")
                 label.backgroundColor = color
             }
+            
             label.sizeToFit()
-
+            label.fadeOut()
+            label.fadeIn()
+            
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
                 index = random(0, allCategories.count - 1)
@@ -66,6 +69,8 @@ class FindViewController: UIViewController {
             label.text = allCategories[index]
             indexed.insert(index)
         }
+        
+//        self.collectionView.fadeIn()
     }
     
     override func viewDidLoad() {
@@ -80,6 +85,15 @@ class FindViewController: UIViewController {
             let label = view as! UILabelCategory
             addCategoryTapRecognizer(to: label)
             label.sizeToFit()
+            if label.isTruncated {
+                label.isHidden = true
+            }
+//            let size: CGSize? = label.text?.size(attributes: [NSFontAttributeName : label.font])
+//            if let size = size {
+//                if (size.width > label.bounds.size.width) {
+//                    label.isHidden = true
+//                }
+//            }
             
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
@@ -129,17 +143,25 @@ class FindViewController: UIViewController {
     
     @IBAction func onShowSearch(_ sender: UIButton) {
         if isSearchShown {
+            
+            self.searchBar.fadeOut()
             searchBar.isHidden = true
-            UIView.animate(withDuration: 0.50, animations: {
-                self.headerLabel.text = "PICK SOME CATEGORIES"
-                self.categoryView.isHidden = false
-            })
+            self.searchBar.fadeIn()
+            
+            self.headerLabel.fadeOut()
+            self.headerLabel.text = "PICK SOME CATEGORIES"
+            self.headerLabel.fadeIn()
+            self.categoryView.isHidden = false
         } else {
+            
+            self.searchBar.fadeOut()
             searchBar.isHidden = false
-            UIView.animate(withDuration: 0.50, animations: {
-                self.headerLabel.text = "SEARCH FOR RECIPES"
-                self.categoryView.isHidden = true
-            })
+            self.searchBar.fadeIn()
+            
+            self.headerLabel.fadeOut()
+            self.headerLabel.text = "SEARCH FOR RECIPES"
+            self.headerLabel.fadeIn()
+            self.categoryView.isHidden = true
         }
         isSearchShown = !isSearchShown
     }
@@ -302,7 +324,7 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.recipeId = recipe.objectId
         cell.recipe = recipe
         cell.categoryLabel.text = recipe.category?.uppercased()
-        cell.createdByLabel.text = "@\(recipe.ownerName!)"
+        cell.createdByLabel.text = "@\(recipe.ownerName ?? "alexdoan7")"
         cell.recipeTitle.text = recipe.name
         
         if !(animated?.contains(indexPath.row))! {
@@ -383,5 +405,20 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
         recipeVC.recipeId = detailVC.recipeId
         show(recipeVC, sender: self)
     }
+}
+
+extension UIView {
+    
+    func fadeIn(duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.alpha = 1.0
+        }, completion: completion)  }
+    
+    func fadeOut(duration: TimeInterval = 0.5, delay: TimeInterval = 3.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.alpha = 0.0
+        }, completion: completion)
+    }
+
 }
 

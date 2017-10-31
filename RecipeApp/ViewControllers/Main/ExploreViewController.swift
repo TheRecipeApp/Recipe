@@ -17,6 +17,8 @@ class ExploreViewController: UIViewController {
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     @IBOutlet weak var localTrendsCollectionView: UICollectionView!
     
+    @IBOutlet weak var favoritesLabel: UILabel!
+    
     fileprivate var trending = [Recipe]()
     fileprivate var favorites = [Recipe]()
     fileprivate var localTrends = [Recipe]()
@@ -93,7 +95,16 @@ class ExploreViewController: UIViewController {
                     }
                 })
             case "favorites":
+                
+                let categoires = Recipe.categories
+                let index = random(0, categoires.count - 1)
+                let categoryChosen = categoires[index]
+                
+                favoritesLabel.text = "Because you like \(categoryChosen.normalizedCasing)"
+                
                 let query = PFQuery(className: "Recipe")
+                let categoryTermRegex = String(format: "(?i)%@", categoryChosen)
+                query.whereKey("category", matchesRegex: categoryTermRegex)
                 query.order(byDescending: "likes")
                 query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                     if error == nil {
@@ -128,6 +139,10 @@ class ExploreViewController: UIViewController {
         
     }
 
+    private func random(_ lower: Int ,_ upper: Int) -> Int {
+        return Int(lower + arc4random_uniform(upper - lower + 1))
+    }
+    
     @objc private func refreshControlAction(_ refreshControl: UIRefreshControl) {
         print("Refresh action called")
         animatedTrending = []
@@ -331,6 +346,13 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
         let detailVC = viewControllerToCommit as! DetailViewController
         recipeVC.recipeId = detailVC.recipeId
         show(recipeVC, sender: self)
+    }
+}
+
+extension String {
+    var normalizedCasing: String {
+        guard let first = first else { return "" }
+        return String(first).uppercased() + dropFirst().lowercased()
     }
 }
 

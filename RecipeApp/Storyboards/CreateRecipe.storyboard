@@ -419,13 +419,13 @@
                                 <rect key="frame" x="0.0" y="84" width="375" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ewk-rz-F2P" userLabel="Text Description View">
-                                        <rect key="frame" x="17.5" y="10" width="340" height="280"/>
+                                        <rect key="frame" x="17.5" y="30" width="340" height="240"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="shn-gZ-4R2">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="280" id="Ttx-FN-mAz"/>
+                                                    <constraint firstAttribute="height" constant="240" id="Ttx-FN-mAz"/>
                                                     <constraint firstAttribute="width" constant="320" id="wyD-ra-4YB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -718,6 +718,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="R58-kZ-V7q"/>
         <segue reference="jZW-3s-Id9"/>
     </inferredMetricsTieBreakers>
 </document>

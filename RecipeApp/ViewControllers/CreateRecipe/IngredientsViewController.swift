@@ -46,6 +46,8 @@ class IngredientsViewController: UIViewController {
 		self.title = "Add Step:\(stepNumber) Ingredients"
         clearIngregients()
         ingredientsTable.reloadData()
+		
+		self.hideKeyboardWhenTappedAround()
     }
     
     override func didReceiveMemoryWarning() {

@@ -24,6 +24,7 @@ class AddStepPictureViewController: UIViewController {
         stepNumber = (steps?.count)!
         self.title = "Add Step\(stepNumber) Image"
 		step = steps?[stepNumber-1]
+		
 	}
 	
 	@IBAction func onNextStep(_ sender: Any) {

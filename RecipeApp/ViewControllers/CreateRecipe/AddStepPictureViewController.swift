@@ -53,7 +53,7 @@ class AddStepPictureViewController: UIViewController {
 		if stepImageUploaded {
 			cookingStep?.setImage(with: stepImage.image)
 		}
-		self.performSegue(withIdentifier: "RecipeSummarySegue", sender: nil)
+		self.performSegue(withIdentifier: "AddRecipeDetailsSegue", sender: nil)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -73,9 +73,9 @@ class AddStepPictureViewController: UIViewController {
 			destVC.steps = self.steps
 		} else {
 			// Get the new view controller using segue.destinationViewController.
-			let recipeSummaryViewController = segue.destination as! RecipeSummaryViewController
+			let addRecipeDetailsViewController = segue.destination as! AddRecipeDetailsViewController
 			// Pass the selected object to the new view controller.
-			recipeSummaryViewController.cookingSteps = steps
+			addRecipeDetailsViewController.cookingSteps = steps
 		}
 	}
 }

@@ -18,6 +18,7 @@ class ExploreViewController: UIViewController {
     @IBOutlet weak var localTrendsCollectionView: UICollectionView!
     
     @IBOutlet weak var favoritesLabel: UILabel!
+    @IBOutlet weak var localTrendsLabel: UILabel!
     
     fileprivate var trending = [Recipe]()
     fileprivate var favorites = [Recipe]()
@@ -96,17 +97,24 @@ class ExploreViewController: UIViewController {
                 })
             case "favorites":
                 
-                let categoires = Recipe.categories
-                let index = random(0, categoires.count - 1)
-                let categoryChosen = categoires[index]
+                let categories = Recipe.categories
+                let index = random(0, categories.count - 1)
+                let categoryChosen = categories[index]
                 
                 favoritesLabel.text = "Because you like \(categoryChosen.normalizedCasing)"
                 
-                let query = PFQuery(className: "Recipe")
+//                let query = PFQuery(className: "Recipe")
                 let categoryTermRegex = String(format: "(?i)%@", categoryChosen)
+                
+                let query = PFQuery(className: "Recipe")
                 query.whereKey("category", matchesRegex: categoryTermRegex)
-                query.order(byDescending: "likes")
-                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                
+                let query2 = PFQuery(className: "Recipe")
+                query2.whereKey("cuisine", matchesRegex: categoryTermRegex)
+                
+                let orQuery = PFQuery.orQuery(withSubqueries: [query, query2])
+//                query.order(byDescending: "likes")
+                orQuery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                     if error == nil {
                         print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
                         if let objects = objects {
@@ -119,9 +127,23 @@ class ExploreViewController: UIViewController {
                     }
                 })
             case "localTrends":
+                
+                let categories = Recipe.categories
+                let index = random(0, categories.count - 1)
+                let categoryChosen = categories[index]
+                let categoryTermRegex = String(format: "(?i)%@", categoryChosen)
+
+                localTrendsLabel.text = "Based on people you follow"
+                
                 let query = PFQuery(className: "Recipe")
-                query.order(byDescending: "likes")
-                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                query.whereKey("category", matchesRegex: "American")
+                
+                let query2 = PFQuery(className: "Recipe")
+                query2.whereKey("cuisine", matchesRegex: "American")
+                
+                let orQuery = PFQuery.orQuery(withSubqueries: [query, query2])
+//                query.order(byDescending: "likes")
+                orQuery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                     if error == nil {
                         print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
                         if let objects = objects {
@@ -148,6 +170,9 @@ class ExploreViewController: UIViewController {
         animatedTrending = []
         animatedFavorites = []
         animatedLocalTrends = []
+        trending = []
+        favorites = []
+        localTrends = []
         fetchRecipes(collectionViewName: "trending")
         fetchRecipes(collectionViewName: "favorites")
         fetchRecipes(collectionViewName: "localTrends")
@@ -218,7 +243,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedTrending?.contains(indexPath.row))! {
@@ -235,7 +260,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedFavorites?.contains(indexPath.row))! {
@@ -253,7 +278,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedLocalTrends?.contains(indexPath.row))! {
@@ -317,6 +342,9 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
             detailVC.recipeId = cell!.recipeId
             detailVC.recipe = cell!.recipe
             detailVC.recipeImage.image = cell!.recipeImage?.image
+            detailVC.categoryLabel.text = cell!.recipe!.category
+            detailVC.owner.text = "by @ \(cell!.recipe!.ownerName ?? "alexdoan7")"
+
             
             let recipe = cell!.recipe
             if recipe != nil {
@@ -330,7 +358,7 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
                     detailVC.likesCount.text = "\(likes)"
                 }
                 if let ownerStr = cell?.createdByLabel {
-                    detailVC.owner.text = ownerStr.text!
+                    detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
                 }
             }
             

@@ -37,11 +37,14 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		cookThisButton.setTitle("No Steps", for: .disabled)
+        cookThisButton.sizeToFit()
+        cookThisButton.titleLabel?.sizeToFit()
 		cookThisButton.layer.cornerRadius = 3
 		// fetch the cooking steps for the recipe
 		fetchRecipe()
         
-        categoryLabel.isHidden = true
+//        categoryLabel.isHidden = true
+        categoryLabel.fadeIn()
         
         owner.isUserInteractionEnabled = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecipeViewController.goToProfile(tapGestureRecognizer:)))
@@ -74,16 +77,18 @@ class RecipeViewController: UIViewController {
 				cuisine.text = cuisineStr
 			}
 			if let categoryStr = recipe?.category {
-				categoryLabel.text = categoryStr.uppercased()
+				categoryLabel.text = categoryStr.normalizedCasing
+                categoryLabel.fadeOut()
+                categoryLabel.fadeIn()
                 categoryLabel.isHidden = false
 			}
             if let likes = recipe?.likes {
-                likesCount.text = "\(likes) Compliments"
+                likesCount.text = "\(likes)"
             }
 			if let ownerStr = recipeOwner?.username {
-				owner.text = "@" + ownerStr
+				owner.text = "by @" + ownerStr
 			} else {
-				owner.text = "@..."
+				owner.text = "by @..."
 			}
             
 			// get recipe image

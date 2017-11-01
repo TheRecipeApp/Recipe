@@ -51,22 +51,27 @@ class FindViewController: UIViewController {
         let allCategories: [String] = Recipe.categories
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
+            label.sizeToFit()
+
             if label.isActive {
                 label.isActive = false
                 let color = UIColor(named: "GraySmallHeader")
                 label.backgroundColor = color
             }
             
-            label.sizeToFit()
-            label.fadeOut()
-            label.fadeIn()
+//            label.fadeOut()
+//            let randomInt = random(0, 9)
+//            let randomDouble: Double = Double(randomInt / 100)
+//            label.fadeIn(duration: randomDouble)
             
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
                 index = random(0, allCategories.count - 1)
             }
             
-            label.text = allCategories[index]
+            label.text = allCategories[index].uppercased()
+            label.fadeOut()
+            label.fadeIn()
             indexed.insert(index)
         }
         
@@ -81,26 +86,24 @@ class FindViewController: UIViewController {
         
         // set up the category labels
         let allCategories: [String] = Recipe.categories
+//        self.categoryView.layer.cornerRadius = 12
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
             addCategoryTapRecognizer(to: label)
             label.sizeToFit()
-            if label.isTruncated {
-                label.isHidden = true
-            }
-//            let size: CGSize? = label.text?.size(attributes: [NSFontAttributeName : label.font])
-//            if let size = size {
-//                if (size.width > label.bounds.size.width) {
-//                    label.isHidden = true
-//                }
+//            if label.isTruncated {
+//                label.isHidden = true
 //            }
+            
+            label.layer.cornerRadius = 18
+            label.layer.cornerRadius = 18
             
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
                 index = random(0, allCategories.count - 1)
             }
             
-            label.text = allCategories[index]
+            label.text = allCategories[index].uppercased()
             indexed.insert(index)
         }
         
@@ -118,7 +121,7 @@ class FindViewController: UIViewController {
         collectionView.dataSource = self
         
         self.noResultsLabel.isHidden = true
-//        fetchCategories()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -158,9 +161,9 @@ class FindViewController: UIViewController {
             searchBar.isHidden = false
             self.searchBar.fadeIn()
             
-            self.headerLabel.fadeOut()
+//            self.headerLabel.fadeOut()
             self.headerLabel.text = "SEARCH FOR RECIPES"
-            self.headerLabel.fadeIn()
+//            self.headerLabel.fadeIn()
             self.categoryView.isHidden = true
         }
         isSearchShown = !isSearchShown
@@ -244,13 +247,13 @@ class FindViewController: UIViewController {
                 let query3 = PFQuery(className: "Recipe")
                 query3.whereKey("name", matchesRegex: searchTermRegex)
                 
-                let query4 = PFQuery(className: "CookingStep")
-                query4.whereKey("ingredients", matchesRegex: searchTermRegex)
+                let query4 = PFQuery(className: "Recipe")
+                query4.whereKey("desc", matchesRegex: searchTermRegex)
                 
                 queries.append(query1)
                 queries.append(query2)
                 queries.append(query3)
-//                queries.append(query4)
+                queries.append(query4)
                 query = PFQuery.orQuery(withSubqueries: queries)
             }
         }
@@ -271,7 +274,9 @@ class FindViewController: UIViewController {
                             }
                             self.collectionView.reloadData()
                         } else {
-                            //                        self.noResultsLabel.isHidden = false
+                            self.noResultsLabel.isHidden = false
+                            self.noResultsLabel.fadeOut()
+                            self.noResultsLabel.fadeIn()
                             self.collectionView.isHidden = true
                         }
                     }
@@ -323,7 +328,7 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         cell.recipeId = recipe.objectId
         cell.recipe = recipe
-        cell.categoryLabel.text = recipe.category?.uppercased()
+        cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
         cell.createdByLabel.text = "@\(recipe.ownerName ?? "alexdoan7")"
         cell.recipeTitle.text = recipe.name
         
@@ -375,6 +380,10 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
             detailVC.recipeId = cell!.recipeId
             detailVC.recipe = cell!.recipe
             detailVC.recipeImage.image = cell!.recipeImage?.image
+            detailVC.categoryLabel.text = cell!.recipe!.category
+//            detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
+
+
             
             let recipe = cell!.recipe
             if recipe != nil {
@@ -388,7 +397,7 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
                     detailVC.likesCount.text = "\(likes)"
                 }
                 if let ownerStr = cell?.createdByLabel {
-                    detailVC.owner.text = ownerStr.text!
+                    detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
                 }
             }
             

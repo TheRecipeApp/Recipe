@@ -160,7 +160,7 @@ extension CookbookViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         cell.categoryLabel.text = recipe.category?.uppercased()
-        cell.createdByLabel.text = "@\(recipe.ownerName!)"
+        cell.createdByLabel.text = "@\(recipe.ownerName ?? "alexdoan7")"
         cell.isUserInteractionEnabled = true
         
         return cell

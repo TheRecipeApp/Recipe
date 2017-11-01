@@ -11,6 +11,7 @@ import Parse
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var categoryLabel: UILabelCategory!
     @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeDescription: UILabel!
@@ -26,6 +27,7 @@ class DetailViewController: UIViewController {
         recipeDescription.sizeToFit()
         recipeName.sizeToFit()
         owner.sizeToFit()
+        categoryLabel.sizeToFit()
         
 //        setupRecipeFields()
         // Do any additional setup after loading the view.

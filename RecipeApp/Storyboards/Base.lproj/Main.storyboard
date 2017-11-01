@@ -285,7 +285,7 @@
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TdQ-8N-AU2">
                                         <rect key="frame" x="0.0" y="207" width="375" height="303"/>
-                                        <color key="backgroundColor" name="GrayBackgroundScreen"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="15" minimumInteritemSpacing="15" id="iZ7-za-ahj">
                                             <size key="itemSize" width="300" height="300"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -313,7 +313,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="GrayBackgroundScreen"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="L1X-9T-q9b" firstAttribute="leading" secondItem="hg5-tV-It5" secondAttribute="leading" constant="9" id="JRH-F4-0CD"/>

@@ -195,15 +195,15 @@ class FindViewController: UIViewController {
         doSearch(nil, categories: true)
     }
     
-    func recipeTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        print("Recipe tapped")
-        let recipeDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
-        
-        let recipeView = tapGestureRecognizer.view as! RecipeBlockView
-        recipeDetailVC.recipeId = recipeView.recipeId
-        
-        self.navigationController?.pushViewController(recipeDetailVC, animated: true)
-    }
+//    func recipeTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+//        print("Recipe tapped")
+//        let recipeDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
+//
+//        let recipeView = tapGestureRecognizer.view as! RecipeBlockView
+//        recipeDetailVC.recipeId = recipeView.recipeId
+//
+//        self.navigationController?.pushViewController(recipeDetailVC, animated: true)
+//    }
     
     func doSearch(_ searchTerm: String?, categories: Bool) {
         
@@ -328,7 +328,8 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         cell.recipeId = recipe.objectId
         cell.recipe = recipe
-        cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
+        cell.categoryLabel.text = recipe.category?.uppercased() ?? "American"
+//        cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
         cell.createdByLabel.text = "@\(recipe.ownerName ?? "alexdoan7")"
         cell.recipeTitle.text = recipe.name
         
@@ -380,7 +381,10 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
             detailVC.recipeId = cell!.recipeId
             detailVC.recipe = cell!.recipe
             detailVC.recipeImage.image = cell!.recipeImage?.image
-            detailVC.categoryLabel.text = cell!.recipe!.category
+//            detailVC.categoryLabel.text = cell!.recipe!.category
+//            detailVC.categoryLabel.text = cell!.recipe!.category?.normalizedCasing() ?? "American"
+            detailVC.categoryLabel.text = cell!.recipe!.category?.uppercased() ?? "American"
+
 //            detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
 
 

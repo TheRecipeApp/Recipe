@@ -97,9 +97,9 @@ class ExploreViewController: UIViewController {
                 })
             case "favorites":
                 
-                let categoires = Recipe.categories
-                let index = random(0, categoires.count - 1)
-                let categoryChosen = categoires[index]
+                let categories = Recipe.categories
+                let index = random(0, categories.count - 1)
+                let categoryChosen = categories[index]
                 
                 favoritesLabel.text = "Because you like \(categoryChosen.normalizedCasing)"
                 
@@ -128,18 +128,18 @@ class ExploreViewController: UIViewController {
                 })
             case "localTrends":
                 
-                let categoires = Recipe.categories
-                let index = random(0, categoires.count - 1)
-                let categoryChosen = categoires[index]
+                let categories = Recipe.categories
+                let index = random(0, categories.count - 1)
+                let categoryChosen = categories[index]
                 let categoryTermRegex = String(format: "(?i)%@", categoryChosen)
 
                 localTrendsLabel.text = "Based on people you follow"
                 
                 let query = PFQuery(className: "Recipe")
-                query.whereKey("category", matchesRegex: categoryTermRegex)
+                query.whereKey("category", matchesRegex: "American")
                 
                 let query2 = PFQuery(className: "Recipe")
-                query2.whereKey("cuisine", matchesRegex: categoryTermRegex)
+                query2.whereKey("cuisine", matchesRegex: "American")
                 
                 let orQuery = PFQuery.orQuery(withSubqueries: [query, query2])
 //                query.order(byDescending: "likes")
@@ -339,6 +339,9 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
             detailVC.recipeId = cell!.recipeId
             detailVC.recipe = cell!.recipe
             detailVC.recipeImage.image = cell!.recipeImage?.image
+            detailVC.categoryLabel.text = cell!.recipe!.category
+            detailVC.owner.text = "by @ \(cell!.recipe!.ownerName ?? "alexdoan7")"
+
             
             let recipe = cell!.recipe
             if recipe != nil {
@@ -352,7 +355,7 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
                     detailVC.likesCount.text = "\(likes)"
                 }
                 if let ownerStr = cell?.createdByLabel {
-                    detailVC.owner.text = ownerStr.text!
+                    detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
                 }
             }
             

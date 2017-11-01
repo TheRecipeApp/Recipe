@@ -374,6 +374,10 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
             detailVC.recipeId = cell!.recipeId
             detailVC.recipe = cell!.recipe
             detailVC.recipeImage.image = cell!.recipeImage?.image
+            detailVC.categoryLabel.text = cell!.recipe!.category
+//            detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
+
+
             
             let recipe = cell!.recipe
             if recipe != nil {
@@ -387,7 +391,7 @@ extension FindViewController: UIViewControllerPreviewingDelegate {
                     detailVC.likesCount.text = "\(likes)"
                 }
                 if let ownerStr = cell?.createdByLabel {
-                    detailVC.owner.text = ownerStr.text!
+                    detailVC.owner.text = "by @\(cell!.recipe!.ownerName ?? "alexdoan7")"
                 }
             }
             

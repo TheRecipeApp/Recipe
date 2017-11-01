@@ -262,14 +262,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkD-aU-sZL" userLabel="Add Ingredient View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5G-Rz-ceN">
-                                        <rect key="frame" x="8" y="59" width="128" height="31"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5G-Rz-ceN">
+                                        <rect key="frame" x="8" y="61" width="128" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="YC1-2D-2YH"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P5G-TO-Dr5">
-                                        <rect key="frame" x="144" y="59" width="97" height="31"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P5G-TO-Dr5">
+                                        <rect key="frame" x="144" y="61" width="97" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="97" id="w0k-UC-FnK"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -285,8 +291,8 @@
                                             <action selector="onAddIngredient:" destination="65b-cB-TaV" eventType="touchUpInside" id="62r-5b-owB"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Units" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D6y-3S-8Wh">
-                                        <rect key="frame" x="249" y="59" width="80" height="31"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Units" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D6y-3S-8Wh">
+                                        <rect key="frame" x="249" y="61" width="80" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="C4R-d0-bLs"/>
                                         </constraints>
@@ -718,7 +724,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="R58-kZ-V7q"/>
+        <segue reference="ynU-HQ-XHX"/>
         <segue reference="jZW-3s-Id9"/>
     </inferredMetricsTieBreakers>
 </document>

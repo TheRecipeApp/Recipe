@@ -46,6 +46,7 @@ class CookingStepViewController: UIViewController {
 			nextStepButton.isHidden = true
 		}
 		stepNumberLabel.text = "Step No: \(stepNumber)"
+		ingredientsTable.reloadData()
 	}
 	
 	func setupStepAudio() {
@@ -107,6 +108,7 @@ class CookingStepViewController: UIViewController {
 		} else {
 			prevStepButton.isHidden = false
 		}
+		ingredientsTable.reloadData()
 	}
 	
 	@IBAction func onNextButtonTapped(_ sender: Any) {
@@ -123,6 +125,7 @@ class CookingStepViewController: UIViewController {
 		} else {
 			nextStepButton.isHidden = false
 		}
+		ingredientsTable.reloadData()
 	}
 	
 	@IBAction func onAudioPlayTapped(_ sender: Any) {

@@ -194,17 +194,7 @@ class FindViewController: UIViewController {
         label.isActive = !label.isActive
         doSearch(nil, categories: true)
     }
-    
-//    func recipeTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-//        print("Recipe tapped")
-//        let recipeDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
-//
-//        let recipeView = tapGestureRecognizer.view as! RecipeBlockView
-//        recipeDetailVC.recipeId = recipeView.recipeId
-//
-//        self.navigationController?.pushViewController(recipeDetailVC, animated: true)
-//    }
-    
+       
     func doSearch(_ searchTerm: String?, categories: Bool) {
         
         self.searchBar.resignFirstResponder()

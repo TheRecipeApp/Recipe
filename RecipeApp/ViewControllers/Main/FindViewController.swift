@@ -194,7 +194,8 @@ class FindViewController: UIViewController {
         label.isActive = !label.isActive
         doSearch(nil, categories: true)
     }
-       
+    
+    
     func doSearch(_ searchTerm: String?, categories: Bool) {
         
         self.searchBar.resignFirstResponder()

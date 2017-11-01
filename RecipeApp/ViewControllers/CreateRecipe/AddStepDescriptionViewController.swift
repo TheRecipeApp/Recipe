@@ -65,6 +65,8 @@ class AddStepDescriptionViewController: UIViewController {
         stepDescription.delegate = self
         stepDescription.text = placeholderText
         stepDescription.textColor = UIColor.lightGray
+		
+		self.hideKeyboardWhenTappedAround()
     }
     
     override func didReceiveMemoryWarning() {

@@ -30,7 +30,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hlz-by-lWP">
-                                <rect key="frame" x="10" y="91" width="375" height="31"/>
+                                <rect key="frame" x="10" y="91" width="355" height="31"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -97,12 +97,12 @@
                             <constraint firstItem="5Ad-mk-oW7" firstAttribute="top" secondItem="Nf6-dc-CRy" secondAttribute="bottom" constant="20" id="LG3-yE-pMc"/>
                             <constraint firstItem="KHV-SZ-YLh" firstAttribute="trailing" secondItem="7n3-me-OLM" secondAttribute="trailing" id="OG3-lt-muO"/>
                             <constraint firstItem="Nf6-dc-CRy" firstAttribute="leading" secondItem="KHV-SZ-YLh" secondAttribute="leading" constant="10" id="SyZ-wP-QkU"/>
-                            <constraint firstItem="Hlz-by-lWP" firstAttribute="trailing" secondItem="KHV-SZ-YLh" secondAttribute="trailing" constant="10" id="akB-R6-GiJ"/>
                             <constraint firstItem="BDX-QH-VYN" firstAttribute="leading" secondItem="KHV-SZ-YLh" secondAttribute="leading" constant="10" id="d2E-7x-IX1"/>
                             <constraint firstItem="Y3n-nn-hUg" firstAttribute="leading" secondItem="KHV-SZ-YLh" secondAttribute="leading" constant="10" id="dPD-eS-XlM"/>
                             <constraint firstItem="KHV-SZ-YLh" firstAttribute="bottom" secondItem="7n3-me-OLM" secondAttribute="bottom" id="dbZ-ye-haI"/>
                             <constraint firstItem="Y3n-nn-hUg" firstAttribute="top" secondItem="KHV-SZ-YLh" secondAttribute="top" constant="20" id="f2j-Wl-vEB"/>
                             <constraint firstItem="Hlz-by-lWP" firstAttribute="leading" secondItem="KHV-SZ-YLh" secondAttribute="leading" constant="10" id="ht8-uC-sC4"/>
+                            <constraint firstItem="KHV-SZ-YLh" firstAttribute="trailing" secondItem="Hlz-by-lWP" secondAttribute="trailing" constant="10" id="ibn-TG-E0z"/>
                             <constraint firstItem="KHV-SZ-YLh" firstAttribute="trailing" secondItem="Nf6-dc-CRy" secondAttribute="trailing" constant="10" id="iyg-Ab-P0c"/>
                             <constraint firstItem="5Ad-mk-oW7" firstAttribute="leading" secondItem="KHV-SZ-YLh" secondAttribute="leading" constant="10" id="k8w-CE-hY7"/>
                             <constraint firstAttribute="trailing" secondItem="Y3n-nn-hUg" secondAttribute="trailing" constant="10" id="kAC-8c-3DV"/>
@@ -185,7 +185,6 @@
                     </view>
                     <connections>
                         <outlet property="recipeImage" destination="0Rz-4o-p7L" id="wVP-Om-ume"/>
-                        <segue destination="m7e-lf-dby" kind="show" identifier="RecipeViewController" id="T7F-IC-bjz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i80-mO-F3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -196,14 +195,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3260" y="-573"/>
-        </scene>
-        <!--RecipeViewController-->
-        <scene sceneID="6zF-cH-URB">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" referencedIdentifier="RecipeViewController" id="m7e-lf-dby" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PVv-Gv-spF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4074" y="-574"/>
         </scene>
         <!--Create Recipe-->
         <scene sceneID="xkf-de-Ooi">
@@ -271,14 +262,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkD-aU-sZL" userLabel="Add Ingredient View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5G-Rz-ceN">
-                                        <rect key="frame" x="8" y="59" width="128" height="31"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5G-Rz-ceN">
+                                        <rect key="frame" x="8" y="61" width="128" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="YC1-2D-2YH"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P5G-TO-Dr5">
-                                        <rect key="frame" x="144" y="59" width="97" height="31"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P5G-TO-Dr5">
+                                        <rect key="frame" x="144" y="61" width="97" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="97" id="w0k-UC-FnK"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -294,8 +291,8 @@
                                             <action selector="onAddIngredient:" destination="65b-cB-TaV" eventType="touchUpInside" id="62r-5b-owB"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Units" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D6y-3S-8Wh">
-                                        <rect key="frame" x="249" y="59" width="80" height="31"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Units" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D6y-3S-8Wh">
+                                        <rect key="frame" x="249" y="61" width="80" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="C4R-d0-bLs"/>
                                         </constraints>
@@ -428,13 +425,13 @@
                                 <rect key="frame" x="0.0" y="84" width="375" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ewk-rz-F2P" userLabel="Text Description View">
-                                        <rect key="frame" x="17.5" y="10" width="340" height="280"/>
+                                        <rect key="frame" x="17.5" y="30" width="340" height="240"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="shn-gZ-4R2">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="280" id="Ttx-FN-mAz"/>
+                                                    <constraint firstAttribute="height" constant="240" id="Ttx-FN-mAz"/>
                                                     <constraint firstAttribute="width" constant="320" id="wyD-ra-4YB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -725,11 +722,9 @@
         <namedColor name="PrimaryColor">
             <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="PrimaryColor">
-            <color red="0.63921568627450975" green="0.0039215686274509803" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ynU-HQ-XHX"/>
         <segue reference="jZW-3s-Id9"/>
     </inferredMetricsTieBreakers>
 </document>

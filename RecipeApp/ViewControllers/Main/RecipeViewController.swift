@@ -114,42 +114,43 @@ class RecipeViewController: UIViewController {
 	func fetchRecipe() {
 		let query = PFQuery(className: "Recipe")
 		query.whereKey("objectId", equalTo: self.recipeId!)
-		query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-			if error == nil {
-				// The find succeeded.
-				print("Successfully retrieved \(objects!.count) cooking steps.")
-				// Do something with the found objects
-				if let objects = objects {
-					self.recipe = objects[0] as? Recipe
-					self.fetchOwner()
-					self.fetchCookingSteps()
-				}
+		do {
+			let objects:[PFObject]? = try query.findObjects()
+			print("Successfully retrieved \(objects?.count) cooking steps.")
+			// Do something with the found objects
+			if let objects = objects {
+				self.recipe = objects[0] as? Recipe
+				self.fetchOwner()
+				self.fetchCookingSteps()
 			}
-		})
+		} catch {
+			print("Unable to fetch Recipe Details", error.localizedDescription)
+		}
 	}
 	
 	func fetchCookingSteps() {
 		self.cookingSteps.removeAll()
 		let query = PFQuery(className: "CookingStep")
 		query.whereKey("recipeId", equalTo: self.recipeId!)
-		query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
-			if error == nil {
-				// The find succeeded.
-				print("Successfully retrieved \(objects!.count) cooking steps.")
-				// Do something with the found objects
-				if let objects = objects {
-					for object in objects {
-						let cookingStep = object as! CookingStep
-						print("cooking step: \(cookingStep)")
-						self.cookingSteps.append(cookingStep)
-					}
+        query.order(byAscending: "createdAt")
+		do {
+			let objects:[PFObject]? = try query.findObjects()
+			// The find succeeded.
+			print("Successfully retrieved \(objects!.count) cooking steps.")
+			// Do something with the found objects
+			if let objects = objects {
+				for object in objects {
+					let cookingStep = object as! CookingStep
+					print("cooking step: \(cookingStep)")
+					self.cookingSteps.append(cookingStep)
 				}
-				print("number of cooking steps: \(self.cookingSteps.count)")
 			}
 			if self.cookingSteps.count == 0 {
 				self.cookThisButton.isEnabled = false
 			}
-		})
+		} catch {
+			print("Unable to fetch cooking steps", error.localizedDescription)
+		}
 	}
     
     // MARK: - Actions

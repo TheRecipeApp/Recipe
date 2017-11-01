@@ -132,6 +132,7 @@ class RecipeViewController: UIViewController {
 		self.cookingSteps.removeAll()
 		let query = PFQuery(className: "CookingStep")
 		query.whereKey("recipeId", equalTo: self.recipeId!)
+        query.order(byAscending: "createdAt")
 		do {
 			let objects:[PFObject]? = try query.findObjects()
 			// The find succeeded.

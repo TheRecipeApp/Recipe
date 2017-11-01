@@ -76,7 +76,6 @@ class CookingStepViewController: UIViewController {
 			if error == nil {
 				if let imageData = data {
 					self.stepImage.image = UIImage(data: imageData)
-					self.stepImage.contentMode = .scaleAspectFit
 				}
 			}
 		})

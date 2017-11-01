@@ -842,7 +842,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ra2-da-yAl">
-                                                <rect key="frame" x="8" y="8" width="128" height="27"/>
+                                                <rect key="frame" x="8" y="8" width="187" height="27"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                                 <color key="textColor" name="PrimaryColor"/>
                                                 <nil key="highlightedColor"/>
@@ -923,6 +923,7 @@
                                             <constraint firstItem="eZo-gg-bpK" firstAttribute="leading" secondItem="Ra2-da-yAl" secondAttribute="leading" id="cHx-c1-zsI"/>
                                             <constraint firstAttribute="trailing" secondItem="EsT-UE-BR7" secondAttribute="trailing" constant="4" id="faY-x2-esg"/>
                                             <constraint firstItem="EsT-UE-BR7" firstAttribute="top" secondItem="Ra2-da-yAl" secondAttribute="top" id="fk9-6t-8pe"/>
+                                            <constraint firstItem="EsT-UE-BR7" firstAttribute="leading" secondItem="Ra2-da-yAl" secondAttribute="trailing" constant="50" id="fmb-Sa-owk"/>
                                             <constraint firstItem="iVR-8N-ion" firstAttribute="leading" secondItem="bP3-Pf-zeO" secondAttribute="trailing" constant="4" id="glU-W8-bhy"/>
                                             <constraint firstItem="BrZ-h6-q5O" firstAttribute="leading" secondItem="eZo-gg-bpK" secondAttribute="trailing" constant="4" id="iS8-dM-bAk"/>
                                             <constraint firstItem="6hr-5Z-cdm" firstAttribute="top" secondItem="Ra2-da-yAl" secondAttribute="bottom" constant="4" id="kf3-ci-kfi"/>

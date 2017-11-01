@@ -240,7 +240,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedTrending?.contains(indexPath.row))! {
@@ -257,7 +257,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedFavorites?.contains(indexPath.row))! {
@@ -275,7 +275,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.uppercased()
+            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedLocalTrends?.contains(indexPath.row))! {

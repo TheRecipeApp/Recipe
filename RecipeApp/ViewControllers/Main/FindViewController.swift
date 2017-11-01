@@ -69,7 +69,7 @@ class FindViewController: UIViewController {
                 index = random(0, allCategories.count - 1)
             }
             
-            label.text = allCategories[index]
+            label.text = allCategories[index].uppercased()
             label.fadeOut()
             label.fadeIn()
             indexed.insert(index)
@@ -86,20 +86,24 @@ class FindViewController: UIViewController {
         
         // set up the category labels
         let allCategories: [String] = Recipe.categories
+//        self.categoryView.layer.cornerRadius = 12
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
             addCategoryTapRecognizer(to: label)
             label.sizeToFit()
-            if label.isTruncated {
-                label.isHidden = true
-            }
+//            if label.isTruncated {
+//                label.isHidden = true
+//            }
+            
+            label.layer.cornerRadius = 18
+            label.layer.cornerRadius = 18
             
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
                 index = random(0, allCategories.count - 1)
             }
             
-            label.text = allCategories[index]
+            label.text = allCategories[index].uppercased()
             indexed.insert(index)
         }
         
@@ -243,13 +247,13 @@ class FindViewController: UIViewController {
                 let query3 = PFQuery(className: "Recipe")
                 query3.whereKey("name", matchesRegex: searchTermRegex)
                 
-                let query4 = PFQuery(className: "CookingStep")
-                query4.whereKey("ingredients", matchesRegex: searchTermRegex)
+                let query4 = PFQuery(className: "Recipe")
+                query4.whereKey("desc", matchesRegex: searchTermRegex)
                 
                 queries.append(query1)
                 queries.append(query2)
                 queries.append(query3)
-//                queries.append(query4)
+                queries.append(query4)
                 query = PFQuery.orQuery(withSubqueries: queries)
             }
         }
@@ -270,7 +274,9 @@ class FindViewController: UIViewController {
                             }
                             self.collectionView.reloadData()
                         } else {
-                            //                        self.noResultsLabel.isHidden = false
+                            self.noResultsLabel.isHidden = false
+                            self.noResultsLabel.fadeOut()
+                            self.noResultsLabel.fadeIn()
                             self.collectionView.isHidden = true
                         }
                     }
@@ -322,7 +328,7 @@ extension FindViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         cell.recipeId = recipe.objectId
         cell.recipe = recipe
-        cell.categoryLabel.text = recipe.category?.uppercased()
+        cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
         cell.createdByLabel.text = "@\(recipe.ownerName ?? "alexdoan7")"
         cell.recipeTitle.text = recipe.name
         

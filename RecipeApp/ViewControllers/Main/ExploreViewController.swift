@@ -243,7 +243,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
+            cell.categoryLabel.text = recipe.category?.uppercased() ?? "American"
+//            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedTrending?.contains(indexPath.row))! {
@@ -260,7 +261,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
+            cell.categoryLabel.text = recipe.category?.uppercased() ?? "American"
+            //            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedFavorites?.contains(indexPath.row))! {
@@ -278,7 +280,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.recipeId = recipe.objectId
             cell.recipe = recipe
             cell.recipeTitle.text = recipe.name
-            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
+            cell.categoryLabel.text = recipe.category?.uppercased() ?? "American"
+//            cell.categoryLabel.text = recipe.category?.normalizedCasing ?? "American"
             recipeImageFile = recipe.image
             cell.createdByLabel.isHidden = true
             if !(animatedLocalTrends?.contains(indexPath.row))! {
@@ -342,7 +345,7 @@ extension ExploreViewController: UIViewControllerPreviewingDelegate {
             detailVC.recipeId = cell!.recipeId
             detailVC.recipe = cell!.recipe
             detailVC.recipeImage.image = cell!.recipeImage?.image
-            detailVC.categoryLabel.text = cell!.recipe!.category
+            detailVC.categoryLabel.text = cell!.recipe!.category?.uppercased() ?? "American"
             detailVC.owner.text = "by @ \(cell!.recipe!.ownerName ?? "alexdoan7")"
 
             

@@ -77,7 +77,7 @@ class RecipeViewController: UIViewController {
 				cuisine.text = cuisineStr
 			}
 			if let categoryStr = recipe?.category {
-				categoryLabel.text = categoryStr.normalizedCasing
+				categoryLabel.text = categoryStr.uppercased()
                 categoryLabel.fadeOut()
                 categoryLabel.fadeIn()
                 categoryLabel.isHidden = false

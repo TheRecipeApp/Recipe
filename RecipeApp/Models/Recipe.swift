@@ -16,7 +16,7 @@ class Recipe: PFObject, PFSubclassing {
 	 
     
     // Munchies
-    static var categories = ["Desserts", "Fusion", "Vietnamese", "Indian", "American", "Mexican", "Barbeque", "Sushi", "Thanksgiving", "Guilty", "Italian", "Healthy", "Vegetarian"]
+    static var categories = ["Desserts", "Fusion", "Vietnamese", "Indian", "American", "Mexican", "Barbeque", "Sushi", "Thanksgiving", "Guilty", "Italian", "Healthy", "Vegetarian", "Carbs"]
     
 	static var cookingTechniques = ["Baking","Basting","Boiling","Boning","Brining","Broiling","Canning","Caramelizing","Chiffonade","Chopping","Cold Storage","Creaming","Cubing","Deep Frying","Deglazing","Degorging","Drying","Fermenting","Grilling","Julienning","Marinating","Melting","Microwaving","Mincing","Pickling","Poaching","Pressure Cooking","Puree","Roasting","Sauteing","Simmering","Slicing","Smoking","Soak","Spice rubs","Steaming","Stir Frying"]
 	

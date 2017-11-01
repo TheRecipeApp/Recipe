@@ -170,6 +170,9 @@ class ExploreViewController: UIViewController {
         animatedTrending = []
         animatedFavorites = []
         animatedLocalTrends = []
+        trending = []
+        favorites = []
+        localTrends = []
         fetchRecipes(collectionViewName: "trending")
         fetchRecipes(collectionViewName: "favorites")
         fetchRecipes(collectionViewName: "localTrends")

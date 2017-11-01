@@ -78,7 +78,7 @@ class RecipeViewController: UIViewController {
                 categoryLabel.isHidden = false
 			}
             if let likes = recipe?.likes {
-                likesCount.text = "\(likes) Compliments"
+                likesCount.text = "\(likes)"
             }
 			if let ownerStr = recipeOwner?.username {
 				owner.text = "@" + ownerStr

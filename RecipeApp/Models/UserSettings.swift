@@ -18,7 +18,11 @@ class UserSettings: PFObject, PFSubclassing {
 	@NSManaged var learnToCook: Bool
 	@NSManaged var enablePushNotifications: Bool
 	@NSManaged var favoriteCuisines: [String]
-
+    
+    override init() {
+        super.init()
+    }
+    
 	init(shareMyCooking : Bool?, learnToCook: Bool?, enablePushNotifications: Bool?, favoriteCuisines: [String]?) {
 		super.init()
 		self.shareMyCooking = shareMyCooking ?? false

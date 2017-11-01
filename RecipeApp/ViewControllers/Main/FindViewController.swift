@@ -51,15 +51,18 @@ class FindViewController: UIViewController {
         let allCategories: [String] = Recipe.categories
         self.categoryView.subviews.forEach { (view: UIView) in
             let label = view as! UILabelCategory
+            label.sizeToFit()
+
             if label.isActive {
                 label.isActive = false
                 let color = UIColor(named: "GraySmallHeader")
                 label.backgroundColor = color
             }
             
-            label.sizeToFit()
-            label.fadeOut()
-            label.fadeIn()
+//            label.fadeOut()
+//            let randomInt = random(0, 9)
+//            let randomDouble: Double = Double(randomInt / 100)
+//            label.fadeIn(duration: randomDouble)
             
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
@@ -67,6 +70,8 @@ class FindViewController: UIViewController {
             }
             
             label.text = allCategories[index]
+            label.fadeOut()
+            label.fadeIn()
             indexed.insert(index)
         }
         
@@ -88,12 +93,6 @@ class FindViewController: UIViewController {
             if label.isTruncated {
                 label.isHidden = true
             }
-//            let size: CGSize? = label.text?.size(attributes: [NSFontAttributeName : label.font])
-//            if let size = size {
-//                if (size.width > label.bounds.size.width) {
-//                    label.isHidden = true
-//                }
-//            }
             
             var index = random(0, allCategories.count - 1)
             while (indexed.contains(index)) {
@@ -118,7 +117,7 @@ class FindViewController: UIViewController {
         collectionView.dataSource = self
         
         self.noResultsLabel.isHidden = true
-//        fetchCategories()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -158,9 +157,9 @@ class FindViewController: UIViewController {
             searchBar.isHidden = false
             self.searchBar.fadeIn()
             
-            self.headerLabel.fadeOut()
+//            self.headerLabel.fadeOut()
             self.headerLabel.text = "SEARCH FOR RECIPES"
-            self.headerLabel.fadeIn()
+//            self.headerLabel.fadeIn()
             self.categoryView.isHidden = true
         }
         isSearchShown = !isSearchShown

@@ -18,6 +18,7 @@ class ExploreViewController: UIViewController {
     @IBOutlet weak var localTrendsCollectionView: UICollectionView!
     
     @IBOutlet weak var favoritesLabel: UILabel!
+    @IBOutlet weak var localTrendsLabel: UILabel!
     
     fileprivate var trending = [Recipe]()
     fileprivate var favorites = [Recipe]()
@@ -102,11 +103,18 @@ class ExploreViewController: UIViewController {
                 
                 favoritesLabel.text = "Because you like \(categoryChosen.normalizedCasing)"
                 
-                let query = PFQuery(className: "Recipe")
+//                let query = PFQuery(className: "Recipe")
                 let categoryTermRegex = String(format: "(?i)%@", categoryChosen)
+                
+                let query = PFQuery(className: "Recipe")
                 query.whereKey("category", matchesRegex: categoryTermRegex)
-                query.order(byDescending: "likes")
-                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                
+                let query2 = PFQuery(className: "Recipe")
+                query2.whereKey("cuisine", matchesRegex: categoryTermRegex)
+                
+                let orQuery = PFQuery.orQuery(withSubqueries: [query, query2])
+//                query.order(byDescending: "likes")
+                orQuery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                     if error == nil {
                         print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
                         if let objects = objects {
@@ -119,9 +127,23 @@ class ExploreViewController: UIViewController {
                     }
                 })
             case "localTrends":
+                
+                let categoires = Recipe.categories
+                let index = random(0, categoires.count - 1)
+                let categoryChosen = categoires[index]
+                let categoryTermRegex = String(format: "(?i)%@", categoryChosen)
+
+                localTrendsLabel.text = "Based on people you follow"
+                
                 let query = PFQuery(className: "Recipe")
-                query.order(byDescending: "likes")
-                query.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+                query.whereKey("category", matchesRegex: categoryTermRegex)
+                
+                let query2 = PFQuery(className: "Recipe")
+                query2.whereKey("cuisine", matchesRegex: categoryTermRegex)
+                
+                let orQuery = PFQuery.orQuery(withSubqueries: [query, query2])
+//                query.order(byDescending: "likes")
+                orQuery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
                     if error == nil {
                         print("Successfully retrieved \(objects!.count) recipes for collectionView: \(type).")
                         if let objects = objects {

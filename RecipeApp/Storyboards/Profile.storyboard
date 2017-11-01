@@ -301,10 +301,32 @@
                                     <action selector="onLogout:" destination="tVQ-Zt-gRl" eventType="touchUpInside" id="5u8-hw-Da9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtn-l5-edA" customClass="UILabelCategory">
+                                <rect key="frame" x="30" y="132" width="120" height="18"/>
+                                <color key="backgroundColor" red="0.0" green="0.69351117227979275" blue="0.0070091675216805479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="GrayBackgroundScreen"/>
                         <constraints>
                             <constraint firstItem="zOU-2c-Y8d" firstAttribute="top" secondItem="rND-fM-M7D" secondAttribute="top" id="2em-HZ-1sU"/>
+                            <constraint firstItem="jtn-l5-edA" firstAttribute="centerX" secondItem="Eov-65-vQG" secondAttribute="centerX" id="4tS-wL-FKU"/>
                             <constraint firstItem="Ppe-xG-vZo" firstAttribute="leading" secondItem="37i-vX-8vX" secondAttribute="trailing" constant="30" id="640-rD-B0y"/>
                             <constraint firstItem="sjA-nZ-SaQ" firstAttribute="top" secondItem="EA3-Ku-Iws" secondAttribute="bottom" constant="8" id="6Cj-ZF-SZ8"/>
                             <constraint firstItem="37i-vX-8vX" firstAttribute="top" secondItem="i69-mD-gWq" secondAttribute="top" constant="30" id="7Pt-Zz-Nv8"/>
@@ -331,9 +353,11 @@
                             <constraint firstItem="rND-fM-M7D" firstAttribute="top" secondItem="gDy-BR-KRI" secondAttribute="bottom" constant="15" id="jd5-iR-2Bd"/>
                             <constraint firstItem="jnl-s5-ZHp" firstAttribute="leading" secondItem="i69-mD-gWq" secondAttribute="leading" id="mU8-4g-jBz"/>
                             <constraint firstItem="ERp-Dg-BsF" firstAttribute="top" secondItem="0Jb-D5-ZvT" secondAttribute="bottom" id="tkH-oC-5hZ"/>
+                            <constraint firstItem="jtn-l5-edA" firstAttribute="width" secondItem="Eov-65-vQG" secondAttribute="width" id="tmM-BW-ShF"/>
                             <constraint firstItem="YsB-JI-9jG" firstAttribute="leading" secondItem="gDy-BR-KRI" secondAttribute="trailing" constant="10" id="u18-Nt-fpb"/>
                             <constraint firstItem="XgV-lf-QnC" firstAttribute="top" secondItem="zOU-2c-Y8d" secondAttribute="bottom" id="x5O-zg-fS3"/>
                             <constraint firstItem="0Jb-D5-ZvT" firstAttribute="top" secondItem="sjA-nZ-SaQ" secondAttribute="top" id="xA5-9K-DkN"/>
+                            <constraint firstItem="jtn-l5-edA" firstAttribute="bottom" secondItem="Eov-65-vQG" secondAttribute="bottom" id="xvO-mK-Sa0"/>
                             <constraint firstItem="0Jb-D5-ZvT" firstAttribute="leading" secondItem="XgV-lf-QnC" secondAttribute="leading" id="yec-r9-6Ic"/>
                             <constraint firstItem="lnP-LV-3Lp" firstAttribute="leading" secondItem="Ppe-xG-vZo" secondAttribute="leading" id="zAv-zL-ay2"/>
                         </constraints>

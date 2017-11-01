@@ -408,8 +408,8 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
                 if let likes = recipe?.likes {
                     detailVC.likesCount.text = "\(likes)"
                 }
-                if let ownerStr = cell.createdByLabel {
-                    detailVC.owner.text = ownerStr.text!
+                if let ownerStr = recipe?.ownerName {
+                    detailVC.owner.text = "@\(ownerStr)"
                 }
             }
             

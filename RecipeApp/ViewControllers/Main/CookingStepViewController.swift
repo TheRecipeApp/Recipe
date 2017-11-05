@@ -11,18 +11,17 @@ import AVFoundation
 
 class CookingStepViewController: UIViewController {
 
+	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var ingredientsTable: UITableView!
 	@IBOutlet weak var stepDescription: UITextView!
-	@IBOutlet weak var stepImage: UIImageView!
 	@IBOutlet weak var stepAudio: UIButton!
-	@IBOutlet weak var nextStepButton: UIButton!
-	@IBOutlet weak var prevStepButton: UIButton!
-	@IBOutlet weak var stepNumberLabel: UILabel!
+	@IBOutlet weak var pageControl: UIPageControl!
 	
 	var steps: [CookingStep]?
 	var step: CookingStep?
 	var audioPlayer: AVAudioPlayer?
 	var stepNumber = 1;
+	var stepImages = [UIImageView]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,20 +32,44 @@ class CookingStepViewController: UIViewController {
 		let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
 		ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 		ingredientsTable.separatorStyle = UITableViewCellSeparatorStyle.none
-
+		
 		// Do any additional setup after loading the view.
 		print("step number: \(stepNumber)")
 		
 		step = steps?[stepNumber-1]
 		stepDescription.text = step?.desc
-		setupStepImage()
 		setupStepAudio()
-		prevStepButton.isHidden = true
-		if steps?.count == 1 {
-			nextStepButton.isHidden = true
-		}
-		stepNumberLabel.text = "Step No: \(stepNumber)"
+
 		ingredientsTable.reloadData()
+		scrollView.delegate = self
+		scrollView.isPagingEnabled = true
+		pageControl.currentPage = 0
+		pageControl.numberOfPages = (steps?.count)!
+		view.bringSubview(toFront: pageControl)
+		setupStepImages()
+		setupScrollView()
+	}
+	
+	func setupStepImages() {
+		if let count = steps?.count {
+			for i in 0 ..< count {
+				let imageView = UIImageView()
+				step = steps?[i]
+				setupStepImage(imageView: imageView)
+				stepImages.append(imageView)
+			}
+		}
+	}
+	
+	func setupScrollView() {
+		if let count = steps?.count {
+			scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 250.0)
+			scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(count), height: 250.0)
+			for i in 0 ..< stepImages.count {
+				stepImages[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: 250.0)
+				scrollView.addSubview(stepImages[i])
+			}
+		}
 	}
 	
 	func setupStepAudio() {
@@ -71,63 +94,22 @@ class CookingStepViewController: UIViewController {
 		}
 	}
 	
-	func setupStepImage() {
+	func setupStepImage(imageView: UIImageView) {
 		let imageFile = step?.stepImage
 		imageFile?.getDataInBackground(block: { (data: Data?, error: Error?) in
 			if error == nil {
 				if let imageData = data {
-					self.stepImage.image = UIImage(data: imageData)
+					imageView.image = UIImage(data:imageData)
 				}
 			}
 		})
-		
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
-	
-	private func clearStep() {
-		stepDescription.text = ""
-		stepImage.image = nil
-		audioPlayer = nil
-	}
-	
-	@IBAction func onPrevButtonTapped(_ sender: Any) {
-		clearStep()
-		stepNumber = stepNumber - 1
-		stepNumberLabel.text = "Step No: \(stepNumber)"
-		step = steps?[stepNumber-1]
-		stepDescription.text = step?.desc
-		setupStepImage()
-		setupStepAudio()
-		nextStepButton.isHidden = false
-		if stepNumber == 1 {
-			prevStepButton.isHidden = true
-		} else {
-			prevStepButton.isHidden = false
-		}
-		ingredientsTable.reloadData()
-	}
-	
-	@IBAction func onNextButtonTapped(_ sender: Any) {
-		clearStep()
-		stepNumber = stepNumber + 1
-		stepNumberLabel.text = "Step No: \(stepNumber)"
-		step = steps?[stepNumber-1]
-		stepDescription.text = step?.desc
-		setupStepImage()
-		setupStepAudio()
-		prevStepButton.isHidden = false
-		if stepNumber == steps?.count {
-			nextStepButton.isHidden = true
-		} else {
-			nextStepButton.isHidden = false
-		}
-		ingredientsTable.reloadData()
-	}
-	
+
 	@IBAction func onAudioPlayTapped(_ sender: Any) {
 		stepAudio.setImage(#imageLiteral(resourceName: "speaker_on"), for: .normal)
 		stepAudio.flash()
@@ -165,5 +147,16 @@ extension CookingStepViewController : AVAudioPlayerDelegate {
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
 		stepAudio.stopFlash()
 		stepAudio.setImage(#imageLiteral(resourceName: "speaker_off"), for: .normal)
+	}
+}
+
+extension CookingStepViewController : UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let pageIndex = Int(round(scrollView.contentOffset.x/view.frame.width))
+		step = steps?[pageIndex]
+		pageControl.currentPage = pageIndex
+		setupStepAudio()
+		stepDescription.text = step?.desc
+		ingredientsTable.reloadData()
 	}
 }

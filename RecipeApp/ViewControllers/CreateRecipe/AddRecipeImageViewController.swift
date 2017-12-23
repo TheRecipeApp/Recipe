@@ -23,7 +23,8 @@ class AddRecipeImageViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         self.hideKeyboardWhenTappedAround()
-        
+		self.title = "Save Recipe";
+
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         
@@ -139,8 +140,8 @@ extension AddRecipeImageViewController : UITableViewDelegate, UITableViewDataSou
 extension AddRecipeImageViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // Get the image captured by the UIImagePickerController
-        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+		let originalImage:UIImage? = info[UIImagePickerControllerOriginalImage] as! UIImage?
+		let editedImage:UIImage? = info[UIImagePickerControllerEditedImage] as! UIImage?
         
         self.recipeImage.contentMode = .center
         self.recipeImage.contentMode = .scaleAspectFit

@@ -22,7 +22,7 @@ class AddStepPictureViewController: UIViewController {
 		super.viewDidLoad()
 		
         stepNumber = (steps?.count)!
-        self.title = "Add Step\(stepNumber) Image"
+        self.title = "Step\(stepNumber)"
 		step = steps?[stepNumber-1]
 		
 	}
@@ -40,7 +40,7 @@ class AddStepPictureViewController: UIViewController {
 		if stepImageUploaded {
 			cookingStep?.setImage(with: stepImage.image)
 		}
-		self.performSegue(withIdentifier: "AddRecipeDetailsSegue", sender: nil)
+		self.performSegue(withIdentifier: "CreateRecipeSegue", sender: nil)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -88,9 +88,10 @@ class AddStepPictureViewController: UIViewController {
 			destVC.steps = self.steps
 		} else {
 			// Get the new view controller using segue.destinationViewController.
-			let addRecipeDetailsViewController = segue.destination as! AddRecipeDetailsViewController
+			let welcomeVC = segue.destination as! WelcomeViewController
 			// Pass the selected object to the new view controller.
-			addRecipeDetailsViewController.cookingSteps = steps
+			welcomeVC.steps = steps
+			welcomeVC.stepsSaved = true
 		}
 	}
 }
@@ -98,8 +99,8 @@ class AddStepPictureViewController: UIViewController {
 extension AddStepPictureViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		// Get the image captured by the UIImagePickerController
-		let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-		let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+		let originalImage:UIImage? = info[UIImagePickerControllerOriginalImage] as! UIImage?
+		let editedImage:UIImage? = info[UIImagePickerControllerEditedImage] as! UIImage?
 		
 		self.stepImage.contentMode = .center
 		self.stepImage.contentMode = .scaleAspectFit

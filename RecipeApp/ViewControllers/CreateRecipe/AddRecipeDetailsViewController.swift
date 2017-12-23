@@ -34,14 +34,18 @@ class AddRecipeDetailsViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
+	@IBAction func onCancel(_ sender: Any) {
+		dismiss(animated: true, completion: nil)
+	}
+	
+	override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func onNextTapped(_ sender: Any) {
         // save the recipe
-        if let nameField = nameTextField, let name = nameTextField.text {
+        if let name = nameTextField.text {
             if (!name.isEmpty) {
                 recipe = Recipe()
                 let owner = PFUser.current()

@@ -50,6 +50,8 @@
 		AFD1FCDF1F8FC2A100190961 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCDE1F8FC2A100190961 /* Recipe.swift */; };
 		AFD1FCE11F90505900190961 /* CookingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCE01F90505900190961 /* CookingStep.swift */; };
 		AFD1FCE51F90507F00190961 /* Cookbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD1FCE41F90507F00190961 /* Cookbook.swift */; };
+		AFF25CCD1FDF78000063F5CB /* StepDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF25CCC1FDF78000063F5CB /* StepDetails.storyboard */; };
+		AFF25CD01FDF78C70063F5CB /* StepDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF25CCF1FDF78C70063F5CB /* StepDetailsViewController.swift */; };
 		AFF6A1221FA6B43600B96B0A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF6A1211FA6B43600B96B0A /* WelcomeViewController.swift */; };
 		AFF8ED791F92C7A8007A34CE /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */; };
 		BE1121011FA1BC44005F2427 /* RecipeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1121001FA1BC44005F2427 /* RecipeView.xib */; };
@@ -109,6 +111,8 @@
 		AFD1FCDE1F8FC2A100190961 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		AFD1FCE01F90505900190961 /* CookingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingStep.swift; sourceTree = "<group>"; };
 		AFD1FCE41F90507F00190961 /* Cookbook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookbook.swift; sourceTree = "<group>"; };
+		AFF25CCC1FDF78000063F5CB /* StepDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StepDetails.storyboard; sourceTree = "<group>"; };
+		AFF25CCF1FDF78C70063F5CB /* StepDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDetailsViewController.swift; sourceTree = "<group>"; };
 		AFF6A1211FA6B43600B96B0A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AFF8ED781F92C7A8007A34CE /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BE1120FE1FA1BA0D005F2427 /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 				5F576D701F944CDA0037228B /* Profile.storyboard */,
 				5F576D761F94512E0037228B /* Cooking.storyboard */,
 				5F576D7D1F9451F00037228B /* CreateRecipe.storyboard */,
+				AFF25CCC1FDF78000063F5CB /* StepDetails.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 		AFA347831F8DAC5B00C283D6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AFF25CCE1FDF780F0063F5CB /* StepDetails */,
 				5F576D691F944BE70037228B /* CreateRecipe */,
 				5F576D671F944BD60037228B /* Profile */,
 				5F576D661F944BD00037228B /* Main */,
@@ -307,6 +313,14 @@
 				5F926E881FA2A36F0050E5F7 /* RPContactPickerViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		AFF25CCE1FDF780F0063F5CB /* StepDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AFF25CCF1FDF78C70063F5CB /* StepDetailsViewController.swift */,
+			);
+			path = StepDetails;
 			sourceTree = "<group>";
 		};
 		BE3F069D1FA32ACA000623FC /* Recovered References */ = {
@@ -360,7 +374,7 @@
 				TargetAttributes = {
 					5FD28DD01F8B2B1D005BAD06 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6MQNBF25VG;
+						DevelopmentTeam = 278DEM2K6B;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -396,6 +410,7 @@
 				BE1121011FA1BC44005F2427 /* RecipeView.xib in Resources */,
 				5F576D771F94512E0037228B /* Cooking.storyboard in Resources */,
 				AFAF0A031F9727D1008DF5D2 /* RecipeBlockView.xib in Resources */,
+				AFF25CCD1FDF78000063F5CB /* StepDetails.storyboard in Resources */,
 				5FD28DDF1F8B2B1D005BAD06 /* LaunchScreen.storyboard in Resources */,
 				5F576D711F944CDA0037228B /* Profile.storyboard in Resources */,
 				5F576D7E1F9451F00037228B /* CreateRecipe.storyboard in Resources */,
@@ -449,6 +464,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RecipeApp/Pods-RecipeApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -464,6 +480,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -523,6 +540,7 @@
 				5F576D861F9453640037228B /* ExploreViewController.swift in Sources */,
 				AFA93A941FA8467E00437080 /* AddRecipeDetailsViewController.swift in Sources */,
 				AFD1FCDF1F8FC2A100190961 /* Recipe.swift in Sources */,
+				AFF25CD01FDF78C70063F5CB /* StepDetailsViewController.swift in Sources */,
 				BE46D7531F9743A00060A49A /* DiscoverRecipeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,10 +667,10 @@
 			baseConfigurationReference = DF996A821FC7F80EAEFDFE1E /* Pods-RecipeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6MQNBF25VG;
+				DEVELOPMENT_TEAM = 278DEM2K6B;
 				INFOPLIST_FILE = RecipeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp.vijay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -663,10 +681,10 @@
 			baseConfigurationReference = D0D52C27226C49A1233A307F /* Pods-RecipeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6MQNBF25VG;
+				DEVELOPMENT_TEAM = 278DEM2K6B;
 				INFOPLIST_FILE = RecipeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.therecipeapp.RecipeApp.vijay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

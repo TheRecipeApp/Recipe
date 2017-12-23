@@ -8,6 +8,7 @@
 import UIKit
 import Speech
 import AVFoundation
+import ActionSheetPicker_3_0
 
 class IngredientsViewController: UIViewController {
     
@@ -15,7 +16,14 @@ class IngredientsViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var unitsTextField: UITextField!
     @IBOutlet weak var ingredientsTable: UITableView!
-    
+	@IBOutlet weak var pickUnitsButton: UIButton!
+	@IBOutlet weak var pickIngredientsButton: UIButton!
+	
+	let ingredientsList = ["", "Potato","Tomato", "Onion", "Cabbage", "Cauliflower", "Garlic", "Eggplant", "Cilantro", "Basil", "Spring Onions", "Capsicum", "Black Gram Lentil", "Bengal Gram Lentil", "Mustard Seeds", "Cumin Seeds", "Pepper", "Chilli Powder", "Green Chillies", "Jalapeno", "Lemon", "Salt" , "Oil", "Vegetable Oil", "Canola Oil", "Olive Oil", "Butter", "Ghee", "Cardamom", "Cinnamon", "Clove", "Ginger", "Coriander", "Turmeric", "Garam Masala"]
+	
+	let unitsList = ["", "tablespoon", "tbsp", "teaspoon", "tsp", "pinch", "cup", "large", "small", "medium", "ounce", "oz", "pint", "litre(s)", "gram(s)", "quart", "dash", "gallon", "pound", "lbs"]
+	
+	
     private var stepNumber = 1
     var steps: [CookingStep]?
     var stepIngredients = [String]()
@@ -34,8 +42,7 @@ class IngredientsViewController: UIViewController {
         let nibName = UINib(nibName: "IngredientsTableViewCell", bundle: nil)
         ingredientsTable.register(nibName, forCellReuseIdentifier: "IngredientsTableViewCell")
 		ingredientsTable.separatorStyle = UITableViewCellSeparatorStyle.none
-
-        
+		
         if steps == nil {
             stepNumber = 1;
             steps = [CookingStep]()
@@ -43,11 +50,14 @@ class IngredientsViewController: UIViewController {
         else {
             stepNumber = (steps?.count)! + 1
         }
-		self.title = "Add Step:\(stepNumber) Ingredients"
+		self.title = "Step:\(stepNumber)"
         clearIngregients()
         ingredientsTable.reloadData()
 		
 		self.hideKeyboardWhenTappedAround()
+		pickUnitsButton.layer.cornerRadius = 3
+		pickIngredientsButton.layer.cornerRadius = 3
+		
 //		setupTextFieldAtributes(field: ingredientTextField, string: "Ingredient")
 //		setupTextFieldAtributes(field: amountTextField, string: "Amount")
 //		setupTextFieldAtributes(field: unitsTextField, string: "Units")
@@ -89,7 +99,34 @@ class IngredientsViewController: UIViewController {
         unitsTextField.text = ""
     }
 
-    @IBAction func onAddIngredient(_ sender: Any) {
+	@IBAction func ingredientPickerClicked(_ sender: UIButton) {
+		ActionSheetStringPicker.show(withTitle: "Pick an Ingredient!", rows: ingredientsList, initialSelection: 0, doneBlock: { (picker: ActionSheetStringPicker?, index:Int, value:Any?) in
+			print("\(picker)")
+			print("\(value)")
+			print("\(index)")
+			if (index > 0) {
+				self.ingredientTextField.text = value as? String
+			} else {
+				self.ingredientTextField.text = ""
+			}
+		}, cancel: { ActionStringCancelBlock in
+			return
+		}, origin: sender.superview!.superview)
+	}
+	
+	@IBAction func unitsPickerClicked(_ sender: UIButton) {
+		ActionSheetStringPicker.show(withTitle: "Pick a Unit", rows: unitsList, initialSelection: 0, doneBlock: { (picker: ActionSheetStringPicker?, index:Int, value: Any?) in
+			if (index > 0) {
+				self.unitsTextField.text = value as? String
+			} else {
+				self.unitsTextField.text = ""
+			}
+		}, cancel: { ActionStringCancelBlock in
+			return
+		}, origin: sender.superview!.superview)
+	}
+	
+	@IBAction func onAddIngredient(_ sender: Any) {
         if let name = ingredientTextField.text {
             let ingredient = name
             stepIngredients.append(ingredient)
@@ -134,7 +171,6 @@ class IngredientsViewController: UIViewController {
         let destVC = segue.destination as! AddStepDescriptionViewController
         destVC.steps = steps
     }
-    
 }
 
 extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -152,3 +188,4 @@ extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 }
+

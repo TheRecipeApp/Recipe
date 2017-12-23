@@ -51,7 +51,7 @@ class AddStepDescriptionViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         stepNumber = (steps?.count)!
-        self.title = "Add Step:\(stepNumber) Description"
+        self.title = "Step:\(stepNumber)"
         stepAudioButton.isHidden = true
         if enableAudioInstruction.isOn {
             textDescriptionView.isHidden = true

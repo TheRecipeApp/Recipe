@@ -37,6 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		PFUser.register(FacebookAuthDelegate(), forAuthType: "facebook")
 
 		let user = PFUser.current()
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		
+		// For testing cookbook vc - remove when done
+		//            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "CookbookNavigationController")
+		window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeTabController")
         if user != nil {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
@@ -49,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			// view controller currently being set in Storyboard as default will be overridden
 			window?.rootViewController = storyboard.instantiateInitialViewController()
 		}
-        
+		
         MSMobileCenter.start("99833ae2-1f46-44b9-870f-991c73e3e3a8", withServices:[
             MSAnalytics.self,
             MSCrashes.self

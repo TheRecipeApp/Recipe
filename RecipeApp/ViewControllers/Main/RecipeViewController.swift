@@ -191,8 +191,9 @@ class RecipeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-		let destVC = segue.destination as! CookingStepViewController
-		destVC.steps = cookingSteps
+		let destVC = segue.destination as! UINavigationController
+		let stepDetailsController = destVC.topViewController as! StepDetailsViewController
+		stepDetailsController.steps = cookingSteps
     }
 
 }

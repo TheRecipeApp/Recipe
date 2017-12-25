@@ -7,7 +7,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -851,7 +850,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="1W6-fg-8R1" kind="show" id="sH0-no-SWZ"/>
+                                            <segue destination="yT5-rZ-8zC" kind="show" id="riq-mE-70K"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mW-Rc-oqU">
@@ -1185,118 +1184,13 @@
             </objects>
             <point key="canvasLocation" x="2423" y="-127"/>
         </scene>
-        <!--Cooking Step Details-->
-        <scene sceneID="1TT-JC-ww8">
+        <!--StepDetailsController-->
+        <scene sceneID="FrB-bz-X2N">
             <objects>
-                <viewController title="Step Details" id="1W6-fg-8R1" userLabel="Cooking Step Details" customClass="CookingStepViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Qlv-6L-F73">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1XM-RC-3RF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Or6-5t-NMm"/>
-                                </constraints>
-                            </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-75-1Xs" userLabel="Step Title Info View">
-                                <rect key="frame" x="0.0" y="252" width="375" height="5"/>
-                                <subviews>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="QgY-Xc-whp">
-                                        <rect key="frame" x="168" y="0.0" width="39" height="5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="taT-p8-WCA"/>
-                                        </constraints>
-                                        <color key="pageIndicatorTintColor" name="GraySmallHeader"/>
-                                        <color key="currentPageIndicatorTintColor" name="PrimaryColor"/>
-                                    </pageControl>
-                                </subviews>
-                                <color key="backgroundColor" name="GrayBackgroundScreen"/>
-                                <constraints>
-                                    <constraint firstItem="QgY-Xc-whp" firstAttribute="centerY" secondItem="SwP-75-1Xs" secondAttribute="centerY" id="5ni-hK-ak1"/>
-                                    <constraint firstItem="QgY-Xc-whp" firstAttribute="centerX" secondItem="SwP-75-1Xs" secondAttribute="centerX" id="eUz-61-Juo"/>
-                                    <constraint firstAttribute="height" constant="5" id="uA1-T5-AKu"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl8-2c-UFs" userLabel="Step Description View">
-                                <rect key="frame" x="0.0" y="259" width="375" height="100"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juF-c6-4Rl">
-                                        <rect key="frame" x="325" y="4" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="P0M-ob-N30"/>
-                                            <constraint firstAttribute="width" constant="40" id="leJ-4c-5dZ"/>
-                                        </constraints>
-                                        <state key="normal" image="speaker_off"/>
-                                        <connections>
-                                            <action selector="onAudioPlayTapped:" destination="1W6-fg-8R1" eventType="touchUpInside" id="dDF-6k-68O"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q18-tt-PFZ">
-                                        <rect key="frame" x="10" y="4" width="97.5" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="97.5" id="sYo-qO-Yag"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vqo-F1-c9M">
-                                        <rect key="frame" x="10" y="28.5" width="300" height="65"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="65" id="Y86-yd-Sji"/>
-                                            <constraint firstAttribute="width" constant="300" id="ixG-wr-uGl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Q18-tt-PFZ" firstAttribute="top" secondItem="bl8-2c-UFs" secondAttribute="top" constant="4" id="0kn-ba-KMc"/>
-                                    <constraint firstAttribute="height" constant="100" id="5qd-Xp-TSb"/>
-                                    <constraint firstItem="Q18-tt-PFZ" firstAttribute="leading" secondItem="bl8-2c-UFs" secondAttribute="leading" constant="10" id="6sn-Ns-gIa"/>
-                                    <constraint firstItem="Vqo-F1-c9M" firstAttribute="top" secondItem="Q18-tt-PFZ" secondAttribute="bottom" constant="4" id="9yF-OH-Kkl"/>
-                                    <constraint firstItem="juF-c6-4Rl" firstAttribute="top" secondItem="bl8-2c-UFs" secondAttribute="top" constant="4" id="F8t-wu-9GG"/>
-                                    <constraint firstAttribute="trailing" secondItem="juF-c6-4Rl" secondAttribute="trailing" constant="10" id="Kwa-kL-fEz"/>
-                                    <constraint firstItem="Vqo-F1-c9M" firstAttribute="leading" secondItem="bl8-2c-UFs" secondAttribute="leading" constant="10" id="Wzp-MC-VJa"/>
-                                </constraints>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6ja-tP-kZB">
-                                <rect key="frame" x="0.0" y="361" width="375" height="242"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" name="GrayBackgroundScreen"/>
-                        <constraints>
-                            <constraint firstItem="KPN-aW-e70" firstAttribute="trailing" secondItem="1XM-RC-3RF" secondAttribute="trailing" id="95K-gQ-bvO"/>
-                            <constraint firstItem="bl8-2c-UFs" firstAttribute="trailing" secondItem="KPN-aW-e70" secondAttribute="trailing" id="CkT-52-okl"/>
-                            <constraint firstItem="1XM-RC-3RF" firstAttribute="leading" secondItem="KPN-aW-e70" secondAttribute="leading" id="J3c-xU-bKh"/>
-                            <constraint firstItem="KPN-aW-e70" firstAttribute="trailing" secondItem="6ja-tP-kZB" secondAttribute="trailing" id="KY6-3O-oFn"/>
-                            <constraint firstItem="KPN-aW-e70" firstAttribute="trailing" secondItem="SwP-75-1Xs" secondAttribute="trailing" id="OST-5G-MMp"/>
-                            <constraint firstItem="bl8-2c-UFs" firstAttribute="leading" secondItem="KPN-aW-e70" secondAttribute="leading" id="Vkq-kP-u88"/>
-                            <constraint firstItem="1XM-RC-3RF" firstAttribute="top" secondItem="KPN-aW-e70" secondAttribute="top" id="ZMi-QW-6HI"/>
-                            <constraint firstItem="SwP-75-1Xs" firstAttribute="leading" secondItem="KPN-aW-e70" secondAttribute="leading" id="Zd5-OL-fbi"/>
-                            <constraint firstItem="6ja-tP-kZB" firstAttribute="leading" secondItem="KPN-aW-e70" secondAttribute="leading" id="b2I-b3-j7S"/>
-                            <constraint firstItem="SwP-75-1Xs" firstAttribute="top" secondItem="1XM-RC-3RF" secondAttribute="bottom" constant="2" id="eGL-FM-MuX"/>
-                            <constraint firstItem="bl8-2c-UFs" firstAttribute="top" secondItem="SwP-75-1Xs" secondAttribute="bottom" constant="2" id="mo0-TX-fSe"/>
-                            <constraint firstItem="6ja-tP-kZB" firstAttribute="bottom" secondItem="KPN-aW-e70" secondAttribute="bottom" id="oAq-6X-MHs"/>
-                            <constraint firstItem="6ja-tP-kZB" firstAttribute="top" secondItem="bl8-2c-UFs" secondAttribute="bottom" constant="2" id="vGO-uU-IAZ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="KPN-aW-e70"/>
-                    </view>
-                    <connections>
-                        <outlet property="ingredientsTable" destination="6ja-tP-kZB" id="jeZ-Cu-nup"/>
-                        <outlet property="pageControl" destination="QgY-Xc-whp" id="rmT-Vu-KiF"/>
-                        <outlet property="scrollView" destination="1XM-RC-3RF" id="pg2-iS-H3j"/>
-                        <outlet property="stepAudio" destination="juF-c6-4Rl" id="k0N-MH-xeB"/>
-                        <outlet property="stepDescription" destination="Vqo-F1-c9M" id="0QO-VB-QVk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Hz-qO-mgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="StepDetailsController" storyboardName="StepDetails" referencedIdentifier="StepDetailsController" id="yT5-rZ-8zC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dGP-lo-l4j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3277.5999999999999" y="646.32683658170924"/>
+            <point key="canvasLocation" x="3265" y="647"/>
         </scene>
     </scenes>
     <resources>
@@ -7849,7 +7743,6 @@ EAAF1R0ABdUgAAXVLQAF1TIABdU6AAXVPQAF1UIABdVKAAXVTQAF1V8ABdViAAXVZwAAAAAAAAQBAAAA
 AAAAAFkAAAAAAAAAAAAAAAAABdVpA
 </mutableData>
         </image>
-        <image name="speaker_off" width="278" height="278"/>
         <namedColor name="GrayBackgroundScreen">
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
